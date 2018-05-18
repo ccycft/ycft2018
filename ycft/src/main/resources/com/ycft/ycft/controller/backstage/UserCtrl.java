@@ -16,7 +16,7 @@ import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.backstage.UserSrv;
 
 @Controller(value="BSUserCon")
-public class UserCon {
+public class UserCtrl {
 	
 	@Autowired
 	private UserSrv us;

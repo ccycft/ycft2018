@@ -101,7 +101,7 @@
       icon = #{icon,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-   <select id="queryMenuList" resultMap="BaseResultMap" resultType="com.ycft.ycft.po.User">
-       SELECT * FROM privilege
+   <select id="queryMenuList"  useCache="true" resultMap="BaseResultMap" resultType="com.ycft.ycft.po.User">
+       SELECT * FROM privilege 
    </select>
 </mapper>
