@@ -13,13 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ycft.ycft.po.User;
-import com.ycft.ycft.services.backstage.UserSer;
+import com.ycft.ycft.services.backstage.UserSrv;
 
 @Controller(value="BSUserCon")
 public class UserCon {
 	
 	@Autowired
-	private UserSer us;
+	private UserSrv us;
 	
 	@RequestMapping("/userAjax.do")
 	public void UserAjax(HttpServletResponse response,HttpServletRequest request) {

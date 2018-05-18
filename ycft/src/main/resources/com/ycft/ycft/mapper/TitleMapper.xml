@@ -20,6 +20,13 @@
       	from title order by time desc limit 0 , #{value}
   </select>
   <!-- 客户端方法 结束 -->
+  
+  <!-- 服务端方法开始 -->
+  <select id="selByCount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select * 
+		from title order by time desc limit 0 , #{value}
+  </select>
+  <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

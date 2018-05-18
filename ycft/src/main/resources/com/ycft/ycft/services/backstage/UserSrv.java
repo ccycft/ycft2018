@@ -30,7 +30,7 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
 @Service(value="BSUserSer")
-public class UserSer {
+public class UserSrv {
 
 	@Autowired
 	private UserMapper um;

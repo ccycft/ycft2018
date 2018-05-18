@@ -21,7 +21,7 @@ import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.PrivilegeService;
 
 @Controller
-public class PrivilegeCon {
+public class PrivilegeCtrl {
 	
 	@Autowired
 	PrivilegeService ps;

@@ -25,4 +25,13 @@ public interface TitleMapper {
     int updateByPrimaryKeySelective(Title record);
 
     int updateByPrimaryKey(Title record);
+    
+    /*
+	 * 服务端方法开始
+	 * 
+	 * */
+	public List<Title> selByCount(int count);
+	/**
+	 * 服务端方法结束
+	 * */
 }
