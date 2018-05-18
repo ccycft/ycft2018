@@ -17,7 +17,7 @@
   <!-- 客户端方法开始 -->
   <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>
-      	from title order by time desc
+      	from title order by time desc limit 0 , #{value}
   </select>
   <!-- 客户端方法 结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

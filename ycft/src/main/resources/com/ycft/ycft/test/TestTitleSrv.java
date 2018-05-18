@@ -1,30 +1,28 @@
 package com.ycft.ycft.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import com.ycft.ycft.services.foreground.TitleSrv;
+import com.ycft.ycft.controller.foreground.IndexCtrl;
 @Service
-public class TestTitleSrv extends SpringTestBase{
+public class TestTitleSrv  {
 
 
 
 	  //  @Autowired
-	    static  TitleSrv ts;
+	    static  IndexCtrl ts;
 	    
-	    @BeforeClass 
+	  @BeforeClass 
 	    public static void init() { 
 	        ApplicationContext 
-	        context = new ClassPathXmlApplicationContext("classpath*:config/spring/spring.xml"); 
-	        ts = (TitleSrv)context.getBean("titleSrv"); 
+	        context = new ClassPathXmlApplicationContext("classpath:spring/spring.xml"); 
+	        ts = (IndexCtrl)context.getBean("indexCtrl"); 
 	    }  
-
 	    @Test
 	    public void testPing() {
-	          ts.select(2);
+	          ts.index();
 	    }
 
 	

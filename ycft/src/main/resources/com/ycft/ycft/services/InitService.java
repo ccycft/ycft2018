@@ -38,6 +38,10 @@ public class InitService extends HttpServlet{
 	
 	public void cacheSlide() {
 		List<Slide> list = sm.selectAll();
+		File file1 = new File(Core.PhotoPath);
+		if(!file1.exists()) {
+			file1.mkdirs();
+		}
 		if(list != null && list.size() > 0) {
 			//开始缓存图片至目录  [如果目录已经存在该图片直接使用，否则加载图片到目录]
 			for(Slide sli : list) {
