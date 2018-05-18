@@ -18,7 +18,7 @@ import com.ycft.ycft.tools.UploadUtil;
 public class Test {
 	
 	/**
-	 * 使用summernote插件上传图片
+	 * 使用summernote插件上传图片2
 	 * @param request
 	 * @param response
 	 * @param file 文件名
