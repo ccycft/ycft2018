@@ -1,6 +1,10 @@
 package com.ycft.ycft.controller.backstage;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,5 +36,26 @@ public class InformCtrl {
 		return modelAndView;
 		
 	}
+	
+	@RequestMapping("/informDel.do")
+	public void del(HttpServletResponse response,HttpServletRequest request) {
+		
+		PrintWriter writer = null;
+		int id = Integer.parseInt(request.getParameter("id"));
+		try {
+			writer = response.getWriter();
+			boolean flag = is.del(id);
+			if (flag) {
+				writer.println("1");
+			} else {
+				writer.print("0");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			writer.flush();
+			writer.close();
+		}
+	} 
 
 }
