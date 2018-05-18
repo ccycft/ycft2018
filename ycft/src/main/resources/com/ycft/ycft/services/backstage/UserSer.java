@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,21 @@ public class UserSer {
 	@Autowired
 	private UserMapper um;
 	
-	public boolean userAjax(String sno,String psd) {
+	/**
+	 * 登录的判断
+	 * 成功后把信息存到session中
+	 * @param sno
+	 * @param psd
+	 * @return
+	 */
+	public boolean userAjax(String sno,String psd,HttpServletRequest request) {
 		boolean flag = false;
 		psd = MD5.md5Password(psd);
-		if (um.bsLogin(sno).getPsd().equals(psd)) {
+		User user = um.bsLogin(sno);
+		if (user.getPsd().equals(psd)) {
 			flag = true;
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
 		}
 		return flag;
 	}

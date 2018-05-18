@@ -28,7 +28,7 @@ public class UserCon {
 		PrintWriter writer = null;
 		try {
 			writer = response.getWriter();
-			boolean flag = us.userAjax(sno, psd);
+			boolean flag = us.userAjax(sno, psd,request);
 			if (flag) {
 				writer.println("1");
 			} else {
