@@ -9,6 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SpringTestBase extends AbstractJUnit4SpringContextTests {
 	
 	public void d() {
-		
+		System.out.println();
 	}
 }
