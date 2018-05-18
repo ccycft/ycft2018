@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ycft.ycft.mapper.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.ycft.ycft.po.Dictionary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+    <result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+    <result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="enabled" property="enabled" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <resultMap id="typeMap" type="com.ycft.ycft.po.Dictionary" >
+   
+    <result column="o1" property="dictType" jdbcType="VARCHAR" />
+      <result column="name" property="typeName" jdbcType="VARCHAR" />
+    <collection property="dList" ofType="com.ycft.ycft.po.Dictionary">
+    	<id column="m1" property="dictCode" jdbcType="VARCHAR" />
+	    <result column="m2" property="dictName" jdbcType="VARCHAR" />
+	   
+    </collection>
+  </resultMap>
+  <!-- 基础字段 -->
+<!-- 	<sql id="base_list" >
+	    dictionary.id id, dict_type, dict_code, dict_name ,sort,enabled
+	</sql> -->
+	<!-- 拓展片段 -->
+ 	<sql id="extra_list" >
+	    dictionary.id id, dictionary.dict_type, dict_code, dict_name,dict_type_name,sort,enabled,remark
+	</sql> 
+   <resultMap id="extraMap" type="com.ycft.ycft.po.Dictionary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+    <result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+    <result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+   	<result column="dict_type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="VARCHAR" />
+    <result column="enabled" property="enabled" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dict_type, dict_code, dict_name, sort, enabled
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dictionary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ycft.ycft.po.Dictionary" >
+    insert into dictionary (id, dict_type, dict_code, 
+      dict_name, sort, enabled
+      )
+    values (#{id,jdbcType=INTEGER}, #{dictType,jdbcType=VARCHAR}, #{dictCode,jdbcType=VARCHAR}, 
+      #{dictName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ycft.ycft.po.Dictionary" >
+    insert into dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dictType != null" >
+        dict_type,
+      </if>
+      <if test="dictCode != null" >
+        dict_code,
+      </if>
+      <if test="dictName != null" >
+        dict_name,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dictType != null" >
+        #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null" >
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null" >
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ycft.ycft.po.Dictionary" >
+    update dictionary
+    <set >
+      <if test="dictType != null" >
+        dict_type = #{dictType,jdbcType=VARCHAR},
+      </if>
+      <if test="dictCode != null" >
+        dict_code = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null" >
+        dict_name = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ycft.ycft.po.Dictionary" >
+    update dictionary
+    set dict_type = #{dictType,jdbcType=VARCHAR},
+      dict_code = #{dictCode,jdbcType=VARCHAR},
+      dict_name = #{dictName,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selAllDicType" resultMap="typeMap">
+  	<!-- SELECT d1.dict_type o1, d2.dict_code m1, d2.dict_name m2 FROM (SELECT DISTINCT dict_type FROM dictionary )d1, dictionary d2 WHERE d1.dict_type = d2.dict_type -->
+	SELECT d1.dict_type o1, d2.dict_code m1, d2.dict_name m2,dict_depict.dict_type_name NAME FROM (SELECT DISTINCT dict_type FROM dictionary )d1, dictionary d2,dict_depict WHERE d1.dict_type = d2.dict_type AND d1.dict_type = dict_depict.dict_type
+  	AND d2.enabled='1' ORDER BY o1,d2.sort ASC
+  </select>
+   <update id="updDict" parameterType="com.ycft.ycft.po.Dictionary" >
+  	update dictionary set enabled=#{enabled} , sort=#{sort} , dict_name=#{dictName} where id=#{id}
+  </update>
+<!--     禁用或启用字典项-->
+  <update id="disableDict" parameterType="String" >
+  	update dictionary set enabled=#{1} where id=#{0}
+  </update>
+  <!-- 查询字典项目根据code -->  
+  <select id="selDictByCode" resultMap="extraMap" parameterType="String">
+  	select 
+    <include refid="extra_list" />
+    from dictionary,dict_depict
+  	where  dictionary.dict_type = dict_depict.dict_type  
+  	and dict_code = #{value}
+  </select>
+  <!--  查询所有字典项目根据类别 (根据sort升序) -->
+  <select id="selByType" resultMap="extraMap" parameterType="String" >
+	SELECT   
+	<include refid="extra_list" />
+	FROM dictionary  ,dict_depict WHERE   dictionary.dict_type = dict_depict.dict_type
+	<if test="value != null and value != ''">
+		and dictionary.dict_type = #{value}
+	</if>
+	order by dictionary.sort ASC
+  </select>
+</mapper>

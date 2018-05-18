@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ycft.ycft.mapper.UserMapper" >
+	<!-- 须要一对多请写另一个，不要改动原基础Map -->
+  <resultMap id="BaseResultMap" type="com.ycft.ycft.po.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sno" property="sno" jdbcType="VARCHAR" />
+    <result column="psd" property="psd" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="cls" property="cls" jdbcType="VARCHAR" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="r1" property="r1" jdbcType="VARCHAR" />
+    <result column="r2" property="r2" jdbcType="VARCHAR" />
+    <result column="r3" property="r3" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.User" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sno, psd, sname, tel, school, college, department, profession, cls, img_name, 
+    status, r1, r2, r3
+  </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
+  
+  <!-- 客户端方法开始 -->
+  <select id="feLogin" parameterType="String" resultMap="BaseResultMap" >
+      
+      select <include refid="Base_Column_List"></include>
+      from user
+      where sno = #{0}
+  </select>
+  <!-- 客户端方法结束 -->
+  
+  <!-- 服务端方法开始 -->
+  <select id="bsLogin" parameterType="String" resultMap="BaseResultMap" >
+      select * from user where sno = #{0}
+  </select>
+  
+  <select id="selAll" resultMap="BaseResultMap">
+  		select * 
+  		from user,user_role,role 
+  		where user.id = user_role.uid AND user_role.rid = role.id AND role.id = 3
+  </select>
+  
+  <!-- 全部查询：选择性查询 -->
+	<select id="selective" parameterType="com.ycft.ycft.po.User" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		<where>
+			<!--  <if test="area != null and area != '' and area !='全部'" >
+		        and area = #{area,jdbcType=VARCHAR}
+		      </if> -->
+		</where>
+	</select>
+	<!-- 批量导入 -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into user
+		<!-- 开始批量执行 -->
+		<foreach collection="list" item="item" index="index">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="item.id != null">
+					id,
+		        </if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="item.id != null">
+					#{item.id},
+			      </if>
+			</trim>
+		</foreach>
+	</insert>
+  <!-- 服务端方法结束 -->
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ycft.ycft.po.User" >
+    insert into user (id, sno, psd, 
+      sname, tel, school, 
+      college, department, profession, 
+      cls, img_name, status, 
+      r1, r2, r3, img
+      )
+    values (#{id,jdbcType=INTEGER}, #{sno,jdbcType=VARCHAR}, #{psd,jdbcType=VARCHAR}, 
+      #{sname,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
+      #{college,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, 
+      #{cls,jdbcType=VARCHAR}, #{imgName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{r1,jdbcType=VARCHAR}, #{r2,jdbcType=VARCHAR}, #{r3,jdbcType=VARCHAR}, #{img,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ycft.ycft.po.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="psd != null" >
+        psd,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="college != null" >
+        college,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="cls != null" >
+        cls,
+      </if>
+      <if test="imgName != null" >
+        img_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="r1 != null" >
+        r1,
+      </if>
+      <if test="r2 != null" >
+        r2,
+      </if>
+      <if test="r3 != null" >
+        r3,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null" >
+        #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="cls != null" >
+        #{cls,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="r1 != null" >
+        #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ycft.ycft.po.User" >
+    update user
+    <set >
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="psd != null" >
+        psd = #{psd,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="cls != null" >
+        cls = #{cls,jdbcType=VARCHAR},
+      </if>
+      <if test="imgName != null" >
+        img_name = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="r1 != null" >
+        r1 = #{r1,jdbcType=VARCHAR},
+      </if>
+      <if test="r2 != null" >
+        r2 = #{r2,jdbcType=VARCHAR},
+      </if>
+      <if test="r3 != null" >
+        r3 = #{r3,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ycft.ycft.po.User" >
+    update user
+    set sno = #{sno,jdbcType=VARCHAR},
+      psd = #{psd,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      cls = #{cls,jdbcType=VARCHAR},
+      img_name = #{imgName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      r1 = #{r1,jdbcType=VARCHAR},
+      r2 = #{r2,jdbcType=VARCHAR},
+      r3 = #{r3,jdbcType=VARCHAR},
+      img = #{img,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ycft.ycft.po.User" >
+    update user
+    set sno = #{sno,jdbcType=VARCHAR},
+      psd = #{psd,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      cls = #{cls,jdbcType=VARCHAR},
+      img_name = #{imgName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      r1 = #{r1,jdbcType=VARCHAR},
+      r2 = #{r2,jdbcType=VARCHAR},
+      r3 = #{r3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
