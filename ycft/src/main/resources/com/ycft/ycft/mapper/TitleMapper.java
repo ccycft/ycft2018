@@ -30,7 +30,7 @@ public interface TitleMapper {
 	 * 服务端方法开始
 	 * 
 	 * */
-	public List<Title> selByCount(int count);
+	public List<Title> selByCount(int type);
 	/**
 	 * 服务端方法结束
 	 * */

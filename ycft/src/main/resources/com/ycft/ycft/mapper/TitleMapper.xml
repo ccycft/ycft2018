@@ -24,7 +24,7 @@
   <!-- 服务端方法开始 -->
   <select id="selByCount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select * 
-		from title order by time desc limit 0 , #{value}
+		from title where type = #{0} order by time desc 
   </select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
