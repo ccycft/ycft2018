@@ -1,6 +1,8 @@
 package com.ycft.ycft.controller.foreground;
 
-//@Controller
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class TitleCtrl {
 
 	
