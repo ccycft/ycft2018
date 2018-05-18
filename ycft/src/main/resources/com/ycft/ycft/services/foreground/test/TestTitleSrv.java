@@ -1,4 +1,4 @@
-package com.ycft.ycft.test;
+package com.ycft.ycft.services.foreground.test;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
