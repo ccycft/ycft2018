@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ycft.ycft.mapper.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.ycft.ycft.po.UserRole" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ycft.ycft.po.UserRole" >
+    insert into user_role (id, uid, rid)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ycft.ycft.po.UserRole" >
+    insert into user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
