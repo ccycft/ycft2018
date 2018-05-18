@@ -1,4 +1,4 @@
-package com.ycft.ycft.controller;
+package com.ycft.ycft.controller.backstage;
 
 import java.io.PrintWriter;
 

@@ -49,12 +49,8 @@ public class SystemInit implements ServletContextListener {
 	    	//获取初始化service执行缓存操作
 	    	boolean isCacheDict = sys.getInitService().cacheDict();
 	    	System.out.println(isCacheDict ? "数据字典加载成功..." : "数据字典加载失败...");
+	    	Menu.setpList(sys.getInitService().cacheMenu());
 		   System.out.println("====================容器启动,数据字典加载成功...===========================");
-		   System.out.println("====================开始缓存首页幻灯片...===========================");
-		   sys.getInitService().cacheSlide();
-		   System.out.println("==================== 缓存首页幻灯片成功...===========================");
-		   
-		   
     	} catch (Exception e) {
 			// TODO: handle exception
     		e.printStackTrace();

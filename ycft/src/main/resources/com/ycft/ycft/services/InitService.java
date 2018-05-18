@@ -1,23 +1,26 @@
 package com.ycft.ycft.services;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-
+import javax.servlet.ServletContextEvent;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
 import com.ycft.ycft.mapper.DictionaryMapper;
-import com.ycft.ycft.mapper.SlideMapper;
 import com.ycft.ycft.po.Dictionary;
-import com.ycft.ycft.po.Slide;
-import com.ycft.ycft.system.Core;
+import com.ycft.ycft.po.Privilege;
 import com.ycft.ycft.system.Dict;
+import com.ycft.ycft.system.Menu;
 
 /**
  * 容器启动初始化数据字典等操作
@@ -28,53 +31,14 @@ import com.ycft.ycft.system.Dict;
 public class InitService extends HttpServlet{
 	@Autowired
 	DictionaryMapper dm;
+	@Autowired
+	PrivilegeService ps;
 	//正向字典
 	private LinkedHashMap<String,HashMap<String,String>> totalMap = new LinkedHashMap<String,HashMap<String,String>>();
 	//装载反向数据字典
 	private  HashMap<String,HashMap<String,String>>  reverseMap = new  HashMap<String,HashMap<String,String>>();
-	
-	@Autowired
-	private SlideMapper sm;
-	
-	public void cacheSlide() {
-		List<Slide> list = sm.selectAll();
-		if(list != null && list.size() > 0) {
-			//开始缓存图片至目录  [如果目录已经存在该图片直接使用，否则加载图片到目录]
-			for(Slide sli : list) {
-				String path = Core.PhotoPath + sli.getName();
-				System.out.println("Path=========:"+path);
-				File file = new File(path);
-				if(file.exists()) {
-					//如果图片存在
-				}else {
-					//不存在须要重新加载图片至目录
-					OutputStream os = null;
-					try {
-						os = new FileOutputStream(file);
-						os.write(sli.getImg()); 
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} finally {
-						try {
-							os.close();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
-					
-				}
-			}
-			/*if() {
-				
-			}*/
-		}else {
-			return ;
-		}
-	}
-	
+	//把菜单缓存起来
+	public List<Privilege> privilegeList = new ArrayList<Privilege>();
 	/**
 	 * 数据字典初始化 缓存
 	 * 		格式 ：  String(sex)，Map<String,String>(key:1,value:女)
@@ -114,4 +78,13 @@ public class InitService extends HttpServlet{
 		return isSuccess;
 	}
 	
+	/**
+	 * 把菜单缓存起来
+	 * @param response
+	 * @throws UnsupportedEncodingException
+	 */
+	public List<Privilege> cacheMenu() throws UnsupportedEncodingException {
+		privilegeList = ps.testQueryMenuList();
+		return privilegeList;
+	}
 }
