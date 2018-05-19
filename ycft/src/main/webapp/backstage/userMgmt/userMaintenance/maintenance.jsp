@@ -97,7 +97,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>后台</strong></a>
+                <a class="navbar-brand" href="jump.do"><strong>返回首页</strong></a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
