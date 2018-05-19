@@ -67,14 +67,62 @@
 		<!-- 开始批量执行 -->
 		<foreach collection="list" item="item" index="index">
 			<trim prefix="(" suffix=")" suffixOverrides=",">
-				<if test="item.id != null">
-					id,
+				<if test="item.sno != null">
+					sno,
+		        </if>
+		        <if test="item.psd != null">
+					psd,
+		        </if>
+		        <if test="item.sname != null">
+					sname,
+		        </if>
+		        <if test="item.tel != null">
+					tel,
+		        </if>
+		        <if test="item.school != null">
+					school,
+		        </if>
+		        <if test="item.college != null">
+					college,
+		        </if>
+		         <if test="item.department != null">
+					department,
+		        </if>
+		         <if test="item.profession != null">
+					profession,
+		        </if>
+		        <if test="item.cls != null">
+					cls,
 		        </if>
 			</trim>
 			<trim prefix="values (" suffix=")" suffixOverrides=",">
-				<if test="item.id != null">
-					#{item.id},
-			      </if>
+		      	<if test="item.sno != null">
+					#{item.sno},
+		        </if>
+		        <if test="item.psd != null">
+					#{item.psd},
+		        </if>
+		        <if test="item.sname != null">
+					#{item.sname},
+		        </if>
+		        <if test="item.tel != null">
+					#{item.tel},
+		        </if>
+		        <if test="item.school != null">
+					#{item.school},
+		        </if>
+		        <if test="item.college != null">
+					#{item.college},
+		        </if>
+		         <if test="item.department != null">
+					#{item.department},
+		        </if>
+		         <if test="item.profession != null">
+					#{item.profession},
+		        </if>
+		        <if test="item.cls != null">
+					#{item.cls},
+		        </if>
 			</trim>
 		</foreach>
 	</insert>

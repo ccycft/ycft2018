@@ -8,27 +8,22 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.sun.tools.doclint.Checker.Flag;
-import com.sun.tools.internal.xjc.generator.bean.ImplStructureStrategy.Result;
 import com.ycft.ycft.mapper.UserMapper;
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.tools.MD5;
-import aj.org.objectweb.asm.Label;
+import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
-
+import jxl.write.Label;
 @Service(value="BSUserSer")
 public class UserSrv {
 
@@ -71,13 +66,13 @@ public class UserSrv {
 	//下载导入模版
 		public void downloadDemo(HttpServletResponse response , HttpServletRequest request){
 			//demo文件的名称
-			String fileName = "demo.xls";
-			String filepath = request.getSession().getServletContext().getRealPath("/") + "demo/" +fileName;
-			File file = new File(filepath);  
-	        InputStream inputStream = null;  
-	        OutputStream outputStream = null;  
-	        byte[] b= new byte[1024];  
-	        int len = 0;  
+			String fileName = "stuDemo.xls";
+			String filepath = request.getSession().getServletContext().getRealPath("/") + "backstage/" + "demo/" +fileName;
+			File file = new File(filepath);
+	        InputStream inputStream = null;
+	        OutputStream outputStream = null;
+	        byte[] b= new byte[1024];
+	        int len = 0;
 	        try {  
 	            inputStream = new FileInputStream(file);  
 	            outputStream = response.getOutputStream();  
@@ -122,18 +117,18 @@ public class UserSrv {
 		 * @param request
 		 * @param response
 		 */
-		public boolean exportExcel(User user,HttpServletResponse response){
+		public boolean exportExcel(HttpServletResponse response){
 			
 			//操作可写工作簿
 			WritableWorkbook bWorkbook = null;
 			OutputStream os = null;
 			try {
 				//查询所有
-				List<User> uList =  selective(user);
+				List<User> uList =  um.selAll();
 				if(uList!= null && !uList.isEmpty()){
 					response.reset();
 					response.setContentType("application/vnd.ms-excel"); //保证不乱码
-					String fileName = "1.xls";
+					String fileName = "学生信息.xls";
 					/* //到第一个值项是attachment，这是真正的关键，设定了这个值，浏览器就会老老实实地显示另存为对话框，如果这个值设成 inline，则无论怎样浏览器都会自动尝试用已知关联的程序打开文件。
 					response.addHeader("Content-Disposition","attachment; filename=\""+ new String(fileName.getBytes("gb2312"),"iso8859-1") + "\""); */
 					
@@ -142,29 +137,29 @@ public class UserSrv {
 						//创建excel对象
 						bWorkbook = Workbook.createWorkbook(os);
 						//通过excel对象创建一个选项卡对象
-						WritableSheet sheet = bWorkbook.createSheet("用水信息", 0);
+						WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
 						for(int i = 0;i < uList.size();i++){
-							
+							User user = uList.get(i);
 							//开始绘制表头
-				/*			sheet.addCell(new Label(0, 0, "用水量")); 
-			                sheet.addCell(new Label(1, 0, "地区"));
-			                sheet.addCell(new Label(2, 0, "日期"));
-			                sheet.addCell(new Label(3, 0, "操作员"));
-			                sheet.addCell(new Label(4, 0, "操作时间"));*/
+							sheet.addCell(new Label(0, 0, "学号")); 
+			                sheet.addCell(new Label(1, 0, "姓名"));
+			                sheet.addCell(new Label(2, 0, "电话"));
+			                sheet.addCell(new Label(3, 0, "校区"));
+			                sheet.addCell(new Label(4, 0, "学院"));
+			                sheet.addCell(new Label(5, 0, "系"));
+			                sheet.addCell(new Label(6, 0, "专业"));
+			                sheet.addCell(new Label(7, 0, "班级"));
 			               
 			                //开始绘制主体内容
-			           /*     sheet.addCell(new Label(0, i + 1,  uList.get(i).getWaterQuantity()+"") );
-			                sheet.addCell(new Label(1, i + 1,  uList.get(i).getArea()) );
-			                sheet.addCell(new Label(2, i + 1,  uList.get(i).getDate()));
-			                sheet.addCell(new Label(3, i + 1,  uList.get(i).getOperatePeople()) );
-			                sheet.addCell(new Label(4, i + 1,  uList.get(i).getOperateDate()) );*/
-			                
+			                sheet.addCell(new Label(0, i + 1,  user.getSno()));
+			                sheet.addCell(new Label(1, i + 1,  user.getSname()));
+			                sheet.addCell(new Label(2, i + 1,  user.getTel()));
+			                sheet.addCell(new Label(3, i + 1,  user.getSchool()));
+			                sheet.addCell(new Label(4, i + 1,  user.getCollege()));
+			                sheet.addCell(new Label(5, i + 1,  user.getDepartment()));
+			                sheet.addCell(new Label(6, i + 1,  user.getProfession()));
+			                sheet.addCell(new Label(7, i + 1,  user.getCls()));
 						}
-							// 创建一个单元格对象，第一个为列，第二个为行，第三个为值  
-				            //Label label = new Label(0, 2, "test");  
-				            // 将创建好的单元格放入选项卡中  
-				            //sheet.addCell(label);  
-				            // 写如目标路径  
 				            bWorkbook.write();
 					} 
 					return true;
@@ -196,7 +191,6 @@ public class UserSrv {
 		 * @param file Excel文件
 		 * @return
 		 */
-		@SuppressWarnings("deprecation")
 		public boolean importExcel(MultipartFile file) throws Exception{
 			InputStream input = null;
 			try {
@@ -212,26 +206,43 @@ public class UserSrv {
 		        	System.out.println("rows==="+rows);
 		            for(int i = 1;i < rows;i++){
 		            	User user = new User();
-		            	//用水量
-		            /*	Cell cell = sheet.getCell(0, i);
-		                String waterQuantity = cell.getContents();
-		                user.setWaterQuantity(Double.parseDouble(waterQuantity));
-		                //地区
+		            	//学号
+		            	Cell cell = sheet.getCell(0, i);
+		                String sno = cell.getContents();
+		                user.setSno(sno);
+		                //密码
 		            	Cell cell1 = sheet.getCell(1, i);
-		                String area = cell1.getContents();
-		                user.setArea(area);
-		                //时间
+		                String psd = cell1.getContents();
+		                psd = MD5.md5Password(psd);
+		                user.setPsd(psd);
+		                //姓名
 		            	Cell cell2 = sheet.getCell(2, i);
-		                String date = cell2.getContents();
-		                user.setDate(date);
-		                //操作人
+		                String sname = cell2.getContents();
+		                user.setSname(sname);
+		                //电话
 		            	Cell cell3 = sheet.getCell(3, i);
-		                String operatePeople = cell3.getContents();
-		                user.setOperatePeople(operatePeople);
-		                //操作时间
+		                String tel = cell3.getContents();
+		                user.setTel(tel);
+		                //校区
 		            	Cell cell4 = sheet.getCell(4, i);
-		                String operateDate = cell4.getContents();
-		                user.setOperateDate(operateDate);*/
+		                String school = cell4.getContents();
+		                user.setSchool(school);
+		                //学院
+		            	Cell cell5 = sheet.getCell(5, i);
+		                String college = cell5.getContents();
+		                user.setCollege(college);
+		                //系
+		            	Cell cell6 = sheet.getCell(6, i);
+		                String department = cell6.getContents();
+		                user.setDepartment(department);
+		                //专业
+		            	Cell cell7 = sheet.getCell(7, i);
+		                String profession = cell7.getContents();
+		                user.setProfession(profession);
+		                //班级
+		            	Cell cell8 = sheet.getCell(8, i);
+		                String cls = cell8.getContents();
+		                user.setCls(cls);
 		                //装入
 		                uList.add(user);
 		            }

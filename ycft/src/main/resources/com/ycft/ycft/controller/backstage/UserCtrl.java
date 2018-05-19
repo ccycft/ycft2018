@@ -50,11 +50,16 @@ public class UserCtrl {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("/exportExcel.action")
-	public ModelAndView exportExcel(User user,HttpServletResponse response){
+	@RequestMapping("/exportExcel.do")
+	public ModelAndView exportExcel(HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
-		boolean b = us.exportExcel(user,response);
-		mav.setViewName("useritionMan/useritionSel/result.jsp");
+		boolean b = us.exportExcel(response);
+		if(b){
+			mav.setViewName("success.jsp");
+			
+		}else{
+			mav.setViewName("fail.jsp");
+		}
 		return mav;
 	}
 	
@@ -63,7 +68,7 @@ public class UserCtrl {
 	 * @param response
 	 * @param request
 	 */
-	@RequestMapping("/downloadDemo.action")
+	@RequestMapping("/downloadDemo.do")
 	public void downloadDemo(HttpServletResponse response,HttpServletRequest request){
 		response.reset();
         us.downloadDemo(response, request);
@@ -72,7 +77,7 @@ public class UserCtrl {
 	 * µº»Îexcel
 	 * @return
 	 */
-	@RequestMapping("/importExcel.action")
+	@RequestMapping("/importExcel.do")
 	public ModelAndView importExcel(MultipartFile file){
 		ModelAndView mav = new ModelAndView();
 		boolean b = false;

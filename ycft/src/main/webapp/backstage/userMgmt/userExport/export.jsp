@@ -163,8 +163,14 @@
 					</ol> 
 									
 		</div>
-            <div id="page-inner">
-
+        <div id="page-inner">
+			<form action="<%=basePathNoBackstage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
+			<a href="<%=basePathNoBackstage%>downloadDemo.do" style="color: #83AFE2;text-decoration:underline;">模版下载</a> 	
+			<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
+			<br />
+			<input  type="button" onclick="validFile()"  style="color: #fff;" value="导入" />
+			<input type="button" value="导出" onclick="exportFile()" />
+		</form>
 		</div><!--/.row-->
 		
          </div>
@@ -205,6 +211,35 @@ $(function(){
         $(this).removeClass('active-menu');
       }
     });
+    </script>
+        <script>
+    	function importFile(){
+    		alert("您将要导入excel文件,导入学员信息前请下载并阅读导入模版，格式不符将会导致导入失败.");
+    	}
+    	function exportFile(){
+    		if(confirm('导出 全部学生信息吗?')){
+    			document.getElementById("fileForm").action="<%=basePathNoBackstage%>exportExcel.do";
+    			document.getElementById("fileForm").submit();
+    		}
+    	}
+    	function validFile(){
+    		var f_content = document.getElementById("file").value;  
+   		    var fileext=f_content.substring(f_content.lastIndexOf("."),f_content.length);
+   		    var filename =  f_content.substring(f_content.lastIndexOf("\\")+1,f_content.length);
+   		    fileext=fileext.toLowerCase();
+   		    if (fileext!='.xls' ){  
+   		        alert("对不起，导入数据格式必须是xls格式文件哦，请您调整格式后重新上传，谢谢 ！");
+   		        
+   		    }else{
+   		    	if(confirm('您将要导入 ['+filename+"] 文件?")){
+   		    		//开始导入
+   		    		alert("开始提交");
+   		    		document.getElementById("fileForm").submit();
+   		    	}
+   		    }  
+   		 
+    	}
+    
     </script>
 </body>
 </html>
