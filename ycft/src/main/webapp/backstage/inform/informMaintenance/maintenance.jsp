@@ -278,7 +278,7 @@
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 		                    <span aria-hidden="true">×</span>  
 		                </button>  
-		                <h4 class="modal-title" id="myModalLabel">学生信息详情</h4>  
+		                <h4 class="modal-title" id="myModalLabel">通知内容发布</h4>  
 		            </div>
 		            <div class="modal-body">  
         				<fieldset>
@@ -287,12 +287,12 @@
 							      <span class="label label-info">编辑器版本3.0.7</span>
 							      <span class="label label-success"></span>
 						      </h4>
-						      <div class="summernote"><p>内容</p></div>
+						      <div class="summernote"><p>开始编辑内容</p></div>
 	                       </div>
 	                    </fieldset>
 		            </div>  
 		            <div class="modal-footer">
-		                <button type="button" class="btn btn-success">发布</button>  
+		                <button type="button" class="btn btn-success" onclick="refer()">发布</button>  
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 		            </div>  
 		        </div>  

@@ -9,10 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.services.backstage.InformSrv;
+import com.ycft.ycft.tools.UploadUtil;
 
 @Controller
 public class InformCtrl {
@@ -56,6 +60,25 @@ public class InformCtrl {
 			writer.flush();
 			writer.close();
 		}
-	} 
+	}
+	
+	@ResponseBody
+	@RequestMapping("informUpload.do")
+	public void summernoteImage(HttpServletRequest request, HttpServletResponse response,MultipartFile file) throws Exception{
+     try {
+    	 System.out.println("----------");
+    	//图片上传之后返回图片的路径
+    	 String path = UploadUtil.commonUpload(request, file);
+    	 //返回json类型的数据
+    	 JSONObject jObject=new JSONObject();
+    	 jObject.put("path", path);
+    	 PrintWriter out=response.getWriter();
+    	 out.print(jObject);
+    	 out.close();
+     }catch(Exception e) {
+    	 e.printStackTrace();
+     }
+	 
+    }
 
 }
