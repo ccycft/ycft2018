@@ -21,7 +21,7 @@ public class SlideSrv {
 		List<Slide> list =  sm.selectAll();
 		if(list != null && list.size() > 0) {
 			for(Slide sli : list) {
-				sli.setName(Core.PhotoPath + sli.getName());
+				sli.setName( sli.getName());
 			}
 		}
 		return list;

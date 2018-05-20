@@ -29,8 +29,8 @@ public class IndexCtrl {
 		List<Title> tlist =  ts.selectHot(2);
 		//加载通知两个
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("slist", slist);
-		mav.addObject("tlist", tlist);
+		mav.addObject("sList", slist);
+		mav.addObject("tList", tlist);
 		mav.setViewName("index");
 		return mav;
 	}

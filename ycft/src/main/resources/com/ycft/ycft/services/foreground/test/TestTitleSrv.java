@@ -23,17 +23,18 @@ public class TestTitleSrv  {
 	    public static void init() { 
 	        ApplicationContext 
 	        context = new ClassPathXmlApplicationContext("classpath:spring/spring.xml"); 
-	        is = (IndexCtrl)context.getBean("indexCtrl"); 
+	       // is = (IndexCtrl)context.getBean("indexCtrl"); 
 	        ts = (TitleSrv)context.getBean("titleSrv"); 
 	        ps = ( PraiseSrv)context.getBean("praiseSrv"); 
 	    }  
 	    @Test
 	    public void testPing() {
 	          //ts.index();
-	    	Praise p = new Praise();
+	    /*	Praise p = new Praise();
 	    	p.setTid(1);
 	    	p.setUid(1);
-	    	ps.praise(p);
+	    	ps.praise(p);*/
+	    	ts.selectHot(2);
 	    }
 
 	
