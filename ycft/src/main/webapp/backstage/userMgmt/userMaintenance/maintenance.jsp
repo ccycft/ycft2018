@@ -84,6 +84,18 @@
     	}
     
     </style>
+    
+    <script type="text/javascript">
+    function check(){
+    	var password = $("#password").val().trim();
+    	var repassword  = $("#repassword").val().trim(); 
+    	if (password != repassword) {
+    		alert("两次密码不一致！");
+    		$("#password").focus();
+    		return false;
+  	  }
+    }
+    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -318,7 +330,7 @@
 						                </button>  
 						                <h4 class="modal-title" id="myModalLabel">学生信息修改</h4>  
 						            </div>
-						            <form action="update.do" method="post"> 
+						            <form action="update.do" method="post" id="updateForm"> 
 						            	<input type="hidden" name="id" value="<%=uList.get(i).getId() %>"/>  
 							            <div class="modal-body">  
 							            	<fieldset>
@@ -335,11 +347,11 @@
 						                       <div class="form-group">
 						                          <label class="col-sm-2 control-label" for="ds_host">修改密码</label>
 						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_host" type="text" placeholder="不填则不修改"  name="psd"/>
+						                             <input class="form-control" id="password" type="password" placeholder="不填则不修改"  name="psd"/>
 						                          </div>
 						                          <label class="col-sm-2 control-label" for="ds_name">确认密码</label>
 						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_name" type="text" placeholder="不填则不修改"/>
+						                             <input class="form-control" id="repassword" type="password" placeholder="不填则不修改"/>
 						                          </div>
 					                       	   </div>
 						                       <div class="form-group">
@@ -390,7 +402,7 @@
 						                    </fieldset>
 							            </div>  
 							            <div class="modal-footer">  
-							                <button type="submit" class="btn btn-info">保存</button>  
+							                <button type="submit" class="btn btn-info" onclick="return check()">保存</button>  
 							                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 							            </div>
 						            </form>  
