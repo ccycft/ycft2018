@@ -28,4 +28,22 @@ public class TitleSrv {
 		}*/
 		return tm.selectByPraiseCount(count);
 	}
+	
+	/**
+	 * 查询文章（根据时间降序）
+	 * 
+	 * @param nowPage 当前页
+	 * @param pageSize 每页显示的条数
+	 * @return
+	 */
+	public List<Title> selectTitle(Integer nowPage, Integer pageSize){
+		//如果第0页
+		if(nowPage == null ||nowPage <=0 ) {
+			//页数须要置回0
+			nowPage = 0;
+		}
+		int start = (nowPage - 1) * pageSize;
+		List<Title> list =  tm.selectByTime(start, pageSize);
+		return list;
+	}
 }

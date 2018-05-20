@@ -90,7 +90,7 @@ public class Tag extends SimpleTagSupport {
 		Dictionary[] dicts = Dict.getDictByType(type);
 		if(dicts != null && dicts.length > 0 ){
 			for(Dictionary dict : dicts){
-				str.append("<option value='"+dict.getDictCode()+"'>"+dict.getDictName()+"</option>");
+				str.append("<option value='"+dict.getDictName()+"'>"+dict.getDictName()+"</option>");
 			}
 		}else{
 			str.append("<option value='"+0+"'>ÎÞÑ¡Ïî</option>");

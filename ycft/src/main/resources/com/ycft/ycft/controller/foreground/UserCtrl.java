@@ -18,7 +18,7 @@ import com.ycft.ycft.services.foreground.UserSrv;
  * @author ишк╖
  *
  */
-@Controller(value="foreUserCon")
+@Controller(value="foreUserCtrl")
 @RequestMapping("fore/user/")
 public class UserCtrl {
 	
