@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ycft.ycft.services.foreground.SlideSrv;
 
-@Controller
+@Controller(value="foreSlideCtrl")
+@RequestMapping("fore/slide/")
 public class SlideCtrl {
 
 	@Autowired
 	private SlideSrv ss;
 	
-	@RequestMapping("select.do")
+	/*@RequestMapping("select.do")
 	public void select(HttpServletRequest rqus) {
 		 ss.selectAll();
 		//System.out.println(path);
-	}
+	}*/
 	
 }

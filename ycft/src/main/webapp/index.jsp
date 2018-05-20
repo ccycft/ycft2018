@@ -1,3 +1,6 @@
+<%@page import="com.ycft.ycft.po.Slide"%>
+<%@page import="com.ycft.ycft.po.Title"%>
+<%@page import="java.util.List"%>
 <html lang="en" dir="ltr">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <head>
@@ -74,15 +77,36 @@
 				
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
-				    <div class="item active">
-				      <img src="./images/time.jpg" alt="...">
-				    </div>
-				    <div class="item">
-				      <img src="./images/time.jpg" alt="...">
-				    </div>
-				    <div class="item">
-				      <img src="./images/time.jpg" alt="...">
-				    </div>
+				   	<%
+				   		List<Slide> sList = (List<Slide>)request.getAttribute("sList");
+				   		List<Title> tList = (List<Title>)request.getAttribute("tList");
+				   	%>
+				   	<%
+				   		if(sList != null && sList.size() > 0){
+				   			int i = 0 ; 
+				   			for(Slide slide : sList){
+				   				++i;
+				   				if(i == 1){
+				   	%>
+					   				<div class="item active">
+								      <img src="./images/time.jpg" alt="...">
+								    </div>
+				   	<%
+				   				}
+				    %>
+				   				
+							    <div class="item">
+							      <img src="./images/time.jpg" alt="...">
+							    </div>
+							    <div class="item">
+							      <img src="./images/time.jpg" alt="...">
+							    </div>
+				   	<%
+				   			}
+				   		}
+				   	%>
+				   	
+				    
 				  </div>
 				  <!-- Controls -->
 				  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">

@@ -90,6 +90,7 @@
     <!-- 注册视图解析器 -->
         <bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 配置前缀后缀 -->
+        <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
         </bean>
     <!-- 配置事务的传播 -->

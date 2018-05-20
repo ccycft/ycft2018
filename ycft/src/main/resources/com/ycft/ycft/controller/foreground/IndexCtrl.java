@@ -12,7 +12,8 @@ import com.ycft.ycft.po.Title;
 import com.ycft.ycft.services.foreground.SlideSrv;
 import com.ycft.ycft.services.foreground.TitleSrv;
 
-@Controller
+@Controller(value="foreIndexCtrl")
+@RequestMapping("fore/index/")
 public class IndexCtrl {
 
 	@Autowired
@@ -30,7 +31,7 @@ public class IndexCtrl {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("slist", slist);
 		mav.addObject("tlist", tlist);
-		mav.setViewName("index.jsp");
+		mav.setViewName("index");
 		return mav;
 	}
 	
