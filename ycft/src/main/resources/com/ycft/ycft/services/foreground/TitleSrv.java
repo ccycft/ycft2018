@@ -15,17 +15,17 @@ public class TitleSrv {
 	private TitleMapper tm;
 	
 	/**
-	 * 查询文章
+	 * 查询热门文章（就是点赞数量排序）
 	 * 
 	 * @author 邵帅
 	 * @param count 一页显示的个数
 	 * @return
 	 * 2018年5月18日上午11:16:22
 	 */
-	public List<Title> select(int count){
+	public List<Title> selectHot(int count){
 		/*if(count == null || count == 0) {
 			count = 2;
 		}*/
-		return tm.select(count);
+		return tm.selectByPraiseCount(count);
 	}
 }

@@ -15,10 +15,14 @@
   </sql>
   
   <!-- 客户端方法开始 -->
-  <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+  <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>
-      	from title order by time desc limit 0 , #{value}
+      	from title order by praise desc limit 0 , #{value}
   </select>
+  
+  <!-- <select>
+      
+  </select> -->
   <!-- 客户端方法 结束 -->
   
   <!-- 服务端方法开始 -->
