@@ -17,7 +17,6 @@
 	List<Privilege> privilegeList = Menu.pList;
 %>
 <%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
-<%@ taglib prefix="cs" uri="/WEB-INF/codeswitch.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,7 +33,7 @@
     <link href="<%=basePath %>assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="<%=basePath %>assets/js/Lightweight-Chart/cssCharts.css"> 
+    <link rel="stylesheet" href="<%=basePath %>assets/js/Lightweight-Chart/cssCharts.css">
         <style>
     	.padding{
     		
@@ -208,27 +207,27 @@
                     <div class="form-group padding">
                         <label class="col-sm-2 control-label" for="ds_host">姓名</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_host" type="text" name="sname"/>
+                           <input class="form-control" id="sname" type="text" name="sname"/>
                         </div>
                         <label class="col-sm-2 control-label" for="ds_name">学号</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_name" type="text" name="sno"/>
+                           <input class="form-control" id="sno" type="text" name="sno"/>
                         </div>
                      </div>
                      <div class="form-group padding">
                         <label class="col-sm-2 control-label" for="ds_host">密码</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_host" type="text" name="psd"/>
+                           <input class="form-control" id="psd" type="text" name="psd"/>
                         </div>
                         <label class="col-sm-2 control-label" for="ds_name">电话</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_name" type="text" name="tel"/>
+                           <input class="form-control" id="tel" type="text" name="tel"/>
                         </div>
                      </div>
                      <div class="form-group padding">
                         <label class="col-sm-2 control-label" for="ds_host">校区</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_host" type="text" name="school"/>
+                           <input class="form-control" id="school" type="text" name="school"/>
                         </div>
                         <label class="col-sm-2 control-label" for="ds_name">学院</label>
                         <div class="col-sm-4">
@@ -248,7 +247,7 @@
                     <div class="form-group padding">
                         <label class="col-sm-2 control-label" for="ds_host">班级</label>
                         <div class="col-sm-4">
-                           <input class="form-control" id="ds_host" type="text" name="cls"/>
+                           <input class="form-control" id="cls" type="text" name="cls"/>
                         </div>
                      </div>
                     </fieldset>
@@ -329,7 +328,6 @@ $(function(){
    		    }  
    		 
     	}
-    
-    </script>
+   	</script>
 </body>
 </html>

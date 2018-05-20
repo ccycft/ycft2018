@@ -61,10 +61,10 @@ public class UserCtrl {
 		ModelAndView mav = new ModelAndView();
 		boolean b = us.exportExcel(response);
 		if(b){
-			mav.setViewName("success.jsp");
+			mav.setViewName("success");
 			
 		}else{
-			mav.setViewName("fail.jsp");
+			mav.setViewName("fail");
 		}
 		return mav;
 	}
@@ -94,10 +94,10 @@ public class UserCtrl {
 			e.printStackTrace();
 		}
 		if(b){
-			mav.setViewName("success.jsp");
+			mav.setViewName("success");
 			
 		}else{
-			mav.setViewName("fail.jsp");
+			mav.setViewName("fail");
 		}
 		return mav;
 	}
@@ -112,7 +112,7 @@ public class UserCtrl {
 		
 		List<User> uList = us.selAll();
 		List<Role> rList = rs.selAll();
-		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance.jsp");
+		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance");
 		modelAndView.addObject("uList" , uList);
 		modelAndView.addObject("rList" , rList);
 		
@@ -125,7 +125,7 @@ public class UserCtrl {
 		if (flag) {
 			modelAndView.setViewName("jump.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("fail");
 		}
 		return modelAndView;
 	}
@@ -160,7 +160,7 @@ public class UserCtrl {
 		if (flag) {
 			modelAndView.setViewName("selAll.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("fail");
 		}
 		return modelAndView;
 	}

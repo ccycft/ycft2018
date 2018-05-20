@@ -36,7 +36,7 @@ public class InformCtrl {
 		List<Title> tList = is.sel();
 		
 		modelAndView.addObject("tList", tList);
-		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance.jsp");
+		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance");
 		
 		return modelAndView;
 		

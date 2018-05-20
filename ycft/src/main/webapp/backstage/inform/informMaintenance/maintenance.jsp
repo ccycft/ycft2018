@@ -128,7 +128,6 @@
     <style>
     	.form-group{
     		padding:15px;
-    	
     	}
     </style>
 <title>Insert title here</title>
@@ -281,24 +280,38 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">通知内容发布</h4>  
 		            </div>
-		            <div class="modal-body">  
+		            <div class="modal-body">
+		            	<div class="row">
+		            		<div class="col-sm-4">
+		            			<div class="row">
+				            		<div class="col-sm-4">
+				            		</div>
+				            		<div class="col-sm-6">
+				            		</div>
+				            		<div class="col-sm-2">
+				            			标题
+				            		</div>
+			            		</div>
+		            		</div>
+		            		<div class="col-sm-6">
+		            			<input type="text" name="title" class="form-control" id="title"/> 
+		            		</div>
+		            		<div class="col-sm-2">
+		            		</div>
+	            		</div>
         				<fieldset>
 	                       <div class="form-group">
-							  <h4> <i class="note-icon-summernote"></i>编辑器
-							      <span class="label label-info">编辑器版本3.0.7</span>
-							      <span class="label label-success"></span>
-						      </h4>
 						      <div class="summernote"><p>开始编辑内容</p></div>
 	                       </div>
 	                    </fieldset>
 		            </div>  
 		            <div class="modal-footer">
-		            	<form action="addInform.do" method="post" id="addInform">
-		            		<input type="hidden" id="contentId" name="text">
 		                	<button type="button" class="btn btn-success" onclick="refer()">发布</button>
-		                </form>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-		            </div>  
+		            </div>
+		            <form action="addInform.do" method="post" id="addInform">
+		            		<input type="hidden" id="contentId" name="text"> 
+		            </form> 
 		        </div>  
 		    </div>  
 		</div>
