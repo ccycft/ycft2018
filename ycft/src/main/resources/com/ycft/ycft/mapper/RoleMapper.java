@@ -1,5 +1,7 @@
 package com.ycft.ycft.mapper;
 
+import java.util.List;
+
 import com.ycft.ycft.po.Role;
 
 public interface RoleMapper {
@@ -14,4 +16,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    List<Role> sellAllRole();
 }

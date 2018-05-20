@@ -68,4 +68,7 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="sellAllRole" resultType="com.ycft.ycft.po.Role">
+      select *　from　role
+  </select>
 </mapper>
