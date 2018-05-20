@@ -120,7 +120,8 @@
     } 
     function refer(){
     	var sHTML = $('.summernote').summernote('code');
-    	  alert(sHTML);
+    	document.getElementById("contentId").value=sHTML;
+    	document.getElementById("addInform").submit();
     }
     
   </script>
@@ -292,7 +293,10 @@
 	                    </fieldset>
 		            </div>  
 		            <div class="modal-footer">
-		                <button type="button" class="btn btn-success" onclick="refer()">发布</button>  
+		            	<form action="addInform.do" method="post" id="addInform">
+		            		<input type="hidden" id="contentId" name="text">
+		                	<button type="button" class="btn btn-success" onclick="refer()">发布</button>
+		                </form>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 		            </div>  
 		        </div>  

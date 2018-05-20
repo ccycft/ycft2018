@@ -37,7 +37,7 @@ public class UploadUtil {
     	fos = new FileOutputStream(finalPathAndName1);
     	fos.write(by);
     	fos.close();
-        return "D://upload/"+newFileName;
+        return "http://localhost:8080/photo/"+newFileName;
     }
     
 }

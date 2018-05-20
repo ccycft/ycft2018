@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.services.backstage.InformSrv;
 import com.ycft.ycft.tools.UploadUtil;
@@ -40,7 +41,17 @@ public class InformCtrl {
 		return modelAndView;
 		
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/addInform.do")
+	public ModelAndView addInform(Content content) { 
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("---");
+		return modelAndView;
+		
+	}
 	@RequestMapping("/informDel.do")
 	public void del(HttpServletResponse response,HttpServletRequest request) {
 		

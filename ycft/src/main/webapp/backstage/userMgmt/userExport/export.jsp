@@ -17,6 +17,7 @@
 	List<Privilege> privilegeList = Menu.pList;
 %>
 <%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
+<%@ taglib prefix="cs" uri="/WEB-INF/codeswitch.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -34,6 +35,12 @@
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="<%=basePath %>assets/js/Lightweight-Chart/cssCharts.css"> 
+        <style>
+    	.padding{
+    		
+    		padding:15px;
+    	}
+    </style>
 </head>
 <body>
     <div id="wrapper">
@@ -170,58 +177,88 @@
 	    </div>
 	     <div class="panel-body">
 	     	<div>
-	     	<div class="col-lg-6">
+	     	<div class="col-lg-3">
 	     	<form action="<%=basePathNoBackstage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
-				<a href="<%=basePathNoBackstage%>downloadDemo.do" style="color: #83AFE2;text-decoration:underline;">模版下载</a> 	
-				<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
-				<br />
-				<input  type="button" class="btn btn-default" onclick="validFile()" value="导入" />
-				<input type="button" class="btn btn-default" value="导出" onclick="exportFile()" />
+				 <div class="form-group">
+                 	<a href="<%=basePathNoBackstage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
+                 </div>
+                 <div class="form-group">
+                 	<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
+                 </div>
+                 <div class="form-group">
+                 
+                 	<input  type="button" class="btn btn-success" onclick="validFile()" value="导入" />
+                 	<input type="button" class="btn btn-success" value="导出" onclick="exportFile()" />
+                 	<input type="button" class="btn btn-success" value="单个学生录入" data-toggle="modal" data-target="#addUser"/>
+                 </div>
 			</form>
-				
 			</div>
-			<div class="col-lg-6">
-                <form action="<%=basePathNoBackstage%>addOneUser.do">
-                    <div class="form-group">
-                        <label>学号</label>
-                        <input class="form-control" name="sno">
-                    </div>
-                    <div class="form-group">
-                        <label>姓名</label>
-                       <input class="form-control" name="sname">
-                    </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input class="form-control" name="psd">
-                    </div>
-                    <div class="form-group">
-                        <label>电话</label>
-                       <input class="form-control" name="tel">
-                    </div>
-                    <div class="form-group">
-                        <label>校区</label>
-                        <input class="form-control" name="school">
-                    </div>
-                    <div class="form-group">
-                        <label>学院</label>
-                       	<ex:dict type="college"  name="college" defaultvalue="全部" classname="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label>系</label>
-                        <input class="form-control" name="department">
-                    </div>
-                    <div class="form-group">
-                        <label>专业</label>
-                       <input class="form-control" name="profession">
-                    </div>
-                    <div class="form-group">
-                        <label>班级</label>
-                        <input class="form-control" name="cls">
-                    </div>
-                    <button type="submit" class="btn btn-default">保存</button>
-                    <button type="reset" class="btn btn-default">重置</button>
-                </form>
-            </div>
+			<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">  
+		        <div class="modal-content">  
+		            <div class="modal-header">  
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+		                    <span aria-hidden="true">×</span>  
+		                </button>  
+		                <h4 class="modal-title" id="myModalLabel">学生信息详情</h4>  
+		            </div>    
+		             <form action="<%=basePathNoBackstage%>addOneUser.do" method="post">
+		            <div class="modal-body">  
+		            	<fieldset>
+                    <div class="form-group padding">
+                        <label class="col-sm-2 control-label" for="ds_host">姓名</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_host" type="text" name="sname"/>
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_name">学号</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_name" type="text" name="sno"/>
+                        </div>
+                     </div>
+                     <div class="form-group padding">
+                        <label class="col-sm-2 control-label" for="ds_host">密码</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_host" type="text" name="psd"/>
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_name">电话</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_name" type="text" name="tel"/>
+                        </div>
+                     </div>
+                     <div class="form-group padding">
+                        <label class="col-sm-2 control-label" for="ds_host">校区</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_host" type="text" name="school"/>
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_name">学院</label>
+                        <div class="col-sm-4">
+                           <ex:dict type="college"  name="college" classname="form-control" />
+                        </div>
+                     </div>
+                     <div class="form-group padding">
+                        <label class="col-sm-2 control-label" for="ds_host">系</label>
+                        <div class="col-sm-4">
+                           <ex:dict type="department"  name="department" classname="form-control" />
+                        </div>
+                        <label class="col-sm-2 control-label" for="ds_name">专业</label>
+                        <div class="col-sm-4">
+                           <ex:dict type="profession"  name="profession" classname="form-control" />
+                        </div>
+                     </div>
+                    <div class="form-group padding">
+                        <label class="col-sm-2 control-label" for="ds_host">班级</label>
+                        <div class="col-sm-4">
+                           <input class="form-control" id="ds_host" type="text" name="cls"/>
+                        </div>
+                     </div>
+                    </fieldset>
+            	</div>
+             </form>
+		            <div class="modal-footer">  
+			            <button type="submit" class="btn btn-default">保存</button>
+	                    <button type="reset" class="btn btn-default">重置</button>
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+		            </div>  
 		 	</div>
 	    </div>
 	    </div>
