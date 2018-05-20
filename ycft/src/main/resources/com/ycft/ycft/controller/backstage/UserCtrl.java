@@ -110,7 +110,17 @@ public class UserCtrl {
 		
 		return modelAndView;
 	}
-	
+	@RequestMapping("/addOneUser.do")
+	public ModelAndView addOneUser(User user) {
+		ModelAndView modelAndView = new ModelAndView();
+		boolean flag = us.addOneUser(user);
+		if (flag) {
+			modelAndView.setViewName("jump.do");
+		} else {
+			modelAndView.setViewName("fail.jsp");
+		}
+		return modelAndView;
+	}
 	@RequestMapping("/userDel.do")
 	public void del(HttpServletResponse response,HttpServletRequest request) {
 		

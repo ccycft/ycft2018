@@ -72,7 +72,7 @@ public class InformCtrl {
     	 //返回json类型的数据
     	 JSONObject jObject=new JSONObject();
     	 jObject.put("path", path);
-    	 PrintWriter out=response.getWriter();
+    	 PrintWriter out=response.getWriter();   
     	 out.print(jObject);
     	 out.close();
      }catch(Exception e) {

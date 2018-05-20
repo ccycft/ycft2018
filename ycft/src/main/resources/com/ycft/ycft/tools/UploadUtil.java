@@ -23,7 +23,6 @@ public class UploadUtil {
     	// 获取时间戳 我是以获取时间戳来命名上传的文件的
         String fileName = TimeTool.getRandomOrderNoOrFileName();
         String path = request.getSession().getServletContext().getRealPath("/");
-    	
     	byte[] by =  filedata.getBytes();
     	//原图片名称
     	String filename = filedata.getOriginalFilename();
@@ -31,15 +30,14 @@ public class UploadUtil {
     	String suffix = filename.substring(filename.lastIndexOf("."));
     	//新文件名
     	String newFileName = System.currentTimeMillis() + suffix;
-    	System.out.println(newFileName+"--------");
-    	System.out.println(path);
     	//上传图片到服务器
     	FileOutputStream fos;
-    	String finalPathAndName1 = path +"images/"+newFileName;
+    	//String finalPathAndName1 = path +"images/"+newFileName;
+    	String finalPathAndName1 = "D://upload/"+newFileName;
     	fos = new FileOutputStream(finalPathAndName1);
     	fos.write(by);
     	fos.close();
-        return "http://localhost:8080/ycft/images/"+newFileName;
+        return "D://upload/"+newFileName;
     }
     
 }

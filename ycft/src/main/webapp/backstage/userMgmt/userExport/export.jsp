@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong>后台</strong></a>
+                <a class="navbar-brand" href="<%=basePathNoBackstage %>jump.do"><strong>返回首页</strong></a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
@@ -154,28 +154,80 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h1 class="page-header">
-                            Dashboard <small>Welcome John Doe</small>
+                            	学生信息导入/出
                         </h1>
 						<ol class="breadcrumb">
-					  <li><a href="#">Home</a></li>
-					  <li><a href="#">Dashboard</a></li>
-					  <li class="active">Data</li>
+					  <li class="active">用户管理</li>
+					  <li class="active">学生信息导入/出</li>
 					</ol> 
-									
 		</div>
-        <div id="page-inner">
-			<form action="<%=basePathNoBackstage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
-			<a href="<%=basePathNoBackstage%>downloadDemo.do" style="color: #83AFE2;text-decoration:underline;">模版下载</a> 	
-			<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
-			<br />
-			<input  type="button" onclick="validFile()"  style="color: #fff;" value="导入" />
-			<input type="button" value="导出" onclick="exportFile()" />
-		</form>
-		</div><!--/.row-->
-		
+		<div class="row">
+		<div class="col-md-12">
+		    <!-- Advanced Tables -->
+		<div class="panel panel-default">
+	    <div class="panel-heading">
+	    </div>
+	     <div class="panel-body">
+	     	<div>
+	     	<div class="col-lg-6">
+	     	<form action="<%=basePathNoBackstage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
+				<a href="<%=basePathNoBackstage%>downloadDemo.do" style="color: #83AFE2;text-decoration:underline;">模版下载</a> 	
+				<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
+				<br />
+				<input  type="button" class="btn btn-default" onclick="validFile()" value="导入" />
+				<input type="button" class="btn btn-default" value="导出" onclick="exportFile()" />
+			</form>
+				
+			</div>
+			<div class="col-lg-6">
+                <form action="<%=basePathNoBackstage%>addOneUser.do">
+                    <div class="form-group">
+                        <label>学号</label>
+                        <input class="form-control" name="sno">
+                    </div>
+                    <div class="form-group">
+                        <label>姓名</label>
+                       <input class="form-control" name="sname">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input class="form-control" name="psd">
+                    </div>
+                    <div class="form-group">
+                        <label>电话</label>
+                       <input class="form-control" name="tel">
+                    </div>
+                    <div class="form-group">
+                        <label>校区</label>
+                        <input class="form-control" name="school">
+                    </div>
+                    <div class="form-group">
+                        <label>学院</label>
+                        <input class="form-control" name="college">
+                    </div>
+                    <div class="form-group">
+                        <label>系</label>
+                        <input class="form-control" name="department">
+                    </div>
+                    <div class="form-group">
+                        <label>专业</label>
+                       <input class="form-control" name="profession">
+                    </div>
+                    <div class="form-group">
+                        <label>班级</label>
+                        <input class="form-control" name="cls">
+                    </div>
+                    <button type="submit" class="btn btn-default">保存</button>
+                    <button type="reset" class="btn btn-default">重置</button>
+                </form>
+            </div>
+		 	</div>
+	    </div>
+	    </div>
          </div>
          <!-- /. ROW  -->
      </div>
+     
      <!-- /. PAGE INNER  -->
     <script src="<%=basePath%>assets/js/jquery-1.10.2.js"></script>
     <!-- Bootstrap Js -->

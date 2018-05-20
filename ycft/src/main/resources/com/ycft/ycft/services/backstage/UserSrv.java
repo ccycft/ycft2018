@@ -49,20 +49,22 @@ public class UserSrv {
 		return flag;
 	}
 	/**
-	 * 信息查询[全部查询]
-	 * 
-	 * @author 
-	 * @param wd 
-	 * @return List<wddentInfo> 满足条件的信息
+	 * 添加一个用户
+	 * @param user
+	 * @return
 	 */
-	public List<User> selective(User us){
-		
-		//选择性查询
-		List<User> list = um.selective(us);
-
-		return list;
+	public boolean addOneUser(User user) {
+		boolean flag = false;
+		//把密码加密
+		String psd = MD5.md5Password(user.getPsd());
+		user.setPsd(psd);
+		//选择性插入信息
+		int returnFlag = um.insertSelective(user);
+		if(returnFlag > 0) {
+			flag = true;
+		}
+		return flag;
 	}
-	
 	//下载导入模版
 		public void downloadDemo(HttpServletResponse response , HttpServletRequest request){
 			//demo文件的名称

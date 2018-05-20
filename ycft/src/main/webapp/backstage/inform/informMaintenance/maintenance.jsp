@@ -105,7 +105,7 @@
         $.ajax({
             data : data,
             type : "POST",
-            url : "../upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
+            url : "<%=basePathNoBackstage%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
             cache : false,
             contentType : false,
             processData : false,
