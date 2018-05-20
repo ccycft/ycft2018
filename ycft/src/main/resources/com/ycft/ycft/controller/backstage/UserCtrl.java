@@ -8,11 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ycft.ycft.po.Role;
 import com.ycft.ycft.po.User;
+import com.ycft.ycft.services.backstage.RoleSrv;
 import com.ycft.ycft.services.backstage.UserSrv;
 
 @Controller(value="BSUserCon")
@@ -20,6 +24,8 @@ public class UserCtrl {
 	
 	@Autowired
 	private UserSrv us;
+	@Autowired
+	private RoleSrv rs;
 	
 	@RequestMapping("/userAjax.do")
 	public void UserAjax(HttpServletResponse response,HttpServletRequest request) {
@@ -105,8 +111,10 @@ public class UserCtrl {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		List<User> uList = us.selAll();
+		List<Role> rList = rs.selAll();
 		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance.jsp");
 		modelAndView.addObject("uList" , uList);
+		modelAndView.addObject("rList" , rList);
 		
 		return modelAndView;
 	}
@@ -141,15 +149,14 @@ public class UserCtrl {
 			writer.close();
 		}
 	}
-	
 	/**
 	 * 
 	 * @return modelAndView
 	 */
 	@RequestMapping("/update.do")
-	public ModelAndView update(User user) {
+	public ModelAndView update(User user,Role role) {
 		ModelAndView modelAndView = new ModelAndView();
-		boolean flag = us.update(user);
+		boolean flag = us.update(user,role);
 		if (flag) {
 			modelAndView.setViewName("selAll.do");
 		} else {

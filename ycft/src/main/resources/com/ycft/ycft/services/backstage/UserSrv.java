@@ -14,7 +14,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.ycft.ycft.mapper.RoleMapper;
 import com.ycft.ycft.mapper.UserMapper;
+import com.ycft.ycft.mapper.UserRoleMapper;
+import com.ycft.ycft.po.Role;
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.tools.MD5;
 import jxl.Cell;
@@ -29,6 +33,10 @@ public class UserSrv {
 
 	@Autowired
 	private UserMapper um;
+	@Autowired
+	private UserRoleMapper urm;
+	@Autowired
+	private RoleMapper rm;
 	
 	/**
 	 * 登录的判断
@@ -284,9 +292,21 @@ public class UserSrv {
 	/**
 	 * @return flag
 	 */
-	public boolean update(User user) {
+	public boolean update(User user,Role role) {
 		boolean flag = false;
-		
+		//如果等于""表示为未修改密码
+		if (user.getPsd() == "") {
+			user.setPsd(null);
+		} else {
+			user.setPsd(MD5.md5Password(user.getPsd()));
+		}
+		//这代表不修改权限
+		if (role.getRname().equals("不选则不修改")) {
+			
+		} else {
+			int rId = selByRnameRole(role).getId();
+			urm.updateByUid(rId, user.getId());
+		}
 		int result = um.updateByPrimaryKeySelective(user);
 		
 		if (result > 0) {
@@ -294,6 +314,16 @@ public class UserSrv {
 		}
 		
 		return flag;
+	}
+	/**
+	 * 通过Rname查
+	 * @param role
+	 * @return
+	 */
+	public Role selByRnameRole(Role role) {
+		System.out.println("----"+role.getRname());
+		System.out.println(rm.selByRname(role.getRname()));
+		return rm.selByRname(role.getRname());
 	}
 	
 }

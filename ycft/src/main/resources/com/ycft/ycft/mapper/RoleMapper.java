@@ -16,6 +16,9 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    /*===============服务端方法================*/
+    List<Role> selAllRole();
     
-    List<Role> sellAllRole();
+    Role selByRname(String rname);
+    /*===============服务端方法================*/
 }

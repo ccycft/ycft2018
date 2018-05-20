@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.po.Role"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="java.util.List"%>
@@ -17,6 +18,7 @@
 <%
 	List<Privilege> privilegeList = Menu.pList;
 %>
+<%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -87,6 +89,7 @@
 <body>
 <%
 	List<User> uList = (List<User>)request.getAttribute("uList");
+	List<Role> rList = (List<Role>)request.getAttribute("rList");
 %>
 <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -235,10 +238,10 @@
 	                <% for (int i=0; i<uList.size(); i++) {
 	                %>
 	                	<tr class="gradeA">
-                            <td><%=uList.get(i).getSno() %></td>
-                            <td><%=uList.get(i).getTel() %></td>
-                            <td><%=uList.get(i).getProfession() %></td>
-                            <td><%=uList.get(i).getSname() %></td>
+                            <td class="col-md-2"><%=uList.get(i).getSno() %></td>
+                            <td class="col-md-2"><%=uList.get(i).getTel() %></td>
+                            <td class="col-md-2"><%=uList.get(i).getProfession() %></td>
+                            <td class="col-md-2"><%=uList.get(i).getSname() %></td>
                             <td class="col-md-2">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=uList.get(i).getId()%>"/>
                             	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=uList.get(i).getId()%>"/>
@@ -300,7 +303,7 @@
 					                    </fieldset>
 						            </div>  
 						            <div class="modal-footer">  
-						                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 						            </div>  
 						        </div>  
 						    </div>  
@@ -330,6 +333,16 @@
 						                          </div>
 						                       </div>
 						                       <div class="form-group">
+						                          <label class="col-sm-2 control-label" for="ds_host">修改密码</label>
+						                          <div class="col-sm-4">
+						                             <input class="form-control" id="ds_host" type="text" placeholder="不填则不修改"  name="psd"/>
+						                          </div>
+						                          <label class="col-sm-2 control-label" for="ds_name">确认密码</label>
+						                          <div class="col-sm-4">
+						                             <input class="form-control" id="ds_name" type="text" placeholder="不填则不修改"/>
+						                          </div>
+					                       	   </div>
+						                       <div class="form-group">
 						                          <label class="col-sm-2 control-label" for="ds_host">电话</label>
 						                          <div class="col-sm-4">
 						                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getTel() %>" name="tel"/>
@@ -342,22 +355,37 @@
 						                       <div class="form-group">
 						                          <label class="col-sm-2 control-label" for="ds_host">学院</label>
 						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getCollege() %>" name="college"/>
+						                          	<ex:dict type="college"  name="college" defaultvalue="<%=uList.get(i).getCollege() %>" classname="form-control" />
 						                          </div>
 						                          <label class="col-sm-2 control-label" for="ds_name">系</label>
 						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getDepartment() %>" name="department"/>
+						                             <ex:dict type="department"  name="department" defaultvalue="<%=uList.get(i).getDepartment() %>" classname="form-control" />
 						                          </div>
 						                       </div>
 						                       <div class="form-group">
 						                          <label class="col-sm-2 control-label" for="ds_host">专业</label>
 						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getProfession() %>" name="profession"/>
+						                          	 <ex:dict type="profession" name="profession" defaultvalue="<%=uList.get(i).getProfession() %>" classname="form-control" />
 						                          </div>
 						                          <label class="col-sm-2 control-label" for="ds_name">班级</label>
 						                          <div class="col-sm-4">
 						                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getCls() %>" name="cls"/>
 						                          </div>
+						                       </div>
+						                       <div class="form-group">
+					                       			<label class="col-sm-2 control-label" for="ds_host">角色权限</label>
+					                       			<div class="col-sm-4">
+					                       				<select class="form-control" name="rname">
+					                       					<option>不选则不修改</option>
+					                       				<%
+					                       					for (int j = 0; j < rList.size(); j++) {
+					                       				%>
+					                       					<option><%=rList.get(j).getRname() %></option>
+					                       				<%		
+					                       					}
+					                       				%>
+					                       				</select>
+						                          	</div>
 						                       </div>
 						                    </fieldset>
 							            </div>  

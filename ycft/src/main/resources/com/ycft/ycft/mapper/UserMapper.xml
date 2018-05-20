@@ -47,7 +47,7 @@
   <select id="selAll" resultMap="BaseResultMap">
   		select * 
   		from user,user_role,role 
-  		where user.id = user_role.uid AND user_role.rid = role.id AND role.id = 3
+  		where user.id = user_role.uid AND user_role.rid = role.id AND role.id != 1 
   </select>
   
   <!-- 全部查询：选择性查询 -->
