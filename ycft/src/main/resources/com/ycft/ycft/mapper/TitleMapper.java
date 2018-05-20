@@ -10,7 +10,8 @@ public interface TitleMapper {
 	 * 客户端方法开始
 	 * 
 	 * */
-	public List<Title> select(int count);
+	//根据点赞数量查询热门文章
+	public List<Title> selectByPraiseCount(int count);
 	/**
 	 * 客户端方法结束
 	 * */

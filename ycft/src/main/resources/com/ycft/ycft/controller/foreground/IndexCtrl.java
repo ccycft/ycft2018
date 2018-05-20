@@ -25,7 +25,7 @@ public class IndexCtrl {
 		//加载幻灯片
 		List<Slide> slist = ss.selectAll();
 		//加载文章2个
-		List<Title> tlist =  ts.select(2);
+		List<Title> tlist =  ts.selectHot(2);
 		//加载通知两个
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("slist", slist);
