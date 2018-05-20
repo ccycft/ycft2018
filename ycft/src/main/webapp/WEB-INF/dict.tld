@@ -1,0 +1,40 @@
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>2.0</jsp-version>
+  <short-name>Example TLD</short-name>
+  <tag>
+  	<!-- 自定义字典遍历标签 dict -->
+    <name>dict</name>
+    <tag-class>com.ycft.ycft.system.Tag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+       <name>id</name>
+    </attribute>
+    <attribute>
+       <name>layFilter</name>
+    </attribute>
+    <attribute>
+       <name>type</name>
+    </attribute>
+    <attribute>
+       <name>classname</name>
+    </attribute>
+     <attribute>
+       <name>name</name>
+    </attribute>
+     <attribute>
+       <name>plus</name>
+    </attribute>
+    <attribute>
+       <name>event</name>
+    </attribute>
+    <attribute>
+       <name>defaultvalue</name>
+       <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+       <name>code</name>
+       <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+</taglib>

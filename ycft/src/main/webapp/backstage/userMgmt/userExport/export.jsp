@@ -16,6 +16,7 @@
 <%
 	List<Privilege> privilegeList = Menu.pList;
 %>
+<%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -203,7 +204,7 @@
                     </div>
                     <div class="form-group">
                         <label>学院</label>
-                        <input class="form-control" name="college">
+                       	<ex:dict type="college"  name="college" defaultvalue="全部" classname="form-control" />
                     </div>
                     <div class="form-group">
                         <label>系</label>
