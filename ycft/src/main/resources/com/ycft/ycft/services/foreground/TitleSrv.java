@@ -26,7 +26,11 @@ public class TitleSrv {
 		/*if(count == null || count == 0) {
 			count = 2;
 		}*/
-		return tm.selectByPraiseCount(count);
+		List<Title> list =  tm.selectByPraiseCount(count);
+		for(Title title : list) {
+			title.setImgName( "title/" +  title.getImgName());
+		}
+		return list;
 	}
 	
 	/**

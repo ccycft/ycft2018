@@ -1,16 +1,27 @@
+<%@page import="com.ycft.ycft.system.Core"%>
 <%@page import="com.ycft.ycft.po.Slide"%>
 <%@page import="com.ycft.ycft.po.Title"%>
 <%@page import="java.util.List"%>
 <html lang="en" dir="ltr">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/" ;
+	
+	//文件路径 Core.PATH是访问图片的虚拟路径
+	String photoPath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort() +  Core.PATH +"/" ;
+%>
 <head>
 	<title>Index</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>css/index.css">
+    <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<style>
 	 @media (max-width: 767px) {
 	  
@@ -83,25 +94,22 @@
 				   	%>
 				   	<%
 				   		if(sList != null && sList.size() > 0){
-				   			int i = 0 ; 
-				   			for(Slide slide : sList){
-				   				++i;
-				   				if(i == 1){
+				   			for(int i = 0 ; i< sList.size() ; i++){
+				   				Slide slide = sList.get(i);
+				   				if(i == 0){
 				   	%>
 					   				<div class="item active">
-								      <img src="./images/time.jpg" alt="...">
+								      <img src="<%=( photoPath + slide.getName())%>" alt="...">
+								    </div>
+				   	<%
+				   				}else{
+				   					
+				   	%>
+				   					<div class="item">
+								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}
-				    %>
-				   				
-							    <div class="item">
-							      <img src="./images/time.jpg" alt="...">
-							    </div>
-							    <div class="item">
-							      <img src="./images/time.jpg" alt="...">
-							    </div>
-				   	<%
 				   			}
 				   		}
 				   	%>
@@ -125,32 +133,32 @@
 		
 		<div class="row">
 			<div class="col-xs-2">
-				   <a href="index.jsp">
-				    <img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
+				   <a href="<%=basePath%>index.jsp">
+				    <img class="img-responsive btn-block" src="<%=basePath%>images/daohang.png" alt="...">
 				    <span>导航</span>
 				   </a>
 			</div>
 			<div class="col-xs-2">
-				 <a href="article.jsp">
-					<img class="img-responsive btn-block" src="./images/tongzhi.png" alt="...">
+				 <a href="<%=basePath%>article.jsp">
+					<img class="img-responsive btn-block" src="<%=basePath%>images/tongzhi.png" alt="...">
 				  	<span>通知</span>	
 				  </a>  
 			</div>
 			<div class="col-xs-2">
-				    <a href="article.jsp">
-					    <img class="img-responsive btn-block" src="./images/wenzhang.png" alt="...">
+				    <a href="<%=basePath%>article.jsp">
+					    <img class="img-responsive btn-block" src="<%=basePath%>images/wenzhang.png" alt="...">
 					  	<span>文章</span>
 				  	</a>	  
 			</div>
 			<div class="col-xs-2">
-					<a href="sign.jsp">
-					    <img class="img-responsive btn-block" src="./images/qiandao.png" alt="...">
+					<a href="<%=basePath%>sign.jsp">
+					    <img class="img-responsive btn-block" src="<%=basePath%>images/qiandao.png" alt="...">
 					  	<span>签到</span>	  
 				  	</a>
 			</div>
 			<div class="col-xs-2">
-					<a href="activity.jsp">
-					   <img class="img-responsive btn-block" src="./images/huodong.png" alt="...">
+					<a href="<%=basePath%>activity.jsp">
+					   <img class="img-responsive btn-block" src="<%=basePath%>images/huodong.png" alt="...">
 					  	<span>活动</span>	
 					</a>  
 			</div>
@@ -159,8 +167,8 @@
 		
 		<div class="row">
 			<div id="jiaowu" class="col-xs-10">
-					<a href="preLogin.html">
-     				 <img id="jiaowu" class=" img-rounded " src="./images/jiaowu.jpg" alt="...">
+					<a href="<%=basePath%>preLogin.html">
+     				 <img id="jiaowu" class=" img-rounded " src="<%=basePath%>images/jiaowu.jpg" alt="...">
   					</a>
   			</div>
 		</div>
@@ -169,33 +177,43 @@
 		<div class="row">
 			<h4>- 热门文章 -</h4><hr>
 			 <div class="col-xs-12">
-			      <div onclick="openDetails()" class="row">
+			      <%
+			      	 if(tList != null && tList.size() > 0){
+			      		 for(Title title : tList){
+			      %>
+			      			 <div onclick="openDetails()" class="row">
+							      <div class="col-xs-7 col-">
+								      <div class="thumbnail">
+								      	<img src="<%= (photoPath + "/" +title.getImgName()) %>" alt="...">
+								  	  </div>
+							      </div>
+							      <div class="col-xs-5 ">
+								       	<p class="tab-p">
+								       		<%=title.getName() %>
+										</p>
+							      </div>
+						      </div>
+						      <div class="row">
+						      		<div class="col-xs-6">
+						      			<span style="float:left"><%=title.getUser() %></span>
+						      		</div>
+						      		<div class="col-xs-6">
+						      			<span style="float:right"> <%=title.getTime()%></span>
+						      		</div>
+						      </div>
+						      
+						      <hr><!--    华丽丽的分割线———————————————————————————————————— -->
+			      
+			      <%
+			      		 }
+			      }
+			      %>
+			     
+			      
+			     <%--  <div class="row">
 				      <div class="col-xs-7 col-">
 					      <div class="thumbnail">
-					      	<img src="./images/t1.jpg" alt="...">
-					  	  </div>
-				      </div>
-				      <div class="col-xs-5 ">
-					       	<p class="tab-p">史蒂夫·乔布斯 [1]（Steve Jobs，1955年2月24日—2011年10月5日 [2]），
-					       		出生于……  
-							</p>
-				      </div>
-			      </div>
-			      <div class="row">
-			      		<div class="col-xs-6">
-			      			<span style="float:left">沉睡的毛利小五郎</span>
-			      		</div>
-			      		<div class="col-xs-6">
-			      			<span style="float:right">2018-5-16</span>
-			      		</div>
-			      </div>
-			      
-			      <hr><!--    华丽丽的分割线———————————————————————————————————— -->
-			      
-			      <div class="row">
-				      <div class="col-xs-7 col-">
-					      <div class="thumbnail">
-					      	<img src="./images/t2.jpg" alt="...">
+					      	<img src="<%=basePath%>images/t2.jpg" alt="...">
 					  	  </div>
 				      </div>
 				      <div class="col-xs-5 ">
@@ -212,7 +230,7 @@
 			      			<span style="float:right">2018-5-16</span>
 			      		</div>
 			      </div>
-			      <hr>
+			      <hr> --%>
 			 </div>
 		</div>
 		
@@ -224,7 +242,7 @@
 			      <div class="row">
 				      <div class="col-xs-7 col-">
 					      <div class="thumbnail">
-					      	<img src="./images/t1.jpg" alt="...">
+					      	<img src="<%=basePath%>images/t1.jpg" alt="...">
 					  	  </div>
 				      </div>
 				      <div class="col-xs-5 ">
@@ -247,7 +265,7 @@
 			      <div class="row">
 				      <div class="col-xs-7 col-">
 					      <div class="thumbnail">
-					      	<img src="./images/t2.jpg" alt="...">
+					      	<img src="<%=basePath%>images/t2.jpg" alt="...">
 					  	  </div>
 				      </div>
 				      <div class="col-xs-5 ">
