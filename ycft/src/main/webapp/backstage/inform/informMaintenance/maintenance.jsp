@@ -282,19 +282,17 @@
 		            </div>
 		            <div class="modal-body">
 		            	<div class="row">
-		            		<div class="col-sm-4">
-		            			<div class="row">
-				            		<div class="col-sm-4">
-				            		</div>
-				            		<div class="col-sm-6">
-				            		</div>
-				            		<div class="col-sm-2">
-				            			标题
-				            		</div>
-			            		</div>
+		            		<div class="col-sm-1">
+		            			标题
 		            		</div>
-		            		<div class="col-sm-6">
-		            			<input type="text" name="title" class="form-control" id="title"/> 
+		            		<div class="col-sm-3">
+		            			<input type="text" name="title" class="form-control" id="title"/>
+		            		</div>
+		            		<div class="col-sm-2">
+		            			标题图片
+		            		</div>
+		            		<div class="col-sm-4">
+		            			<input type="file" name="file" class="form-control"  id="titleFile" onclick="preview(this)">
 		            		</div>
 		            		<div class="col-sm-2">
 		            		</div>
@@ -365,7 +363,7 @@
 //监听被点击的一级菜单
 $(function(){   
 	var id = "#sp"+ ${param.pid};
-    $(id).trigger("click");  
+    $(id).trigger("click"); 
 }); 
     var urlstatus=false;
     var count = 0;
@@ -377,6 +375,18 @@ $(function(){
         $(this).removeClass('active-menu');
       }
     });
+    function preview(file) {
+        var prevDiv = document.getElementById('preview');
+        if (file.files && file.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(evt) {
+            prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+          }
+          reader.readAsDataURL(file.files[0]);
+        } else {
+          prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+     }
     </script>
 </body>
 </html>
