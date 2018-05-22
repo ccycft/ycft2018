@@ -80,4 +80,12 @@
     set tid = #{tid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 服务端方法开始 -->
+  
+  <select id="selectByTid" resultMap="BaseResultMap" parameterType="int">
+  		select * from content where tid = #{1}
+  </select>
+  
+  <!-- 服务端方法结束 -->
 </mapper>
