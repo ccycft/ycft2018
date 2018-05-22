@@ -280,21 +280,26 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">通知内容发布</h4>  
 		            </div>
+		            <form action="addInform.do" method="post" id="addInform" enctype="multipart/form-data">
+		            		<input type="hidden" id="contentId" name="text">
 		            <div class="modal-body">
 		            	<div class="row">
+		            		<div class="col-sm-1">
+		            		</div>
 		            		<div class="col-sm-1">
 		            			标题
 		            		</div>
 		            		<div class="col-sm-3">
-		            			<input type="text" name="title" class="form-control" id="title"/>
+		            			<input type="text" name="name" class="form-control" id="title"/>
 		            		</div>
-		            		<div class="col-sm-2">
-		            			标题图片
+		            		<div class="col-sm-1">
+		            			图片
 		            		</div>
 		            		<div class="col-sm-4">
-		            			<input type="file" name="file" class="form-control"  id="titleFile" onclick="preview(this)">
+		            			<input type="file" name="titleFile" class="form-control"  id="titleFile" onchange="preview(this)">
 		            		</div>
-		            		<div class="col-sm-2">
+		            		<!--标题图片预览的div  -->
+		            		<div class="col-sm-2" id="preview">
 		            		</div>
 	            		</div>
         				<fieldset>
@@ -303,13 +308,11 @@
 	                       </div>
 	                    </fieldset>
 		            </div>  
+		            </form>
 		            <div class="modal-footer">
 		                	<button type="button" class="btn btn-success" onclick="refer()">发布</button>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 		            </div>
-		            <form action="addInform.do" method="post" id="addInform">
-		            		<input type="hidden" id="contentId" name="text"> 
-		            </form> 
 		        </div>  
 		    </div>  
 		</div>
@@ -375,16 +378,15 @@ $(function(){
         $(this).removeClass('active-menu');
       }
     });
+    //上传标题图片预览
     function preview(file) {
         var prevDiv = document.getElementById('preview');
         if (file.files && file.files[0]) {
           var reader = new FileReader();
           reader.onload = function(evt) {
-            prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+            prevDiv.innerHTML = '<img src="' + evt.target.result + '" style="width:40px;height:40px;"/>';
           }
           reader.readAsDataURL(file.files[0]);
-        } else {
-          prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
         }
      }
     </script>

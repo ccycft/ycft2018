@@ -34,6 +34,7 @@ public interface TitleMapper {
 	 * 
 	 * */
 	public List<Title> selByCount(int type);
+	public int insertTitle(Title title);
 	/**
 	 * 服务端方法结束
 	 * */

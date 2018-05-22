@@ -46,9 +46,13 @@ public class InformCtrl {
 	 * @return
 	 */
 	@RequestMapping("/addInform.do")
-	public ModelAndView addInform(Content content) { 
+	public ModelAndView addInform(HttpServletRequest request, Content content,Title title,MultipartFile titleFile) { 
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("---");
+		System.out.println(content.getText()+"---");
+		System.out.println(title.getName()+"---");
+		System.out.println(titleFile.getName());
+		is.addInformAffairs(request,content,title,titleFile);
 		return modelAndView;
 		
 	}
