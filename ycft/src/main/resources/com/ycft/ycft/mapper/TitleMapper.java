@@ -3,6 +3,7 @@ package com.ycft.ycft.mapper;
 import java.util.List;
 
 import com.ycft.ycft.po.Title;
+import com.ycft.ycft.po.TitleContent;
 
 public interface TitleMapper {
 	
@@ -35,6 +36,8 @@ public interface TitleMapper {
 	 * */
 	public List<Title> selByCount(int type);
 	public int insertTitle(Title title);
+	//连表查询所有的通知属性
+	public List<TitleContent> selAllTwo();
 	/**
 	 * 服务端方法结束
 	 * */

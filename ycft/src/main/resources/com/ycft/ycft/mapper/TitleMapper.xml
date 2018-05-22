@@ -10,6 +10,18 @@
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="CustomizeResultMap" type="com.ycft.ycft.po.TitleContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.TitleContent" extends="CustomizeResultMap" >
+    <result column="text" property="text" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, time, user, type, praise, img_name
   </sql>
@@ -32,6 +44,12 @@
   <select id="selByCount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select * 
 		from title where type = #{0} order by time desc 
+  </select>
+  
+  <select id="selAllTwo" resultMap="ResultMapWithBLOBs">
+  		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
+  		FROM content,title 
+  		WHERE title.id = content.tid AND TYPE = 2
   </select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
