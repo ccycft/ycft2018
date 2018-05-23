@@ -81,6 +81,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <update id="updateByTid" parameterType="com.ycft.ycft.po.Content" >
+    update content
+    set text = #{text,jdbcType=LONGVARCHAR}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  
   <!-- 服务端方法开始 -->
   
   <select id="selectByTid" resultMap="BaseResultMap" parameterType="int">

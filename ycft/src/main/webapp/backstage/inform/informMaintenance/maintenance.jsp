@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.po.TitleContent"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="com.ycft.ycft.po.Title"%>
@@ -129,7 +130,16 @@
     	.form-group{
     		padding:15px;
     	}
+    	fieldset{
+    		border:0 none;
+    		padding:0;
+    	}  
     </style>
+    <script type="text/javascript">
+    	function update(id){
+    		window.open("informUpdate.do?id="+id);
+    	}
+    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -222,7 +232,7 @@
                 <!-- /.dropdown -->
             </ul>
         </nav>
-  <nav class="navbar-default navbar-side" role="navigation">
+  		<nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <%for(int i = 0;i<privilegeList.size();i++){
@@ -241,13 +251,11 @@
                     </li>
                     <% }%>
                 </ul>
-
             </div>
-
         </nav>
 </div>
 <%
-	List<Title> tList = (List<Title>)request.getAttribute("tList");
+	List<TitleContent> tcList = (List<TitleContent>)request.getAttribute("tcList");
 %>
 <div id="page-wrapper" >
 	<div class="header"> 
@@ -329,17 +337,17 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                <% for (int i=0; i<tList.size(); i++) {
+	                <% for (int i=0; i<tcList.size(); i++) {
 	                %>
 	                	<tr class="gradeA">
-                            <td><%=tList.get(i).getName() %></td>
-                            <td><%=tList.get(i).getTime() %></td>
-                            <td><%=tList.get(i).getUser() %></td>
-                            <td><%=tList.get(i).getImgName() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getName() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getImgName() %></td>
                             <td class="col-md-2">
-                            	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tList.get(i).getId()%>"/>
-                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=tList.get(i).getId()%>"/>
-                            	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tList.get(i).getId() %>','<%=tList.get(i).getName()%>')"/>
+                            	<input type="button" value="详情" class="btn btn-warning"/>
+                            	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
+                            	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>
 	                <%	

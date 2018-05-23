@@ -38,6 +38,8 @@ public interface TitleMapper {
 	public int insertTitle(Title title);
 	//连表查询所有的通知属性
 	public List<TitleContent> selAllTwo();
+	
+	public TitleContent selAllTwoById(int id);
 	/**
 	 * 服务端方法结束
 	 * */

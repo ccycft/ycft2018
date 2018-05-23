@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.fastjson.JSONObject;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
+import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.InformSrv;
 import com.ycft.ycft.tools.UploadUtil;
 
@@ -33,9 +34,9 @@ public class InformCtrl {
 	public ModelAndView selInform() { 
 		ModelAndView modelAndView = new ModelAndView();
 		
-		List<Title> tList = is.sel();
+		List<TitleContent> tcList = is.selAllInform();
 		
-		modelAndView.addObject("tList", tList);
+		modelAndView.addObject("tcList", tcList);
 		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance");
 		
 		return modelAndView;
@@ -95,5 +96,29 @@ public class InformCtrl {
      }
 	 
     }
-
+	/**
+	 * 点修改带id进来查询出数据到修改界面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/informUpdate.do")
+	public ModelAndView informUpdate(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		TitleContent tc = is.selAllTwoById(id);
+		
+		modelAndView.addObject("tc",tc);
+		modelAndView.setViewName("backstage/inform/informMaintenance/informUpdate");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updInform.do")
+	public ModelAndView updInform(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
+		ModelAndView modelAndView = new ModelAndView();
+		is.updInform(request,title,content,updFile);
+		return modelAndView;
+	}
 }

@@ -51,6 +51,12 @@
   		FROM content,title 
   		WHERE title.id = content.tid AND TYPE = 2
   </select>
+  
+  <select id="selAllTwoById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
+  		FROM content,title 
+  		WHERE title.id = content.tid AND TYPE = 2 AND title.id = #{1}
+  </select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
