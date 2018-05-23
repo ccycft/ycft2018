@@ -144,6 +144,19 @@
     	    $("#remove"+id).removeAttr("onclick");
     	}
     </script>
+    <script type="text/javascript">
+    	function cTop(){
+    		timer=setInterval(function(){
+                var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                var ispeed=Math.floor(-scrollTop/6);
+                if(scrollTop==0){
+                    clearInterval(timer);
+                }
+                document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
+            },30)
+    	}	
+    
+    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -280,7 +293,7 @@
 	         	通知内容
 	    </div>
 	    <div class="panel-heading">
-	        <input type="button" value="通知发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static"/>
+	        <input type="button" value="通知发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static" onclick="cTop()"/>
 	    </div>
 	    <!-- 发布的弹出层 -->
 		<div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
