@@ -4239,7 +4239,9 @@ var Editor = /** @class */ (function () {
                 if (typeof param === 'string') {
                     $image.attr('data-filename', param);
                 }
-                $image.css('width', Math.min(_this.$editable.width(), $image.width()));
+                //$image.css('width', Math.min(_this.$editable.width(), $image.width()));
+                $image.css('width','auto');
+                $image.css('height','auto');
             }
             $image.show();
             range.create(_this.editable).insertNode($image[0]);

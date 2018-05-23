@@ -73,11 +73,15 @@ public class InformSrv {
 	public boolean addInformAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
 		boolean flag = false;
 		String imgNamePath  = "";
-		//上传图片
-		try {
-			imgNamePath = UploadUtil.commonUpload(request, titleFile);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!titleFile.isEmpty()) {
+			//上传图片
+			try {
+				imgNamePath = UploadUtil.commonUpload(request, titleFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {//把默认的图片存进数据库里
+			imgNamePath = "http://localhost:8080/photo/baidu.png";
 		}
 		title.setTime(DateUtil.getNowDate());
 		User user = (User)request.getSession().getAttribute("user");
@@ -90,6 +94,7 @@ public class InformSrv {
 		content.setTid(title.getId());
 		int success = contentMapper.insertSelective(content);
 		System.out.println(success);
+		flag = true;
 		return flag;
 	}
 	/**
@@ -121,23 +126,27 @@ public class InformSrv {
 		boolean flag = false;
 		System.out.println(updFile.getOriginalFilename()+"++++++++++");
 		String imgNamePath  = "";
-		//上传图片
-		try {
-			//得到的是图片的路径
-			imgNamePath = UploadUtil.commonUpload(request, updFile);
-		} catch (IOException e) {
-			e.printStackTrace();
+		System.out.println(updFile.isEmpty());
+		if(!updFile.isEmpty()) {
+			//上传图片
+			try {
+				//得到的是图片的路径
+				imgNamePath = UploadUtil.commonUpload(request, updFile);
+				String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
+				title.setImgName(imgName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		//设置修改时间
 		title.setTime(DateUtil.getNowDate());
 		//获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
-		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
-		title.setImgName(imgName);
 		
 		tm.updateByPrimaryKeySelective(title);
 		contentMapper.updateByTid(content);
+		flag = true;
 		return flag;
 	}
 }

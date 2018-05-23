@@ -5,7 +5,13 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/"+"backstage/";%>
+			+ path + "/"+"backstage/";
+	//没有backstage的路径
+	String basePathNoBackstage = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";		
+	%>
+			
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,7 +29,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
   	$('.summernote').summernote({
-          height: 500,
+          height: 400,
           lang: 'zh-CN',
           focus:true,
           toolbar: [
@@ -49,7 +55,7 @@
       $.ajax({
           data : data,
           type : "POST",
-          url : "<%=basePath%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
+          url : "<%=basePathNoBackstage%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
           cache : false,
           contentType : false,
           processData : false,
@@ -68,6 +74,23 @@
   	document.getElementById("updInform").submit();
   }
 </script>
+<style>
+    	.form-group{
+    		padding:15px;
+    	}
+    	/* .img-responsive {
+		  display: inline-block;
+		  height: auto;
+		  max-width: 40%;
+		} */
+		#updImg{
+			width:40px;
+			height:40px;
+		}
+		.row{
+			margin-top:30px;
+		}
+    </style>
 </head>
 <body>
 	<%
@@ -77,30 +100,35 @@
 		<input type="hidden" id="updContentId" name="text">
    		<input type="hidden" name="id" value="<%=tc.getId() %>">
    		<input type="hidden" name="tid" value="<%=tc.getId() %>">
+   		<input type="hidden" name="imgName" value="<%=tc.getImgName()%>">
    		<div class="row">
 			<div class="col-sm-1">
 			</div>
 			<div class="col-sm-1">
 				标题
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-2">
 				<input type="text" name="name" value="<%=tc.getName() %>" class="form-control" id="updTitle"/>
+			</div>
+			<div class="col-sm-2">
 			</div>
 			<div class="col-sm-1">
 				图片
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-2">
 				<input type="file" id="updFileId" name="updFile" class="form-control" onchange="updPreview(this)">
 			</div>
 			<!--标题图片预览的div  -->
 			<div class="col-sm-2" id="updPreview">
 				<img id="updImg" src="http://localhost:8080/photo/<%=tc.getImgName() %>" /> 
 			</div>
+			<div class="col-sm-1">
+				<button type="button" class="btn btn-success" onclick="upd()">保存</button>
+			</div>
 		</div>
-		<div class="container">
+		<div class="form-group">
 			<div class="summernote"><p><%=tc.getText() %></p></div>
 	    </div>
-	    <button type="button" class="btn btn-success" onclick="upd()">保存</button>
 	</form>
 	<script type="text/javascript">
 		//修改标题图片预览

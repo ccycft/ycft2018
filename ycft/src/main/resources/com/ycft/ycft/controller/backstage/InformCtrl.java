@@ -1,5 +1,6 @@
 package com.ycft.ycft.controller.backstage;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -45,16 +46,16 @@ public class InformCtrl {
 	/**
 	 * 
 	 * @return
+	 * @throws IOException 
 	 */
 	@RequestMapping("/addInform.do")
-	public ModelAndView addInform(HttpServletRequest request, Content content,Title title,MultipartFile titleFile) { 
-		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("---");
-		System.out.println(content.getText()+"---");
-		System.out.println(title.getName()+"---");
-		System.out.println(titleFile.getName());
-		is.addInformAffairs(request,content,title,titleFile);
-		return modelAndView;
+	public String addInform(HttpServletResponse response,HttpServletRequest request, Content content,Title title,MultipartFile titleFile) throws IOException { 
+		boolean flag = is.addInformAffairs(request,content,title,titleFile);
+		if(flag) {
+			return "selInform.do";
+		}else {
+			return "selInform.do";
+		}
 		
 	}
 	@RequestMapping("/informDel.do")
@@ -116,9 +117,24 @@ public class InformCtrl {
 	}
 	
 	@RequestMapping("/updInform.do")
-	public ModelAndView updInform(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
-		ModelAndView modelAndView = new ModelAndView();
-		is.updInform(request,title,content,updFile);
-		return modelAndView;
+	public void updInform(HttpServletResponse response,HttpServletRequest request,Title title,Content content,MultipartFile updFile) throws IOException {
+		boolean flag = is.updInform(request,title,content,updFile);
+		if(flag) {
+			response.setContentType("text/html");
+        	response.setCharacterEncoding("UTF-8");
+        	PrintWriter out = response.getWriter();
+        	out.println("<script>"); 
+        	out.println("alert('修改成功');"); 
+        	out.println("window.opener=null;window.close();");
+        	out.println("</script>");
+		}else {
+			response.setContentType("text/html");
+        	response.setCharacterEncoding("UTF-8");
+        	PrintWriter out = response.getWriter();
+        	out.println("<script>"); 
+        	out.println("alert('修改失败');"); 
+        	out.println("window.opener=null;window.close();");
+        	out.println("</script>");
+		}
 	}
 }
