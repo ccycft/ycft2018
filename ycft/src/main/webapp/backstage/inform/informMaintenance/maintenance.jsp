@@ -124,7 +124,6 @@
     	document.getElementById("contentId").value=sHTML;
     	document.getElementById("addInform").submit();
     }
-    
   </script>
     <style>
     	.form-group{
@@ -138,6 +137,11 @@
     <script type="text/javascript">
     	function update(id){
     		window.open("informUpdate.do?id="+id);
+    	}
+    	function filter(id){
+    	    var html=$($("#test"+id).val());
+    	    $("#test"+id).val(html.text());
+    	    $("#remove"+id).removeAttr("onclick");
     	}
     </script>
 <title>Insert title here</title>
@@ -345,11 +349,34 @@
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getImgName() %></td>
                             <td class="col-md-2">
-                            	<input type="button" value="详情" class="btn btn-warning"/>
+                            	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>
+                        <!-- 详情的弹出层 -->
+						<div class="modal fade" id="details<%=tcList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+						    <div class="modal-dialog" role="document">  
+						        <div class="modal-content">  
+						            <div class="modal-header">  
+						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						                    <span aria-hidden="true">×</span>  
+						                </button>  
+						                <h4 class="modal-title" id="myModalLabel">通知内容</h4>  
+						            </div>  
+						            <div class="modal-body">  
+						            	<fieldset>
+					                       <div class="form-group">
+				                       			<%=tcList.get(i).getText() %>
+					                       </div>
+					                    </fieldset>
+						            </div>  
+						            <div class="modal-footer">  
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+						            </div>  
+						        </div>  
+						    </div>  
+						</div>
 	                <%	
 	                }%>
 	                </tbody>
