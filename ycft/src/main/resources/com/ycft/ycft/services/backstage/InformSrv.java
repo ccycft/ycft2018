@@ -102,7 +102,7 @@ public class InformSrv {
 	 * @return
 	 */
 	public List<TitleContent> selAllInform(){
-		return tm.selAllTwo();
+		return tm.selAllByType(2);
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public class InformSrv {
 	 */
 	public TitleContent selAllTwoById(int id) {
 				
-		return tm.selAllTwoById(id);
+		return tm.selAllByTypeAndId(2, id);
 	}
 	/**
 	 * 修改通知的标题和内容信息

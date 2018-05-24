@@ -46,16 +46,16 @@
 		from title where type = #{0} order by time desc 
   </select>
   
-  <select id="selAllTwo" resultMap="ResultMapWithBLOBs">
+  <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
   		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = 2
+  		WHERE title.id = content.tid AND TYPE = #{1}
   </select>
   
-  <select id="selAllTwoById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
   		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = 2 AND title.id = #{1}
+  		WHERE title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
   </select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

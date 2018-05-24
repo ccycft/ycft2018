@@ -37,9 +37,9 @@ public interface TitleMapper {
 	public List<Title> selByCount(int type);
 	public int insertTitle(Title title);
 	//连表查询所有的通知属性
-	public List<TitleContent> selAllTwo();
+	public List<TitleContent> selAllByType(int type);
 	
-	public TitleContent selAllTwoById(int id);
+	public TitleContent selAllByTypeAndId(int type,int id);
 	/**
 	 * 服务端方法结束
 	 * */
