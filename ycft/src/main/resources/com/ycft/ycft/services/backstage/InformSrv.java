@@ -90,11 +90,13 @@ public class InformSrv {
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//²åÈë±êÌâ
-		tm.insertTitle(title);
+		int resultOne = tm.insertTitle(title);
 		content.setTid(title.getId());
-		int success = contentMapper.insertSelective(content);
-		System.out.println(success);
-		flag = true;
+		int resultTwo = contentMapper.insertSelective(content);
+		if (resultOne > 0 && resultTwo >0) {
+			flag = true;
+		}
+		
 		return flag;
 	}
 	/**

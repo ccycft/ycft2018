@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ycft.ycft.mapper.RoleMapper;
@@ -292,8 +293,10 @@ public class UserSrv {
 	/**
 	 * @return flag
 	 */
-	public boolean update(User user,Role role) {
+	public boolean updateAffairs(User user,Role role) {
 		boolean flag = false;
+		int resultOne = 0;
+		int resultTwo = 0;
 		//如果等于""表示为未修改密码
 		if (user.getPsd() == "") {
 			user.setPsd(null);
@@ -305,12 +308,16 @@ public class UserSrv {
 			
 		} else {
 			int rId = selByRnameRole(role).getId();
-			urm.updateByUid(rId, user.getId());
+			resultOne = urm.updateByUid(rId, user.getId());
+			if (resultOne >0) {
+				flag = true;
+			}
 		}
-		int result = um.updateByPrimaryKeySelective(user);
-		
-		if (result > 0) {
+		resultTwo = um.updateByPrimaryKeySelective(user);
+		if (resultTwo > 0) {
 			flag = true;
+		} else {
+			flag = false;
 		}
 		
 		return flag;

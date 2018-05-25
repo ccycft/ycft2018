@@ -156,7 +156,7 @@ public class UserCtrl {
 	@RequestMapping("/update.do")
 	public ModelAndView update(User user,Role role) {
 		ModelAndView modelAndView = new ModelAndView();
-		boolean flag = us.update(user,role);
+		boolean flag = us.updateAffairs(user,role);
 		if (flag) {
 			modelAndView.setViewName("selAll.do");
 		} else {
