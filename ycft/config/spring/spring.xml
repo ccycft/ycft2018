@@ -15,7 +15,9 @@
     <!--加载配置文件-->
     <context:property-placeholder location="classpath:config.properties" ignore-unresolvable="true"/>
     <!--依赖注入，扫描-->
-    <context:component-scan base-package="com.ycft.ycft"></context:component-scan>
+    <context:component-scan base-package="com.ycft.ycft.*">
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+    </context:component-scan>
     <!--开启注解-->
     <context:annotation-config />
     <!--把查询慢的sql写到日志里面 -->
