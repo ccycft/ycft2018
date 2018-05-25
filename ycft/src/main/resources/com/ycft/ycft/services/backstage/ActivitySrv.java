@@ -53,7 +53,7 @@ public class ActivitySrv {
 				e.printStackTrace();
 			}
 		}else {//把默认的图片存进数据库里
-			imgNamePath = "/baidu.png";
+			imgNamePath = "/logo.png";
 		}
 		title.setTime(DateUtil.getNowDate());
 		User user = (User)request.getSession().getAttribute("user");

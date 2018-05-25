@@ -70,7 +70,7 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","informDel.do",true);
+	    		xmlhttp.open("post","articleDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
     		}
@@ -122,7 +122,7 @@
     function refer(){
     	var sHTML = $('.summernote').summernote('code');
     	document.getElementById("contentId").value=sHTML;
-    	document.getElementById("addInform").submit();
+    	document.getElementById("addArticle").submit();
     }
   </script>
     <style>
@@ -141,7 +141,7 @@
     </style>
     <script type="text/javascript">
     	function update(id){
-    		window.open("informUpdate.do?id="+id);
+    		window.open("articleUpdate.do?id="+id);
     	}
     	function filter(id){
     	    var html=$($("#test"+id).val());
@@ -282,11 +282,11 @@
 <div id="page-wrapper" >
 	<div class="header"> 
 		<h1 class="page-header">
-		    通知维护
+		    文章维护
 		</h1>
 		<ol class="breadcrumb">
-			<li class="active">通知管理</li>
-			<li class="active">通知维护</li>
+			<li class="active">文章管理</li>
+			<li class="active">文章维护</li>
 		</ol> 
 	</div>
 	
@@ -295,10 +295,10 @@
 		    <!-- Advanced Tables -->
 		<div class="panel panel-default">
 	    <div class="panel-heading">
-	         	通知内容
+	         	文章内容
 	    </div>
 	    <div class="panel-heading">
-	        <input type="button" value="通知发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static" onclick="cTop()"/>
+	        <input type="button" value="文章发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static" onclick="cTop()"/>
 	    </div>
 	    <!-- 发布的弹出层 -->
 		<div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
@@ -308,9 +308,9 @@
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 		                    <span aria-hidden="true">×</span>  
 		                </button>  
-		                <h4 class="modal-title" id="myModalLabel">通知内容发布</h4>  
+		                <h4 class="modal-title" id="myModalLabel">文章内容发布</h4>  
 		            </div>
-		            <form action="addInform.do" method="post" id="addInform" enctype="multipart/form-data">
+		            <form action="addArticle.do" method="post" id="addArticle" enctype="multipart/form-data">
 		            		<input type="hidden" id="contentId" name="text">
 		            <div class="modal-body">
 		            	<div class="row">
@@ -355,6 +355,7 @@
 	                        <th>发布时间</th>
 	                        <th>作者名</th>
 	                        <th>图片</th>
+	                        <th>赞的个数</th>
 	                        <th>操作</th>
 	                    </tr>
 	                </thead>
@@ -366,9 +367,10 @@
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2">
-                            <img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/>
+                           	  	<img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/>
                             </td>
-                            <td class="col-md-2">
+                            <td class="col-md-1"><%=tcList.get(i).getPraise() %></td>
+                            <td class="col-md-3">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
@@ -382,7 +384,7 @@
 						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 						                    <span aria-hidden="true">×</span>  
 						                </button>  
-						                <h4 class="modal-title" id="myModalLabel">通知内容</h4>  
+						                <h4 class="modal-title" id="myModalLabel">文章内容</h4>  
 						            </div>  
 						            <div class="modal-body">  
 						            	<fieldset>

@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.ycft.ycft.mapper.ContentMapper;
 import com.ycft.ycft.mapper.TitleMapper;
 import com.ycft.ycft.po.Content;
@@ -17,8 +16,7 @@ import com.ycft.ycft.tools.DateUtil;
 import com.ycft.ycft.tools.UploadUtil;
 
 @Service
-public class InformSrv {
-
+public class ArticleSrv {
 	@Autowired
 	private TitleMapper tm;
 	@Autowired
@@ -28,7 +26,7 @@ public class InformSrv {
 	 * @return
 	 */
 	public List<Title> sel(){
-		List<Title> tList = selByCount(2);
+		List<Title> tList = selByCount(1);
 		return tList;
 	}
 	
@@ -70,7 +68,7 @@ public class InformSrv {
 	 * @return
 	 * @throws IOException 
 	 */
-	public boolean addInformAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
+	public boolean addArticleAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
 		boolean flag = false;
 		String imgNamePath  = "";
 		if(!titleFile.isEmpty()) {
@@ -86,25 +84,23 @@ public class InformSrv {
 		title.setTime(DateUtil.getNowDate());
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
-		title.setType(2);
+		title.setType(1);
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//插入标题
-		int resultOne = tm.insertTitle(title);
+		tm.insertTitle(title);
 		content.setTid(title.getId());
-		int resultTwo = contentMapper.insertSelective(content);
-		if (resultOne > 0 && resultTwo >0) {
-			flag = true;
-		}
-		
+		int success = contentMapper.insertSelective(content);
+		System.out.println(success);
+		flag = true;
 		return flag;
 	}
 	/**
-	 * 连表查询全部通知
+	 * 连表查询全部文章
 	 * @return
 	 */
-	public List<TitleContent> selAllInform(){
-		return tm.selAllByType(2);
+	public List<TitleContent> selAllArticle(){
+		return tm.selAllByType(1);
 	}
 	
 	/**
@@ -112,9 +108,9 @@ public class InformSrv {
 	 * @param id
 	 * @return
 	 */
-	public TitleContent selAllInformById(int id) {
+	public TitleContent selAllTwoById(int id) {
 				
-		return tm.selAllByTypeAndId(2, id);
+		return tm.selAllByTypeAndId(1, id);
 	}
 	/**
 	 * 修改通知的标题和内容信息
@@ -124,7 +120,7 @@ public class InformSrv {
 	 * @param content 内容
 	 * @return
 	 */
-	public boolean updInform(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
+	public boolean updArticle(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
 		boolean flag = false;
 		System.out.println(updFile.getOriginalFilename()+"++++++++++");
 		String imgNamePath  = "";
