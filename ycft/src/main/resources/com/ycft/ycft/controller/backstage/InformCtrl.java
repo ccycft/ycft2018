@@ -108,7 +108,7 @@ public class InformCtrl {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		TitleContent tc = is.selAllTwoById(id);
+		TitleContent tc = is.selAllInformById(id);
 		
 		modelAndView.addObject("tc",tc);
 		modelAndView.setViewName("backstage/inform/informMaintenance/informUpdate");

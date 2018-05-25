@@ -112,7 +112,7 @@ public class InformSrv {
 	 * @param id
 	 * @return
 	 */
-	public TitleContent selAllTwoById(int id) {
+	public TitleContent selAllInformById(int id) {
 				
 		return tm.selAllByTypeAndId(2, id);
 	}

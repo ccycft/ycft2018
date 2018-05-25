@@ -136,7 +136,7 @@
     </style>
     <script type="text/javascript">
     	function update(id){
-    		window.open("informUpdate.do?id="+id);
+    		window.open("activityUpdate.do?id="+id);
     	}
     	function filter(id){
     	    var html=$($("#test"+id).val());

@@ -11,7 +11,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";		
 	%>
-			
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -92,10 +91,10 @@
     </style>
 </head>
 <body>
-	<%
+<%
 		TitleContent tc = (TitleContent)request.getAttribute("tc");
 	%>
-	<form action="updInform.do" method="post" id="updInform" enctype="multipart/form-data">
+	<form action="updActivity.do" method="post" id="updInform" enctype="multipart/form-data">
 		<input type="hidden" id="updContentId" name="text">
    		<input type="hidden" name="id" value="<%=tc.getId() %>">
    		<input type="hidden" name="tid" value="<%=tc.getId() %>">

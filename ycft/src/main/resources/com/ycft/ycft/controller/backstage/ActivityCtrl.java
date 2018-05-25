@@ -28,7 +28,7 @@ public class ActivityCtrl {
 	public ModelAndView selActivity() {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		List<TitleContent> tcList = as.selAllInform();
+		List<TitleContent> tcList = as.selAllActivity();
 		
 		modelAndView.addObject("tcList", tcList);
 		modelAndView.setViewName("backstage/activity/activityMaintenance/maintenance");
@@ -70,6 +70,47 @@ public class ActivityCtrl {
 		} finally {
 			writer.flush();
 			writer.close();
+		}
+	}
+	
+	/**
+	 * 点修改带id进来查询出数据到修改界面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/activityUpdate.do")
+	public ModelAndView activityUpdate(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		TitleContent tc = as.selAllActivityById(id);
+		
+		modelAndView.addObject("tc",tc);
+		modelAndView.setViewName("backstage/activity/activityMaintenance/activityUpdate");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updActivity.do")
+	public void updActivity(HttpServletResponse response,HttpServletRequest request,Title title,Content content,MultipartFile updFile) throws IOException {
+		boolean flag = as.updActivity(request,title,content,updFile);
+		if(flag) {
+			response.setContentType("text/html");
+        	response.setCharacterEncoding("UTF-8");
+        	PrintWriter out = response.getWriter();
+        	out.println("<script>"); 
+        	out.println("alert('修改成功');"); 
+        	out.println("window.opener=null;window.close();");
+        	out.println("</script>");
+		}else {
+			response.setContentType("text/html");
+        	response.setCharacterEncoding("UTF-8");
+        	PrintWriter out = response.getWriter();
+        	out.println("<script>"); 
+        	out.println("alert('修改失败');"); 
+        	out.println("window.opener=null;window.close();");
+        	out.println("</script>");
 		}
 	}
 }

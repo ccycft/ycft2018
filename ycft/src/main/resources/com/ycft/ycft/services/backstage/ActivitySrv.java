@@ -30,7 +30,7 @@ public class ActivitySrv {
 	 * 连表查询全部通知
 	 * @return
 	 */
-	public List<TitleContent> selAllInform(){
+	public List<TitleContent> selAllActivity(){
 		return tm.selAllByType(3);
 	}
 	/**
@@ -81,6 +81,53 @@ public class ActivitySrv {
 		
 		int result = tm.deleteByPrimaryKey(id);
 		if (result > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	/**
+	 * 通过id连表查询
+	 * @param id
+	 * @return
+	 */
+	public TitleContent selAllActivityById(int id) {
+				
+		return tm.selAllByTypeAndId(3, id);
+	}
+	
+	/**
+	 * 修改通知的标题和内容信息
+	 * @author 马荣福
+	 * @param request
+	 * @param title 标题
+	 * @param content 内容
+	 * @return
+	 */
+	public boolean updActivity(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
+		boolean flag = false;
+		String imgNamePath  = "";
+		if(!updFile.isEmpty()) {
+			//上传图片
+			try {
+				//得到的是图片的路径
+				imgNamePath = UploadUtil.commonUpload(request, updFile);
+				String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
+				title.setImgName(imgName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//设置修改时间
+		title.setTime(DateUtil.getNowDate());
+		//获取用户信息
+		User user = (User)request.getSession().getAttribute("user");
+		title.setUser(user.getSname());
+		
+		int resultOne = tm.updateByPrimaryKeySelective(title);
+		int resultTwo = contentMapper.updateByTid(content);
+		if (resultOne > 0&& resultTwo > 0) {
 			flag = true;
 		}
 		
