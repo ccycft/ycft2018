@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ycft.ycft.mapper.ContentMapper;
 import com.ycft.ycft.mapper.TitleMapper;
+import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 
 @Service
@@ -23,5 +24,13 @@ public class ForumSrv {
 	 */
 	public List<TitleContent> selAllForum(){
 		return tm.selAllByType(4);
+	}
+	
+	/**根据id查询对应的评论
+	 * @param id
+	 * @return
+	 */
+	public List<Title> selTitleCommentById(int id){
+		return tm.selTitleCommentById(id);
 	}
 }

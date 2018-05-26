@@ -22,6 +22,21 @@
   <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.TitleContent" extends="CustomizeResultMap" >
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
   </resultMap>
+	<resultMap id="TitleComment" type="com.ycft.ycft.po.Title">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <collection property="commentList" ofType="com.ycft.ycft.po.Comment">
+	    <result column="cid" property="id" jdbcType="INTEGER" />
+	    <result column="uid" property="uid" jdbcType="INTEGER" />
+	    <result column="tid" property="tid" jdbcType="INTEGER" />
+	    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, time, user, type, praise, img_name
   </sql>
@@ -114,6 +129,10 @@
       </if>
     </trim>
 	</insert>
+	<select id="selTitleCommentById" resultMap="TitleComment" parameterType="java.lang.Integer">
+	    SELECT comment.id cid,content,TIME,USER FROM COMMENT,title 
+	    WHERE comment.tid = title.id AND title.id = #{1}
+	</select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

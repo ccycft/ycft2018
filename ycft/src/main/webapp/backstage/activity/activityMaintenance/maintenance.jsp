@@ -157,7 +157,12 @@
     	fieldset{
     		border:0 none;
     		padding:0;
-    	}  
+    	}
+    	.img-responsive{
+    		display:inline-block;
+    		height:auto;
+    		max-width:20%;
+    	}
     </style>
     <script type="text/javascript">
     	function update(id){
@@ -384,9 +389,9 @@
 	                	<tr class="gradeA">
                             <td class="col-md-2"><%=tcList.get(i).getName() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
-                            <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-1"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2"><img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/></td>
-                            <td class="col-md-4">
+                            <td class="col-md-5">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>

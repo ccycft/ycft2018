@@ -99,6 +99,9 @@
     	    $("#test"+id).val(html.text());
     	    $("#remove"+id).removeAttr("onclick");
     	}
+    	function commentDetail(id){
+    		window.open("selComment.do?id="+id);
+    	}
     </script>
     <script type="text/javascript">
     	function cTop(){
@@ -268,7 +271,7 @@
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2">
                             	<input type="button" value="论坛详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
-                            	<input type="button" value="评论详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
+                            	<input type="button" value="评论详情" class="btn btn-warning" data-toggle="modal" data-target="" onclick="commentDetail('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>

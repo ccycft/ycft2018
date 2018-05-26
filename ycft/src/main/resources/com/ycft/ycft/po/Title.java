@@ -1,5 +1,7 @@
 package com.ycft.ycft.po;
 
+import java.util.List;
+
 public class Title {
 	//文章id
     private Integer id;
@@ -16,7 +18,18 @@ public class Title {
     //首页图片名称
     private String imgName;
 
-    public Integer getId() {
+    //和评论表进行一对一配置
+    private List<Comment> commentList;
+    
+	public List<Comment> getComment() {
+		return commentList;
+	}
+
+	public void setComment(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+
+	public Integer getId() {
         return id;
     }
 
