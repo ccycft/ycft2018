@@ -254,8 +254,7 @@
             	</div>
              </form>
 		            <div class="modal-footer">  
-			            <button type="submit" class="btn btn-default">保存</button>
-	                    <button type="reset" class="btn btn-default">重置</button>
+			            <button type="submit" class="btn btn-info">保存</button>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 		            </div>  
 		 	</div>

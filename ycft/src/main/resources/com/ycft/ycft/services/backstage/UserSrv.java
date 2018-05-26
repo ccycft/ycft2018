@@ -179,14 +179,13 @@ public class UserSrv {
 					return false;
 				}finally {  
 					try {
+						if(os != null){
+							os.close();
+						}
 						//¹Ø±Õ
 						if(bWorkbook != null){
 							bWorkbook.close();
 						}
-						if(os != null){
-							os.close();
-						}
-						
 					} catch (WriteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

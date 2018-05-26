@@ -60,11 +60,11 @@ public class UserCtrl {
 	public ModelAndView exportExcel(HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		boolean b = us.exportExcel(response);
+		System.out.println(b+"-------");
 		if(b){
-			mav.setViewName("success");
-			
+			mav.setViewName("backstage/success");
 		}else{
-			mav.setViewName("fail");
+			mav.setViewName("backstage/fail");
 		}
 		return mav;
 	}
@@ -94,10 +94,10 @@ public class UserCtrl {
 			e.printStackTrace();
 		}
 		if(b){
-			mav.setViewName("success");
+			mav.setViewName("backstage/success");
 			
 		}else{
-			mav.setViewName("fail");
+			mav.setViewName("backstage/fail");
 		}
 		return mav;
 	}
@@ -125,7 +125,7 @@ public class UserCtrl {
 		if (flag) {
 			modelAndView.setViewName("jump.do");
 		} else {
-			modelAndView.setViewName("fail");
+			modelAndView.setViewName("backstage/fail");
 		}
 		return modelAndView;
 	}
@@ -160,7 +160,7 @@ public class UserCtrl {
 		if (flag) {
 			modelAndView.setViewName("selAll.do");
 		} else {
-			modelAndView.setViewName("fail");
+//			modelAndView.setViewName("backstage/fail");
 		}
 		return modelAndView;
 	}
