@@ -201,7 +201,8 @@ public class UserSrv {
 		 * @param file Excel文件
 		 * @return
 		 */
-		public boolean importExcel(MultipartFile file) throws Exception{
+		public boolean importExcelAffairs(MultipartFile file) throws Exception{
+			boolean flag = false;
 			InputStream input = null;
 			try {
 				input = file.getInputStream();
@@ -256,7 +257,12 @@ public class UserSrv {
 		                //装入
 		                uList.add(user);
 		            }
-		            return um.batchInsert(uList) >= 1 ? true : false;    
+		            int temp = um.batchInsert(uList);
+		            if(temp >=1) {
+		            	flag = true;
+		            }
+		            um.delRepeat();
+		            return flag;
 			} catch (Exception e) {
 				// TODO: handle exception
 				return false;

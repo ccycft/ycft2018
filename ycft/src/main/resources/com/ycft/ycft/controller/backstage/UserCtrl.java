@@ -88,7 +88,7 @@ public class UserCtrl {
 		ModelAndView mav = new ModelAndView();
 		boolean b = false;
 		try {
-			b =  us.importExcel(file);
+			b =  us.importExcelAffairs(file);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

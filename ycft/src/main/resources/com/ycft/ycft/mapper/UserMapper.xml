@@ -63,40 +63,10 @@
 	</select>
 	<!-- 批量导入 -->
 	<insert id="batchInsert" parameterType="java.util.List">
-		insert into user
+		insert into user(sno,psd,sname,tel,school,college,department,profession,cls) values
 		<!-- 开始批量执行 -->
-		<foreach collection="list" item="item" index="index">
-			<trim prefix="(" suffix=")" suffixOverrides=",">
-				<if test="item.sno != null">
-					sno,
-		        </if>
-		        <if test="item.psd != null">
-					psd,
-		        </if>
-		        <if test="item.sname != null">
-					sname,
-		        </if>
-		        <if test="item.tel != null">
-					tel,
-		        </if>
-		        <if test="item.school != null">
-					school,
-		        </if>
-		        <if test="item.college != null">
-					college,
-		        </if>
-		         <if test="item.department != null">
-					department,
-		        </if>
-		         <if test="item.profession != null">
-					profession,
-		        </if>
-		        <if test="item.cls != null">
-					cls,
-		        </if>
-			</trim>
-			<trim prefix="values (" suffix=")" suffixOverrides=",">
-		      	<if test="item.sno != null">
+		<foreach collection="list" item="item" index="index" separator=",">
+		      	(<if test="item.sno != null">
 					#{item.sno},
 		        </if>
 		        <if test="item.psd != null">
@@ -121,11 +91,14 @@
 					#{item.profession},
 		        </if>
 		        <if test="item.cls != null">
-					#{item.cls},
-		        </if>
-			</trim>
+					#{item.cls}
+		        </if>)
 		</foreach>
 	</insert>
+	<!-- 删除导入之后的重复数据 -->
+	<delete id="delRepeat">
+	    DELETE FROM USER WHERE id NOT IN (SELECT minid FROM (SELECT MIN(id) AS minid FROM USER GROUP BY sno) b);
+	</delete>
   <!-- 服务端方法结束 -->
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
