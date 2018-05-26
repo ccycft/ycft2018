@@ -124,6 +124,31 @@
     	document.getElementById("contentId").value=sHTML;
     	document.getElementById("addInform").submit();
     }
+    function validFile(id){
+		var f_content = document.getElementById("fileEntry").value;  
+	    var fileext=f_content.substring(f_content.lastIndexOf("."),f_content.length);
+	    var filename =  f_content.substring(f_content.lastIndexOf("\\")+1,f_content.length);
+	    fileext=fileext.toLowerCase();
+	    if (fileext!='.xls' ){  
+	        alert("对不起，导入数据格式必须是xls格式文件哦，请您调整格式后重新上传，谢谢 ！");
+	        
+	    }else{
+	    	alert("请仔细核对学号，如若错误则无法导入！");
+	    	if(confirm('您将要导入 ['+filename+"] 文件?")){
+	    		//开始导入
+	    		document.getElementById("fileForm"+id).submit();
+	    	} else {
+	    		return false;
+	    	}
+	    }  
+	}
+    
+    function exportFile(id){
+		if(confirm('导出 全部学生信息吗?')){
+			document.getElementById("fileForm"+id).action="<%=basePathNoBackstage%>exportActivityExcel.do";
+			document.getElementById("fileForm"+id).submit();
+		}
+	}
   </script>
     <style>
     	.form-group{
@@ -361,10 +386,12 @@
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2"><img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/></td>
-                            <td class="col-md-2">
+                            <td class="col-md-4">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
+                            	<input type="button" class="btn btn-success" data-toggle="modal" data-target="#entry<%=tcList.get(i).getId()%>" value="报名导入" />
+                 				<input type="button" class="btn btn-success" value="报名导出" onclick="exportFile('<%=tcList.get(i).getId() %>')" />
                             </td>
                         </tr>
                         <!-- 详情的弹出层 -->
@@ -387,6 +414,43 @@
 						            <div class="modal-footer">  
 						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 						            </div>  
+						        </div>  
+						    </div>  
+						</div>
+	               		<!-- 导入的弹出层 -->
+						<div class="modal fade" id="entry<%=tcList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+						    <div class="modal-dialog" role="document">  
+						        <div class="modal-content">  
+						            <div class="modal-header">  
+						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						                    <span aria-hidden="true">×</span>  
+						                </button>  
+						                <h4 class="modal-title" id="myModalLabel">导入活动报名人</h4>  
+						            </div>
+						            <form action="<%=basePathNoBackstage%>importActivityExcel.do" method="post" id="fileForm<%=tcList.get(i).getId() %>" enctype="multipart/form-data"> 
+						            	<input type="hidden" name="id" value="<%=tcList.get(i).getId() %>"/>  
+							            <div class="modal-body">  
+							            	<fieldset>
+						            			<div class="form-group">
+						                          <label class="col-sm-6 control-label" for="ds_host">活动标题：<%=tcList.get(i).getName() %></label>
+						                       </div>
+						                       <div class="form-group">
+						                          <label class="col-sm-2 control-label" for="ds_host">导入需先下载模板</label>
+						                          <div class="col-sm-4">
+						                          	<a href="<%=basePathNoBackstage%>downloadActivityDemo.do" class ="btn btn-success">模版下载</a>
+						                          </div>
+						                          <label class="col-sm-2 control-label" for="ds_host">请选择导入的表格</label>
+						                          <div class="col-sm-4">
+						                          	<input type="file" name="file" onclick="javascript:importFile()"  id="fileEntry" style="vertical-align:middle" >
+						                          </div>
+						                       </div>
+						                    </fieldset>
+							            </div>  
+							            <div class="modal-footer">  
+							                <button type="submit" class="btn btn-info" onclick="return validFile('<%=tcList.get(i).getId() %>')">提交</button>  
+							                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+							            </div>
+						            </form>  
 						        </div>  
 						    </div>  
 						</div>

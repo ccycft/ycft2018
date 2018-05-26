@@ -99,6 +99,9 @@
 	<delete id="delRepeat">
 	    DELETE FROM USER WHERE id NOT IN (SELECT minid FROM (SELECT MIN(id) AS minid FROM USER GROUP BY sno) b);
 	</delete>
+	<select id="selExport" parameterType="int" resultMap="BaseResultMap">
+		SELECT user.sno,user.sname,user.tel,user.profession,user.cls FROM title,USER,activity WHERE activity.tid = #{1} AND activity.tid = title.id AND activity.uid = user.id
+	</select>
   <!-- 服务端方法结束 -->
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ycft.ycft.po.Activity;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
@@ -112,5 +113,54 @@ public class ActivityCtrl {
         	out.println("window.opener=null;window.close();");
         	out.println("</script>");
 		}
+	}
+	
+	/**
+	 * 下载导入活动的excel模版demo文件
+	 * @param response
+	 * @param request
+	 */
+	@RequestMapping("/downloadActivityDemo.do")
+	public void downloadActivityDemo(HttpServletResponse response,HttpServletRequest request){
+		response.reset();
+        as.downloadActivityDemo(response, request);
+	}
+	
+	@RequestMapping("/importActivityExcel.do")
+	public ModelAndView importActivityExcel(MultipartFile file,Activity activity){
+		ModelAndView mav = new ModelAndView();
+		boolean flag = false;
+		try {
+			flag =  as.importActivityExcelAffairs(file,activity);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(flag){
+			mav.setViewName("selActivity.do");
+		}else{
+			mav.setViewName("backstage/fail");
+		}
+		return mav;
+	}
+	
+	/**
+	 * 导出excel
+	 * 
+	 * @param student
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/exportActivityExcel.do")
+	public ModelAndView exportActivityExcel(HttpServletResponse response,Activity activity){
+		ModelAndView mav = new ModelAndView();
+		boolean flag = as.exportActivityExcel(response,activity.getId());
+		if(flag){
+			mav.setViewName("backstage/success");
+		}else{
+			mav.setViewName("backstage/fail");
+		}
+		return mav;
 	}
 }

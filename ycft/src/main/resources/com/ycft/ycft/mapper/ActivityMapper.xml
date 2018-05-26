@@ -35,4 +35,22 @@
       </if>
     </trim>
   </insert>
+  <!-- 服务端方法开始 -->
+  <!-- 批量导入 -->
+	<insert id="batchInsert" parameterType="java.util.List" >
+		insert into activity(tid,uid) values
+		<!-- 开始批量执行 -->
+		<foreach collection="list" item="item" index="index" separator=",">
+		      	(<if test="item.tid != null">
+					#{item.tid},
+		        </if>
+		        <if test="item.uid != null">
+					#{item.uid}
+		        </if>)
+		</foreach>
+	</insert>
+	<delete id="delRepeat">
+		DELETE FROM activity WHERE id NOT IN (SELECT minid FROM (SELECT MIN(id) AS minid FROM activity GROUP BY tid,uid) b)
+	</delete>
+	<!-- 服务端方法结束 -->
 </mapper>
