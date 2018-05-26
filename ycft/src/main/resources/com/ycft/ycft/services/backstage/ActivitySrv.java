@@ -26,7 +26,6 @@ import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.tools.DateUtil;
-import com.ycft.ycft.tools.MD5;
 import com.ycft.ycft.tools.UploadUtil;
 
 import jxl.Cell;
@@ -51,7 +50,8 @@ public class ActivitySrv {
 	
 	/**
 	 * 连表查询全部通知
-	 * @return
+	 * @author 郑斌
+	 * @return List<TitleContent>
 	 */
 	public List<TitleContent> selAllActivity(){
 		return tm.selAllByType(3);
@@ -59,10 +59,11 @@ public class ActivitySrv {
 	/**
 	 * 添加通知信息
 	 * @author 郑斌
+	 * @param request
 	 * @param content 内容表
 	 * @param title	标题表
 	 * @param titleFile 标题的图片
-	 * @return
+	 * @return boolean
 	 * @throws IOException 
 	 */
 	public boolean addActivityAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
@@ -78,16 +79,21 @@ public class ActivitySrv {
 		}else {//把默认的图片存进数据库里
 			imgNamePath = "/logo.png";
 		}
+		//封装好的时间格式
 		title.setTime(DateUtil.getNowDate());
+		//从session中获取user
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
+		//3为活动
 		title.setType(3);
+		//截取一下获取图片名
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//插入标题
 		tm.insertTitle(title);
 		content.setTid(title.getId());
 		int result = contentMapper.insertSelective(content);
+		//结果大于0为发不成功
 		if (result > 0) {
 			flag = true;
 		}
@@ -96,13 +102,15 @@ public class ActivitySrv {
 	
 	/**
 	 * 删除
-	 * @param id
-	 * @return
+	 * @author 郑斌
+	 * @param id 
+	 * @return boolean
 	 */
 	public boolean del(int id) {
 		boolean flag = false;
 		
 		int result = tm.deleteByPrimaryKey(id);
+		//删除成功后大于0
 		if (result > 0) {
 			flag = true;
 		}
@@ -112,8 +120,9 @@ public class ActivitySrv {
 	
 	/**
 	 * 通过id连表查询
+	 * @author 郑斌
 	 * @param id
-	 * @return
+	 * @return TitleContent
 	 */
 	public TitleContent selAllActivityById(int id) {
 				
@@ -122,11 +131,11 @@ public class ActivitySrv {
 	
 	/**
 	 * 修改通知的标题和内容信息
-	 * @author 马荣福
+	 * @author 郑斌
 	 * @param request
-	 * @param title 标题
-	 * @param content 内容
-	 * @return
+	 * @param title 参数绑定
+	 * @param content 参数绑定
+	 * @return boolean
 	 */
 	public boolean updActivity(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
 		boolean flag = false;
@@ -136,6 +145,7 @@ public class ActivitySrv {
 			try {
 				//得到的是图片的路径
 				imgNamePath = UploadUtil.commonUpload(request, updFile);
+				//截取获取图片名
 				String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 				title.setImgName(imgName);
 			} catch (IOException e) {
@@ -150,6 +160,7 @@ public class ActivitySrv {
 		
 		int resultOne = tm.updateByPrimaryKeySelective(title);
 		int resultTwo = contentMapper.updateByTid(content);
+		//只有两个都修改成功则返回true
 		if (resultOne > 0&& resultTwo > 0) {
 			flag = true;
 		}
@@ -157,7 +168,12 @@ public class ActivitySrv {
 		return flag;
 	}
 	
-	//下载导入模版
+	/**
+	 * 下载导入模版
+	 * @author 郑斌
+	 * @param response
+	 * @param request
+	 */
 	public void downloadActivityDemo(HttpServletResponse response , HttpServletRequest request){
 		//demo文件的名称
 		String fileName = "activityDemo.xls";
@@ -205,8 +221,11 @@ public class ActivitySrv {
 	}
 	/**
 	 * 导入excel文件
+	 * @author 郑斌
 	 * @param file Excel文件
-	 * @return
+	 * @param activity 将tid绑定过来但是绑定到id上了。。。
+	 * @throws Exception
+	 * @return boolean
 	 */
 	public boolean importActivityExcelAffairs(MultipartFile file,Activity activity) throws Exception{
 		InputStream input = null;
@@ -221,7 +240,7 @@ public class ActivitySrv {
         	List<Activity> aList = new ArrayList<Activity>();
             for(int i = 1;i < rows;i++){
             	Activity activity2 = new Activity();
-            	//学号
+            	//获取表格里的学号
             	Cell cell = sheet.getCell(0, i);
                 String sno = cell.getContents();
                 User user = um.bsLogin(sno);
@@ -249,10 +268,10 @@ public class ActivitySrv {
 	
 	/**
 	 * 导出信息
-	 * 
-	 * @param User
-	 * @param request
+	 * @author 郑斌
 	 * @param response
+	 * @param tid
+	 * @return boolean
 	 */
 	public boolean exportActivityExcel(HttpServletResponse response,int tid){
 		
@@ -271,27 +290,27 @@ public class ActivitySrv {
 				
 				response.setHeader("Content-Disposition", "attachment;"+ " filename="+ new String(fileName.getBytes(), "ISO-8859-1"));
 				os = response.getOutputStream();
-					//创建excel对象
-					bWorkbook = Workbook.createWorkbook(os);
-					//通过excel对象创建一个选项卡对象
-					WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
-					for(int i = 0;i < uList.size();i++){
-						User user = uList.get(i);
-						//开始绘制表头
-						sheet.addCell(new Label(0, 0, "学号")); 
-		                sheet.addCell(new Label(1, 0, "姓名"));
-		                sheet.addCell(new Label(2, 0, "电话"));
-		                sheet.addCell(new Label(3, 0, "专业"));
-		                sheet.addCell(new Label(4, 0, "班级"));
-		               
-		                //开始绘制主体内容
-		                sheet.addCell(new Label(0, i + 1,  user.getSno()));
-		                sheet.addCell(new Label(1, i + 1,  user.getSname()));
-		                sheet.addCell(new Label(2, i + 1,  user.getTel()));
-		                sheet.addCell(new Label(3, i + 1,  user.getProfession()));
-		                sheet.addCell(new Label(4, i + 1,  user.getCls()));
+				//创建excel对象
+				bWorkbook = Workbook.createWorkbook(os);
+				//通过excel对象创建一个选项卡对象
+				WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
+				for(int i = 0;i < uList.size();i++){
+					User user = uList.get(i);
+					//开始绘制表头
+					sheet.addCell(new Label(0, 0, "学号")); 
+	                sheet.addCell(new Label(1, 0, "姓名"));
+	                sheet.addCell(new Label(2, 0, "电话"));
+	                sheet.addCell(new Label(3, 0, "专业"));
+	                sheet.addCell(new Label(4, 0, "班级"));
+	               
+	                //开始绘制主体内容
+	                sheet.addCell(new Label(0, i + 1,  user.getSno()));
+	                sheet.addCell(new Label(1, i + 1,  user.getSname()));
+	                sheet.addCell(new Label(2, i + 1,  user.getTel()));
+	                sheet.addCell(new Label(3, i + 1,  user.getProfession()));
+	                sheet.addCell(new Label(4, i + 1,  user.getCls()));
 					}
-			            bWorkbook.write();
+		            bWorkbook.write();
 				} 
 				return true;
 			} catch (Exception e) {
@@ -299,7 +318,7 @@ public class ActivitySrv {
 				return false;
 			}finally {  
 				try {
-					//关闭
+					//下面这两个关闭不能反，否则导出不好使
 					if(bWorkbook != null){
 						bWorkbook.close();
 					}
