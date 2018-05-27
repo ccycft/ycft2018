@@ -70,11 +70,77 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","informDel.do",true);
+	    		xmlhttp.open("post","forumDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
     		}
     	}
+    	//评论的详情
+    	function commentDetail(id){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange  = function(){
+				if(xmlhttp.readyState == 4){
+					var data = xmlhttp.responseText;
+					var dataObj=eval("("+data+")");//转换为json对象 
+					appendLi(dataObj);
+				}
+			};
+			xmlhttp.open("post","selComment.do",true);
+    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    		xmlhttp.send("id="+id);
+    	}
+    	//把li追加到页面上
+    	function appendLi(tt) {  
+            var json = eval(tt); //数组     
+            var tt = "";  
+            $.each(json, function (index) {  
+                //循环获取数据    
+                var user = json[index].user;
+                var time = json[index].time;
+                var commentListId = json[index].commentList[0].id;
+                var commentListContent = json[index].commentList[0].content;
+                tt += "<li style='list-style-type:none;' id='li"+commentListId+"' onclick='delComment(this.id)'><span style='color:#295c9d'>" + user + " </span> : " + commentListContent + "</li>";  
+            });  
+            $("#list").html('');
+            $("#list").html(tt);
+        }
+    	//删除评论
+    	function delComment(id){
+			var temp = document.getElementById(id).innerHTML;
+			//要截取的长度
+			var length = temp.indexOf("</span> :")-temp.indexOf(">")-1;
+			//截取名字
+			var name = temp.substr(temp.indexOf(">")+1,length);
+    		if (confirm("您确认删除\""+name+"的评论\"吗?")) {
+    			var xmlhttp = new XMLHttpRequest();
+	    		xmlhttp.onreadystatechange = function(){
+	    			if(xmlhttp.readyState == 4){
+	    				var data= xmlhttp.responseText;
+	    				if (data == 1) {
+	    					alert("删除成功！");
+	    					document.location.reload();
+	    				} else {
+	    					alert("删除失败！");
+	    	    		}
+	    			}
+	    		};
+	    		xmlhttp.open("post","commentDel.do",true);
+	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	    		xmlhttp.send("id="+id);
+    		}
+    	}
+    	//把滚动条移动到最上面
+    	function cTop(){
+    		timer=setInterval(function(){
+                var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                var ispeed=Math.floor(-scrollTop/6);
+                if(scrollTop==0){
+                    clearInterval(timer);
+                }
+                document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
+            },30)
+    	}	
+    
     </script>
     <style>
     	.form-group{
@@ -89,33 +155,10 @@
 		  height: auto;
 		  max-width: 20%;
 		}
+		#list{
+			background: #ededed;
+		}
     </style>
-    <script type="text/javascript">
-    	function update(id){
-    		window.open("informUpdate.do?id="+id);
-    	}
-    	function filter(id){
-    	    var html=$($("#test"+id).val());
-    	    $("#test"+id).val(html.text());
-    	    $("#remove"+id).removeAttr("onclick");
-    	}
-    	function commentDetail(id){
-    		window.open("selComment.do?id="+id);
-    	}
-    </script>
-    <script type="text/javascript">
-    	function cTop(){
-    		timer=setInterval(function(){
-                var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
-                var ispeed=Math.floor(-scrollTop/6);
-                if(scrollTop==0){
-                    clearInterval(timer);
-                }
-                document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
-            },30)
-    	}	
-    
-    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -270,8 +313,7 @@
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2">
-                            	<input type="button" value="论坛详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
-                            	<input type="button" value="评论详情" class="btn btn-warning" data-toggle="modal" data-target="" onclick="commentDetail('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
+                            	<input type="button" value="论坛详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="commentDetail('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>
@@ -290,6 +332,8 @@
 					                       <div class="form-group">
 				                       			<%=tcList.get(i).getText() %>
 					                       </div>
+					                       <ul id="list">
+					                       </ul>
 					                    </fieldset>
 						            </div>  
 						            <div class="modal-footer">
