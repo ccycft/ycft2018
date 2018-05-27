@@ -27,7 +27,7 @@ public class ActivityCtrl {
 
 	/**
 	 * 查询出所以活动信息
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @return backstage/activity/activityMaintenance/maintenance
 	 */
 	@RequestMapping("/selActivity.do")
@@ -45,7 +45,7 @@ public class ActivityCtrl {
 	/**
 	 * 活动的发布处理
 	 * 发布后跳转回原界面
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param request
 	 * @param content 参数绑定
@@ -70,7 +70,7 @@ public class ActivityCtrl {
 	 * ajax删除
 	 * 删除成功后返回1
 	 * 因为创建了触发器所以删除某条活动，该活动的报名信息也删除
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param request
 	 */
@@ -99,7 +99,7 @@ public class ActivityCtrl {
 	
 	/**
 	 * 点修改带id进来查询出数据跳转到新的修改界面
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param request
 	 * @return backstage/activity/activityMaintenance/activityUpdate
 	 */
@@ -119,7 +119,7 @@ public class ActivityCtrl {
 	
 	/**
 	 * 修改成功后提示修改成功，并关闭修改页面
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param request
 	 * @param title 参数绑定
@@ -153,7 +153,7 @@ public class ActivityCtrl {
 	
 	/**
 	 * 下载导入活动的excel模版demo文件
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param request
 	 */
@@ -165,7 +165,7 @@ public class ActivityCtrl {
 	
 	/**
 	 * 导入成功后跳转回原界面
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param file
 	 * @param activity 参数绑定，导入哪个活动，绑定过来id
 	 * @return selActivity.do
@@ -192,7 +192,7 @@ public class ActivityCtrl {
 	/**
 	 * 导出excel
 	 * 导出成功后跳转到success，否则后台会因为getWriter和getOutputStream冲突而报错
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param activity 参数绑定，导出哪个活动，绑定过来id
 	 * @return backstage/success

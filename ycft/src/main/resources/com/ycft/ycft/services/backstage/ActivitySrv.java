@@ -50,7 +50,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 连表查询全部通知
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @return List<TitleContent>
 	 */
 	public List<TitleContent> selAllActivity(){
@@ -58,7 +58,7 @@ public class ActivitySrv {
 	}
 	/**
 	 * 添加通知信息
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param request
 	 * @param content 内容表
 	 * @param title	标题表
@@ -102,7 +102,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 删除
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param id 
 	 * @return boolean
 	 */
@@ -120,7 +120,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 通过id连表查询
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param id
 	 * @return TitleContent
 	 */
@@ -131,7 +131,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 修改通知的标题和内容信息
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param request
 	 * @param title 参数绑定
 	 * @param content 参数绑定
@@ -170,7 +170,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 下载导入模版
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param request
 	 */
@@ -221,7 +221,7 @@ public class ActivitySrv {
 	}
 	/**
 	 * 导入excel文件
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param file Excel文件
 	 * @param activity 将tid绑定过来但是绑定到id上了。。。
 	 * @throws Exception
@@ -268,7 +268,7 @@ public class ActivitySrv {
 	
 	/**
 	 * 导出信息
-	 * @author 郑斌
+	 * @author ZHENGBIN
 	 * @param response
 	 * @param tid
 	 * @return boolean
