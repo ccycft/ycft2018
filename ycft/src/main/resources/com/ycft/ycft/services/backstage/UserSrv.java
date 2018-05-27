@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ycft.ycft.mapper.RoleMapper;
@@ -42,16 +41,20 @@ public class UserSrv {
 	/**
 	 * 登录的判断
 	 * 成功后把信息存到session中
+	 * @author ZHENGBIN
 	 * @param sno
 	 * @param psd
-	 * @return
+	 * @return boolean
 	 */
 	public boolean userAjax(String sno,String psd,HttpServletRequest request) {
 		boolean flag = false;
+		//md5加密
 		psd = MD5.md5Password(psd);
 		User user = um.bsLogin(sno);
+		//因为md5不支持解密所以只能用输入的密码进行加密然后和数据库里的密码进行对比
 		if (user.getPsd().equals(psd)) {
 			flag = true;
+			//将用户信息存储到session
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
 		}
@@ -275,7 +278,8 @@ public class UserSrv {
 		
 	/**
 	 * 查询所有学生的信息，不包括超级管理员
-	 * @return uList
+	 * @author ZHENGBIN
+	 * @return List<User>
 	 */
 	public List<User> selAll(){
 		List<User> uList = um.selAll();
@@ -283,12 +287,14 @@ public class UserSrv {
 	}
 	
 	/**
+	 * 删除功能
+	 * @author ZHENGBIN
 	 * @param id
 	 * @return boolean
 	 */
 	public boolean del(int id) {
 		boolean flag = false;
-		System.out.println("-++"+id);
+		//删除成功后返回ture
 		if (um.deleteByPrimaryKey(id) > 0) {
 			flag = true;
 		}
@@ -296,7 +302,10 @@ public class UserSrv {
 	}
 	
 	/**
-	 * @return flag
+	 * @author ZHENGBIN
+	 * @param user 参数绑定
+	 * @param role 参数绑定
+	 * @return boolean
 	 */
 	public boolean updateAffairs(User user,Role role) {
 		boolean flag = false;
@@ -306,12 +315,14 @@ public class UserSrv {
 		if (user.getPsd() == "") {
 			user.setPsd(null);
 		} else {
+			//如果修改密码则用md5加密存进去
 			user.setPsd(MD5.md5Password(user.getPsd()));
 		}
 		//这代表不修改权限
 		if (role.getRname().equals("不选则不修改")) {
 			
 		} else {
+			//修改了权限则获取该权限的id存到user_role
 			int rId = selByRnameRole(role).getId();
 			resultOne = urm.updateByUid(rId, user.getId());
 			if (resultOne >0) {
@@ -329,12 +340,11 @@ public class UserSrv {
 	}
 	/**
 	 * 通过Rname查
-	 * @param role
-	 * @return
+	 * @author ZHENGBIN
+	 * @param role 参数绑定
+	 * @return Role
 	 */
 	public Role selByRnameRole(Role role) {
-		System.out.println("----"+role.getRname());
-		System.out.println(rm.selByRname(role.getRname()));
 		return rm.selByRname(role.getRname());
 	}
 	
