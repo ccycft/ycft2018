@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,14 +25,23 @@ public class UserCtrl {
 	@Autowired
 	private RoleSrv rs;
 	
+	/**
+	 * 登录的ajax
+	 * @author ZHENGBIN
+	 * @param response
+	 * @param request
+	 */
 	@RequestMapping("/userAjax.do")
 	public void UserAjax(HttpServletResponse response,HttpServletRequest request) {
+		//用户名
 		String sno = request.getParameter("sno");
+		//密码
 		String psd = request.getParameter("psd");
 		PrintWriter writer = null;
 		try {
 			writer = response.getWriter();
 			boolean flag = us.userAjax(sno, psd,request);
+			//登录成功则返回1并由前台跳转主页面
 			if (flag) {
 				writer.println("1");
 			} else {
@@ -104,13 +111,14 @@ public class UserCtrl {
 	
 	/**
 	 * 查询全部学生
-	 * @return modelAndView
+	 * @return backstage/userMgmt/userMaintenance/maintenance
 	 */
 	@RequestMapping("/selAll.do")
 	public ModelAndView selAll() {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		List<User> uList = us.selAll();
+		//获取所有权限名称，修改该用户权限的时候下拉框的值
 		List<Role> rList = rs.selAll();
 		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance");
 		modelAndView.addObject("uList" , uList);
@@ -129,14 +137,22 @@ public class UserCtrl {
 		}
 		return modelAndView;
 	}
+	/**
+	 * ajax删除
+	 * @author ZHENGBIN
+	 * @param response
+	 * @param request
+	 */
 	@RequestMapping("/userDel.do")
 	public void del(HttpServletResponse response,HttpServletRequest request) {
 		
 		PrintWriter writer = null;
+		//获取删除的id
 		int id = Integer.parseInt(request.getParameter("id"));
 		try {
 			writer = response.getWriter();
 			boolean flag = us.del(id);
+			//删除成功后返回1
 			if (flag) {
 				writer.println("1");
 			} else {
@@ -150,17 +166,20 @@ public class UserCtrl {
 		}
 	}
 	/**
-	 * 
-	 * @return modelAndView
+	 * @author ZHENGBIN
+	 * @param user 参数绑定
+	 * @param role 参数绑定
+	 * @return selAll.do
 	 */
 	@RequestMapping("/update.do")
 	public ModelAndView update(User user,Role role) {
 		ModelAndView modelAndView = new ModelAndView();
 		boolean flag = us.updateAffairs(user,role);
+		//删除成功后返回原页面
 		if (flag) {
 			modelAndView.setViewName("selAll.do");
 		} else {
-//			modelAndView.setViewName("backstage/fail");
+			//modelAndView.setViewName("backstage/fail");
 		}
 		return modelAndView;
 	}
