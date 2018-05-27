@@ -80,17 +80,22 @@ public class InformSrv {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else {//把默认的图片存进数据库里
+		}else {
+			//把默认的图片存进数据库里
 			imgNamePath = "/logo.png";
 		}
+		//日期
 		title.setTime(DateUtil.getNowDate());
+		//用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
+		//2代表通知
 		title.setType(2);
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//插入标题
 		int resultOne = tm.insertTitle(title);
+		////插入标题的id
 		content.setTid(title.getId());
 		int resultTwo = contentMapper.insertSelective(content);
 		if (resultOne > 0 && resultTwo >0) {
@@ -126,9 +131,8 @@ public class InformSrv {
 	 */
 	public boolean updInform(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
 		boolean flag = false;
-		System.out.println(updFile.getOriginalFilename()+"++++++++++");
 		String imgNamePath  = "";
-		System.out.println(updFile.isEmpty());
+		//不空
 		if(!updFile.isEmpty()) {
 			//上传图片
 			try {
@@ -146,9 +150,11 @@ public class InformSrv {
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
 		
-		tm.updateByPrimaryKeySelective(title);
-		contentMapper.updateByTid(content);
-		flag = true;
+		int returnValue1 = tm.updateByPrimaryKeySelective(title);
+		int returnValue2 = contentMapper.updateByTid(content);
+		if(returnValue1 > 0 && returnValue2>0) {
+			flag = true;
+		}
 		return flag;
 	}
 }

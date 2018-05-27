@@ -22,10 +22,12 @@ public class ArticleSrv {
 	@Autowired
 	private ContentMapper contentMapper;
 	/**
-	 * 查询通知的信息
+	 * 查询文章的信息
+	 * @author 马荣福
 	 * @return
 	 */
 	public List<Title> sel(){
+		//1代表文章
 		List<Title> tList = selByCount(1);
 		return tList;
 	}
@@ -71,6 +73,7 @@ public class ArticleSrv {
 	public boolean addArticleAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
 		boolean flag = false;
 		String imgNamePath  = "";
+		//判断文件不空
 		if(!titleFile.isEmpty()) {
 			//上传图片
 			try {
@@ -78,21 +81,30 @@ public class ArticleSrv {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}else {//把默认的图片存进数据库里
+		}else {
+			//把默认的图片存进数据库里
 			imgNamePath = "/logo.png";
 		}
+		//存储日期
 		title.setTime(DateUtil.getNowDate());
+		//通过session获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
+		//设置用户名
 		title.setUser(user.getSname());
+		//设置类型 1代表文章
 		title.setType(1);
+		//文件名截取
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//插入标题
 		tm.insertTitle(title);
+		//插入标题的id
 		content.setTid(title.getId());
+		//判断是否成功
 		int success = contentMapper.insertSelective(content);
-		System.out.println(success);
-		flag = true;
+		if(success > 0) {
+			flag = true;
+		}
 		return flag;
 	}
 	/**
@@ -122,9 +134,8 @@ public class ArticleSrv {
 	 */
 	public boolean updArticle(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
 		boolean flag = false;
-		System.out.println(updFile.getOriginalFilename()+"++++++++++");
 		String imgNamePath  = "";
-		System.out.println(updFile.isEmpty());
+		//文件不空
 		if(!updFile.isEmpty()) {
 			//上传图片
 			try {
@@ -141,10 +152,13 @@ public class ArticleSrv {
 		//获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
-		
-		tm.updateByPrimaryKeySelective(title);
-		contentMapper.updateByTid(content);
-		flag = true;
+		//选择性修改
+		int returnValue1 = tm.updateByPrimaryKeySelective(title);
+		//通过id修改
+		int returnValue2 = contentMapper.updateByTid(content);
+		if(returnValue1 > 0 && returnValue2 > 0) {
+			flag = true;
+		}
 		return flag;
 	}
 }

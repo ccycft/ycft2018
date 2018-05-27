@@ -25,41 +25,35 @@ public class ArticleCtrl {
 	private ArticleSrv articleSrv;
 	
 	/**
-	 * 
+	 * 查询所有的文章
+	 * @author 马荣福
 	 * @return
 	 */
 	@RequestMapping("/selArticle.do")
 	public ModelAndView selArticle() {
 		ModelAndView modelAndView = new ModelAndView();
-		
+		//查询文章的标题和内容的连表
 		List<TitleContent> tcList = articleSrv.selAllArticle();
-		System.out.println(tcList.get(0).getPraise()+"+++++++++");
+		//返回页面的数据
 		modelAndView.addObject("tcList", tcList);
+		//跳转的页面
 		modelAndView.setViewName("backstage/article/articleMaintenance/maintenance");
-		
 		return modelAndView;
 		
 	}
 	/**
-	 * 查询热门文章
-	 * @author 马荣福
+	 *  文章的录入
+	 * @param response
+	 * @param request
+	 * @param content 内容
+	 * @param title 标题
+	 * @param titleFile 标题文件
 	 * @return
-	 */
-	@RequestMapping("selHotArticle.do")
-	public ModelAndView selHotArticle(){
-		ModelAndView modelAndView = new ModelAndView();
-		List<TitleContent> tcList = articleSrv.selAllArticle();
-		modelAndView.addObject("tcList", tcList);
-		modelAndView.setViewName("backstage/article/hotArticleSel/maintenance");
-		return modelAndView;
-	}
-	/**
-	 * 
-	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@RequestMapping("/addArticle.do")
 	public String addArticle(HttpServletResponse response,HttpServletRequest request, Content content,Title title,MultipartFile titleFile) throws IOException { 
+		//录入文章
 		boolean flag = articleSrv.addArticleAffairs(request,content,title,titleFile);
 		if(flag) {
 			return "selArticle.do";
@@ -68,14 +62,21 @@ public class ArticleCtrl {
 		}
 		
 	}
+	/**
+	 * 文章的删除通过id删除标题表的文章，使用了触发器删除对应的内容，ajax
+	 * @author 马荣福
+	 * @param response
+	 * @param request
+	 * @param id 标题的id
+	 */
 	@RequestMapping("/articleDel.do")
-	public void del(HttpServletResponse response,HttpServletRequest request) {
+	public void del(HttpServletResponse response,HttpServletRequest request,int id) {
 		
 		PrintWriter writer = null;
-		int id = Integer.parseInt(request.getParameter("id"));
 		try {
 			writer = response.getWriter();
 			boolean flag = articleSrv.del(id);
+			//向前台返回信息
 			if (flag) {
 				writer.println("1");
 			} else {
@@ -88,25 +89,6 @@ public class ArticleCtrl {
 			writer.close();
 		}
 	}
-	
-	@ResponseBody
-	@RequestMapping("articleUpload.do")
-	public void summernoteImage(HttpServletRequest request, HttpServletResponse response,MultipartFile file) throws Exception{
-     try {
-    	 System.out.println("----------");
-    	//图片上传之后返回图片的路径
-    	 String path = UploadUtil.commonUpload(request, file);
-    	 //返回json类型的数据
-    	 JSONObject jObject=new JSONObject();
-    	 jObject.put("path", path);
-    	 PrintWriter out=response.getWriter();   
-    	 out.print(jObject);
-    	 out.close();
-     }catch(Exception e) {
-    	 e.printStackTrace();
-     }
-	 
-    }
 	/**
 	 * 点修改带id进来查询出数据到修改界面
 	 * @param request
@@ -121,14 +103,27 @@ public class ArticleCtrl {
 		TitleContent tc = articleSrv.selAllTwoById(id);
 		
 		modelAndView.addObject("tc",tc);
+		//返回的界面
 		modelAndView.setViewName("backstage/article/articleMaintenance/articleUpdate");
 		
 		return modelAndView;
 	}
 	
+	/**
+	 * 修改文章信息
+	 * @author 马荣福
+	 * @param response
+	 * @param request
+	 * @param title
+	 * @param content
+	 * @param updFile
+	 * @throws IOException
+	 */
 	@RequestMapping("/updArticle.do")
 	public void updArticle(HttpServletResponse response,HttpServletRequest request,Title title,Content content,MultipartFile updFile) throws IOException {
+		//修改文章
 		boolean flag = articleSrv.updArticle(request,title,content,updFile);
+		//使用js代码关闭前台界面
 		if(flag) {
 			response.setContentType("text/html");
         	response.setCharacterEncoding("UTF-8");

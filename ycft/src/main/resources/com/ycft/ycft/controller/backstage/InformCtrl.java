@@ -28,7 +28,8 @@ public class InformCtrl {
 	private InformSrv is;
 	
 	/**
-	 * 
+	 * 查询所有的通知
+	 * @author 马荣福
 	 * @return
 	 */
 	@RequestMapping("/selInform.do")
@@ -38,15 +39,20 @@ public class InformCtrl {
 		List<TitleContent> tcList = is.selAllInform();
 		
 		modelAndView.addObject("tcList", tcList);
+		//返回界面
 		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance");
 		
 		return modelAndView;
 		
 	}
 	/**
-	 * 
+	* @param response
+	 * @param request
+	 * @param content 内容
+	 * @param title 标题
+	 * @param titleFile 标题文件
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@RequestMapping("/addInform.do")
 	public String addInform(HttpServletResponse response,HttpServletRequest request, Content content,Title title,MultipartFile titleFile) throws IOException { 
@@ -58,6 +64,11 @@ public class InformCtrl {
 		}
 		
 	}
+	/**
+	 * 删除通知
+	 * @param response
+	 * @param request
+	 */
 	@RequestMapping("/informDel.do")
 	public void del(HttpServletResponse response,HttpServletRequest request) {
 		
@@ -79,24 +90,6 @@ public class InformCtrl {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping("informUpload.do")
-	public void summernoteImage(HttpServletRequest request, HttpServletResponse response,MultipartFile file) throws Exception{
-     try {
-    	 System.out.println("----------");
-    	//图片上传之后返回图片的路径
-    	 String path = UploadUtil.commonUpload(request, file);
-    	 //返回json类型的数据
-    	 JSONObject jObject=new JSONObject();
-    	 jObject.put("path", path);
-    	 PrintWriter out=response.getWriter();   
-    	 out.print(jObject);
-    	 out.close();
-     }catch(Exception e) {
-    	 e.printStackTrace();
-     }
-	 
-    }
 	/**
 	 * 点修改带id进来查询出数据到修改界面
 	 * @param request
@@ -116,9 +109,19 @@ public class InformCtrl {
 		return modelAndView;
 	}
 	
+	/**
+	 * 修改通知信息
+	 * @param response
+	 * @param request
+	 * @param title
+	 * @param content
+	 * @param updFile
+	 * @throws IOException
+	 */
 	@RequestMapping("/updInform.do")
 	public void updInform(HttpServletResponse response,HttpServletRequest request,Title title,Content content,MultipartFile updFile) throws IOException {
 		boolean flag = is.updInform(request,title,content,updFile);
+		//使用js关闭页面
 		if(flag) {
 			response.setContentType("text/html");
         	response.setCharacterEncoding("UTF-8");

@@ -25,6 +25,7 @@ public class ForumCtrl {
 	
 	/**
 	 * 查询论坛信息
+	 * @author 马荣福
 	 * @return
 	 */
 	@RequestMapping("selForum.do")
@@ -39,6 +40,7 @@ public class ForumCtrl {
 	}
 	/**
 	 * 查询评论信息,使用gson传到前台
+	 * @author 马荣福
 	 * @return
 	 */
 	@RequestMapping("selComment.do")

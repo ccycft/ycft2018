@@ -56,10 +56,9 @@ public class UserCtrl {
 		
 	}
 	/**
-	 * 导出excel
+	 * 把用户信息导出excel表格
 	 * 
-	 * @param student
-	 * @param request
+	 * @author 马荣福
 	 * @param response
 	 * @return
 	 */
@@ -67,27 +66,31 @@ public class UserCtrl {
 	public ModelAndView exportExcel(HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		boolean b = us.exportExcel(response);
-		System.out.println(b+"-------");
 		if(b){
+			//成功页面
 			mav.setViewName("backstage/success");
 		}else{
+			//失败页面
 			mav.setViewName("backstage/fail");
 		}
 		return mav;
 	}
 	
 	/**
-	 * 下载导入excel模版demo文件
+	 * 下载导入excel模版demo文件,不用跳转页面
+	 * @author 马荣福
 	 * @param response
 	 * @param request
 	 */
 	@RequestMapping("/downloadDemo.do")
 	public void downloadDemo(HttpServletResponse response,HttpServletRequest request){
-		response.reset();
+		
         us.downloadDemo(response, request);
 	}
 	/**
-	 * 导入excel
+	 * 学生信息导入excel
+	 * @author 马荣福
+	 * @param file xls格式的表格
 	 * @return
 	 */
 	@RequestMapping("/importExcel.do")
@@ -97,13 +100,13 @@ public class UserCtrl {
 		try {
 			b =  us.importExcelAffairs(file);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(b){
+			//成功页面
 			mav.setViewName("backstage/success");
-			
 		}else{
+			//失败页面
 			mav.setViewName("backstage/fail");
 		}
 		return mav;
@@ -126,11 +129,18 @@ public class UserCtrl {
 		
 		return modelAndView;
 	}
+	/**
+	 * 学生单个录入
+	 * @author 马荣福
+	 * @param user 参数绑定
+	 * @return
+	 */
 	@RequestMapping("/addOneUser.do")
 	public ModelAndView addOneUser(User user) {
 		ModelAndView modelAndView = new ModelAndView();
 		boolean flag = us.addOneUser(user);
 		if (flag) {
+			//返回首页
 			modelAndView.setViewName("jump.do");
 		} else {
 			modelAndView.setViewName("backstage/fail");
