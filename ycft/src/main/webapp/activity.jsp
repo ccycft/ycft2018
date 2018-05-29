@@ -77,7 +77,7 @@
 			     				 <img class=" img-rounded  activity_img" src="<%=photoPath%><%=title.getImgName()%>" alt="...">
 			  			</div>
 					</div>
-					<div class="row" onclick="openDetails()">
+					<div class="row" onclick="openDetails('<%=title.getId()%>')">
 						<div id="info" class="col-xs-7">
 			     			<span><%=title.getName() %></span>
 			  			</div>

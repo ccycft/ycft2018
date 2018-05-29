@@ -68,6 +68,14 @@
       SELECT  title.*,COUNT(*) cnt FROM activity,title 
       WHERE activity.tid = title.id and title.type = 3 GROUP BY activity.tid order by title.time desc limit #{0} , #{1}
   </select>
+  <!-- 活动报名 -->
+  <insert id="insertActivity" parameterType="java.lang.Integer" >
+	  insert into activity(tid , uid) values( #{0} , #{1} )      
+  </insert>
+  <!-- 查询用户是否参加过活动 -->
+  <select id="selectActivityByTidUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      select count(*) from activity where tid = #{0} and uid = #{1}
+  </select>
   <!-- 客户端方法 结束 -->
   
   <!-- 服务端方法开始 -->

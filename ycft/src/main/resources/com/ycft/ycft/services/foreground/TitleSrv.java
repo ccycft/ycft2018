@@ -55,21 +55,18 @@ public class TitleSrv {
 		return list;
 	}
 	
+	//活动报名
+	public  boolean  joinActivity(Integer tid , Integer uid) {
+		return tm.insertActivity(tid , uid) > 0 ? true : false;
+	}
+	
 	/**
-	 * 查询文章（根据时间降序）
-	 * 
-	 * @param nowPage 当前页
-	 * @param pageSize 每页显示的条数
-	 * @return
+	 * 查询是否报过名
+	 * @param tid
+	 * @param uid
+	 * @return Boolean true是已经报过名了
 	 */
-	/*public List<Title> selectTitle(){
-		//如果第0页
-		if(nowPage == null ||nowPage <=0 ) {
-			//页数须要置回0
-			nowPage = 0;
-		}
-		int start = (nowPage - 1) * pageSize;
-		List<Title> list =  tm.selectByTime(1 , start, pageSize);
-		return list;
-	}*/
+	public boolean selectIsJoin(Integer tid , Integer uid) {
+		return tm.selectActivityByTidUid(tid , uid) > 0 ? true : false;
+	}
 }

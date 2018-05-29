@@ -29,6 +29,7 @@ public class TestTitleSrv  {
 	    }  
 	    @Test
 	    public void testPing() {
+	    	ts.joinActivity(10, 2);
 	          //ts.index();
 	    /*	Praise p = new Praise();
 	    	p.setTid(1);
