@@ -2,6 +2,8 @@ package com.ycft.ycft.controller.foreground;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.foreground.UserSrv;
@@ -41,27 +44,56 @@ public class UserCtrl {
 		if (user != null) {
 			//开始存储session,cookie啥的
 			//实例化一个Cookie  
-	        Cookie cookie1 = new Cookie("uid", String.valueOf(u.getId()));  
-	        Cookie cookie2 = new Cookie("sno", u.getSno());  
+	        Cookie cookie1 = new Cookie("uid", String.valueOf(user.getId()));  
+	        Cookie cookie2 = new Cookie("sno", user.getSno());  
+	        //姓名
+	        Cookie cookie3 = null;
+			try {
+				cookie3 = new Cookie("sname",  URLEncoder.encode(user.getSname(), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+	        //电话
+	        Cookie cookie4 = new Cookie("tel", user.getTel());  
 	        //设置Cookie的生命期限五年  
 	        cookie1.setMaxAge(5*365*24*60*60);  
 	        cookie2.setMaxAge(5*365*24*60*60);  
+	        cookie3.setMaxAge(5*365*24*60*60);  
+	        cookie4.setMaxAge(5*365*24*60*60); 
+	        cookie1.setPath("/");
+	        cookie2.setPath("/");
+	        cookie3.setPath("/");
+	        cookie4.setPath("/");
 	        //添加Cookie到客户端  
 	        rspn.addCookie(cookie1);  
 	        rspn.addCookie(cookie2); 
+	        rspn.addCookie(cookie3); 
+	        rspn.addCookie(cookie4); 
 			//........../
 	        isLogin = true;
 		}
+	/*	ModelAndView mav = new ModelAndView();
+		if(isLogin) {
+			mav.setViewName("fore/index/index.do");
+		}else {
+			mav.setViewName("preLogin.jsp");
+		}*/
 		PrintWriter out = null;
 		try {
 			out = rspn.getWriter();
-			out.print("isSuccess="+isLogin);
+			out.print(isLogin);
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			out.close();
 		}
+	}
+	
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		 String a = URLEncoder.encode("邵帅", "UTF-8");
+		 System.out.println(a);
 	}
 
 }
