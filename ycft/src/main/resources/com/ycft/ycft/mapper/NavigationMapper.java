@@ -17,5 +17,5 @@ public interface NavigationMapper {
 
     int updateByPrimaryKey(Navigation record);
     
-    List<Navigation> seclecAll();
+    List<Navigation> selectAll();
 }

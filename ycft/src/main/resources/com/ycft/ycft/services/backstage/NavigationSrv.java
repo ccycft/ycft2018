@@ -21,10 +21,18 @@ public class NavigationSrv {
 	 */
 	public List<Navigation> navigationSel() { 
 		List<Navigation> nList = null;
-		nList = nm.seclecAll();
+		nList = nm.selectAll();
 		return nList;
 	}
 	
+	/**
+	 * 通过id查询Navigation
+	 * @param id
+	 * @return
+	 */
+	public Navigation selById(int id) {
+		return nm.selectByPrimaryKey(id);
+	}
 	
 	/**
 	 * 导航修改
@@ -44,15 +52,14 @@ public class NavigationSrv {
 	
 	
 	/**
-	 * 根据id删除=把坐标修改成""
+	 * 根据id删除
 	 * @author ZHENGBIN
 	 * @param navigation 参数绑定
 	 * @return boolean
 	 */
 	public boolean navigationDel(Navigation navigation) {
 		boolean flag = false;
-		navigation.setCoordinate("");
-		int result = nm.updateByPrimaryKeySelective(navigation);
+		int result = nm.deleteByPrimaryKey(navigation.getId());
 		//删除成功后flag为true
 		if (result > 0) {
 			flag = true;

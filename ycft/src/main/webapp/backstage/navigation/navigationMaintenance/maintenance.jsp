@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.po.Navigation"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="java.util.List"%>
@@ -14,6 +15,7 @@
     %>
     <%
 	List<Privilege> privilegeList = Menu.pList;
+    List<Navigation> nList = (List<Navigation>)request.getAttribute("nList");
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,6 +63,7 @@
 <script type="text/javascript">
 	function pointOver(id){
 		document.getElementById("id").value = id;
+		//markers = 
 		alert("请在下面的地图上标记点信息");
 	}
 
@@ -195,6 +198,33 @@
 					    <div class="panel-heading">
 					         	校园导航
 					    </div>
+					     <!-- 发布的弹出层 -->
+						<div class="modal fade" id="mapName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+						    <div class="modal-dialog" role="document">  
+						        <div class="modal-content" >  
+						            <div class="modal-header">  
+						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						                    <span aria-hidden="true">×</span>  
+						                </button>  
+						                <h4 class="modal-title" id="myModalLabel">请给您选的点命名</h4>  
+						            </div>
+						            <div class="modal-body">
+						            	<div class="row">
+						            		<div class="col-sm-6">
+						            			<input type="text" class="form-control" placeholder="请给您选的点命名" id="pointName">
+						            			<input type="text" id="content">
+						            		</div>
+						            		<div class="col-sm-6" id="preview">
+						            		</div>
+					            		</div>
+						            </div>  
+						            <div class="modal-footer">
+						                	<button type="button" class="btn btn-success" onclick="refer()" data-dismiss="modal">确定</button>
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+						            </div>
+						        </div>  
+						    </div>  
+						</div>
 					    <div class="panel-body">
 							<div class="col-md-12">
 						    	<div class="row">
@@ -209,14 +239,14 @@
 						    		<div class="col-md-2"><input type="button" value="图书馆" class="btn btn-success" onclick="pointOver(7)"/></div>
 						    		<div class="col-md-2"><input type="button" value="教学楼" class="btn btn-success" onclick="pointOver(8)"/></div>
 						    		<div class="col-md-4"></div>
-						    		<div class="col-md-2"><input type="button" value="确认" class="btn btn-primary"/></div>
+						    		<div class="col-md-2"><input type="button" value="确认" class="btn btn-primary" onclick="clickMap()"/></div>
 						    		<div class="col-md-2"><input type="button" value="删除" class="btn btn-danger"/></div>
 							  	</div>
 						    </div>
 						    <div class="col-md-12" id="customize">
-								<form action="">
-									<input type="hidden" name="id" id="id"/>
-									<input type="hidden" name="coordinate" />
+								<form action="<%=basePathNoBackStage %>navigationUpdate.do" method="post" id="navigationUpDate">
+									<input type="hidden" name="id" id="id" />
+									<input type="hidden" name="coordinate" id="coordinate"/>
 								</form>
 								<div id="container" ></div>
 							</div>		
@@ -255,12 +285,72 @@
     });
 </script>
 <script>
-    var map = new AMap.Map('container', {
-        resizeEnable: true,
-        zoom:11,
-        center: [126.57472, 43.88023]
+	var map = new AMap.Map("container", {
+	    resizeEnable: true,
+	     center: [126.568923,43.924275],
+	     zoom: 16
+	 });
+	//设置搜索联想与poi对接
+    AMap.plugin(['AMap.Autocomplete','AMap.PlaceSearch'],function(){
+	     var autoOptions = {
+	          city: "", //城市，默认全国
+	          input: "tipinput"//使用联想输入的input的id
+	     };
+	     autocomplete= new AMap.Autocomplete(autoOptions);
+	     AMap.event.addListener(autocomplete, "select", function(e){
+	           //TODO 针对选中的poi实现自己的功能
+	           //placeSearch.search(e.poi.name);
+	           map.setCenter(e.poi.location);
+	     });
+	});
+    
+    var contextMenu = new AMap.ContextMenu();  //创建右键菜单
+	//用来存储标记点的信息
+    var markers = [], positions = [];
+    //地图绑定鼠标右击事件——弹出右键菜单	
+    map.on('click', function(e) {
+    	$("#mapName").modal();
+    	var content1 = document.getElementById("pointName").value;
+        contextMenuPositon = e.lnglat;
+    	console.log(e.lnglat+'');
+         var marker = new AMap.Marker({
+            map: map,
+            position: contextMenuPositon //基点位置
+        });
+         marker.content = content1;
+      markers.push(marker);
+      positions.push(contextMenuPositon);
+      console.log(markers[0].content);
     });
-
+    //把地点的值放在hidden中
+    function refer(){
+    	var hiddenContent = document.getElementById("content").value;
+    	var content = document.getElementById("pointName").value;
+    	$("#pointName").val("");
+    	document.getElementById("content").value = hiddenContent +","+content;
+    }
+    //删除所有标记的点 
+   AMap.event.addDomListener(document.getElementById('clearMarker'), 'click', function() {
+        map.remove(markers);
+        markers = null;
+    }, false);
+    //把地点的坐标存在隐藏域里
+    function clickMap(){
+    	var hiddenContent = document.getElementById("content").value;
+    	var contentArray = hiddenContent.split(",");
+    	alert(contentArray);
+    	var data  = "";
+    	//125.286283,43.824238,报道点A|125.286304,43.824632,报到点B|125.286315,43.82375,报道点C
+    	for(var i = 0;i<markers.length;i++){
+    		if(i == markers.length -1){
+    			data += markers[i].getPosition()+","+contentArray[i+1];
+    		}else{
+    			data += markers[i].getPosition()+","+contentArray[i+1]+"|";
+    		}
+    	}
+    	document.getElementById("coordinate").value = data;
+    	document.getElementById("navigationUpDate").submit();
+    }
 </script>
 </body>
 </html>
