@@ -46,12 +46,18 @@
 <!-- Custom Js -->
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
 <style type="text/css">
-
 	.row {  
 	  margin-top: 10px;  
 	  margin-bottom: 10px;  
 	} 
 </style>
+<script type="text/javascript">
+	function pointOver(id){
+		document.getElementById("id").value = id;
+		alert("请在地图上右键设置坐标点！");
+	}
+
+</script>
 </head>
 <body>
 
@@ -180,28 +186,33 @@
         		<div class="col-md-12">
 	       			<div class="panel panel-default">
 					    <div class="panel-heading">
-					         	签到事件
+					         	校园导航
 					    </div>
 					    <div class="panel-body">
 							<div class="col-md-6">
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="测试1" class="btn btn-success"/></div>
-						    		<div class="col-md-3"><input type="button" value="测试2" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="食堂" class="btn btn-success" onclick="pointOver(3)"/></div>
+						    		<div class="col-md-3"><input type="button" value="超市" class="btn btn-success" onclick="pointOver(4)"/></div>
 							  	</div>
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="测试3" class="btn btn-success"/></div>
-						    		<div class="col-md-3"><input type="button" value="测试4" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="报告厅" class="btn btn-success" onclick="pointOver(2)"/></div>
+						    		<div class="col-md-3"><input type="button" value="ATM" class="btn btn-success" onclick="pointOver(6)"/></div>
 							  	</div>
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="测试5" class="btn btn-success"/></div>
-						    		<div class="col-md-3"><input type="button" value="测试6" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="体育馆" class="btn btn-success" onclick="pointOver(5)"/></div>
+						    		<div class="col-md-3"><input type="button" value="图书馆" class="btn btn-success" onclick="pointOver(7)"/></div>
 							  	</div>
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="测试7" class="btn btn-success"/></div>
-						    		<div class="col-md-3"><input type="button" value="测试8" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="报到地点" class="btn btn-success" onclick="pointOver(1)"/></div>
+						    		<div class="col-md-3"><input type="button" value="教学楼" class="btn btn-success" onclick="pointOver(8)"/></div>
 							  	</div>
 						    </div>
-							<div class="col-md-6"></div>					    
+							<div class="col-md-6">
+								<form action="">
+									<input type="hidden" name="id" id="id"/>
+									<input type="hidden" name="coordinate" />
+								</form>
+							</div>					    
 					    </div>
 					</div>
         		</div>
