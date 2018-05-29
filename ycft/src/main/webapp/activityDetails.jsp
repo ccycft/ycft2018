@@ -49,6 +49,36 @@
 			font-size:1.5rem;
 		}
 	</style>
+	<script>
+		$(document).ready(function(){
+			//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+		    var curWwwPath = window.document.location.href;
+		    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+		    var pathName = window.document.location.pathname;
+		    var pos = curWwwPath.indexOf(pathName);
+		    //获取主机地址，如： http://localhost:8083
+		    var localhostPath = curWwwPath.substring(0, pos);
+		    //获取带"/"的项目名，如：/uimcardprj
+		    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+		    var basePath = localhostPath + projectName + "/";	
+			
+			$("#confirm").click(function(){
+				//确认报名
+				var uid = $("#uid").val();
+				var tid = $("#tid").val();
+				htmlobj=$.ajax({url: basePath + "fore/title/joinActivity.do?tid="+tid+"&uid="+uid,async:false});
+				var isSuccess = (htmlobj.responseText);
+				if(isSuccess == 1){
+					alert("报名成功...");
+				}else if(isSuccess == 2){
+					alert("您已经报过名了，请勿重复报名谢谢..");
+				} else{
+					alert("报名失败请稍候重试...");
+				}
+				$("#close").click();
+			});
+		});
+	</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -153,7 +183,8 @@
 						 %>
 						 	 <div class="modal-body">
 										<div class="list-group">
-											<input type="hidden" value="<%=uid%>" name="uid"/>
+											<input type="hidden" value="<%=uid%>" name="uid" id="uid"/>
+											<input type="hidden" value="<%=con.getId()%>" name="tid" id="tid"/>
 											<div class="list-group-item">
 												 姓名: <%=name %>
 											</div>
@@ -169,9 +200,9 @@
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+										<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭
 										</button>
-										<button type="button" class="btn btn-info">
+										<button type="button" class="btn btn-info" id="confirm">
 											确认报名
 										</button>
 									</div>

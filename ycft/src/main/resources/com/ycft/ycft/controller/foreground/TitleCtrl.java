@@ -1,6 +1,10 @@
 package com.ycft.ycft.controller.foreground;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ycft.ycft.mapper.TitleMapper;
-import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
+import com.ycft.ycft.services.foreground.TitleSrv;
 
 @Controller(value="foreTitleCtrl")
 @RequestMapping("fore/title/")
@@ -18,7 +22,9 @@ public class TitleCtrl {
 	
 	@Autowired
 	TitleMapper tm;
-
+	@Autowired
+	TitleSrv ts;
+	
 	/**
 	 * 根据时间降序 查询文章
 	 * @param nowPage 当前页
@@ -103,5 +109,41 @@ public class TitleCtrl {
 		mav.addObject("tList" , tList);
 		mav.setViewName("activity.jsp");
 		return mav;
+	}
+	
+	/**
+	 * 活动报名
+	 * @param tid 活动id
+	 * @param uid 用户id
+	 * @param rspn response
+	 */
+	@RequestMapping("joinActivity.do")
+	public void joinActivity(Integer tid , Integer uid , HttpServletResponse rspn) {
+		//查询该用户是否已经报过名？
+		boolean b = ts.selectIsJoin(tid , uid);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			///如果没报过名
+			if(!b) {
+				boolean isSuccess = ts.joinActivity(tid , uid);
+					if(isSuccess) {
+						out.print(1);
+					}else {
+						out.print(0);
+					}
+					
+			}else {
+				//2代表已经报过名了...
+				out.print(2);
+			}
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+		
 	}
 }
