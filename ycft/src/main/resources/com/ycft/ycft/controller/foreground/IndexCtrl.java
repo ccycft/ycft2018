@@ -25,13 +25,15 @@ public class IndexCtrl {
 	public ModelAndView index() {
 		//加载幻灯片
 		List<Slide> slist = ss.selectAll();
-		//加载文章2个
-		List<Title> tlist =  ts.selectHot(2);
-		//加载通知两个
+		//加载热门文章2个
+		List<Title> tlist =  ts.selectHot(1 , 2);
+		//加载最新通知两个
+		List<Title> informList =  ts.selectTime( 2 , 1 , 2);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sList", slist);
 		mav.addObject("tList", tlist);
-		mav.setViewName("index");
+		mav.addObject("informList", informList);
+		mav.setViewName("index.jsp");
 		return mav;
 	}
 	

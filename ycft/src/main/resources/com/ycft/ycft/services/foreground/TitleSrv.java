@@ -22,13 +22,35 @@ public class TitleSrv {
 	 * @return
 	 * 2018年5月18日上午11:16:22
 	 */
-	public List<Title> selectHot(int count){
+	public List<Title> selectHot(int type, int count){
 		/*if(count == null || count == 0) {
 			count = 2;
 		}*/
-		List<Title> list =  tm.selectByPraiseCount(count);
+		List<Title> list =  tm.selectByPraiseCount(type , count);
 		for(Title title : list) {
-			title.setImgName( "title/" +  title.getImgName());
+			title.setImgName( title.getImgName());
+		}
+		return list;
+	}
+	
+	/**
+	 * 根据时间查询和类型查询
+	 * @param type 查询类型 1.文章   2.通知
+	 * @return
+	 */
+	public List<Title> selectTime(int type ,Integer nowPage, Integer pageSize ){
+		/*if(count == null || count == 0) {
+			count = 2;
+		}*/
+		if(nowPage == null ||nowPage <=0 ) {
+			//页数须要置回0
+			nowPage = 0;
+		}
+		//2:查询通知  0：起始坐标  2终止坐标 [查询两条]
+		int start = (nowPage - 1) * pageSize;
+		List<Title> list =  tm.selectByTime(2 , start, pageSize);
+		for(Title title : list) {
+			title.setImgName( title.getImgName());
 		}
 		return list;
 	}
@@ -40,14 +62,14 @@ public class TitleSrv {
 	 * @param pageSize 每页显示的条数
 	 * @return
 	 */
-	public List<Title> selectTitle(Integer nowPage, Integer pageSize){
+	/*public List<Title> selectTitle(){
 		//如果第0页
 		if(nowPage == null ||nowPage <=0 ) {
 			//页数须要置回0
 			nowPage = 0;
 		}
 		int start = (nowPage - 1) * pageSize;
-		List<Title> list =  tm.selectByTime(start, pageSize);
+		List<Title> list =  tm.selectByTime(1 , start, pageSize);
 		return list;
-	}
+	}*/
 }

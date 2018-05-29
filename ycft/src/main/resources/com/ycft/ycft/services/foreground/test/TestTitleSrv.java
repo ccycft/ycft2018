@@ -34,7 +34,7 @@ public class TestTitleSrv  {
 	    	p.setTid(1);
 	    	p.setUid(1);
 	    	ps.praise(p);*/
-	    	ts.selectHot(2);
+	    	//ts.selectHot(2);
 	    }
 
 	
