@@ -1,6 +1,17 @@
+<%@page import="com.ycft.ycft.system.Core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/" ;
+	
+	//文件路径 Core.PATH是访问图片的虚拟路径
+	String photoPath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort() +  Core.PATH +"/" ;
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -16,10 +27,11 @@
 <!--     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
  -->    
     <script>
+    var map ;
 	   $(function(){
 		   
 		   // 地图初始化…
-		   var map = new AMap.Map('container', {
+		   map = new AMap.Map('container', {
 		        resizeEnable: true,
 		        zoom:15,
 		        center: [125.277062,43.823759]
@@ -37,13 +49,12 @@
 
 					$.ajax({
 	    			  type: 'POST',
-	    			  url: '',
+	    			  url: '<%=basePath%>selNavigationById.do',
 	    			  async:false,
 	    			  data: mark,
 	    			  success: function(eve,xhr){
 	    				  
 	    				  var value = xhr.responseText;
-	    				  
 	    				  setPoint(value);
 	    				  
 	    			  },
