@@ -44,14 +44,15 @@ public class NavigationSrv {
 	
 	
 	/**
-	 * 根据id删除
+	 * 根据id删除=把坐标修改成""
 	 * @author ZHENGBIN
 	 * @param navigation 参数绑定
 	 * @return boolean
 	 */
 	public boolean navigationDel(Navigation navigation) {
 		boolean flag = false;
-		int result = nm.deleteByPrimaryKey(navigation.getId());
+		navigation.setCoordinate("");
+		int result = nm.updateByPrimaryKeySelective(navigation);
 		//删除成功后flag为true
 		if (result > 0) {
 			flag = true;
