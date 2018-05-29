@@ -45,6 +45,13 @@
 <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
 <!-- Custom Js -->
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+<style type="text/css">
+
+	.row {  
+	  margin-top: 10px;  
+	  margin-bottom: 10px;  
+	} 
+</style>
 </head>
 <body>
 
@@ -170,7 +177,34 @@
 				</ol>        	
         	</div>
         	<div class="row">
-        	
+        		<div class="col-md-12">
+	       			<div class="panel panel-default">
+					    <div class="panel-heading">
+					         	签到事件
+					    </div>
+					    <div class="panel-body">
+							<div class="col-md-6">
+						    	<div class="row">
+						    		<div class="col-md-3"><input type="button" value="测试1" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="测试2" class="btn btn-success"/></div>
+							  	</div>
+						    	<div class="row">
+						    		<div class="col-md-3"><input type="button" value="测试3" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="测试4" class="btn btn-success"/></div>
+							  	</div>
+						    	<div class="row">
+						    		<div class="col-md-3"><input type="button" value="测试5" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="测试6" class="btn btn-success"/></div>
+							  	</div>
+						    	<div class="row">
+						    		<div class="col-md-3"><input type="button" value="测试7" class="btn btn-success"/></div>
+						    		<div class="col-md-3"><input type="button" value="测试8" class="btn btn-success"/></div>
+							  	</div>
+						    </div>
+							<div class="col-md-6"></div>					    
+					    </div>
+					</div>
+        		</div>
         	</div>
         </div>
 
