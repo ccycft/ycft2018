@@ -45,7 +45,7 @@ public class PrivilegeCtrl {
 		}
 		String menuGson = g.toJson(privilegeList);
 		System.out.println(menuGson);
-		Cookie cookie = new Cookie("menuGson",menuGson );
+		Cookie cookie = new Cookie("menuGson",menuGson);
 		System.out.println(menuGson);
 		response.addCookie(cookie);
 		return mav;

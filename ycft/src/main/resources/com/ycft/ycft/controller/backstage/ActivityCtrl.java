@@ -37,7 +37,7 @@ public class ActivityCtrl {
 		List<TitleContent> tcList = as.selAllActivity();
 		
 		modelAndView.addObject("tcList", tcList);
-		modelAndView.setViewName("backstage/activity/activityMaintenance/maintenance");
+		modelAndView.setViewName("backstage/activity/activityMaintenance/maintenance.jsp");
 		
 		return modelAndView;
 	}
@@ -112,7 +112,7 @@ public class ActivityCtrl {
 		TitleContent tc = as.selAllActivityById(id);
 		
 		modelAndView.addObject("tc",tc);
-		modelAndView.setViewName("backstage/activity/activityMaintenance/activityUpdate");
+		modelAndView.setViewName("backstage/activity/activityMaintenance/activityUpdate.jsp");
 		
 		return modelAndView;
 	}
@@ -184,7 +184,7 @@ public class ActivityCtrl {
 		if(flag){
 			modelAndView.setViewName("selActivity.do");
 		}else{
-			modelAndView.setViewName("backstage/fail");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -203,9 +203,9 @@ public class ActivityCtrl {
 		boolean flag = as.exportActivityExcel(response,activity.getId());
 		//true 为导出成功
 		if(flag){
-			modelAndView.setViewName("backstage/success");
+			modelAndView.setViewName("backstage/success.jsp");
 		}else{
-			modelAndView.setViewName("backstage/fail");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

@@ -37,7 +37,7 @@ public class ArticleCtrl {
 		//返回页面的数据
 		modelAndView.addObject("tcList", tcList);
 		//跳转的页面
-		modelAndView.setViewName("backstage/article/articleMaintenance/maintenance");
+		modelAndView.setViewName("backstage/article/articleMaintenance/maintenance.jsp");
 		return modelAndView;
 		
 	}
@@ -104,7 +104,7 @@ public class ArticleCtrl {
 		
 		modelAndView.addObject("tc",tc);
 		//返回的界面
-		modelAndView.setViewName("backstage/article/articleMaintenance/articleUpdate");
+		modelAndView.setViewName("backstage/article/articleMaintenance/articleUpdate.jsp");
 		
 		return modelAndView;
 	}

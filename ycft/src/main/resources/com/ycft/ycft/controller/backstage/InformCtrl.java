@@ -40,7 +40,7 @@ public class InformCtrl {
 		
 		modelAndView.addObject("tcList", tcList);
 		//∑µªÿΩÁ√Ê
-		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance");
+		modelAndView.setViewName("backstage/inform/informMaintenance/maintenance.jsp");
 		
 		return modelAndView;
 		
@@ -104,7 +104,7 @@ public class InformCtrl {
 		TitleContent tc = is.selAllInformById(id);
 		
 		modelAndView.addObject("tc",tc);
-		modelAndView.setViewName("backstage/inform/informMaintenance/informUpdate");
+		modelAndView.setViewName("backstage/inform/informMaintenance/informUpdate.jsp");
 		
 		return modelAndView;
 	}

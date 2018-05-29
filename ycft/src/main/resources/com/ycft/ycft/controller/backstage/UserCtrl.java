@@ -68,10 +68,10 @@ public class UserCtrl {
 		boolean b = us.exportExcel(response);
 		if(b){
 			//成功页面
-			mav.setViewName("backstage/success");
+			mav.setViewName("backstage/success.jsp");
 		}else{
 			//失败页面
-			mav.setViewName("backstage/fail");
+			mav.setViewName("backstage/fail.jsp");
 		}
 		return mav;
 	}
@@ -104,10 +104,10 @@ public class UserCtrl {
 		}
 		if(b){
 			//成功页面
-			mav.setViewName("backstage/success");
+			mav.setViewName("backstage/success.jsp");
 		}else{
 			//失败页面
-			mav.setViewName("backstage/fail");
+			mav.setViewName("backstage/fail.jsp");
 		}
 		return mav;
 	}
@@ -123,7 +123,7 @@ public class UserCtrl {
 		List<User> uList = us.selAll();
 		//获取所有权限名称，修改该用户权限的时候下拉框的值
 		List<Role> rList = rs.selAll();
-		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance");
+		modelAndView.setViewName("backstage/userMgmt/userMaintenance/maintenance.jsp");
 		modelAndView.addObject("uList" , uList);
 		modelAndView.addObject("rList" , rList);
 		
@@ -143,7 +143,7 @@ public class UserCtrl {
 			//返回首页
 			modelAndView.setViewName("jump.do");
 		} else {
-			modelAndView.setViewName("backstage/fail");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

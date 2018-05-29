@@ -35,7 +35,7 @@ public class ForumCtrl {
 		List<TitleContent> tcList = forumSrv.selAllForum();
 		modelAndView.addObject("tcList", tcList);
 		//返回结果界面
-		modelAndView.setViewName("backstage/forum/forumMaintenance/maintenance");
+		modelAndView.setViewName("backstage/forum/forumMaintenance/maintenance.jsp");
 		return modelAndView;
 	}
 	/**
