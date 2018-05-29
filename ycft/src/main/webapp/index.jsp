@@ -129,8 +129,6 @@
 		</div>
 		
 		<!--    华丽丽的分割线———————————————————————————————————— -->
-		
-		
 		<div class="row">
 			<div class="col-xs-2">
 				   <a href="<%=basePath%>index.jsp">

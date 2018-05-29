@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.sun.tools.internal.ws.processor.model.Request;
 import com.ycft.ycft.po.Privilege;
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.PrivilegeService;
