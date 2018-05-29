@@ -42,6 +42,16 @@
   </sql>
   
   <!-- 客户端方法开始 -->
+  <resultMap id="ActivityResultMap" type="com.ycft.ycft.po.Title" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="cnt" property="cnt" jdbcType="INTEGER" />
+  </resultMap>
   <!--  [查询文章]根据点赞数数量排序-->
   <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>
@@ -52,6 +62,11 @@
       select <include refid="Base_Column_List"></include>
       from title where type = #{0} order by time desc 
       limit #{1} , #{2}
+  </select>
+  <!-- 查询活动 并显示报名人数 -->
+  <select id="selectByTimeAndCount" parameterType="java.lang.Integer" resultMap="ActivityResultMap">
+      SELECT  title.*,COUNT(*) cnt FROM activity,title 
+      WHERE activity.tid = title.id and title.type = 3 GROUP BY activity.tid order by title.time desc limit #{0} , #{1}
   </select>
   <!-- 客户端方法 结束 -->
   

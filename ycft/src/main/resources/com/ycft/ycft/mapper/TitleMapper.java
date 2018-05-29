@@ -15,6 +15,7 @@ public interface TitleMapper {
 	public List<Title> selectByPraiseCount(int type , int count  );
 	//根据发布时间查询文章   用于加载更多limit start:开始坐标 end结束坐标
 	public List<Title> selectByTime( int type , int start , int end );
+	public List<Title> selectByTimeAndCount(  int start , int end );
 	/**
 	 * 客户端方法结束
 	 * */

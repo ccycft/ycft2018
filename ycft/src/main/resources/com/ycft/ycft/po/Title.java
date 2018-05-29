@@ -17,8 +17,18 @@ public class Title {
     private Integer praise;
     //首页图片名称
     private String imgName;
+    
+    private Integer cnt;
 
-    //和评论表进行一对一配置
+    public Integer getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(Integer cnt) {
+		this.cnt = cnt;
+	}
+
+	//和评论表进行一对一配置
     private List<Comment> commentList;
     
 	public List<Comment> getComment() {

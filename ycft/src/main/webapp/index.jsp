@@ -165,7 +165,7 @@
 				  	</a>
 			</div>
 			<div class="col-xs-2">
-					<a href="<%=basePath%>activity.jsp">
+					<a href="<%=basePath%>fore/title/loadActivity.do?nowPage=1">
 					   <img class="img-responsive btn-block" src="<%=basePath%>images/huodong.png" alt="...">
 					  	<span>活动</span>	
 					</a>  

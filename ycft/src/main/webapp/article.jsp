@@ -34,6 +34,22 @@
 		}
 	
 	</style>
+	<script>
+		//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+	    var curWwwPath = window.document.location.href;
+	    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+	    var pathName = window.document.location.pathname;
+	    var pos = curWwwPath.indexOf(pathName);
+	    //获取主机地址，如： http://localhost:8083
+	    var localhostPath = curWwwPath.substring(0, pos);
+	    //获取带"/"的项目名，如：/uimcardprj
+	    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+	    var basePath = localhostPath + projectName + "/";	
+		function openDetail(id){
+			window.open(basePath + 'fore/title/articleDetail.do?id='+id,'_self');	
+			
+		}
+	</script>
 </head>
 <body class="text-center">
 	<div class="container-fluid">
@@ -52,7 +68,7 @@
 			 		if(tList != null && tList.size() > 0){
 			 			for(Title t : tList){
 			 			%>
-		 				<div class="row">
+		 				<div class="row" onclick="openDetail('<%=t.getId()%>')">
 					      <div class="col-xs-7 ">
 						      <div class="thumbnail">
 						      	<img  src="<%=photoPath%><%=t.getImgName() %>" alt="...">

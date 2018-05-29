@@ -68,4 +68,40 @@ public class TitleCtrl {
 		return mav;
 	}
 	
+	/**
+	 * 查询活动详情
+	 * @param id 活动id
+	 * @return
+	 */
+	@RequestMapping("activityDetail.do")
+	public ModelAndView activityDetail(Integer id) {
+		TitleContent con = tm.selAllByTypeAndId(3, id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("titleContent" , con);
+		mav.setViewName("activityDetails.jsp");
+		return mav;
+	}
+	/**
+	 * 查询活动 根据时间降序
+	 * @param nowPage 当前页
+	 * @return
+	 */
+	@RequestMapping("loadActivity.do")
+	public ModelAndView loadActivity(Integer nowPage) {
+		ModelAndView mav = new ModelAndView();
+		//默认查询四条数据
+		int pageSize = 4;
+		if(nowPage == null || nowPage == 0) {
+			nowPage = 1;
+		}
+		int start = ( nowPage - 1 ) * pageSize;
+		if(start < 0 ) {
+			start = 0;
+		}
+		//根据时间查询最新活动 和报名人数 3：代表查询活动
+		List<Title> tList = tm.selectByTimeAndCount(start , pageSize);
+		mav.addObject("tList" , tList);
+		mav.setViewName("activity.jsp");
+		return mav;
+	}
 }

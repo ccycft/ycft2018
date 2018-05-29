@@ -52,85 +52,93 @@
 <body>
 	<%
 	 	TitleContent con = (TitleContent)request.getAttribute("titleContent");
-	  
-	 %>
-	<div class="container-fluid">
-		<ul class="pager">
-			<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> </a></li>
-			<h5>活动详情</h5>
-		</ul>
-		<hr>
-		<div class="row">
-			<div  class="col-xs-12 activity_img">
-     				 <img class=" img-rounded  activity_img" src="<%=photoPath %><%=con.getImgName() %>" alt="...">
-  			</div>
-  			<div class="col-xs-12">
-				<ul class="none_style">
-					<li class="">活动名称：比赛 | 互联网+大赛</li>
-					<li class="">活动地点： 经信九阶</li>
-					<li class="">活动时间：2018.5.18</li>	
-					<li class="">活动主办方：吉林大学经管学院</li>	
-					<li class="">联系方式：到场报名即可</li>	
-					<li class="">活动内容描述：</li>	
-				</ul>								
-			</div>
-		</div>
-		<dir class="row">
-			<div class="col-xs-11">
-				
-				 <%=con.getText() %>
-			</div>
-		</dir>
-		
-		<hr>
-		
-		<dir class="row">
-			<div id="activity_btn" class="col-xs-9">
-			
-				<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">点击报名</a>
-			
-			</div>
-		</dir>		
-	</div>
+	  	if(con != null){
+	%>
 	
-		<!-- 模态框（Modal） -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="myModalLabel">
-						互联网+网页设计大赛
-					</h4>
+	
+		<div class="container-fluid">
+			<ul class="pager">
+				<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> </a></li>
+				<h5>活动详情</h5>
+			</ul>
+			<hr>
+			<div class="row">
+				<div  class="col-xs-12 activity_img">
+	     				 <img class=" img-rounded  activity_img" src="<%=photoPath %><%=con.getImgName() %>" alt="...">
+	  			</div>
+	  			<div class="col-xs-12">
+					<ul class="none_style">
+						<li class="">活动名称：比赛 | 互联网+大赛</li>
+						<li class="">活动地点： 经信九阶</li>
+						<li class="">活动时间：2018.5.18</li>	
+						<li class="">活动主办方：吉林大学经管学院</li>	
+						<li class="">联系方式：到场报名即可</li>	
+						<li class="">活动内容描述：</li>	
+					</ul>								
 				</div>
-				<div class="modal-body">
-					<div class="list-group">
-						<div class="list-group-item">
-							 姓名
-						</div>
-						<div class="list-group-item">
-							 学号
-						</div>
-						<div class="list-group-item">
-							 电话
-						</div>
-						<div class="list-group-item">
-							 …
+			</div>
+			<dir class="row">
+				<div class="col-xs-11">
+					
+					 <%=con.getText() %>
+				</div>
+			</dir>
+			
+			<hr>
+			
+			<dir class="row">
+				<div id="activity_btn" class="col-xs-9">
+				
+					<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">点击报名</a>
+				
+				</div>
+			</dir>		
+		</div>
+		
+			<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							互联网+网页设计大赛
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="list-group">
+							<div class="list-group-item">
+								 姓名
+							</div>
+							<div class="list-group-item">
+								 学号
+							</div>
+							<div class="list-group-item">
+								 电话
+							</div>
+							<div class="list-group-item">
+								 …
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-					</button>
-					<button type="button" class="btn btn-info">
-						确认报名
-					</button>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						<button type="button" class="btn btn-info">
+							确认报名
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<%  		
+	  	}else{
+	  		out.print("未查询到内容...");
+	  	}
+	 %>
+	
 	
 	
 </body>
