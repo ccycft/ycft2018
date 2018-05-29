@@ -20,5 +20,7 @@ public interface ContentMapper {
     /*===============服务端方法================*/
     
     Content selectByTid(Integer tid);
+    
+    int updateByTid(Content content);
     /*===============服务端方法================*/
 }

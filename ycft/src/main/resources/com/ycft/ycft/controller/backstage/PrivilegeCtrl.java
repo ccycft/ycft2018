@@ -1,7 +1,6 @@
 package com.ycft.ycft.controller.backstage;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class PrivilegeCtrl {
 		}
 		String menuGson = g.toJson(privilegeList);
 		System.out.println(menuGson);
-		Cookie cookie = new Cookie("menuGson",menuGson );
+		Cookie cookie = new Cookie("menuGson",menuGson);
 		System.out.println(menuGson);
 		response.addCookie(cookie);
 		return mav;

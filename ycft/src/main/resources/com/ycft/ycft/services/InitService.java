@@ -1,7 +1,9 @@
 package com.ycft.ycft.services;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -130,5 +133,43 @@ public class InitService extends HttpServlet{
 	public List<Privilege> cacheMenu(){
 		privilegeList = ps.testQueryMenuList();
 		return privilegeList;
+	}
+	
+	public void cacheDefaultImg(String logoPath){
+		logoPath += "backstage/images/logo.png";
+		System.out.println(logoPath+"------------");
+		File file1 = new File(Core.PhotoPath);
+		if(!file1.exists()) {
+			file1.mkdirs();
+		}
+		String path = Core.PhotoPath + "logo.png";
+		File file = new File(path);
+		if(file.exists()) {
+			//Èç¹ûÍ¼Æ¬´æÔÚ
+		}else {
+			InputStream is = null;
+			OutputStream os = null;
+			try {
+				is = new FileInputStream(logoPath);
+				os = new FileOutputStream(file);
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				while ((len = is.read(buffer)) != -1){
+					os.write(buffer,0,len);
+                }
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					os.close();
+					is.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			
+		}
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.po.TitleContent"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="com.ycft.ycft.po.Title"%>
@@ -123,13 +124,44 @@
     	document.getElementById("contentId").value=sHTML;
     	document.getElementById("addInform").submit();
     }
-    
   </script>
     <style>
     	.form-group{
     		padding:15px;
     	}
+    	fieldset{
+    		border:0 none;
+    		padding:0;
+    	}
+    	.img-responsive {
+		  display: inline-block;
+		  height: auto;
+		  max-width: 20%;
+		}
     </style>
+    <script type="text/javascript">
+    	function update(id){
+    		window.open("informUpdate.do?id="+id);
+    	}
+    	function filter(id){
+    	    var html=$($("#test"+id).val());
+    	    $("#test"+id).val(html.text());
+    	    $("#remove"+id).removeAttr("onclick");
+    	}
+    </script>
+    <script type="text/javascript">
+    	function cTop(){
+    		timer=setInterval(function(){
+                var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                var ispeed=Math.floor(-scrollTop/6);
+                if(scrollTop==0){
+                    clearInterval(timer);
+                }
+                document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
+            },30)
+    	}	
+    
+    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -222,7 +254,7 @@
                 <!-- /.dropdown -->
             </ul>
         </nav>
-  <nav class="navbar-default navbar-side" role="navigation">
+  		<nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <%for(int i = 0;i<privilegeList.size();i++){
@@ -241,13 +273,11 @@
                     </li>
                     <% }%>
                 </ul>
-
             </div>
-
         </nav>
 </div>
 <%
-	List<Title> tList = (List<Title>)request.getAttribute("tList");
+	List<TitleContent> tcList = (List<TitleContent>)request.getAttribute("tcList");
 %>
 <div id="page-wrapper" >
 	<div class="header"> 
@@ -268,7 +298,7 @@
 	         	通知内容
 	    </div>
 	    <div class="panel-heading">
-	        <input type="button" value="通知发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static"/>
+	        <input type="button" value="通知发布" class="btn btn-success" data-toggle="modal" data-target="#release" data-backdrop="static" onclick="cTop()"/>
 	    </div>
 	    <!-- 发布的弹出层 -->
 		<div class="modal fade" id="release" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
@@ -329,19 +359,46 @@
 	                    </tr>
 	                </thead>
 	                <tbody>
-	                <% for (int i=0; i<tList.size(); i++) {
+	                <% for (int i=0; i<tcList.size(); i++) {
 	                %>
 	                	<tr class="gradeA">
-                            <td><%=tList.get(i).getName() %></td>
-                            <td><%=tList.get(i).getTime() %></td>
-                            <td><%=tList.get(i).getUser() %></td>
-                            <td><%=tList.get(i).getImgName() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getName() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
                             <td class="col-md-2">
-                            	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tList.get(i).getId()%>"/>
-                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=tList.get(i).getId()%>"/>
-                            	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tList.get(i).getId() %>','<%=tList.get(i).getName()%>')"/>
+                            <img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/>
+                            </td>
+                            <td class="col-md-2">
+                            	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
+                            	<input type="button" value="修改" class="btn btn-primary" onclick="update('<%=tcList.get(i).getId()%>')"/>
+                            	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>
+                        <!-- 详情的弹出层 -->
+						<div class="modal fade" id="details<%=tcList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+						    <div class="modal-dialog" role="document">  
+						        <div class="modal-content">  
+						            <div class="modal-header">  
+						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						                    <span aria-hidden="true">×</span>  
+						                </button>  
+						                <h4 class="modal-title" id="myModalLabel">通知内容</h4>  
+						            </div>  
+						            <div class="modal-body">  
+						            	<fieldset>
+					                       <div class="row">
+					                       		<div class="col-xs-11">
+					                       			<%=tcList.get(i).getText() %>
+					                       		</div>
+					                       </div>
+					                    </fieldset>
+						            </div>  
+						            <div class="modal-footer">  
+						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+						            </div>  
+						        </div>  
+						    </div>  
+						</div>
 	                <%	
 	                }%>
 	                </tbody>
@@ -390,5 +447,10 @@ $(function(){
         }
      }
     </script>
+    <script>
+		//控制图片宽度
+		var width  = $(".modal-dialog").width() + $(".modal-body").width();
+		$(".col-xs-11").find("img").width(width);
+	</script>
 </body>
 </html>

@@ -29,5 +29,9 @@ public interface UserMapper {
     public int batchInsert(List<User> uList);
     //查询所有学生的信息，不包括超级管理员
     public List<User> selAll();
+    //删除重复的数据
+    public int delRepeat();
+    //查询导出某活动的学生信息
+    List<User> selExport(int tid);
     /*===============服务端方法================*/
 }

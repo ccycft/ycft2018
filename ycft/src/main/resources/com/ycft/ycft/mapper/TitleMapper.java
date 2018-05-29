@@ -12,9 +12,10 @@ public interface TitleMapper {
 	 * 
 	 * */
 	//根据点赞数量查询热门文章
-	public List<Title> selectByPraiseCount(int count);
+	public List<Title> selectByPraiseCount(int type , int count  );
 	//根据发布时间查询文章   用于加载更多limit start:开始坐标 end结束坐标
-	public List<Title> selectByTime(int start , int end);
+	public List<Title> selectByTime( int type , int start , int end );
+	public List<Title> selectByTimeAndCount(  int start , int end );
 	/**
 	 * 客户端方法结束
 	 * */
@@ -37,7 +38,10 @@ public interface TitleMapper {
 	public List<Title> selByCount(int type);
 	public int insertTitle(Title title);
 	//连表查询所有的通知属性
-	public List<TitleContent> selAllTwo();
+	public List<TitleContent> selAllByType(int type);
+	
+	public TitleContent selAllByTypeAndId(int type,int id);
+	public List<Title> selTitleCommentById(int id);
 	/**
 	 * 服务端方法结束
 	 * */

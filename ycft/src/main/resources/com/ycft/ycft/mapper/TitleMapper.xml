@@ -22,21 +22,51 @@
   <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.TitleContent" extends="CustomizeResultMap" >
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
   </resultMap>
+	<resultMap id="TitleComment" type="com.ycft.ycft.po.Title">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <collection property="commentList" ofType="com.ycft.ycft.po.Comment">
+	    <result column="cid" property="id" jdbcType="INTEGER" />
+	    <result column="uid" property="uid" jdbcType="INTEGER" />
+	    <result column="tid" property="tid" jdbcType="INTEGER" />
+	    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, time, user, type, praise, img_name
   </sql>
   
   <!-- 客户端方法开始 -->
-  <!-- 根据点赞数数量排序 -->
+  <resultMap id="ActivityResultMap" type="com.ycft.ycft.po.Title" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="user" property="user" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="cnt" property="cnt" jdbcType="INTEGER" />
+  </resultMap>
+  <!--  [查询文章]根据点赞数数量排序-->
   <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>
-      	from title order by praise desc limit 0 , #{value}
+      	from title where type = #{0} order by praise desc limit 0 , #{1}
   </select>
-  <!-- 根据发布时间排序 -->
+  <!-- [查询文章]根据发布时间排序 -->
   <select id="selectByTime" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       select <include refid="Base_Column_List"></include>
-      from title order by time desc 
-      limit #{0} , #{1}
+      from title where type = #{0} order by time desc 
+      limit #{1} , #{2}
+  </select>
+  <!-- 查询活动 并显示报名人数 -->
+  <select id="selectByTimeAndCount" parameterType="java.lang.Integer" resultMap="ActivityResultMap">
+      SELECT  title.*,COUNT(*) cnt FROM activity,title 
+      WHERE activity.tid = title.id and title.type = 3 GROUP BY activity.tid order by title.time desc limit #{0} , #{1}
   </select>
   <!-- 客户端方法 结束 -->
   
@@ -46,11 +76,78 @@
 		from title where type = #{0} order by time desc 
   </select>
   
-  <select id="selAllTwo" resultMap="ResultMapWithBLOBs">
+  <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  		SELECT title.id,NAME,TIME,USER,img_name,TEXT,praise 
+  		FROM content,title 
+  		WHERE title.id = content.tid AND TYPE = #{1}
+  </select>
+  
+  <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
   		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = 2
+  		WHERE title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
   </select>
+  <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
+		<!-- 将插入数据的主键返回，返回到User对象中 -->
+		<!-- keyProperty：将查询到的主键值设置到parameterType对象的哪个属性中 -->
+		<!-- order：SELECT LAST_INSERT_ID()语句的执行顺序（相对于insert语句来说的执行顺序） -->
+		<!-- resultType：指定SELECT LAST_INSERT_ID()语句的结果类型 -->
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			<!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into title
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="praise != null" >
+        praise,
+      </if>
+      <if test="imgName != null" >
+        img_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="praise != null" >
+        #{praise,jdbcType=INTEGER},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+	</insert>
+	<select id="selTitleCommentById" resultMap="TitleComment" parameterType="java.lang.Integer">
+	    SELECT comment.id cid,content,TIME,USER FROM COMMENT,title 
+	    WHERE comment.tid = title.id AND title.id = #{1}
+	</select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -153,61 +250,4 @@
       img_name = #{imgName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
-		<!-- 将插入数据的主键返回，返回到User对象中 -->
-		<!-- keyProperty：将查询到的主键值设置到parameterType对象的哪个属性中 -->
-		<!-- order：SELECT LAST_INSERT_ID()语句的执行顺序（相对于insert语句来说的执行顺序） -->
-		<!-- resultType：指定SELECT LAST_INSERT_ID()语句的结果类型 -->
-		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-			<!-- SELECT LAST_INSERT_ID()：得到刚insert到数据表中的记录的主键值，只适用于自增主键 -->
-			SELECT LAST_INSERT_ID()
-		</selectKey>
-		insert into title
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="time != null" >
-        time,
-      </if>
-      <if test="user != null" >
-        user,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="praise != null" >
-        praise,
-      </if>
-      <if test="imgName != null" >
-        img_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="time != null" >
-        #{time,jdbcType=VARCHAR},
-      </if>
-      <if test="user != null" >
-        #{user,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="praise != null" >
-        #{praise,jdbcType=INTEGER},
-      </if>
-      <if test="imgName != null" >
-        #{imgName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-	</insert>
 </mapper>

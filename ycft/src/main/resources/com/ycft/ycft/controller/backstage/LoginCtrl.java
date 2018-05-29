@@ -19,7 +19,7 @@ public class LoginCtrl {
 			String url = Menu.pList.get(0).getChildMenus().get(0).getmUrl();
 			modelAndView.setViewName(url);
 		} else {
-			modelAndView.setViewName("fail");
+			modelAndView.setViewName("fail.jsp");
 		}
 		
 		

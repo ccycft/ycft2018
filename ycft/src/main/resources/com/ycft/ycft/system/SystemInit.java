@@ -51,11 +51,12 @@ public class SystemInit implements ServletContextListener {
 	    	System.out.println(isCacheDict ? "数据字典加载成功..." : "数据字典加载失败...");
 	    	Menu.setpList(sys.getInitService().cacheMenu());
 		   System.out.println("====================容器启动,数据字典加载成功...===========================");
-		   System.out.println("====================容器启动,数据字典加载成功...===========================");
 		   System.out.println("====================开始缓存首页幻灯片...===========================");
 		   sys.getInitService().cacheSlide();
 		   System.out.println("==================== 缓存首页幻灯片成功...===========================");
-		   
+		   System.out.println("====================开始缓存默认图片...===========================");
+		   sys.getInitService().cacheDefaultImg(sce.getServletContext().getRealPath("/"));
+		   System.out.println("==================== 默认图片缓存成功...===========================");
 		   
     	} catch (Exception e) {
 			// TODO: handle exception

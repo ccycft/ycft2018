@@ -11,6 +11,7 @@ import com.ycft.ycft.mapper.ContentMapper;
 import com.ycft.ycft.mapper.TitleMapper;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
+import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.po.User;
 import com.ycft.ycft.tools.DateUtil;
 import com.ycft.ycft.tools.UploadUtil;
@@ -72,24 +73,88 @@ public class InformSrv {
 	public boolean addInformAffairs(HttpServletRequest request,Content content,Title title,MultipartFile titleFile){
 		boolean flag = false;
 		String imgNamePath  = "";
-		//上传图片
-		try {
-			imgNamePath = UploadUtil.commonUpload(request, titleFile);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(!titleFile.isEmpty()) {
+			//上传图片
+			try {
+				imgNamePath = UploadUtil.commonUpload(request, titleFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			//把默认的图片存进数据库里
+			imgNamePath = "/logo.png";
 		}
+		//日期
 		title.setTime(DateUtil.getNowDate());
+		//用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
+		//2代表通知
 		title.setType(2);
-		title.setUser("-");
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		//插入标题
-		tm.insertTitle(title);
+		int resultOne = tm.insertTitle(title);
+		////插入标题的id
 		content.setTid(title.getId());
-		int success = contentMapper.insertSelective(content);
-		System.out.println(success);
+		int resultTwo = contentMapper.insertSelective(content);
+		if (resultOne > 0 && resultTwo >0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	/**
+	 * 连表查询全部通知
+	 * @return
+	 */
+	public List<TitleContent> selAllInform(){
+		return tm.selAllByType(2);
+	}
+	
+	/**
+	 * 通过id连表查询
+	 * @param id
+	 * @return
+	 */
+	public TitleContent selAllInformById(int id) {
+				
+		return tm.selAllByTypeAndId(2, id);
+	}
+	/**
+	 * 修改通知的标题和内容信息
+	 * @author 马荣福
+	 * @param request
+	 * @param title 标题
+	 * @param content 内容
+	 * @return
+	 */
+	public boolean updInform(HttpServletRequest request,Title title,Content content,MultipartFile updFile) {
+		boolean flag = false;
+		String imgNamePath  = "";
+		//不空
+		if(!updFile.isEmpty()) {
+			//上传图片
+			try {
+				//得到的是图片的路径
+				imgNamePath = UploadUtil.commonUpload(request, updFile);
+				String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
+				title.setImgName(imgName);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//设置修改时间
+		title.setTime(DateUtil.getNowDate());
+		//获取用户信息
+		User user = (User)request.getSession().getAttribute("user");
+		title.setUser(user.getSname());
+		
+		int returnValue1 = tm.updateByPrimaryKeySelective(title);
+		int returnValue2 = contentMapper.updateByTid(content);
+		if(returnValue1 > 0 && returnValue2>0) {
+			flag = true;
+		}
 		return flag;
 	}
 }
