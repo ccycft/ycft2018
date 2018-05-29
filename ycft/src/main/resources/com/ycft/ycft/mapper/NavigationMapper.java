@@ -1,5 +1,7 @@
 package com.ycft.ycft.mapper;
 
+import java.util.List;
+
 import com.ycft.ycft.po.Navigation;
 
 public interface NavigationMapper {
@@ -14,4 +16,6 @@ public interface NavigationMapper {
     int updateByPrimaryKeySelective(Navigation record);
 
     int updateByPrimaryKey(Navigation record);
+    
+    List<Navigation> seclecAll();
 }

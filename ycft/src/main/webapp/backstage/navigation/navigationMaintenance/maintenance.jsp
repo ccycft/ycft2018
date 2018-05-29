@@ -45,16 +45,23 @@
 <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
 <!-- Custom Js -->
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+<script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+<script src="http://webapi.amap.com/maps?v=1.4.6&key=82a461d12ba64ec960f5fe838ccd10a5"></script>
+<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 <style type="text/css">
 	.row {  
 	  margin-top: 10px;  
 	  margin-bottom: 10px;  
 	} 
+	#customize{
+		height:330px;
+	}
 </style>
 <script type="text/javascript">
 	function pointOver(id){
 		document.getElementById("id").value = id;
-		alert("请在地图上右键设置坐标点！");
+		alert("请在下面的地图上标记点信息");
 	}
 
 </script>
@@ -189,30 +196,30 @@
 					         	校园导航
 					    </div>
 					    <div class="panel-body">
-							<div class="col-md-6">
+							<div class="col-md-12">
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="食堂" class="btn btn-success" onclick="pointOver(3)"/></div>
-						    		<div class="col-md-3"><input type="button" value="超市" class="btn btn-success" onclick="pointOver(4)"/></div>
+						    		<div class="col-md-2"><input type="button" value="体育馆" class="btn btn-success" onclick="pointOver(5)"/></div>
+						    		<div class="col-md-2"><input type="button" value="报告厅" class="btn btn-success" onclick="pointOver(2)"/></div>
+						    		<div class="col-md-2"><input type="button" value="报到地点" class="btn btn-success" onclick="pointOver(1)"/></div>
+						    		<div class="col-md-2"><input type="button" value="ATM" class="btn btn-success" onclick="pointOver(6)"/></div>
+						    		<div class="col-md-2"><input type="button" value="超市" class="btn btn-success" onclick="pointOver(4)"/></div>
+						    		<div class="col-md-2"><input type="button" value="食堂" class="btn btn-success" onclick="pointOver(3)"/></div>
 							  	</div>
 						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="报告厅" class="btn btn-success" onclick="pointOver(2)"/></div>
-						    		<div class="col-md-3"><input type="button" value="ATM" class="btn btn-success" onclick="pointOver(6)"/></div>
-							  	</div>
-						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="体育馆" class="btn btn-success" onclick="pointOver(5)"/></div>
-						    		<div class="col-md-3"><input type="button" value="图书馆" class="btn btn-success" onclick="pointOver(7)"/></div>
-							  	</div>
-						    	<div class="row">
-						    		<div class="col-md-3"><input type="button" value="报到地点" class="btn btn-success" onclick="pointOver(1)"/></div>
-						    		<div class="col-md-3"><input type="button" value="教学楼" class="btn btn-success" onclick="pointOver(8)"/></div>
+						    		<div class="col-md-2"><input type="button" value="图书馆" class="btn btn-success" onclick="pointOver(7)"/></div>
+						    		<div class="col-md-2"><input type="button" value="教学楼" class="btn btn-success" onclick="pointOver(8)"/></div>
+						    		<div class="col-md-4"></div>
+						    		<div class="col-md-2"><input type="button" value="确认" class="btn btn-primary"/></div>
+						    		<div class="col-md-2"><input type="button" value="删除" class="btn btn-danger"/></div>
 							  	</div>
 						    </div>
-							<div class="col-md-6">
+						    <div class="col-md-12" id="customize">
 								<form action="">
 									<input type="hidden" name="id" id="id"/>
 									<input type="hidden" name="coordinate" />
 								</form>
-							</div>					    
+								<div id="container" ></div>
+							</div>		
 					    </div>
 					</div>
         		</div>
@@ -246,6 +253,14 @@
         $(this).removeClass('active-menu');
       }
     });
+</script>
+<script>
+    var map = new AMap.Map('container', {
+        resizeEnable: true,
+        zoom:11,
+        center: [126.57472, 43.88023]
+    });
+
 </script>
 </body>
 </html>
