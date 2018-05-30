@@ -24,8 +24,7 @@
     <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
-<!--     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
- -->    
+
     <script>
     var map ;
 	   $(function(){
@@ -45,37 +44,39 @@
 	        
 	        $(".col-xs-2").click(function(event){
 	    		 var mark = $(event.target).attr("id")||$(event.target).parent().attr('id');
-	    		 console.log(mark);
-
+	    		 //console.log(mark);
 					$.ajax({
-	    			  type: 'POST',
-	    			  url: '<%=basePath%>selNavigationById.do',
+	    			  type: 'GET',
+	    			  url: '<%=basePath%>selNavigationById.do?id='+mark,
 	    			  async:false,
-	    			  data: mark,
-	    			  success: function(eve,xhr){
-	    				  
-	    				  var value = xhr.responseText;
-	    				  setPoint(value);
+	    			  success:function(eve){
+	    				  //console.log(eve.coordinate);
+	    				  setPoint(eve.coordinate);
 	    			  },
-	    			  dataType: 'text'
+	    			  dataType: 'json'
 	    			});
 	   		 });
 	   });
 	   
-	   function setPoint(){
-		   
-		   map.clearMap(value);  // 清除地图覆盖物
-		   
+	   function setPoint(value){
+		   map.clearMap();  // 清除地图覆盖物
+		   var coordinate = value.split("|");
 		    var markers = [{
-		        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b1.png',
-		        position: [116.205467, 39.907761]
-		    }, {
-		        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b2.png',
-		        position: [116.368904, 39.913423]
-		    }, {
-		        icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b3.png',
-		        position: [116.305467, 39.807761]
+		        icon: './images/mark_b.png',
+		        position: [125.277062,43.823759]
 		    }];
+		    console.log(coordinate);
+		    var len = coordinate.length;
+		    for(var i = 0 ; i < len ; i++){
+		    	markers[i+1]={};
+		    	markers[i+1].icon="http://webapi.amap.com/theme/v1.3/markers/n/mark_b"+(i+1)+".png";
+		    	console.log(markers)
+		    	temp = coordinate[i].substring(0,coordinate[i].lastIndexOf(","));
+		    	var p = temp.split(",");
+		    	markers[i+1].position=[];
+		    	markers[i+1].position.push(p[0],p[1]);
+		    } 
+		    
 		    // 添加一些分布不均的点到地图上,地图上添加三个点标记，作为参照
 		    markers.forEach(function(marker) {
 		        new AMap.Marker({
@@ -85,88 +86,11 @@
 		            offset: new AMap.Pixel(-12, -36)
 		        });
 		    });
-		    var center = map.getCenter();
+		    map.setFitView();
 	   }
 	   
-	  
-	   /*  var centerText = '当前中心点坐标：' + center.getLng() + ',' + center.getLat();
-	    document.getElementById('centerCoord').innerHTML = centerText;
-	    document.getElementById('tips').innerHTML = '成功添加三个点标记，其中有两个在当前地图视野外！';
-
-	    // 添加事件监听, 使地图自适应显示到合适的范围
-	    AMap.event.addDomListener(document.getElementById('setFitView'), 'click', function() {
-	        var newCenter = map.setFitView();
-	        document.getElementById('centerCoord').innerHTML = '当前中心点坐标：' + newCenter.getCenter();
-	        document.getElementById('tips').innerHTML = '通过setFitView，地图自适应显示到合适的范围内,点标记已全部显示在视野中！';
-	    }); */
-	   
 	</script>
-    <!--  $(function(){
-			
-			window.open("http://uri.amap.com/marker?position=125.277062,43.823759&name=吉林大学前卫校区南区&key=1662e84b6b9339c8e60267a9d9afb106",'_self');
-		}); 
-		
-		// h5获取当前坐标信息，需要https支持
-		
-		var x=document.getElementById("demo");
-		function getLocation()
-		{
-		    if (navigator.geolocation)
-		    {
-		    	alert(1111);
-		        navigator.geolocation.getCurrentPosition(showPosition,locationError,{
-		        	// 指示浏览器获取高精度的位置，默认为false  
-		            enableHighAcuracy: true,  
-		            // 指定获取地理位置的超时时间，默认不限时，单位为毫秒  
-		            timeout: 5000,  
-		            // 最长有效期，在重复获取地理位置时，此参数指定多久再次获取位置。  
-		            maximumAge: 3000  
-		        });
-		    }
-		    else
-		    {
-		        x.innerHTML="该浏览器不支持获取地理位置。";
-		    }
-		}
-		 
-		function showPosition(position)
-		{
-			alert(2222);
-		    x.innerHTML="纬度: " + position.coords.latitude + 
-		    "<br>经度: " + position.coords.longitude;    
-		    alert(333);
-		}
-		
-			function locationError(error){  
-			    switch(error.code) {  
-			        case error.TIMEOUT:  
-			            alert("A timeout occured! Please try again!");  
-			            break;  
-			        case error.POSITION_UNAVAILABLE:  
-			        	alert('We can\'t detect your location. Sorry!');  
-			            break;  
-			        case error.PERMISSION_DENIED:  
-			        	alert('Please allow geolocation access for this to work.');  
-			            break;  
-			        case error.UNKNOWN_ERROR:  
-			        	alert('An unknown error occured!');  
-			            break;  
-			    }  
-			}  
-		
-		function locationSuccess(position){  
-		    var coords = position.coords;       
-		        // 维度  
-		        alert(coords.latitude);  
-		        // 精度  
-		        alert(coords.longitude);  
-		}	 
-		var map = new AMap.Map('container', {
-		    resizeEnable: true,
-		    zoom:11,
-		    center: [116.397428, 39.90923]        
-		});
-	</script> -->
+	
 	<style>
 	.container-fluid{
 		position:absolute;
