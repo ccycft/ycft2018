@@ -11,6 +11,16 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="cid" property="cid" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap id="SlideContentBaseResultMap" type="com.ycft.ycft.po.SlideContent" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="AWResultMapWithBLOBs" type="com.ycft.ycft.po.SlideContent" extends="SlideContentBaseResultMap" >
+    <result column="text" property="text" jdbcType="LONGVARCHAR" />
+  </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.Slide" extends="BaseResultMap" >
     <result column="img" property="img" jdbcType="LONGVARBINARY" />
   </resultMap>
@@ -132,4 +142,11 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- 服务端方法开始 -->
+  <select id="AdvertisingWindowSel" resultMap="AWResultMapWithBLOBs">
+	SELECT slide.*,content.text 
+	FROM slide,content 
+	WHERE slide.cid = content.id  
+  </select>
+  <!-- 服务端方法结束 -->
 </mapper>

@@ -1,3 +1,5 @@
+<%@page import="com.ycft.ycft.po.Title"%>
+<%@page import="com.ycft.ycft.po.SlideContent"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="java.util.List"%>
@@ -45,9 +47,19 @@
 <!-- Custom Js -->
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+	.img-responsive {
+		  display: inline-block;
+		  height: auto;
+		  max-width: 20%;
+		}
+</style>
 </head>
 <body>
-
+<%
+	List<SlideContent> scList = (List<SlideContent>)request.getAttribute("scList");
+	List<Title> tList = (List<Title>)request.getAttribute("tList");
+%>
 <div id="wrapper">
 	<nav class="navbar navbar-default top-navbar" role="navigation">
     	<div class="navbar-header">
@@ -168,7 +180,104 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 				    <div class="panel-heading">
-				         	用户信息
+				         	广告窗信息
+				    </div>
+				    <div class="panel-body">
+				        <div class="table-responsive">
+				            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+				                <thead>
+				                    <tr>
+		                   		 		<th>发布时间</th>
+				                        <th>轮播图</th>
+				                        <th>操作</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+				                	<%
+				                	for (int i = 0; i < scList.size(); i++) {
+				                	%>
+				                	<tr class="gradeA">
+			                            <td class="col-md-4"><%=scList.get(i).getTime() %></td>
+			                            <td class="col-md-4"><img class="img-responsive" src="http://localhost:8080/photo/<%=scList.get(i).getName() %>"/></td>
+			                            <td class="col-md-4">
+			                            	<input type="button" value="内容详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=scList.get(i).getId()%>"/>
+			                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=scList.get(i).getId()%>"/>
+			                            </td>
+			                        </tr>
+			                        <!-- 详情的弹出层 -->
+									<div class="modal fade" id="details<%=scList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+									    <div class="modal-dialog" role="document">  
+									        <div class="modal-content">  
+									            <div class="modal-header">  
+									                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+									                    <span aria-hidden="true">×</span>  
+									                </button>  
+									                <h4 class="modal-title" id="myModalLabel">文章内容</h4>  
+									            </div>  
+									            <div class="modal-body">  
+									            	<fieldset>
+								                       <div class="row">
+								                       		<div class="col-xs-11">
+								                       			<%=scList.get(i).getText() %>
+								                       		</div>
+								                       </div>
+								                    </fieldset>
+									            </div>  
+									            <div class="modal-footer">  
+									                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+									            </div>  
+									        </div>  
+									    </div>  
+									</div>
+									<!-- 修改的弹出层 -->
+									<div class="modal fade" id="update<%=scList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+									    <div class="modal-dialog" role="document">  
+									        <div class="modal-content">  
+									            <div class="modal-header">  
+									                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+									                    <span aria-hidden="true">×</span>  
+									                </button>  
+									                <h4 class="modal-title" id="myModalLabel">广告窗修改</h4>  
+									            </div>
+									            <form action="uploadAdvertisingWindow.do" method="post" id="updateForm" enctype="multipart/form-data"> 
+										            <input type="hidden" name="id" value="<%=scList.get(i).getId()%>"/>
+										            <div class="modal-body">  
+										            	<fieldset>
+									                       <div class="form-group">
+									                          <label class="col-sm-2 control-label" for="ds_host">轮播图</label>
+									                          <div class="col-sm-4">
+									                             <input type="file" name="titleFile" class="form-control"  id="titleFile" onchange="preview(this)">
+									                          </div>
+							                       			  <label class="col-sm-2 control-label" for="ds_host">文章名</label>
+							                       			  <div class="col-sm-4">
+							                       				  <select class="form-control" name="cid">
+							                       				   	  <option value="<%=scList.get(i).getCid()%>">不选则不修改</option>
+							                       				  <%
+							                       					  for (int j = 0; j < tList.size(); j++) {
+							                       				  %>
+							                       					  <option value="<%=tList.get(j).getId()%>"><%=tList.get(j).getName() %></option>
+							                       				  <%		
+							                       					  }
+							                       				  %>
+							                       				  </select>
+								                          	  </div>
+									                       </div>
+									                    </fieldset>
+										            </div>  
+										            <div class="modal-footer">  
+										                <button type="submit" class="btn btn-info" onclick="return check()">保存</button>  
+										                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+										            </div>
+									            </form>  
+									        </div>  
+									    </div>  
+									</div>
+			                        <%	
+				                	}
+				                	%>
+				                </tbody>
+				    		</table>
+				    	</div>
 				    </div>
 			    </div>
 			</div>
