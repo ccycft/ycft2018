@@ -219,7 +219,7 @@
 <div id="page-wrapper" >
 	<div class="header"> 
 		<h1 class="page-header">
-		    用户维护
+		    用户管理
 		</h1>
 		<ol class="breadcrumb">
 			<li class="active">用户管理</li>

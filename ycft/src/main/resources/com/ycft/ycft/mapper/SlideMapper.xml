@@ -17,6 +17,9 @@
   <sql id="Base_Column_List" >
     id, name, time, content, cid
   </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
   <!-- 带图片的字段 -->
   <sql id="all_Column_List" >
     id, name, time , img, content
