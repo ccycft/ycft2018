@@ -162,6 +162,10 @@
     </script>
     <script type="text/javascript">
     	function cTop(){
+    		var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+			if (scrollTop==0) {
+				document.documentElement.scrollTop=document.body.scrollTop=15;
+    		}
     		timer=setInterval(function(){
                 var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
                 var ispeed=Math.floor(-scrollTop/6);
