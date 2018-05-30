@@ -56,7 +56,6 @@
 	    				  
 	    				  var value = xhr.responseText;
 	    				  setPoint(value);
-	    				  
 	    			  },
 	    			  dataType: 'text'
 	    			});
