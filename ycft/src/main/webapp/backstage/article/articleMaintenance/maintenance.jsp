@@ -55,7 +55,6 @@
             });
             //上传标题图片预览
             function preview(file) {
-            	alert();
                 var prevDiv = document.getElementById('preview');
                 if (file.files && file.files[0]) {
                   var reader = new FileReader();
@@ -63,7 +62,6 @@
                     prevDiv.innerHTML = '<img src="' + evt.target.result + '" style="width:40px;height:40px;"/>';
                   }
                   reader.readAsDataURL(file.files[0]);
-                  $('#titleFile').val('')
                 }
              }
     </script>

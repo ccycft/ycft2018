@@ -53,6 +53,17 @@
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
+            //上传标题图片预览
+            function preview(file) {
+                var prevDiv = document.getElementById('preview');
+                if (file.files && file.files[0]) {
+                  var reader = new FileReader();
+                  reader.onload = function(evt) {
+                    prevDiv.innerHTML = '<img src="' + evt.target.result + '" style="width:40px;height:40px;"/>';
+                  }
+                  reader.readAsDataURL(file.files[0]);
+                }
+             }
     </script>
     
     <script type="text/javascript">
@@ -502,17 +513,6 @@ $(function(){
         $(this).removeClass('active-menu');
       }
     });
-    //上传标题图片预览
-    function preview(file) {
-        var prevDiv = document.getElementById('preview');
-        if (file.files && file.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function(evt) {
-            prevDiv.innerHTML = '<img src="' + evt.target.result + '" style="width:40px;height:40px;"/>';
-          }
-          reader.readAsDataURL(file.files[0]);
-        }
-     }
     </script>
     <script>
 		//控制图片宽度
