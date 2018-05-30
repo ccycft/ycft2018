@@ -8,15 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import com.alibaba.fastjson.JSONObject;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.ArticleSrv;
-import com.ycft.ycft.tools.UploadUtil;
 
 @Controller
 public class ArticleCtrl {
