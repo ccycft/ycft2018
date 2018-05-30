@@ -46,6 +46,14 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+    <error-page>
+  	<error-code>404</error-code>
+  	<location>/backstage/404_500.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/backstage/404_500.jsp</location>
+  </error-page>
     <filter>
         <filter-name>DruidWebStatFilter</filter-name>
         <filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
