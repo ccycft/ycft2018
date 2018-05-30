@@ -2,37 +2,25 @@ package com.ycft.ycft.po;
 
 import java.io.Serializable;
 
-public class Slide implements Serializable {
-    /**
+public class Slide implements Serializable{
+	
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private Integer id;
+	
+    private Integer id;
 
     private String name;
 
     private String time;
 
-    private byte[] img;
-
     private String content;
 
-    public byte[] getImg() {
-        return img;
-    }
+    private Integer cid;
 
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
+    private byte[] img;
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
     public Integer getId() {
         return id;
     }
@@ -55,5 +43,29 @@ public class Slide implements Serializable {
 
     public void setTime(String time) {
         this.time = time == null ? null : time.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
+    }
+
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 }
