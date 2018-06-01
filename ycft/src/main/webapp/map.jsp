@@ -113,7 +113,8 @@
 		margin-top:1.0rem;
 		margin-left:2.5rem;	
 	}
-	.btn-info{
+	.btn-value{
+		
 		line-height:3rem;
 		font-size:1rem;
 	}
@@ -136,19 +137,19 @@
 		<div class="row">
 			<div class="col-xs-2" id="1">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">报道点</span>
+				<span class="btn-value">报道点</span>
 			</div>
 			<div class="col-xs-2" id="2">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">报告厅</span>
+				<span class="btn-value">报告厅</span>
 			</div>
 			<div class="col-xs-2" id="3">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">教学楼</span>
+				<span class="btn-value">教学楼</span>
 			</div>
 			<div class="col-xs-2" id="4">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">餐厅</span>
+				<span class="btn-value">餐厅</span>
 			</div>
 		</div>
 		<!--	第二排btn 23333 	-->
@@ -156,28 +157,24 @@
 		<div class="row">
 			<div class="col-xs-2" id="5">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">超市</span>
+				<span class="btn-value">超市</span>
 			</div>
 			<div class="col-xs-2" id="6">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">运动场</span>
+				<span class="btn-value">运动场</span>
 			</div>
 			<div class="col-xs-2" id="7">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">图书馆</span>
+				<span class="btn-value">图书馆</span>
 			</div>
 			<div class="col-xs-2" id="8">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span class="btn-info">ATM</span>
+				<span class="btn-value">ATM</span>
 			</div>
 		</div>
 		
 	</div>
 		
 	</body>
-	<style>
-		.amap-copyright{
-				display:none;
-		}
-	</style>
+
 </html>

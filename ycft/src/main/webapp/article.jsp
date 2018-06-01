@@ -55,20 +55,13 @@
 <body class="text-center">
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">校园导航</span>	
-		<img class="right-icon" src="./images/add.png">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">校园文章</span>	
+		<img class="right-icon" src="<%=basePath%>images/backhome.png">
 	</div>
 	<div class="container-fluid">
 			<div class="row">
-			<nav aria-label="...">
-			  <ul class="pager">
-			    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> </a></li>
-			 	<h4>文章</h4>
-			  </ul>
-			</nav>
 			 <div class="col-xs-12">
-			 
 			 	  <%
 			 		List<Title> tList = (List<Title>)request.getAttribute("tList");
 			 	  	
@@ -100,7 +93,6 @@
 			 			<%
 			 			}
 			 		}
-			 			
 			 	   %> 
 			 </div>
 		</div>

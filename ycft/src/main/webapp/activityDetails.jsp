@@ -25,11 +25,12 @@
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
     <style>
+    	
 		.activity_img{
 			width:100%;
 		}
 		#activity_btn{
-			margin-left:23%;
+			text-align:center;
 		}
 		.text-area{
 			
@@ -84,9 +85,9 @@
 <body>
 		<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">校园导航</span>	
-		<img class="right-icon" src="./images/add.png">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">活动详情</span>	
+		<img class="right-icon" src="<%=basePath%>images/backhome.png">
 	</div>
 
 	<div class="container-fluid">
@@ -109,8 +110,8 @@
 						</ul>								
 					</div>
 				</div>
-				<dir class="row">
-					<div class="col-xs-11">
+				<div class="row">
+					<div class="col-xs-12">
 						
 						
 						<%=con.getText()%>
@@ -133,12 +134,12 @@
 							在这个快速发展的智能硬件时代，困扰应用开发者的一个重要问题就是如何在功率、覆盖范围、传输速率和成本之间找到那个微妙的平衡点。企业组织利用相关数据和分析可以帮助它们降低成本、提高效率、开发新产品、做出更明智的业务决策等等。
 						</p> -->
 					</div>
-				</dir>
+				</div>
 				
 				<hr>
 				
 				<div class="row">
-					<div id="activity_btn" class="col-xs-9">
+					<div id="activity_btn" class="col-xs-12">
 					
 						<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">点击报名</a>
 					

@@ -40,24 +40,24 @@
 		background-image: none;
 	}	
 	.row{  
-  		margin-top:14px;  
+  		/* margin-top:14px;   */
   		margin-bottom:14px;  
 	} 
 	.thumbnail{
 		margin-bottom: 5px;
 	} 
-	
 	#jiaowu{
 		width:100%;
 		height:8rem;
 	}
 	.container-fluid{
-	
-		/* margin-top:10rem; */
 		height:100%;
 	}	
 	.col-xs-2{
 	 	width:20%; 
+	}
+	.btn-value{
+		line-height:2;
 	}
 	</style>  
 	
@@ -139,33 +139,33 @@
 		<!--    华丽丽的分割线———————————————————————————————————— -->
 		<div class="row">
 			<div class="col-xs-2">
-				   <a href="<%=basePath%>index.jsp">
+				   <a href="<%=basePath%>map.jsp">
 				    <img class="img-responsive btn-block" src="<%=basePath%>images/daohang.png" alt="...">
-				    <span>导航</span>
+				    <span class="btn-value">导航</span>
 				   </a>
 			</div>
 			<div class="col-xs-2">
 				 <a href="<%=basePath%>fore/title/loadInform.do?nowPage=1">
 					<img class="img-responsive btn-block" src="<%=basePath%>images/tongzhi.png" alt="...">
-				  	<span>通知</span>	
+				  	<span class="btn-value">通知</span>	
 				  </a>  
 			</div>
 			<div class="col-xs-2">
 				    <a href="<%=basePath%>fore/title/loadArticle.do?nowPage=1">
 					    <img class="img-responsive btn-block" src="<%=basePath%>images/wenzhang.png" alt="...">
-					  	<span>文章</span>
+					  	<span class="btn-value">文章</span>
 				  	</a>	  
 			</div>
 			<div class="col-xs-2">
 					<a href="<%=basePath%>sign.jsp">
 					    <img class="img-responsive btn-block" src="<%=basePath%>images/qiandao.png" alt="...">
-					  	<span>签到</span>	  
+					  	<span class="btn-value">签到</span>	  
 				  	</a>
 			</div>
 			<div class="col-xs-2">
 					<a href="<%=basePath%>fore/title/loadActivity.do?nowPage=1">
 					   <img class="img-responsive btn-block" src="<%=basePath%>images/huodong.png" alt="...">
-					  	<span>活动</span>	
+					  	<span class="btn-value">活动</span>	
 					</a>  
 			</div>
 		</div>
@@ -174,7 +174,7 @@
 		<div class="row">
 			<div id="jiaowu" class="col-xs-10">
 					<a href="<%=basePath%>preLogin.html">
-     				 <img id="jiaowu" class=" img-rounded " src="<%=basePath%>images/jiaowu.jpg" alt="...">
+     				 <img id="jiaowu" class="img-rounded" src="<%=basePath%>images/jiaowu.jpg" alt="...">
   					</a>
   			</div>
 		</div>

@@ -39,15 +39,14 @@
 <body class="text-center">
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">校园导航</span>	
-		<img class="right-icon" src="./images/add.png">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">校园通知</span>	
+		<a href="<%=basePath%>fore/index/index.do"><img class="right-icon" src="<%=basePath%>images/backhome.png"></a>
 	</div>
 	
 	<div class="container-fluid">
 			<div class="row">
 			 <div class="col-xs-12">
-			 
 			 	  <%
 			 		List<Title> tList = (List<Title>)request.getAttribute("tList");
 			 	  	
