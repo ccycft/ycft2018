@@ -251,7 +251,7 @@
 							                       			  <label class="col-sm-2 control-label" for="ds_host">文章名</label>
 							                       			  <div class="col-sm-4">
 							                       				  <select class="form-control" name="cid">
-							                       				   	  <option value="<%=scList.get(i).getCid()%>">不选则不修改</option>
+							                       				   	  <option value="0">不选则不修改</option>
 							                       				  <%
 							                       					  for (int j = 0; j < tList.size(); j++) {
 							                       				  %>
@@ -309,6 +309,11 @@
         $(this).removeClass('active-menu');
       }
     });
+</script>
+<script>
+	//控制图片宽度
+	var width  = $(".modal-dialog").width() + $(".modal-body").width();
+	$(".col-xs-11").find("img").width(width);
 </script>
 </body>
 </html>

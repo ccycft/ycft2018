@@ -39,17 +39,30 @@ public class AdvertisingWindowCtrl {
 			modelAndView.addObject("tList",tList);
 			modelAndView.setViewName("backstage/advertisingWindow/advertisingWindowMaintenance/maintenance.jsp");
 		} else {
-			modelAndView.setViewName("fali.jsp");
+			modelAndView.setViewName("fail.jsp");
 		}
 		
 		return modelAndView;
 	}
 	
+	/**
+	 * 广告窗修改
+	 * @author ZHENGBIN
+	 * @param request
+	 * @param titleFile 参数绑定
+	 * @param slide 参数绑定
+	 * @return advertisingWindowSel.do
+	 */
 	@RequestMapping("uploadAdvertisingWindow.do")
 	public ModelAndView upload(HttpServletRequest request,MultipartFile titleFile,Slide slide) {
 		ModelAndView modelAndView = new ModelAndView();
 		boolean flag = aws.uploadAdvertisingWindow(request,titleFile,slide);
-		modelAndView.setViewName("advertisingWindowSel.do");
+		//修改成功后返回原页面
+		if (flag) {
+			modelAndView.setViewName("advertisingWindowSel.do");
+		} else {
+			modelAndView.setViewName("fail.jsp");
+		}
 		return modelAndView;
 	}
 	

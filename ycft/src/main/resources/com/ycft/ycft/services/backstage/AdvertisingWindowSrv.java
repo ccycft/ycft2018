@@ -38,30 +38,44 @@ public class AdvertisingWindowSrv {
 		return scList;
 	}
 	
+	/**
+	 * 广告窗的修改
+	 * @author ZHENGBIN
+	 * @param request
+	 * @param titleFile 参数绑定
+	 * @param slide 参数绑定
+	 * @return boolean
+	 */
 	public boolean uploadAdvertisingWindow(HttpServletRequest request,MultipartFile titleFile,Slide slide) {
 		boolean flag = false;
-		Content content = contentMapper.selectByTid(slide.getCid());
-		slide.setCid(content.getId());
+		//0表示为没修改文章
+		if (slide.getCid() == 0) {
+			slide.setCid(null);
+		} else {
+			//如果修改了则根据content的id去查出title的id存入
+			Content content = contentMapper.selectByTid(slide.getCid());
+			slide.setCid(content.getId());
+		}
 		String imgNamePath  = "";
-		if(titleFile != null && !titleFile.isEmpty()) {
+		if(!titleFile.isEmpty()) {
 			//上传图片
 			try {
 				imgNamePath = UploadUtil.commonUpload(request, titleFile);
+				//截取一下获取图片名
+				String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
+				slide.setName(imgName);
+				slide.setImg(titleFile.getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		} else {
+			//将图片名和图片都设置为空则不会修改
+			slide.setName(null);
+			slide.setImg(null);
 		}
-		//截取一下获取图片名
-		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
-		slide.setName(imgName);
+		//修改上传时间
 		slide.setTime(DateUtil.getNowDate());
-		try {
-			slide.setImg(titleFile.getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if(sm.updateByPrimaryKeyWithBLOBs(slide)>0) {
+		if(sm.updateByPrimaryKeySelective(slide)>0) {
 			flag = true;
 		}
 		return flag;
