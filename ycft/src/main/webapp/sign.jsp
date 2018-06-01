@@ -45,10 +45,12 @@
 
 <body>
 	<div class="container-fluid">
-		<ul class="pager ">
-			<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> </a></li>
-			<h5>签到</h5>
-		</ul>
+			<!-- 页面顶端导航栏 -->
+		<div class="nav-area">
+			<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+			<span class="nav-title">校园导航</span>	
+			<img class="right-icon" src="./images/location.png">
+		</div>
 		
 		<hr><!--    华丽丽的分割线———————————————————————————————————— -->
 		

@@ -19,6 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>文章</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/article.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
@@ -52,6 +53,12 @@
 	</script>
 </head>
 <body class="text-center">
+	<!-- 页面顶端导航栏 -->
+	<div class="nav-area">
+		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">校园导航</span>	
+		<img class="right-icon" src="./images/add.png">
+	</div>
 	<div class="container-fluid">
 			<div class="row">
 			<nav aria-label="...">

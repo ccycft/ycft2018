@@ -15,10 +15,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>基本地图展示</title>
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/navs.css">
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
@@ -26,7 +27,11 @@
     <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
 
     <script>
-    var map ;
+    /*
+    	高德地图js api
+    
+    */
+       var map ;
 	   $(function(){
 		   
 		   // 地图初始化…
@@ -42,6 +47,7 @@
 	        });
 	        marker.setMap(map);
 	        
+	        //ajax获取坐标
 	        $(".col-xs-2").click(function(event){
 	    		 var mark = $(event.target).attr("id")||$(event.target).parent().attr('id');
 	    		 //console.log(mark);
@@ -58,6 +64,7 @@
 	   		 });
 	   });
 	   
+	   //地图点标记
 	   function setPoint(value){
 		   map.clearMap();  // 清除地图覆盖物
 		   var coordinate = value.split("|");
@@ -106,57 +113,71 @@
 		margin-top:1.0rem;
 		margin-left:2.5rem;	
 	}
-	span{
+	.btn-info{
 		line-height:3rem;
 		font-size:1rem;
 	}
-	
+
 </style>
 </head>
 	<body class="text-center">
+	
 	<div id="container">
 	</div>
+	
+	<!-- 页面顶端导航栏 -->
+	<div class="nav-area">
+		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">校园导航</span>	
+		<img class="right-icon" src="./images/location.png">
+	</div>
+	
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-2" id="1">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>报道点</span>
+				<span class="btn-info">报道点</span>
 			</div>
 			<div class="col-xs-2" id="2">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>报告厅</span>
+				<span class="btn-info">报告厅</span>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="3">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>教学楼</span>
+				<span class="btn-info">教学楼</span>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="4">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>餐厅</span>
+				<span class="btn-info">餐厅</span>
 			</div>
 		</div>
 		<!--	第二排btn 23333 	-->
 		
 		<div class="row">
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="5">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>超市</span>
+				<span class="btn-info">超市</span>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="6">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>运动场</span>
+				<span class="btn-info">运动场</span>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="7">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>图书馆</span>
+				<span class="btn-info">图书馆</span>
 			</div>
-			<div class="col-xs-2">
+			<div class="col-xs-2" id="8">
 				<img class="img-responsive btn-block" src="./images/daohang.png" alt="...">
-				<span>ATM</span>
+				<span class="btn-info">ATM</span>
 			</div>
 		</div>
 		
 	</div>
-	
+		
 	</body>
+	<style>
+		.amap-copyright{
+				display:none;
+		}
+	</style>
 </html>

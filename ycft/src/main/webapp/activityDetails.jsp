@@ -19,6 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>活动详情</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+   	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/activity.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
@@ -81,13 +82,14 @@
 	</script>
 </head>
 <body>
+		<!-- 页面顶端导航栏 -->
+	<div class="nav-area">
+		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+		<span class="nav-title">校园导航</span>	
+		<img class="right-icon" src="./images/add.png">
+	</div>
+
 	<div class="container-fluid">
-		<ul class="pager">
-			<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> </a></li>
-			<h5>活动详情</h5>
-		</ul>
-		<hr>
-		
 		<%
 			TitleContent con = (TitleContent)request.getAttribute("titleContent");
 			if(con != null){
@@ -135,13 +137,13 @@
 				
 				<hr>
 				
-				<dir class="row">
+				<div class="row">
 					<div id="activity_btn" class="col-xs-9">
 					
 						<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">点击报名</a>
 					
 					</div>
-				</dir>		
+				</div>		
 			</div>
 			
 				<!-- 模态框（Modal） -->
