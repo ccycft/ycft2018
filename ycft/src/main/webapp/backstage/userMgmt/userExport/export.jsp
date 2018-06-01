@@ -161,11 +161,11 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h1 class="page-header">
-                            	学生信息导入/出
+                            	用户信息导入/出
                         </h1>
 						<ol class="breadcrumb">
 					  <li class="active">用户管理</li>
-					  <li class="active">学生信息导入/出</li>
+					  <li class="active">用户信息导入/出</li>
 					</ol> 
 		</div>
 		<div class="row">
@@ -188,7 +188,7 @@
                  
                  	<input  type="button" class="btn btn-success" onclick="validFile()" value="导入" />
                  	<input type="button" class="btn btn-success" value="导出" onclick="exportFile()" />
-                 	<input type="button" class="btn btn-success" value="单个学生录入" data-toggle="modal" data-target="#addUser"/>
+                 	<input type="button" class="btn btn-success" value="单个用户录入" data-toggle="modal" data-target="#addUser"/>
                  </div>
 			</form>
 			</div>
@@ -199,7 +199,7 @@
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 		                    <span aria-hidden="true">×</span>  
 		                </button>  
-		                <h4 class="modal-title" id="myModalLabel">学生信息详情</h4>  
+		                <h4 class="modal-title" id="myModalLabel">用户信息详情</h4>  
 		            </div>    
 		             <form action="<%=basePathNoBackstage%>addOneUser.do" method="post">
 		            <div class="modal-body">  
@@ -305,7 +305,7 @@ $(function(){
     		alert("您将要导入excel文件,导入学员信息前请下载并阅读导入模版，格式不符将会导致导入失败.");
     	}
     	function exportFile(){
-    		if(confirm('导出 全部学生信息吗?')){
+    		if(confirm('导出 全部用户信息吗?')){
     			document.getElementById("fileForm").action="<%=basePathNoBackstage%>exportExcel.do";
     			document.getElementById("fileForm").submit();
     		}
