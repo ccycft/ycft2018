@@ -202,8 +202,22 @@
     	}	
     
     </script>
+    <script type="text/javascript">
+    	function load(){
+    		document.getElementById("dataTables-example_paginate").onclick=function(){
+    			timer=setInterval(function(){
+                  var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                  var ispeed=Math.floor(-scrollTop/6);
+                  if(scrollTop==0){
+                      clearInterval(timer);
+                  }
+                  document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
+               },0)
+    		}
+    	}
+   </script>
 </head>
-<body>
+<body onload="load()">
 <%
 	List<TitleContent> tcList = (List<TitleContent>)request.getAttribute("tcList");
 %>

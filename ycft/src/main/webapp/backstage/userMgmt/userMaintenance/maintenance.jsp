@@ -96,9 +96,23 @@
   	  }
     }
     </script>
+    <script type="text/javascript">
+    	function load(){
+    		document.getElementById("dataTables-example_paginate").onclick=function(){
+    			timer=setInterval(function(){
+                  var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+                  var ispeed=Math.floor(-scrollTop/6);
+                  if(scrollTop==0){
+                      clearInterval(timer);
+                  }
+                  document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
+               },0)
+    		}
+    	}
+   </script>
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="load()">
 <%
 	List<User> uList = (List<User>)request.getAttribute("uList");
 	List<Role> rList = (List<Role>)request.getAttribute("rList");
