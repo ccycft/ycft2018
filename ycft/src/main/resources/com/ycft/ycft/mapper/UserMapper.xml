@@ -102,6 +102,12 @@
 	<select id="selExport" parameterType="int" resultMap="BaseResultMap">
 		SELECT user.sno,user.sname,user.tel,user.profession,user.cls FROM title,USER,activity WHERE activity.tid = #{1} AND activity.tid = title.id AND activity.uid = user.id
 	</select>
+	
+	<select id="selCls" resultMap="BaseResultMap">
+		SELECT cls 
+		FROM USER 
+		GROUP BY cls
+	</select>
   <!-- 服务端方法结束 -->
   
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
