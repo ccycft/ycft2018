@@ -54,6 +54,11 @@
         $('#dataTables-example').dataTable();
     });
     function changeId(){
+    	$("#signId").attr("action","<%=basePathNoBackStage %>selSignEvent.do");
+    	$("#signId").submit();
+    }
+    function exportSignInfo(){
+    	$("#signId").attr("action","<%=basePathNoBackStage %>exportSignInfo.do");
     	$("#signId").submit();
     }
     </script>
@@ -201,13 +206,16 @@
 					    		<button class="btn btn-success" data-toggle="modal" data-target="#sign">统计</button>
 					    	</div>
 					    	<div class="col-md-3">
-					    		<form id="signId" action="<%=basePathNoBackStage %>selSignEvent.do" method="post">
+					    		<form id="signId" method="post">
 						    		<select name="uid" class="form-control" onchange="changeId()">
 						         		<c:forEach items="${eventList}" var="signEvent">
 						         			<option value="${signEvent.id}">${signEvent.name}</option>
 						         		</c:forEach>
 				         			</select>
 				         		</form>
+					    	</div>
+					    	<div class="col-sm-1">
+					    		<button class="btn btn-success" onclick="exportSignInfo()">导出</button>
 					    	</div>
 					    </div>
 					 </div>
@@ -288,14 +296,14 @@
 					 			</thead>
 					 			<tbody>
 					 				<c:forEach items="${sList.signList}" var="signLists">
-					 					<c:set value="${signLists.u}" var="u" />
+					 					<c:set value="${signLists.user}" var="user" />
 					 					<tr class="gradeA">
-					 							<td class="col-md-2">${u.sno}</td>
-					 							<td class="col-md-2">${u.sname}</td>
-					 							<td class="col-md-2">${u.cls}</td>
-					 							<td class="col-md-2">${u.college}</td>
-					 							<td class="col-md-2">${u.department}</td>
-					 							<td class="col-md-2">${u.profession}</td>
+					 							<td class="col-md-2">${user.sno}</td>
+					 							<td class="col-md-2">${user.sname}</td>
+					 							<td class="col-md-2">${user.cls}</td>
+					 							<td class="col-md-2">${user.college}</td>
+					 							<td class="col-md-2">${user.department}</td>
+					 							<td class="col-md-2">${user.profession}</td>
 				 						</tr>
 					 				</c:forEach>
 					 			</tbody>

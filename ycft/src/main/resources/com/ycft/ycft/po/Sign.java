@@ -9,11 +9,11 @@ public class Sign {
     
     private User user;
     
-	public User getU() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setU(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,5 +82,11 @@ public class SignCtrl {
 		//活动名绑定到R3上了
 		modelAndView.addObject("name",user.getR3());
 		return modelAndView;
+	}
+	
+	@RequestMapping("exportSignInfo.do")
+	public void exportSignInfo(HttpServletResponse response,int uid) {
+		//导出信息
+		signSrv.exportSignInfo(response,uid);
 	}
 }
