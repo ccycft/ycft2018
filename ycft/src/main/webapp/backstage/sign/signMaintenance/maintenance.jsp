@@ -175,47 +175,7 @@
 				    <div class="panel-heading">
 				         	签到事件
 				    </div>
-				    <input type="button" data-toggle="modal" data-target="#button" />
-				    <div class="modal fade" id="button" tabindex="-1" role="dialog" aria-labelledby="myModelLabel">
-				    	<div class="modal-dialog modal-sm" role="document">  
-						        <div class="modal-content">  
-						            <div class="modal-header">  
-						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
-						                    <span aria-hidden="true">×</span>  
-						                </button>  
-						                <h4 class="modal-title" id="myModalLabel">学生信息详情</h4>  
-						            </div>  
-						            <div class="modal-body">  
-						            	<fieldset>
-					                       <div class="form-group">
-					                       <label class="col-sm-2 control-label" for="ds_name">报名人数</label>
-					                       <div class="col-sm-10">
-					                       <div class="panel panel-primary text-center no-boder blue">
-											       <div class="panel-right">
-													   <h3>16,150</h3>
-											           <strong> 测试活动名</strong>
-											        </div>
-									    		</div>
-									    		</div>
-					                       </div>
-					                    </fieldset>
-						            </div>  
-						            <div class="modal-footer">  
-						                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-						            </div>  
-						        </div>  
-						    </div>  
-				    </div>
-		    		<div class="panel panel-primary text-center no-boder blue">
-				        <div class="panel-left pull-left blue">
-				            <i class="fa fa-eye fa-5x"></i>
-				            
-				        </div>
-				       <div class="panel-right">
-						   <h3>16,150</h3>
-				           <strong> Daily Visits</strong>
-				        </div>
-		    		</div>
+				    
 		    	</div>
 			</div>
 		</div>
