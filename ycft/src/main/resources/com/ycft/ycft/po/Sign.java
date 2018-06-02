@@ -6,8 +6,18 @@ public class Sign {
     private Integer sid;
 
     private Integer uid;
+    
+    private User u;
+    
+	public User getU() {
+		return u;
+	}
 
-    public Integer getId() {
+	public void setU(User u) {
+		this.u = u;
+	}
+
+	public Integer getId() {
         return id;
     }
 

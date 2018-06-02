@@ -1,5 +1,7 @@
 package com.ycft.ycft.mapper;
 
+import java.util.List;
+
 import com.ycft.ycft.po.SignEvent;
 
 public interface SignEventMapper {
@@ -14,4 +16,6 @@ public interface SignEventMapper {
     int updateByPrimaryKeySelective(SignEvent record);
 
     int updateByPrimaryKey(SignEvent record);
+    
+   List<SignEvent> selSignUser(SignEvent record);
 }

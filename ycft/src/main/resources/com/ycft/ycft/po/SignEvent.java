@@ -1,5 +1,7 @@
 package com.ycft.ycft.po;
 
+import java.util.List;
+
 public class SignEvent {
     private Integer id;
 
@@ -12,8 +14,19 @@ public class SignEvent {
     private String time;
 
     private String signType;
+    
+    private List<Sign> signList;
+    
+    
+    public List<Sign> getSignList() {
+		return signList;
+	}
 
-    public Integer getId() {
+	public void setSignList(List<Sign> signList) {
+		this.signList = signList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

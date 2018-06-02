@@ -9,9 +9,48 @@
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="sign_type" property="signType" jdbcType="VARCHAR" />
   </resultMap>
+  <!-- 一个签到事件对应多个签到表的uid,一个uid对应一个用户  -->
+  <resultMap id="SigneventUser" type="com.ycft.ycft.po.SignEvent" >
+    <id column="eid" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="coordinate" property="coordinate" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <collection property="signList" ofType="com.ycft.ycft.po.Sign">
+        
+        <id column="signId" property="id" jdbcType="INTEGER" />
+    	<result column="sid" property="sid" jdbcType="INTEGER" />
+    	<result column="uid" property="uid" jdbcType="INTEGER" />
+    	<association property="u" javaType="com.ycft.ycft.po.User">
+    	    
+    	    <id column="userId" property="id" jdbcType="INTEGER" />
+		    <result column="sno" property="sno" jdbcType="VARCHAR" />
+		    <result column="psd" property="psd" jdbcType="VARCHAR" />
+		    <result column="sname" property="sname" jdbcType="VARCHAR" />
+		    <result column="tel" property="tel" jdbcType="VARCHAR" />
+		    <result column="school" property="school" jdbcType="VARCHAR" />
+		    <result column="college" property="college" jdbcType="VARCHAR" />
+		    <result column="department" property="department" jdbcType="VARCHAR" />
+		    <result column="profession" property="profession" jdbcType="VARCHAR" />
+		    <result column="cls" property="cls" jdbcType="VARCHAR" />
+		    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+		    <result column="status" property="status" jdbcType="CHAR" />
+		    <result column="r1" property="r1" jdbcType="VARCHAR" />
+		    <result column="r2" property="r2" jdbcType="VARCHAR" />
+		    <result column="r3" property="r3" jdbcType="VARCHAR" />
+    	</association>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, name, uid, coordinate, time, sign_type
   </sql>
+  <!-- 服务端方法开始 -->
+  <select id="selSignUser" resultMap="SigneventUser" parameterType="com.ycft.ycft.po.SignEvent">
+       SELECT sign_event.id eid,NAME,TIME,sign.id signId,user.id userId,sno,sname,tel,school,college,department,profession,cls 
+  FROM sign_event,SIGN,USER WHERE sign.sid = sign_event.id AND sign.uid = user.id
+  </select>
+ <!-- 服务端方法结束  -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
