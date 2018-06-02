@@ -22,7 +22,7 @@
         <id column="signId" property="id" jdbcType="INTEGER" />
     	<result column="sid" property="sid" jdbcType="INTEGER" />
     	<result column="uid" property="uid" jdbcType="INTEGER" />
-    	<association property="u" javaType="com.ycft.ycft.po.User">
+    	<association property="user" javaType="com.ycft.ycft.po.User">
     	    
     	    <id column="userId" property="id" jdbcType="INTEGER" />
 		    <result column="sno" property="sno" jdbcType="VARCHAR" />
@@ -49,6 +49,18 @@
   <select id="selSignUser" resultMap="SigneventUser" parameterType="com.ycft.ycft.po.SignEvent">
        SELECT sign_event.id eid,NAME,TIME,sign.id signId,user.id userId,sno,sname,tel,school,college,department,profession,cls 
   FROM sign_event,SIGN,USER WHERE sign.sid = sign_event.id AND sign.uid = user.id
+  	<if test="id != null" >
+       and sign_event.id = #{id}
+    </if>
+	<if test="uid != null" >
+       and sign_event.uid = #{uid}
+    </if>
+  </select>
+  <select id="selEvent" resultType="com.ycft.ycft.po.SignEvent" parameterType="com.ycft.ycft.po.SignEvent">
+      select id,name from sign_event
+      <if test="uid != null" >
+       where uid = #{uid}
+    </if>
   </select>
  <!-- 服务端方法结束  -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

@@ -47,6 +47,14 @@
     <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
         <!-- Custom Js -->
     <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#dataTables-example').dataTable();
+    });
+    function changeId(){
+    	$("#signId").submit();
+    }
+    </script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -180,11 +188,13 @@
 				    <div class="panel-heading">
 					    <div class="row">
 					    	<div class="col-md-3">
-					    		<select class="form-control">
-					         		<c:forEach items="${sList}" var="signEvent">
-					         			<option>${signEvent.name}</option>
-					         		</c:forEach>
-			         			</select>
+					    		<form id="signId" action="<%=basePathNoBackStage %>selSignEvent.do" method="post">
+						    		<select name="uid" class="form-control" onchange="changeId()">
+						         		<c:forEach items="${eventList}" var="signEvent">
+						         			<option value="${signEvent.id}">${signEvent.name}</option>
+						         		</c:forEach>
+				         			</select>
+				         		</form>
 					    	</div>
 					    </div>
 					 </div>
@@ -202,19 +212,16 @@
 					 				</tr>
 					 			</thead>
 					 			<tbody>
-					 				<c:forEach items="${sList}" var="signEvent">
-					 					<c:set value="${signEvent.signList}" var="signList" />
-					 					<c:forEach items="${signList}" var="sign">
-					 						<c:set value="${sign.u}" var="u" />
-					 						<tr class="gradeA">
+					 				<c:forEach items="${sList.signList}" var="signLists">
+					 					<c:set value="${signLists.u}" var="u" />
+					 					<tr class="gradeA">
 					 							<td class="col-md-2">${u.sno}</td>
 					 							<td class="col-md-2">${u.sname}</td>
 					 							<td class="col-md-2">${u.cls}</td>
 					 							<td class="col-md-2">${u.college}</td>
 					 							<td class="col-md-2">${u.department}</td>
 					 							<td class="col-md-2">${u.profession}</td>
-					 						</tr>
-					 					</c:forEach>
+				 						</tr>
 					 				</c:forEach>
 					 			</tbody>
 					 		</table>
@@ -249,9 +256,6 @@ $(function(){
       } else {
         $(this).removeClass('active-menu');
       }
-    });
-    $(document).ready(function () {
-        $('#dataTables-example').dataTable();
     });
     </script>
 </body>

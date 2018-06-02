@@ -7,14 +7,14 @@ public class Sign {
 
     private Integer uid;
     
-    private User u;
+    private User user;
     
 	public User getU() {
-		return u;
+		return user;
 	}
 
-	public void setU(User u) {
-		this.u = u;
+	public void setU(User user) {
+		this.user = user;
 	}
 
 	public Integer getId() {

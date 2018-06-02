@@ -18,4 +18,6 @@ public interface SignEventMapper {
     int updateByPrimaryKey(SignEvent record);
     
    List<SignEvent> selSignUser(SignEvent record);
+   
+   List<SignEvent> selEvent(SignEvent record);
 }
