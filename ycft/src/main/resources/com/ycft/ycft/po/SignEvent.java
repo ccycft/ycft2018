@@ -8,10 +8,31 @@ public class SignEvent {
     private String name;
 
     private Integer uid;
+    
+    //用来显示用户姓名
+    private String sname;
 
-    private String coordinate;
+    public String getSname() {
+		return sname;
+	}
 
-    private String time;
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	private String coordinate;
+    
+    private String coordinateName;
+
+    public String getCoordinateName() {
+		return coordinateName;
+	}
+
+	public void setCoordinateName(String coordinateName) {
+		this.coordinateName = coordinateName;
+	}
+
+	private String time;
 
     private String signType;
     
