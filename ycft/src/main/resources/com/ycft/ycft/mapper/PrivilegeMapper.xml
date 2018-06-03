@@ -102,6 +102,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
    <select id="queryMenuList"  useCache="true" resultMap="BaseResultMap" resultType="com.ycft.ycft.po.User">
-       SELECT * FROM privilege 
+       SELECT privilege.* FROM privilege,role_privilege,role,USER,user_role
+		WHERE privilege.id = role_privilege.pid AND role_privilege.rid = role.id AND role.id = user_role.rid AND user_role.uid = user.id
+		<if test="id != null">
+		    AND user.id = #{id}
+		</if>
    </select>
 </mapper>

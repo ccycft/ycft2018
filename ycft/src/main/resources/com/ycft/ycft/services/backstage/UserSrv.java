@@ -20,6 +20,8 @@ import com.ycft.ycft.mapper.UserMapper;
 import com.ycft.ycft.mapper.UserRoleMapper;
 import com.ycft.ycft.po.Role;
 import com.ycft.ycft.po.User;
+import com.ycft.ycft.services.InitService;
+import com.ycft.ycft.tools.BeanUtil;
 import com.ycft.ycft.tools.MD5;
 import jxl.Cell;
 import jxl.Sheet;
@@ -57,6 +59,14 @@ public class UserSrv {
 			//将用户信息存储到session
 			HttpSession session = request.getSession();
 			session.setAttribute("user", user);
+			InitService init =  (InitService)BeanUtil.getBean("InitService");
+			try {
+				//登录之后重新缓存菜单
+				init.cacheMenu(user);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return flag;
 	}

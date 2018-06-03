@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ycft.ycft.mapper.PrivilegeMapper;
 import com.ycft.ycft.po.Privilege;
+import com.ycft.ycft.po.User;
 
 @Service
 public class PrivilegeService {
@@ -19,9 +22,9 @@ public class PrivilegeService {
 	PrivilegeMapper pm;
 	
 	private final Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-	public List<Privilege> testQueryMenuList() {
+	public List<Privilege> testQueryMenuList(User user) {
 	    // 原始的数据
-	    List<Privilege> rootMenu = pm.queryMenuList(null);
+	    List<Privilege> rootMenu = pm.queryMenuList(user);
 	    
 	    // 查看结果
 	    for (Privilege menu : rootMenu) {
@@ -36,14 +39,12 @@ public class PrivilegeService {
 	            menuList.add(rootMenu.get(i));
 	        }
 	    }
-	    System.out.println(menuList.size());
 	    // 为一级菜单设置子菜单，getChild是递归调用的
 	    for (Privilege menu : menuList) {
 	        menu.setChildMenus(getChild(menu.getId(), rootMenu));
 	    }
 	    Map<String,Object> jsonMap = new HashMap<String,Object>();
 	    jsonMap.put("menu", menuList);
-	    System.out.println(gson.toJson(jsonMap));
 	    return menuList;
 	}
 

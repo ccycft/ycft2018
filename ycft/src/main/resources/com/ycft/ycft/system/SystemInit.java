@@ -1,13 +1,12 @@
 package com.ycft.ycft.system;
 
-import java.util.List;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.InitService;
 
 
@@ -49,7 +48,8 @@ public class SystemInit implements ServletContextListener {
 	    	//获取初始化service执行缓存操作
 	    	boolean isCacheDict = sys.getInitService().cacheDict();
 	    	System.out.println(isCacheDict ? "数据字典加载成功..." : "数据字典加载失败...");
-	    	Menu.setpList(sys.getInitService().cacheMenu());
+	    	User user = new User();
+	    	Menu.setpList(sys.getInitService().cacheMenu(user));
 		   System.out.println("====================容器启动,数据字典加载成功...===========================");
 		   System.out.println("====================开始缓存首页幻灯片...===========================");
 		   sys.getInitService().cacheSlide();

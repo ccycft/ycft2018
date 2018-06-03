@@ -34,7 +34,7 @@ public class PrivilegeCtrl {
 	@RequestMapping("privilege.do")
 	public ModelAndView selMenu(User user,HttpServletResponse response,HttpServletRequest request) throws UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
-		List<Privilege> privilegeList = ps.testQueryMenuList();
+		List<Privilege> privilegeList = ps.testQueryMenuList(null);
 		
 		Gson g = new Gson();
 		for(Privilege p : privilegeList) {

@@ -5,13 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +20,7 @@ import com.ycft.ycft.mapper.SlideMapper;
 import com.ycft.ycft.po.Dictionary;
 import com.ycft.ycft.po.Privilege;
 import com.ycft.ycft.po.Slide;
+import com.ycft.ycft.po.User;
 import com.ycft.ycft.system.Core;
 import com.ycft.ycft.system.Dict;
 
@@ -130,8 +131,8 @@ public class InitService extends HttpServlet{
 	 * @param response
 	 * @throws UnsupportedEncodingException
 	 */
-	public List<Privilege> cacheMenu(){
-		privilegeList = ps.testQueryMenuList();
+	public List<Privilege> cacheMenu(User user){
+		privilegeList = ps.testQueryMenuList(user);
 		return privilegeList;
 	}
 	
