@@ -1,9 +1,6 @@
-<%@page import="com.ycft.ycft.po.User"%>
-<%@page import="com.ycft.ycft.po.SignEvent"%>
 <%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="java.util.List"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
@@ -19,7 +16,6 @@
     <%
 	List<Privilege> privilegeList = Menu.pList;
 	%>
-	<%@taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,32 +45,24 @@
     <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
         <!-- Custom Js -->
     <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-        $('#dataTables-example').dataTable();
-    });
-    function changeId(){
-    	$("#signId").attr("action","<%=basePathNoBackStage %>selSignEvent.do");
-    	$("#signId").submit();
-    }
-    function exportSignInfo(){
-    	$("#signId").attr("action","<%=basePathNoBackStage %>exportSignInfo.do");
-    	$("#signId").submit();
-    }
-    </script>
-    <style type="text/css">
-    	.padding{
-			padding:15px;    	
-    	}
-    </style>
 <title>Insert title here</title>
+<script type="text/javascript">
+	function load(){
+		$("#button").modal();
+	}
+	function closeWindow(){
+		window.location.href = "selSignEvent.do";		
+	}
+</script>
 </head>
-<body>
+<body onload="load()">
 <%
-	List<User> uList = (List<User>)request.getAttribute("uList");
+	String result = (String)request.getAttribute("result");
+	int numerator = (Integer)request.getAttribute("numerator");
+	String name = (String)request.getAttribute("name");
 %>
 <div id="wrapper">
-<nav class="navbar navbar-default top-navbar" role="navigation">
+	<nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -163,13 +151,13 @@
                 <!-- /.dropdown -->
             </ul>
         </nav>
-  <nav class="navbar-default navbar-side" role="navigation">
+	 	<nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <%for(int i = 0;i<privilegeList.size();i++){
                     	%>
                     	<li id="<%=privilegeList.get(i).getId()%>">
-                        <a href="#"><%=privilegeList.get(i).getIcon()%><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-sitemap"></i><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                         <%for(int j = 0;j<privilegeList.get(i).getChildMenus().size();j++){
                         	%>
@@ -198,131 +186,59 @@
 			<div class="col-md-12">
 				<div class="panel panel-default">
 				    <div class="panel-heading">
-				         	签到事件
+				         	统计
 				    </div>
-				    <div class="panel-heading">
-					    <div class="row">
-					    	<div class="col-sm-1">
-					    		<button class="btn btn-success" data-toggle="modal" data-target="#sign">统计</button>
-					    	</div>
-					    	<div class="col-md-3">
-					    		<form id="signId" method="post">
-						    		<select name="uid" class="form-control" onchange="changeId()">
-						         		<c:forEach items="${eventList}" var="signEvent">
-						         			<option value="${signEvent.id}">${signEvent.name}</option>
-						         		</c:forEach>
-				         			</select>
-				         		</form>
-					    	</div>
-					    	<div class="col-sm-1">
-					    		<button class="btn btn-success" onclick="exportSignInfo()">导出</button>
-					    	</div>
-					    </div>
-					 </div>
-					 <!-- 统计的弹出层 -->
-					 <div class="modal fade" id="sign" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" data-backdrop="static">
-				    	<div class="modal-dialog modal-sm" role="document">  
+				    <div class="modal fade" id="button" tabindex="-1" role="dialog" aria-labelledby="myModelLabel" data-backdrop="static">
+				    	<div class="modal-dialog" role="document">  
 					        <div class="modal-content">  
 					            <div class="modal-header">  
 					                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 					                    <span aria-hidden="true" onclick="closeWindow()">×</span>  
 					                </button>  
-					                <h4 class="modal-title" id="myModalLabel">请选择条件</h4>  
-					            </div>
-					            <form action="signSel.do" method="post">  
-					            <div class="modal-body">
-						            	<input type="hidden" name="id" value="${eventList[0].id}"/> 
-						            	<input type="hidden" name="r3" value="${eventList[0].name}"/> 
-						            	<fieldset>
-						            		<div class="form-group padding">
-						            			<label class="col-sm-12 control-label">如果都不选则统计全部用户</label>
-						            		</div>
-						            		<div class="form-group padding">
-						            			<label class="col-sm-3 control-label">学院</label>
-						            			<div class="col-sm-9">
-						            				<ex:dict type="college" name="college" classname="form-control" defaultvalue=""/>
-						            			</div>
-						            		</div>
-						            		<div class="form-group padding">
-						            			<label class="col-sm-3 control-label">系</label>
-						            			<div class="col-sm-9">
-						            				<ex:dict type="department" name="department" classname="form-control" defaultvalue=""/>
-						            			</div>
-						            		</div>
-						            		<div class="form-group padding">
-						            			<label class="col-sm-3 control-label">专业</label>
-						            			<div class="col-sm-9">
-						            				<ex:dict type="profession" name="profession" classname="form-control" defaultvalue=""/>
-						            			</div>
-						            		</div>
-						            		<div class="form-group padding">
-						            			<label class="col-sm-3 control-label">班级</label>
-						            			<div class="col-sm-9">
-						            				<select name="cls" class="selectpicker show-tick form-control">
-						            					<option></option>
-						            					<%
-						            						for (int i = 0; i < uList.size(); i++) {
-						            					%>
-						            					<option><%=uList.get(i).getCls() %></option>
-						            					<%		
-						            						}
-						            					%>
-						            				</select>
-						            			</div>
-						            		</div>
-					                    </fieldset>
-				                     
+					                <h4 class="modal-title" id="myModalLabel">统计</h4>  
 					            </div>  
-					            <div class="modal-footer"> 
-					            	<input type="submit" class="btn btn-info" value="统计"/> 
+					            <div class="modal-body">  
+					            	<fieldset>
+				                       <div class="form-group">
+					                       <label class="col-sm-1 control-label" for="ds_name"><%=name %></label>
+		                       		   		<div class="col-sm-5">
+						                       <div class="panel panel-primary text-center no-boder blue">
+											       <div class="panel-right">
+													   <h3><%=numerator %></h3>
+											           <strong>签到人数</strong>
+											        </div>
+									    		</div>
+					    			   		</div>
+					    			   		<label class="col-sm-1 control-label" for="ds_name">出勤率</label>
+				                      		<div class="col-xs-6 col-sm-5">
+												<div class="panel panel-default">
+													<div class="panel-body easypiechart-panel">
+														<div class="easypiechart" id="easypiechart-orange" data-percent="<%=result %>" ><span class="percent"><%=result %>%</span>
+														</div>
+													</div>
+												</div>
+											</div>
+				                       </div>
+				                    </fieldset>
+					            </div>  
+					            <div class="modal-footer">  
 					                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeWindow()">关闭</button>  
-					            </div>
-					            </form>  
+					            </div>  
 					        </div>  
 					    </div>  
-		   	    	 </div>
-					 <div class="panel-body">
-					 	<div class="table-responsive">
-					 		<table class="table table-striped table-bordered table-hover" id="dataTables-example">
-					 			<thead>
-					 				<tr>
-					 					<th>学号</th>
-					 					<th>姓名</th>
-					 					<th>班级</th>
-					 					<th>学院</th>
-					 					<th>系</th>
-					 					<th>专业</th>
-					 				</tr>
-					 			</thead>
-					 			<tbody>
-					 				<c:forEach items="${sList.signList}" var="signLists">
-					 					<c:set value="${signLists.user}" var="user" />
-					 					<tr class="gradeA">
-					 							<td class="col-md-2">${user.sno}</td>
-					 							<td class="col-md-2">${user.sname}</td>
-					 							<td class="col-md-2">${user.cls}</td>
-					 							<td class="col-md-2">${user.college}</td>
-					 							<td class="col-md-2">${user.department}</td>
-					 							<td class="col-md-2">${user.profession}</td>
-				 						</tr>
-					 				</c:forEach>
-					 			</tbody>
-					 		</table>
-					 	</div>
-					 </div>
+		   	    	</div>
 		    	</div>
 			</div>
 		</div>
 	</div>
-</div>
 <!-- Morris Chart Js -->
-    <script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="<%=basePath%>assets/js/morris/morris.js"></script>
-	
-	<script src="<%=basePath%>assets/js/easypiechart.js"></script>
-	<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
-	
-	 <script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
+<script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="<%=basePath%>assets/js/morris/morris.js"></script>
+
+<script src="<%=basePath%>assets/js/easypiechart.js"></script>
+<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
+
+<script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	
 <script type="text/javascript">
 //监听被点击的一级菜单
@@ -341,5 +257,6 @@ $(function(){
       }
     });
     </script>
+</div>
 </body>
 </html>

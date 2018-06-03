@@ -361,4 +361,12 @@ public class UserSrv {
 		return rm.selByRname(role.getRname());
 	}
 	
+	/**
+	 * 查询都有什么班级
+	 * @author ZHENGBIN
+	 * @return List<User>
+	 */
+	public List<User> selCls(){
+		return um.selCls();
+	}
 }

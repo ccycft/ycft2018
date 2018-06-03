@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ycft.ycft.controller.foreground.IndexCtrl;
 import com.ycft.ycft.po.Praise;
 import com.ycft.ycft.services.foreground.PraiseSrv;
+import com.ycft.ycft.services.foreground.SignEventSrv;
 import com.ycft.ycft.services.foreground.TitleSrv;
 @Service
 public class TestTitleSrv  {
@@ -19,6 +20,7 @@ public class TestTitleSrv  {
 	    
 	    static  TitleSrv ts;
 	    static  PraiseSrv ps;
+	    static  SignEventSrv ss;
 	  @BeforeClass 
 	    public static void init() { 
 	        ApplicationContext 
@@ -26,10 +28,11 @@ public class TestTitleSrv  {
 	       // is = (IndexCtrl)context.getBean("indexCtrl"); 
 	        ts = (TitleSrv)context.getBean("titleSrv"); 
 	        ps = ( PraiseSrv)context.getBean("praiseSrv"); 
+	        ss = ( SignEventSrv)context.getBean("signEventSrv"); 
 	    }  
 	    @Test
 	    public void testPing() {
-	    	ts.joinActivity(10, 2);
+	    	ss.selSignEvent(1,4);
 	          //ts.index();
 	    /*	Praise p = new Praise();
 	    	p.setTid(1);

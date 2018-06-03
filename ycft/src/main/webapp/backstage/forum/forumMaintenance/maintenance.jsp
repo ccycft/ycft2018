@@ -271,7 +271,7 @@
                     <%for(int i = 0;i<privilegeList.size();i++){
                     	%>
                     	<li id="<%=privilegeList.get(i).getId()%>">
-                        <a href="#"><i class="fa fa-sitemap"></i><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
+                        <a href="#"><%=privilegeList.get(i).getIcon()%><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                         <%for(int j = 0;j<privilegeList.get(i).getChildMenus().size();j++){
                         	%>

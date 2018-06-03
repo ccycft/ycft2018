@@ -157,7 +157,7 @@
 				  	</a>	  
 			</div>
 			<div class="col-xs-2">
-					<a href="<%=basePath%>sign.jsp">
+					<a href="<%=basePath%>fore/signEvent/selSignEvent.do?nowPage=1">
 					    <img class="img-responsive btn-block" src="<%=basePath%>images/qiandao.png" alt="...">
 					  	<span class="btn-value">签到</span>	  
 				  	</a>

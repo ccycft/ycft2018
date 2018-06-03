@@ -33,5 +33,7 @@ public interface UserMapper {
     public int delRepeat();
     //查询导出某活动的学生信息
     List<User> selExport(int tid);
+    //查询出都有什么班级
+    List<User> selCls();
     /*===============服务端方法================*/
 }
