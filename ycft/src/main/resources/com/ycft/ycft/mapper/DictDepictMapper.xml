@@ -7,6 +7,27 @@
     <result column="dict_type_name" property="dictTypeName" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="DictDictionary" type="com.ycft.ycft.po.DictDepict">
+  	<id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+    <result column="dict_type_name" property="dictTypeName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  	<collection property="dList" ofType="com.ycft.ycft.po.Dictionary">
+  		<id column="did" property="id" jdbcType="INTEGER" />
+	    <result column="dict_type" property="dictType" jdbcType="VARCHAR" />
+	    <result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+	    <result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+	    <result column="sort" property="sort" jdbcType="INTEGER" />
+	    <result column="enabled" property="enabled" jdbcType="INTEGER" />
+  	</collection>
+  </resultMap>
+  <!-- 服务端方法开始 -->
+  	<select id="selDictDictionary" resultMap="DictDictionary">
+  		SELECT dict_depict.*,dictionary.id did,dictionary.dict_type,dictionary.dict_code,dictionary.dict_name,dictionary.sort,dictionary.enabled 
+  		FROM dict_depict,dictionary 
+  		WHERE dict_depict.dict_type = dictionary.dict_type
+  	</select>
+  <!-- 服务端方法结束 -->
   <sql id="Base_Column_List" >
     id, dict_type, dict_type_name, remark
   </sql>

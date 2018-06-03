@@ -1,5 +1,7 @@
 package com.ycft.ycft.po;
 
+import java.util.List;
+
 public class DictDepict {
     private Integer id;
 
@@ -8,8 +10,18 @@ public class DictDepict {
     private String dictTypeName;
 
     private String remark;
+    
+    private List<Dictionary> dList;
 
-    public Integer getId() {
+    public List<Dictionary> getdList() {
+		return dList;
+	}
+
+	public void setdList(List<Dictionary> dList) {
+		this.dList = dList;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -1,5 +1,7 @@
 package com.ycft.ycft.mapper;
 
+import java.util.List;
+
 import com.ycft.ycft.po.DictDepict;
 
 public interface DictDepictMapper {
@@ -14,4 +16,6 @@ public interface DictDepictMapper {
     int updateByPrimaryKeySelective(DictDepict record);
 
     int updateByPrimaryKey(DictDepict record);
+    
+    List<DictDepict> selDictDictionary();
 }
