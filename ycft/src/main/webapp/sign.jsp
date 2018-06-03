@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/sign.css">
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
+    <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<style>
@@ -45,9 +46,17 @@
 	
 	$(function() { 
 		$(".btn").click(function(){
-			//AJAX 签到
-			$(this).button('complete').addClass('btn-danger');
-			$(this).attr("disabled", true); 
+			$.ajax({
+  			  type: 'GET',
+  			  url: '<%=basePath%>selNavigationById.do?id='+mark,
+  			  async:false,
+  			  success:function(eve){
+  					$(this).button('complete').addClass('btn-danger');
+  					$(this).attr("disabled", true); 
+  			  },
+  			  dataType: 'json'
+  			});
+			
 		});
 	}); 
 	</script>

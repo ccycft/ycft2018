@@ -32,12 +32,17 @@
 		#activity_btn{
 			text-align:center;
 		}
-		.text-area{
+		
+		.context img{
+			
+			padding-top:0.5rem;
+			padding-bottom:1.5rem;
+		}
+		.context p{
 			
 			text-indent:2em;
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
-			/* -webkit-line-clamp: 7; */
 			overflow: hidden;
 			text-align:left;
 		
@@ -102,7 +107,7 @@
 		  			<div class="col-xs-12">
 						<ul class="none_style">
 							<li class=""><%=con.getName()%></li>
-						<!-- 	<li class="">活动地点： 经信九阶</li>
+						<!--<li class="">活动地点： 经信九阶</li>
 							<li class="">活动时间：2018.5.18</li>	
 							<li class="">活动主办方：吉林大学经管学院</li>	
 							<li class="">联系方式：到场报名即可</li>	
@@ -110,10 +115,8 @@
 						</ul>								
 					</div>
 				</div>
-				<div class="row">
+				<div class="row context">
 					<div class="col-xs-12">
-						
-						
 						<%=con.getText()%>
 						<!-- <p class="text-area">
 						现在的社会是一个高速发展的社会，科技发达，信息流通，人们之间的交流越来越密切，生活也越来越方便，大数据就是这个高科技时代的产物。 [11]  阿里巴巴创办人马云来台演讲中就提到，未来的时代将不是IT时代，而是DT的时代，DT就是Data Technology数据科技，显示大数据对于阿里巴巴集团来说举足轻重。 [12]
@@ -144,7 +147,9 @@
 						<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">点击报名</a>
 					
 					</div>
-				</div>		
+				</div>
+				
+				<hr>	
 			</div>
 			
 				<!-- 模态框（Modal） -->
@@ -226,8 +231,8 @@
 	</div>
 	<script>
 		//控制图片宽度
-		var width  = $(".col-xs-11").width();
-		$(".col-xs-11").find("img").width(width);
+		var width  = $(".col-xs-12").width();
+		$(".col-xs-12").find("img").width(width);
 	</script>
 	
 </body>

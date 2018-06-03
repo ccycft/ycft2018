@@ -78,7 +78,7 @@
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
 		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">校园导航</span>	
+		<span class="nav-title">签到详情</span>	
 		<img class="right-icon" src="./images/add.png">
 	</div>
 
