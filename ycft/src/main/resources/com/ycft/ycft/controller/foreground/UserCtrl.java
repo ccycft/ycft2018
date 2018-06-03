@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,32 @@ public class UserCtrl {
 		}
 	}
 	
+	@RequestMapping("select.do")
+	public ModelAndView login(HttpServletRequest rq) {
+		//是否登录成功
+		Cookie[] cookies = rq.getCookies();
+		int uid = 1;
+		try {
+			if(cookies != null && cookies.length > 0) {
+				for(Cookie cookie : cookies) {
+					if(cookie.getName().equals("uid")) {
+						uid = Integer.parseInt(cookie.getValue());
+					}
+				}
+			}
+			//查询用户信息
+		 	User u = us.selectById(uid);
+		 	ModelAndView mav = new ModelAndView();
+		 	mav.setViewName("personal.jsp");
+		 	mav.addObject("user" , u);
+		 	return mav;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace( );
+			return null;
+		}
+		 
+	}	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		 String a = URLEncoder.encode("邵帅", "UTF-8");
 		 System.out.println(a);

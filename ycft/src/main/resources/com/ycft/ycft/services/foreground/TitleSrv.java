@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ycft.ycft.mapper.TitleMapper;
+import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Title;
 
 @Service(value="titleSrv")
@@ -68,5 +69,11 @@ public class TitleSrv {
 	 */
 	public boolean selectIsJoin(Integer tid , Integer uid) {
 		return tm.selectActivityByTidUid(tid , uid) > 0 ? true : false;
+	}
+	
+	//²éÑ¯ÂÛÌ³
+	public List<Forum> selectForum(){
+		 
+		return tm.selectForum();
 	}
 }

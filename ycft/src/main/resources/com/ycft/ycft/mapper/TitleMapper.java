@@ -2,6 +2,7 @@ package com.ycft.ycft.mapper;
 
 import java.util.List;
 
+import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 
@@ -19,6 +20,8 @@ public interface TitleMapper {
 	public int insertActivity(Integer tid , Integer uid);
 	//根据uid和tid查询
 	public int selectActivityByTidUid(Integer tid , Integer uid);
+	//论坛查询
+	public List<Forum> selectForum();
 	/**
 	 * 客户端方法结束
 	 * */

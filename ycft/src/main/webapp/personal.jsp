@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.po.User"%>
 <%@page import="com.ycft.ycft.system.Core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -50,35 +51,43 @@
 <body>
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
 		<span class="nav-title">校园导航</span>	
-		<img class="right-icon" src="./images/add.png">
+		<img class="right-icon" src="<%=basePath%>images/add.png">
 	</div>
 	<div class="list-group" >
 		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive logo_icon" src="./images/wode.png">
-		    <span class="name_item">Jerry</span></a>
-		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="./images/huodong.png">
-		    <span class="a_item">我的活动 </span></a>
-		  <a href="<%=basePath%>signDetails.jsp" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/qiandao.png">	
-		  	<span class="a_item">我的签到</span></a>
-		  <a href="#" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/fabu.png">
-		  	<span class="a_item">我的发布</span></a>
-		  <a href="#" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/jiaowurukou.png">
-		  	<span class="a_item">教务信息</span></a>
-		  <a href="#" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/jianyi.png">
-		  	<span class="a_item">我的建议</span></a>
-		  <a href="#" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/guanyu.png">
-		  	<span class="a_item">关于我们</span></a>
-		  <a href="#" class="list-group-item ">
-		  	<img class="img-responsive icon" src="./images/banben.png">
-		  	<span class="a_item">当前版本</span></a>
+		  <%
+		  	User u = (User)request.getAttribute("user");
+			if(u != null){
+		  %>
+		  		
+		  		<img class="img-responsive logo_icon" src="<%=photoPath+"icon/" + u.getImgName()%>">
+				    <span class="name_item">Jerry</span></a>
+				  <a  href="#" class="list-group-item ">
+				   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
+				    <span class="a_item">我的活动 </span></a>
+				  <a href="<%=basePath%>signDetails.jsp" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/qiandao.png">	
+				  	<span class="a_item">我的签到</span></a>
+				  <a href="#" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/fabu.png">
+				  	<span class="a_item">我的发布</span></a>
+				  <a href="#" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/jiaowurukou.png">
+				  	<span class="a_item">教务信息</span></a>
+				  <a href="#" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/jianyi.png">
+				  	<span class="a_item">我的建议</span></a>
+				  <a href="#" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/guanyu.png">
+				  	<span class="a_item">关于我们</span></a>
+				  <a href="#" class="list-group-item ">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/banben.png">
+				  	<span class="a_item">当前版本</span></a>
+		  <%	  
+			}
+		  %>
 	</div>
 </body>
 </html>

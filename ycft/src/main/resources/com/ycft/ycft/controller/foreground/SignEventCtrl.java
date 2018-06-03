@@ -26,6 +26,9 @@ public class SignEventCtrl {
 			//如果前端未指定查询几条数据  那后台指定为4条
 			pageSize = 4;
 		}
+		if(nowPage == null || nowPage <= 0) {
+			nowPage = 1;
+		}
 		List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sList", slist ); 

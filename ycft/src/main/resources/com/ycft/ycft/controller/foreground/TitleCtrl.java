@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ycft.ycft.mapper.TitleMapper;
+import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.foreground.TitleSrv;
@@ -145,5 +146,21 @@ public class TitleCtrl {
 			out.close();
 		}
 		
+	}
+	
+	//查询论坛
+	public ModelAndView selectForum(Integer nowPage , Integer pageSize) {
+		if(pageSize == null || pageSize == 0) {
+			//如果前端未指定查询几条数据  那后台指定为4条
+			pageSize = 4;
+		}
+		if(nowPage == null || nowPage <= 0) {
+			nowPage = 1;
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("论坛.jsp");
+		List<Forum> fList = ts.selectForum();
+		mav.addObject("sList",fList);
+		return mav;
 	}
 }

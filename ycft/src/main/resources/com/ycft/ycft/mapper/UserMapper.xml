@@ -14,6 +14,7 @@
     <result column="profession" property="profession" jdbcType="VARCHAR" />
     <result column="cls" property="cls" jdbcType="VARCHAR" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="LONGVARBINARY" />
     <result column="status" property="status" jdbcType="CHAR" />
     <result column="r1" property="r1" jdbcType="VARCHAR" />
     <result column="r2" property="r2" jdbcType="VARCHAR" />
@@ -23,7 +24,7 @@
     <result column="img" property="img" jdbcType="LONGVARBINARY" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, sno, psd, sname, tel, school, college, department, profession, cls, img_name, 
+    id, sno, psd, sname, tel, school, college, department, profession, cls, img ,img_name, 
     status, r1, r2, r3
   </sql>
   <sql id="Blob_Column_List" >

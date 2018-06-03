@@ -52,6 +52,25 @@
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
     <result column="cnt" property="cnt" jdbcType="INTEGER" />
   </resultMap>
+  <!-- 论坛查询返回Map -->
+  <resultMap id="ForumResultMap" type="com.ycft.ycft.po.Forum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" /> 
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" /> 
+    <!-- 评论数 -->
+    <result column="cmtcnts" property="cmtcnts" jdbcType="INTEGER"/>
+    <!-- 用户ID -->
+    <result column="userid" property="userId" jdbcType="INTEGER"/>
+    <!-- 用户名 -->
+    <result column="username" property="userName" jdbcType="VARCHAR"/>
+    <!-- 用户头像 -->
+    <result column="userimg" property="userImg" jdbcType="LONGVARBINARY"/>
+    <!-- 用户头像名 -->
+    <result column="userimgname" property="userImgName" jdbcType="VARCHAR"/>
+  </resultMap>
   <!--  [查询文章]根据点赞数数量排序-->
   <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>
@@ -75,6 +94,23 @@
   <!-- 查询用户是否参加过活动 -->
   <select id="selectActivityByTidUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
       select count(*) from activity where tid = #{0} and uid = #{1}
+  </select>
+  <!-- 论坛查询 -->
+  <select id="selectForum" resultMap="ForumResultMap">
+      <!-- 评论数  -->
+      SELECT COUNT(comment.uid) cmtcnts,title.*,
+      <!-- 用户姓名和头像信息 -->
+      user.id userid , user.sname username,user.img userimg,user.img_name userimgname
+      <!-- 评论表 文章表  用户表 -->
+      FROM COMMENT ,title,USER  
+      WHERE title.id = comment.tid 
+      AND title.uid = user.id  
+      <!-- 4代表是论坛文章 -->
+      AND title.type = 4 
+      <!-- 根据id分组 再根据时间降序 -->
+      GROUP BY comment.tid 
+      ORDER BY title.time DESC
+      
   </select>
   <!-- 客户端方法 结束 -->
   
