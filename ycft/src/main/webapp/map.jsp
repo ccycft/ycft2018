@@ -118,7 +118,16 @@
 		   
 	   }
 	   
-	   
+	   function back(){ 
+			
+			if(typeof(window.ceshi) != 'undefined'){
+				//说明 可以调用安卓的返回功能
+				window.ceshi.back(); 
+			}else{
+				window.history.back();
+			}
+			
+		}
 	</script>
 	
 	<style>
@@ -151,7 +160,7 @@
 	
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
+		<img class="left-icon"  src="./images/back.png" onClick="back()">	
 		<span class="nav-title">校园导航</span>	
 		<img class="right-icon" src="./images/location.png" onClick="getGeolocation()">
 	</div>

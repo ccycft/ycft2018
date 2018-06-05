@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.sun.tools.internal.xjc.runtime.ZeroOneBooleanAdapter;
 import com.ycft.ycft.mapper.DictDepictMapper;
 import com.ycft.ycft.mapper.DictionaryMapper;
 import com.ycft.ycft.po.DictDepict;

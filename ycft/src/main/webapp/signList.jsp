@@ -51,10 +51,7 @@
     		margin-top:1.5rem;
     		
     	}
-    	.img{
     	
-    		height:
-    	}
     	.list-group{
     	
     		 margin-top:5rem; 

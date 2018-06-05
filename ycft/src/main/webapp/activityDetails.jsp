@@ -85,12 +85,22 @@
 				$("#close").click();
 			});
 		});
+		function back(){ 
+			
+			if(typeof(window.ceshi) != 'undefined'){
+				//说明 可以调用安卓的返回功能
+				window.ceshi.back(); 
+			}else{
+				window.history.back();
+			}
+			
+		}
 	</script>
 </head>
 <body>
 		<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 		<span class="nav-title">活动详情</span>	
 		<img class="right-icon" src="<%=basePath%>images/backhome.png">
 	</div>

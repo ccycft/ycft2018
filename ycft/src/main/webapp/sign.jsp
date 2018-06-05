@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/sign.css">
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
-    <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<style>
@@ -80,6 +79,16 @@
 			
 		});
 	}); 
+	function back(){ 
+		
+		if(typeof(window.ceshi) != 'undefined'){
+			//说明 可以调用安卓的返回功能
+			window.ceshi.back(); 
+		}else{
+			window.history.back();
+		}
+		
+	}
 	</script>
 	
 </head>
@@ -88,7 +97,7 @@
 	<div class="container-fluid">
 			<!-- 页面顶端导航栏 -->
 		<div class="nav-area">
-			<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+			<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="back()">	
 			<span class="nav-title">签到 | 考勤</span>	
 			<img class="right-icon" src="<%=basePath%>images/backhome.png">
 		</div>
