@@ -79,6 +79,16 @@
 			}
 			
 		});
+		
+		
+		$(".thumbnail").click(function(){
+			
+			//去controller判断此用户是否已签！
+			
+			
+		});
+		
+		
 	}); 
 	</script>
 	
@@ -125,7 +135,7 @@
 				
 				<div id="sign_div" class="row">
 					<div class="col-xs-12">
-							<div class="thumbnail">
+							<div class="thumbnail" >
 								<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">
 								<h4 id="course_title" > <%=sign.getName()%>  </h4>
 								<div class="row">
@@ -139,7 +149,7 @@
 									<div id="" class="col-xs-4 sign_btn">
 										<a  class="btn btn-info btn-lg"
 										data-complete-text="已签到"
-										>签到</a> 
+										>正在签到</a> 
 									</div>
 								</div>
 							</div>

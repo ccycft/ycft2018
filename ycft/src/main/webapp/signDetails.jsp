@@ -27,6 +27,10 @@
 		
 			height:1rem;
 		}
+		.a_item{
+    	
+    		margin-left:1rem;
+    	}
 		.sign_btn{
 		
 			margin-top:1.5rem;
@@ -39,6 +43,11 @@
 			padding-left:2rem;
 			line-height:2.5rem;
 		}
+		.icon{
+    		display:inline;
+    		width:2.5rem;
+    		height:100%;
+    	}
 	</style>
 </head>
 <body>
@@ -59,13 +68,18 @@
 									<div class="col-xs-8">
 										<ul class="none_style">
 											<li class="">签到时间： 123123 </li>
-											<li class=""> 主 办 方： 1231231</li>
 											<li class="">签到地点：1231231 </li>
 											<li><a  class="btn btn-info btn-lg"
 													data-complete-text="已签到"
 												>签到</a> 
 											</li>
 										</ul>
+									</div>
+									<div class="list-group" >
+									  <a  href="#" class="list-group-item pull-left ">
+									   	<img class="img-responsive icon" src="./images/tongzhi.png">
+									    <span class="a_item">正在签到 </span>
+									  </a>
 									</div>
 									<div id="" class="col-xs-4 sign_btn">
 										
