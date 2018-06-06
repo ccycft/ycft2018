@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.ycft.ycft.po.SignEvent"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ycft.ycft.system.Core"%>
@@ -46,38 +49,13 @@
 	
 	<script>
 	
-	$(function() { 
-		$(".btn").click(function(){
-			$.ajax({
-  			  type: 'GET',
-  			  url: '<%=basePath%>selNavigationById.do?id='+mark,
-  			  async:false,
-  			  success:function(eve){
-  					$(this).button('complete').addClass('btn-danger');
-  					$(this).attr("disabled", true); 
-  			  },
-  			  dataType: 'json'
-  			});
-			//AJAX 签到 邵帅来写！
-			var sid = $("#sid").val();
-			var uid = $("#uid").val();
-			
-			if(uid != ''){
-				htmlobj=$.ajax({url: "<%=basePath%>fore/signEvent/sign.do?sid="+sid+"&uid="+uid,async:false});
-	  			var rtn = (htmlobj.responseText);
-	  			if(rtn == 1){
-	  				$(this).button('complete').addClass('btn-danger');
-					$(this).attr("disabled", true); 
-	  			}else{
-	  				alert("签到失败...");
-	  			}
-				
-			}else{
-				alert("用户信息未找到，请重新登录后尝试...");
-			}
-			
-		});
-	}); 
+	
+	
+	function details(div){
+		$(div).find("form").submit();
+	
+	}
+	 
 	function back(){ 
 		
 		if(typeof(window.ceshi) != 'undefined'){
@@ -131,7 +109,17 @@
 						
 		%>
 				
-				<div id="sign_div" class="row">
+				<div id="sign_div" class="row" onclick="details(this)">
+					<form action="<%=basePath%>fore/signEvent/selDetail.do" method="post" >
+						<input type="hidden" value="<%=sign.getId()%>" name="id" />
+						<input type="hidden" value="<%=sign.getName() %>" name="name" />
+						<input type="hidden" value="<%=sign.getTime() %>" name="time" />
+						<input type="hidden" value="<%=sign.getDeadLine() %>" name="deadLine" />
+						<input type="hidden" value="<%=sign.getSname() %>" name="sname" />
+						<input type="hidden" value="<%=sign.getCoordinate() %>" name="coordinate" />
+						<input type="hidden" value="<%=sign.getCoordinateName()%>"  name="coordinateName" />
+						<input type="hidden" value="<%=uid%>"  name="userid" />
+					</form>
 					<div class="col-xs-12">
 							<div class="thumbnail">
 								<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">
@@ -140,15 +128,54 @@
 									<div class="col-xs-8">
 										<ul class="none_style">
 											<li class="">签到时间： <%=sign.getTime() %> </li>
+											<li class="">截止时间： <%=sign.getDeadLine() %> </li>
 											<li class=""> 主 办 方： <%=sign.getSname() %></li>
 											<li class="">签到地点：<%=sign.getCoordinateName()%> </li>
 										</ul>
 									</div>
-									<div id="" class="col-xs-4 sign_btn">
-										<a  class="btn btn-info btn-lg"
-										data-complete-text="已签到"
-										>签到</a> 
-									</div>
+									
+									<%
+									  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+									  Date now = new Date();
+									  String dete = sdf.format(now);
+									  now = sdf.parse(dete);
+									  long time = now.getTime();
+									  Date et=sdf.parse(sign.getDeadLine()); 
+									  long hh =  et.getTime();
+									  Date startDate =sdf.parse(sign.getTime()); 
+									  long start = startDate.getTime();
+									  //现在的时间必须要比 截止时间小 并且大等于开始时间
+									  boolean b = time - hh <= 0 && time - start >= 0;
+									  if(b){
+								    	  //则现在的时间还早于截止时间   即为正在签到
+								    %>
+								    	<div id="" class="col-xs-4 sign_btn">
+											<a  class="btn btn-info btn-lg"
+											data-complete-text="签到中"
+											>签到中</a> 
+										</div>
+								    <%
+								      }else{
+								    	  if(time - start < 0){
+								    %>
+								    		<div id="" class="col-xs-4 sign_btn">
+												<a  class="btn btn-info btn-lg btn-danger" 
+												data-complete-text="未开始"
+												>未开始</a> 
+											</div>	
+								    <% 
+								    	  }else{
+								    %>
+								    	<div id="" class="col-xs-4 sign_btn">
+											<a  class="btn btn-info btn-lg btn-danger" 
+											data-complete-text="已结束"
+											>已结束</a> 
+										</div>	  
+								    <%
+								    	  }
+								      }
+									%>
+									 
 								</div>
 							</div>
 					</div>
