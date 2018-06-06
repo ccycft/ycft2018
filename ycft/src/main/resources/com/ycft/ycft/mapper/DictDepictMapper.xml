@@ -25,7 +25,12 @@
   	<select id="selDictDictionary" resultMap="DictDictionary">
   		SELECT dict_depict.*,dictionary.id did,dictionary.dict_type,dictionary.dict_code,dictionary.dict_name,dictionary.sort,dictionary.enabled 
   		FROM dict_depict,dictionary 
-  		WHERE dict_depict.dict_type = dictionary.dict_type
+  		WHERE dict_depict.dict_type = dictionary.dict_type ORDER BY did asc
+  	</select>
+  	<select id="selectByDictType" resultMap="BaseResultMap" parameterType="java.lang.String">
+  		select * 
+  		from dict_depict 
+  		where dict_type = #{1}
   	</select>
   <!-- 服务端方法结束 -->
   <sql id="Base_Column_List" >
