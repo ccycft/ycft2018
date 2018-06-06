@@ -23,31 +23,29 @@
 	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
 <title></title>
 <style>
-		#sign_div{
+		.img-rounded{
 		
-			height:1rem;
+			width:100%;
 		}
-		.a_item{
-    	
-    		margin-left:1rem;
+		.row{
+			line-height:4rem;
+			margin-top:1rem;
+		}
+		.icon_area{
+		
+    		border-top:1px solid #ccc;
+    		border-bottom:1px solid #ccc;
     	}
-		.sign_btn{
-		
-			margin-top:1.5rem;
-		}
-		#course_title{
-			margin-left:1.5rem;
-		}
-		.none_style{
-			list-style-type:none;
-			padding-left:2rem;
-			line-height:2.5rem;
-		}
-		.icon{
+    	.icon{
     		display:inline;
     		width:2.5rem;
     		height:100%;
     	}
+    	.a_item{
+    	
+    		margin-left:2rem;
+    	}
+		
 	</style>
 </head>
 <body>
@@ -56,39 +54,43 @@
 		<div class="nav-area">
 			<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
 			<span class="nav-title">签到 | 考勤</span>	
-			<img class="right-icon" src="<%=basePath%>images/backhome.png">
+			<img class="right-icon" src="<%=basePath%>images/location.png">
 		</div>
 		
 		<div id="sign_div" class="row">
-					<div class="col-xs-12">
-							<div class="thumbnail">
-								<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">
-								<h4 id="course_title" > 1231231 </h4>
-								<div class="row">
-									<div class="col-xs-8">
-										<ul class="none_style">
-											<li class="">签到时间： 123123 </li>
-											<li class="">签到地点：1231231 </li>
-											<li><a  class="btn btn-info btn-lg"
-													data-complete-text="已签到"
-												>签到</a> 
-											</li>
-										</ul>
-									</div>
-									<div class="list-group" >
-									  <a  href="#" class="list-group-item pull-left ">
-									   	<img class="img-responsive icon" src="./images/tongzhi.png">
-									    <span class="a_item">正在签到 </span>
-									  </a>
-									</div>
-									<div id="" class="col-xs-4 sign_btn">
-										
-									</div>
-								</div>
-							</div>
-					</div>
-				</div>
+			<div class="col-xs-12">
+				<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">	
+			</div>
+		</div>
 		
+		<div class="row">
+			<div class="col-xs-12">
+				<h4>签到标题:</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<span>签到时间:</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<span>签到地点:</span>
+			</div>
+		</div>
+		
+		<div class="row icon_area" >
+			<div class="col-xs-12">
+				<img class="img-responsive icon" src="./images/tongzhi.png">
+				<span class="a_item" style="font-size:1.5rem;font-weight:bold;">正在签到 ···</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 text-center" style="margin-top:3rem;">
+				<a class="btn btn-info"> 点击签到 </a>
+			</div>
+		</div>
 	</div>
 
 </body>
