@@ -188,7 +188,7 @@
                   }
                   document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
                },0)
-    		}
+    		};
     	}
    </script>
 <title>Insert title here</title>
