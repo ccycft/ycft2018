@@ -74,7 +74,15 @@ public class TitleCtrl {
 		mav.setViewName("articleDetails.jsp");
 		return mav;
 	}
-	
+	//查询通知详情
+	@RequestMapping("informDetail.do")
+	public ModelAndView informDetail(Integer id) {
+		TitleContent con = tm.selAllByTypeAndId(2, id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("titleContent" , con);
+		mav.setViewName("informDetails.jsp");
+		return mav;
+	}
 	/**
 	 * 查询活动详情
 	 * @param id 活动id

@@ -64,9 +64,24 @@
 			
 		    if(/* dis <= 500 */true){
 		    	//ajax后台    sign	event  code
-		    	alert("签到成功！！");
-		    	//签到变样式
-		    	$('#sign_btn').text("已签到").addClass('btn-danger').attr("disabled", true);
+		    	
+		    	var sid = $("#sid").val();
+				var uid = $("#uid").val();
+				if(uid != ''){
+					htmlobj=$.ajax({url: "<%=basePath%>fore/signEvent/sign.do?sid="+sid+"&uid="+uid,async:false});
+		  			var rtn = (htmlobj.responseText);
+		  			if(rtn == 1){
+		  				alert("签到成功！！");
+		  				//签到变样式
+				    	$('#sign_btn').text("已签到").addClass('btn-danger').attr("disabled", true);
+		  			}else{
+		  				alert("签到失败...");
+		  			}
+					
+				}else{
+					alert("用户信息未找到，请重新登录后尝试...");
+				}
+		    	
 		    }else{
 		    	alert("太远啦~");
 		    }
@@ -90,24 +105,7 @@
 
 		
 		
-		function qiandao(){
-				 
-				//AJAX 签到 邵帅来写！
-				var sid = $("#sid").val();
-				var uid = $("#uid").val();
-				if(uid != ''){
-					htmlobj=$.ajax({url: "<%=basePath%>fore/signEvent/sign.do?sid="+sid+"&uid="+uid,async:false});
-		  			var rtn = (htmlobj.responseText);
-		  			if(rtn == 1){
-		  				alert("正要签到...");
-		  			}else{
-		  				alert("签到失败...");
-		  			}
-					
-				}else{
-					alert("用户信息未找到，请重新登录后尝试...");
-				}
-		}
+		 
 		
 		function back(){ 
 			
@@ -249,31 +247,25 @@
 		<div class="row">
 		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
 			<%
-				//用户没签到 过  并且  签到时间未过
-				if(canSign && b){
+				//用户没签到 过  并且  签到时间未过   
+				if(canSign && b ){
 			%>	
 					 
-							<a class="btn btn-info" onclick="qiandao()"> 点击签到 </a> 
+							<a class="btn btn-info" onclick="getGeolocation()"> 点击签到 </a> 
 			<%
 				}else{
 					if(!b){
 			%>
 			<%
-					}else{
+					}else{ 
 			%> 
-							<a class="btn btn-info" onclick="return false;"> 您已经签到过了 </a>
+							<a disabled="disabled" class="btn btn-info btn-danger" onclick="return false;"> 您已经签到过了 </a>
 			<%		
 					}
 				}
 			%>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 text-center" style="margin-top:3rem;">
-				<a class="btn btn-info" id="sign_btn" onClick="getGeolocation()"> 点击签到  </a>
-			</div>
-		</div>
+		</div> 
 	</div>
-
 </body>
 </html>
