@@ -25,6 +25,7 @@ public interface SignEventMapper {
    //前台查询签到事件
    List<SignEvent> foreSelSignevent(int start , int size);
    int insertSign(Integer sid , Integer uid);
+   int selSignByUidAndSid(Integer uid , Integer sid);
    
    //查出该签到课程的人数
    int conditionSel(User user);

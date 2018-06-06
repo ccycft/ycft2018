@@ -64,6 +64,10 @@
       SELECT sign_event.*,user.sname FROM sign_event , USER WHERE user.id = sign_event.uid
       order by time desc limit #{0} , #{1}
   </select>
+  <!-- 查询该人是不是可以签到 -->
+  <select id="selSignByUidAndSid" resultType="int" parameterType="java.lang.Integer" >
+  	  select count(id) from sign where uid = #{0} and sid = #{1}
+  </select>
   <!-- 前台点击签到 -->
   <insert id="insertSign" parameterType="java.lang.Integer">
       insert into sign(sid,uid) values(#{0} #{1} )

@@ -1,3 +1,6 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.ycft.ycft.po.SignEvent"%>
 <%@page import="com.ycft.ycft.system.Core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -23,6 +26,7 @@
 	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
 <title></title>
 <script>
+
 		$(function(){
 			
 			var map, geolocation;
@@ -59,6 +63,39 @@
 			    }
 			});
 		});	
+		
+		
+		function qiandao(){
+				 
+				//AJAX 签到 邵帅来写！
+				var sid = $("#sid").val();
+				var uid = $("#uid").val();
+				if(uid != ''){
+					htmlobj=$.ajax({url: "<%=basePath%>fore/signEvent/sign.do?sid="+sid+"&uid="+uid,async:false});
+		  			var rtn = (htmlobj.responseText);
+		  			if(rtn == 1){
+		  				alert("正要签到...");
+		  			}else{
+		  				alert("签到失败...");
+		  			}
+					
+				}else{
+					alert("用户信息未找到，请重新登录后尝试...");
+				}
+				
+			
+		}
+		
+		function back(){ 
+			
+			if(typeof(window.ceshi) != 'undefined'){
+				//说明 可以调用安卓的返回功能
+				window.ceshi.back(); 
+			}else{
+				window.history.back();
+			}
+			
+		}
 	</script>
 <style>
 		.img-rounded{
@@ -90,8 +127,27 @@
 <body>
 	<div class="container-fluid">
 			<!-- 页面顶端导航栏 -->
+		<%
+			SignEvent sign = (SignEvent)request.getAttribute("signEvent");
+			//是否能签到
+			boolean canSign = (Boolean)request.getAttribute("canSign");
+			String uid = "";
+			//获取cookie找到用户信息
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null){ 
+				for(Cookie cookie : cookies){ 
+					 //用户id
+					 if(cookie.getName().equals("uid")){
+						 uid = cookie.getValue();
+					 }
+				 }
+			}
+		%>
+		<!-- uid和sid -->
+		<input type="hidden" value="<%=uid%>" id="uid" />
+		<input type="hidden" value="<%=sign.getId()%>" id="sid"  />
 		<div class="nav-area">
-			<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
+			<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 			<span class="nav-title">签到 | 考勤</span>	
 			<img class="right-icon" src="<%=basePath%>images/location.png">
 		</div>
@@ -104,32 +160,86 @@
 		
 		<div class="row">
 			<div class="col-xs-12">
-				<h4>签到标题:</h4>
+				<h4>签到标题:<%=sign.getName() %></h4>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<span>签到时间:</span>
+				<h4>主办单位:<%=sign.getSname() %></h4>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<span>签到地点:</span>
+				<span>签到时间:<%=sign.getTime() %></span>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<span>截止时间:<%=sign.getDeadLine()%></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<span>签到地点:<%=sign.getCoordinateName() %></span>
+			</div>
+		</div>
+		 
+				<%-- <span>签到坐标:<%=sign.getCoordinate() %></span> --%>
+		 
 		
 		<div class="row icon_area" >
 			<div class="col-xs-12">
-				<img class="img-responsive icon" src="./images/tongzhi.png">
-				<span class="a_item" style="font-size:1.5rem;font-weight:bold;">正在签到 ···</span>
+				<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
+				<%
+				  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				  Date now = new Date();
+				  String dete = sdf.format(now);
+				  now = sdf.parse(dete);
+				  long time = now.getTime();
+				  Date et=sdf.parse(sign.getDeadLine()); 
+				  Date startDate =sdf.parse(sign.getTime()); 
+				  long hh =  et.getTime();
+				  long start = startDate.getTime();
+				  //现在的时间必须要比 截止时间小
+				  boolean b = time - hh <= 0 && time - start >= 0;
+				  //时间是否能够签到
+				  if(b){
+			    	  //则现在的时间还早于截止时间   即为正在签到
+			    %>
+			    		<span class="a_item" style="font-size:1.5rem;font-weight:bold;">正在签到 ···</span>
+			    <%
+			      }else{
+			    %>
+			    	<span class="a_item" style="font-size:1.5rem;font-weight:bold;">签到未开始或已结束,请留意时间 ···</span>
+			    <%
+			      }
+				%> 
+				
+			</div>
+		</div>
+		<div class="row">
+		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
+			<%
+				//用户没签到 过  并且  签到时间未过
+				if(canSign && b){
+			%>	
+					 
+							<a class="btn btn-info" onclick="qiandao()"> 点击签到 </a> 
+			<%
+				}else{
+					if(!b){
+			%>
+			<%
+					}else{
+			%> 
+							<a class="btn btn-info" onclick="return false;"> 您已经签到过了 </a>
+			<%		
+					}
+				}
+			%>
 			</div>
 		</div>
 		
-		<div class="row">
-			<div class="col-xs-12 text-center" style="margin-top:3rem;">
-				<a class="btn btn-info"> 点击签到 </a>
-			</div>
-		</div>
 	</div>
 
 </body>

@@ -33,4 +33,10 @@ public class SignEventSrv {
 		int i = sem.insertSign(sid , uid);
 		return i > 0 ? true : false;
 	}
+	
+	
+	public boolean selSignByUidAndSid(Integer uid , Integer sid) {
+		//返回true  代表用户已经签到了  无法再次签到
+		return sem.selSignByUidAndSid(uid , sid) > 0 ? true : false;
+	}
 }
