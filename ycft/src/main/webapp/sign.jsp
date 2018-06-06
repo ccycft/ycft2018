@@ -22,7 +22,6 @@
 <title>签到</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>css/sign.css">
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
