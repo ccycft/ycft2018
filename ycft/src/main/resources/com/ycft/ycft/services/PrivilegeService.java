@@ -26,10 +26,6 @@ public class PrivilegeService {
 	    // 原始的数据
 	    List<Privilege> rootMenu = pm.queryMenuList(user);
 	    
-	    // 查看结果
-	    for (Privilege menu : rootMenu) {
-	        System.out.println(menu);
-	    }
 	    // 最后的结果
 	    List<Privilege> menuList = new ArrayList<Privilege>();
 	    // 先找到所有的一级菜单
