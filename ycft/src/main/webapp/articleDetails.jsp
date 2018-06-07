@@ -38,7 +38,6 @@
 			/* -webkit-line-clamp: 7; */
 			overflow: hidden;
 			text-align:left;
-		
 		}
 		.none_style{
 			list-style-type:none;
