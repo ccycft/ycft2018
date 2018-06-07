@@ -60,31 +60,22 @@ public class ArticleCtrl {
 		
 	}
 	/**
-	 * 文章的删除通过id删除标题表的文章，使用了触发器删除对应的内容，ajax
+	 * 文章的删除通过id删除标题表的文章，使用了触发器删除对应的内容
 	 * @author 马荣福
-	 * @param response
 	 * @param request
 	 * @param id 标题的id
 	 */
 	@RequestMapping("/articleDel.do")
-	public void del(HttpServletResponse response,HttpServletRequest request,int id) {
-		
-		PrintWriter writer = null;
-		try {
-			writer = response.getWriter();
-			boolean flag = articleSrv.del(id);
-			//向前台返回信息
-			if (flag) {
-				writer.println("1");
-			} else {
-				writer.print("0");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			writer.flush();
-			writer.close();
+	public ModelAndView del(HttpServletRequest request,int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		boolean flag = articleSrv.del(id);
+		if (flag) {
+			modelAndView.setViewName("selArticle.do");
+		} else {
+			modelAndView.setViewName("fail.jsp");
 		}
+			//向前台返回信息
+		return modelAndView;
 	}
 	/**
 	 * 点修改带id进来查询出数据到修改界面

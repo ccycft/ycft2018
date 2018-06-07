@@ -52,12 +52,9 @@
 	<script src="<%=basePath%>assets/js/easypiechart.js"></script>
 	<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
 	<script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
-        <style>
-    	.padding{
-    		
-    		padding:15px;
-    	}
-    </style>
+	 <script src="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.js"></script>
+<link href="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.css" rel="stylesheet"/>
+	
     <script type="text/javascript">
 	function getRootPath(){
 		var curWwwPath=window.document.location.href;
@@ -125,6 +122,64 @@
    	$(document).ready(function(){
 		loadMenu();
    	});
+    </script>
+    <script type="text/javascript">
+    $(function () {
+        $('#addOneUser').bootstrapValidator({
+            fields: {
+            	sname: {
+                	message: '姓名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '姓名不能为空'
+                        },
+                        stringLength: {
+                        	min: 1,
+                        	max: 10,
+                        	message: '姓名长度必须在1到10位之间'
+                        }
+                    }
+                },
+                sno: {
+                    message: '学号验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '学号不能为空'
+                        },
+                        regexp: {
+                        	regexp: /^[0-9]+$/,
+                        	message: '学号只能为数字'
+                        }
+                    }
+                },
+                tel: {
+                    message: '电话验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '电话不能为空'
+                        },
+                        stringLength: {
+                        	min: 11,
+                        	max: 11,
+                        	message: '请输入11位手机号'
+                        },
+                        digits: {
+                        	message: '电话只能为数字'
+                        }
+                    }
+                },
+                psd: {
+                	message: '密码验证失败',
+                	validators: {
+                		regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '密码只能由字母，数字，圆点和下划线组成'
+                        }
+                	}
+                }
+            }
+        });
+    });
     </script>
 </head>
 <body>
@@ -270,57 +325,75 @@
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
 		                    <span aria-hidden="true">×</span>  
 		                </button>  
-		                <h4 class="modal-title" id="myModalLabel">用户信息详情</h4>  
+		                <h4 class="modal-title" id="myModalLabel">用户信息添加</h4>  
 		            </div>    
-		             <form action="<%=basePathNoBackStage%>addOneUser.do" method="post">
+		             <form action="<%=basePathNoBackStage%>addOneUser.do" method="post" id="addOneUser">
 		            <div class="modal-body">  
 		            	<fieldset>
-                    <div class="form-group padding">
-                        <label class="col-sm-2 control-label" for="ds_host">姓名</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="sname" type="text" name="sname"/>
-                        </div>
-                        <label class="col-sm-2 control-label" for="ds_name">学号</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="sno" type="text" name="sno"/>
-                        </div>
-                     </div>
-                     <div class="form-group padding">
-                        <label class="col-sm-2 control-label" for="ds_host">密码</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="psd" type="text" name="psd"/>
-                        </div>
-                        <label class="col-sm-2 control-label" for="ds_name">电话</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="tel" type="text" name="tel"/>
-                        </div>
-                     </div>
-                     <div class="form-group padding">
-                        <label class="col-sm-2 control-label" for="ds_host">校区</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="school" type="text" name="school"/>
-                        </div>
-                        <label class="col-sm-2 control-label" for="ds_name">学院</label>
-                        <div class="col-sm-4">
-                           <ex:dict type="college"  name="college" classname="form-control" />
-                        </div>
-                     </div>
-                     <div class="form-group padding">
-                        <label class="col-sm-2 control-label" for="ds_host">系</label>
-                        <div class="col-sm-4">
-                           <ex:dict type="department"  name="department" classname="form-control" />
-                        </div>
-                        <label class="col-sm-2 control-label" for="ds_name">专业</label>
-                        <div class="col-sm-4">
-                           <ex:dict type="profession"  name="profession" classname="form-control" />
-                        </div>
-                     </div>
-                    <div class="form-group padding">
-                        <label class="col-sm-2 control-label" for="ds_host">班级</label>
-                        <div class="col-sm-4">
-                           <input class="form-control" id="cls" type="text" name="cls"/>
-                        </div>
-                     </div>
+		            	<div class="row">
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_host">姓名</label>
+		        				<div class="form-group col-sm-4">
+		        					<input class="form-control" id="sname" type="text" name="sname"/>
+		        				</div>
+		        			</div>
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_name">学号</label>
+		        				<div class="form-group col-sm-4">
+		        					 <input class="form-control" id="sno" type="text" name="sno"/>
+		        				</div>
+		        			</div>
+	        			</div>
+		            	<div class="row">
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_host">密码</label>
+		        				<div class="form-group col-sm-4">
+		        					<input class="form-control" id="psd" type="text" name="psd"/>
+		        				</div>
+		        			</div>
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_name">电话</label>
+		        				<div class="form-group col-sm-4">
+		        					 <input class="form-control" id="tel" type="text" name="tel"/>
+		        				</div>
+		        			</div>
+	        			</div>
+		            	<div class="row">
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_host">校区</label>
+		        				<div class="form-group col-sm-4">
+		        					<input class="form-control" id="school" type="text" name="school"/>
+		        				</div>
+		        			</div>
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_name">学院</label>
+		        				<div class="form-group col-sm-4">
+		        					 <ex:dict type="college"  name="college" classname="form-control" />
+		        				</div>
+		        			</div>
+	        			</div>
+		            	<div class="row">
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_host">系</label>
+		        				<div class="form-group col-sm-4">
+		        					<ex:dict type="department"  name="department" classname="form-control" />
+		        				</div>
+		        			</div>
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_name">专业</label>
+		        				<div class="form-group col-sm-4">
+		        					 <ex:dict type="profession"  name="profession" classname="form-control" />
+		        				</div>
+		        			</div>
+	        			</div>
+		            	<div class="row">
+		        			<div>
+		        				<label class="col-sm-2 control-label" for="ds_host">班级</label>
+		        				<div class="form-group col-sm-4">
+		        					<input class="form-control" id="cls" type="text" name="cls"/>
+		        				</div>
+		        			</div>
+	        			</div>
                     </fieldset>
             	</div>
              </form>

@@ -43,6 +43,8 @@
     <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
         <!-- Custom Js -->
     <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+    <script src="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.js"></script>
+<link href="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.css" rel="stylesheet"/>
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
@@ -71,15 +73,6 @@
     	}
     
     </script>
-    <style>
-    	.form-group{
-    		
-    		padding:15px;
-    	
-    	}
-    
-    </style>
-    
     <script type="text/javascript">
     function check(){
     	var password = $("#password").val().trim();
@@ -172,6 +165,85 @@
    	$(document).ready(function(){
 		loadMenu();
    	});
+    </script>
+    <script type="text/javascript">
+    	function update(id,sname,sno,tel,school,college,department,profession,cls){
+    		document.getElementById("updateForm").reset();
+    		$("#id").attr("value",id);
+    		$("#sname").attr("value",sname);
+    		$("#sno").attr("value",sno);
+    		$("#tel").attr("value",tel);
+    		$("#school").attr("value",school);
+    		$("#cls").attr("value",cls);
+    	}
+    
+    </script>
+    <script type="text/javascript">
+    $(function () {
+        $('#updateForm').bootstrapValidator({
+            fields: {
+            	sname: {
+                	message: '姓名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '姓名不能为空'
+                        },
+                        stringLength: {
+                        	min: 1,
+                        	max: 10,
+                        	message: '姓名长度必须在1到10位之间'
+                        }
+                    }
+                },
+                sno: {
+                    message: '学号验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '学号不能为空'
+                        },
+                        regexp: {
+                        	regexp: /^[0-9]+$/,
+                        	message: '学号只能为数字'
+                        }
+                    }
+                },
+                tel: {
+                    message: '电话验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '电话不能为空'
+                        },
+                        stringLength: {
+                        	min: 11,
+                        	max: 11,
+                        	message: '请输入11位手机号'
+                        },
+                        digits: {
+                        	message: '电话只能为数字'
+                        }
+                    }
+                },
+                psd: {
+                	message: '密码验证失败',
+                	validators: {
+                		regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '密码只能由字母，数字，圆点和下划线组成'
+                        }
+                	}
+                },
+                confirmPsd: {
+                	message: '确认密码严重失败',
+                	validators: {
+                		identical: {
+                            field: 'psd',
+                            message: '两次密码不一致'
+                        }
+                	}
+                }
+            }
+        });
+    });
     </script>
 <title>Insert title here</title>
 </head>
@@ -318,7 +390,12 @@
                             <td class="col-md-2"><%=uList.get(i).getSname() %></td>
                             <td class="col-md-2">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=uList.get(i).getId()%>"/>
-                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=uList.get(i).getId()%>"/>
+                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#updateModal" 
+                            	onclick="update('<%=uList.get(i).getId() %>','<%=uList.get(i).getSname() %>',
+                            	'<%=uList.get(i).getSno() %>','<%=uList.get(i).getTel() %>',
+                            	'<%=uList.get(i).getSchool() %>','<%=uList.get(i).getCollege() %>',
+                            	'<%=uList.get(i).getDepartment() %>','<%=uList.get(i).getProfession() %>',
+                            	'<%=uList.get(i).getCls() %>')"/>
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=uList.get(i).getId() %>','<%=uList.get(i).getSname()%>')"/>
                             </td>
                         </tr>
@@ -382,96 +459,6 @@
 						        </div>  
 						    </div>  
 						</div>
-						<!-- 修改的弹出层 -->
-						<div class="modal fade" id="update<%=uList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
-						    <div class="modal-dialog" role="document">  
-						        <div class="modal-content">  
-						            <div class="modal-header">  
-						                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
-						                    <span aria-hidden="true">×</span>  
-						                </button>  
-						                <h4 class="modal-title" id="myModalLabel">学生信息修改</h4>  
-						            </div>
-						            <form action="update.do" method="post" id="updateForm"> 
-						            	<input type="hidden" name="id" value="<%=uList.get(i).getId() %>"/>  
-							            <div class="modal-body">  
-							            	<fieldset>
-						                       <div class="form-group">
-						                          <label class="col-sm-2 control-label" for="ds_host">姓名</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getSname() %>" name="sname"/>
-						                          </div>
-						                          <label class="col-sm-2 control-label" for="ds_name">学号</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getSno() %>" name="sno"/>
-						                          </div>
-						                       </div>
-						                       <div class="form-group">
-						                          <label class="col-sm-2 control-label" for="ds_host">修改密码</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="password" type="password" placeholder="不填则不修改"  name="psd"/>
-						                          </div>
-						                          <label class="col-sm-2 control-label" for="ds_name">确认密码</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="repassword" type="password" placeholder="不填则不修改"/>
-						                          </div>
-					                       	   </div>
-						                       <div class="form-group">
-						                          <label class="col-sm-2 control-label" for="ds_host">电话</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getTel() %>" name="tel"/>
-						                          </div>
-						                          <label class="col-sm-2 control-label" for="ds_name">校区</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getSchool() %>" name="school"/>
-						                          </div>
-						                       </div>
-						                       <div class="form-group">
-						                          <label class="col-sm-2 control-label" for="ds_host">学院</label>
-						                          <div class="col-sm-4">
-						                          	<ex:dict type="college"  name="college" defaultvalue="<%=uList.get(i).getCollege() %>" classname="form-control" />
-						                          </div>
-						                          <label class="col-sm-2 control-label" for="ds_name">系</label>
-						                          <div class="col-sm-4">
-						                             <ex:dict type="department"  name="department" defaultvalue="<%=uList.get(i).getDepartment() %>" classname="form-control" />
-						                          </div>
-						                       </div>
-						                       <div class="form-group">
-						                          <label class="col-sm-2 control-label" for="ds_host">专业</label>
-						                          <div class="col-sm-4">
-						                          	 <ex:dict type="profession" name="profession" defaultvalue="<%=uList.get(i).getProfession() %>" classname="form-control" />
-						                          </div>
-						                          <label class="col-sm-2 control-label" for="ds_name">班级</label>
-						                          <div class="col-sm-4">
-						                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getCls() %>" name="cls"/>
-						                          </div>
-						                       </div>
-						                       <div class="form-group">
-					                       			<label class="col-sm-2 control-label" for="ds_host">角色权限</label>
-					                       			<div class="col-sm-4">
-					                       				<select class="form-control" name="rname">
-					                       					<option>不选则不修改</option>
-					                       				<%
-					                       					for (int j = 0; j < rList.size(); j++) {
-					                       				%>
-					                       					<option><%=rList.get(j).getRname() %></option>
-					                       				<%		
-					                       					}
-					                       				%>
-					                       				</select>
-						                          	</div>
-						                       </div>
-						                    </fieldset>
-							            </div>  
-							            <div class="modal-footer">  
-							                <button type="submit" class="btn btn-info" onclick="return check()">保存</button>  
-							                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-							            </div>
-						            </form>  
-						        </div>  
-						    </div>  
-						</div>
-						</form>
 	                <%	
 	                }%>
 	                </tbody>
@@ -482,6 +469,117 @@
 	<!--End Advanced Tables -->
 	</div>
 	</div>
+</div>
+<!-- 修改的弹出层 -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+<div class="modal-dialog" role="document">  
+    <div class="modal-content">  
+        <div class="modal-header">  
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                <span aria-hidden="true">×</span>  
+            </button>  
+            <h4 class="modal-title" id="myModalLabel">学生信息修改</h4>  
+        </div>
+        <form action="update.do" method="post" id="updateForm"> 
+        	<input type="hidden" name="id" id="id"/>  
+        <div class="modal-body">  
+        	<fieldset>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">姓名</label>
+        				<div class="form-group col-sm-4">
+        					<input class="form-control" id="sname" type="text" name="sname"/>
+        				</div>
+        			</div>
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_name">学号</label>
+        				<div class="form-group col-sm-4">
+        					<input class="form-control" id="sno" type="text" name="sno"/>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">修改密码</label>
+        				<div class="form-group col-sm-4">
+        					<input class="form-control" id="password" type="password" placeholder="不填则不修改"  name="psd"/>
+        				</div>
+        			</div>
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_name">确认密码</label>
+        				<div class="form-group col-sm-4">
+        					<input class="form-control" id="repassword" type="password" placeholder="不填则不修改" name="confirmPsd"/>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">电话</label>
+        				<div class="form-group col-sm-4">
+        					<input class="form-control" id="tel" type="text" name="tel"/>
+        				</div>
+        			</div>
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_name">校区</label>
+        				<div class="form-group col-sm-4">
+        					 <input class="form-control" id="school" type="text" name="school"/>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">学院</label>
+        				<div class="form-group col-sm-4">
+        					<ex:dict type="college"  name="college" id="college" defaultvalue="不选则不修改" classname="form-control" />
+        				</div>
+        			</div>
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_name">系</label>
+        				<div class="form-group col-sm-4">
+        					 <ex:dict type="department" id="department" defaultvalue="不选则不修改" name="department" classname="form-control" />
+        				</div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">专业</label>
+        				<div class="form-group col-sm-4">
+        					<ex:dict type="profession" id="profession" defaultvalue="不选则不修改" name="profession" classname="form-control" />
+        				</div>
+        			</div>
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_name">班级</label>
+        				<div class="form-group col-sm-4">
+        					 <input class="form-control" id="cls" type="text" name="cls"/>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="row">
+        			<div>
+        				<label class="col-sm-2 control-label" for="ds_host">角色权限</label>
+        				<div class="form-group col-sm-4">
+        					<select class="form-control" name="rname">
+                 					<option>不选则不修改</option>
+                 				<%
+                 					for (int j = 0; j < rList.size(); j++) {
+                 				%>
+                 					<option><%=rList.get(j).getRname() %></option>
+                 				<%		
+                 					}
+                 				%>
+                 				</select>
+        				</div>
+        			</div>
+        		</div>
+        	</fieldset>
+        </div>  
+        <div class="modal-footer">  
+            <button type="submit" class="btn btn-info" onclick="return check()">保存</button>  
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+	            </div>
+            </form>  
+        </div>  
+    </div>  
 </div>
     <!-- Morris Chart Js -->
     <script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>

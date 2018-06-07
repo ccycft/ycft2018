@@ -67,34 +67,24 @@ public class ActivityCtrl {
 	}
 	
 	/**
-	 * ajax删除
-	 * 删除成功后返回1
+	 * 删除成功后返回原页面
 	 * 因为创建了触发器所以删除某条活动，该活动的报名信息也删除
 	 * @author ZHENGBIN
-	 * @param response
 	 * @param request
 	 */
 	@RequestMapping("/activityDel.do")
-	public void del(HttpServletResponse response,HttpServletRequest request) {
-		
-		PrintWriter writer = null;
+	public ModelAndView del(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
 		//获取删除哪条活动信息的id
 		int id = Integer.parseInt(request.getParameter("id"));
-		try {
-			writer = response.getWriter();
-			boolean flag = as.del(id);
-			//true为删除成功
-			if (flag) {
-				writer.println("1");
-			} else {
-				writer.print("0");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			writer.flush();
-			writer.close();
+		boolean flag = as.del(id);
+		//删除成功返回显示页面
+		if (flag) {
+			modelAndView.setViewName("selActivity.do");
+		} else {
+			modelAndView.setViewName("fail.jsp");
 		}
+		return modelAndView;
 	}
 	
 	/**
