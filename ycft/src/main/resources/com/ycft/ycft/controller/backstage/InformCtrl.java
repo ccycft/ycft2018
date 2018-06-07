@@ -62,42 +62,38 @@ public class InformCtrl {
 		
 	}
 	/**
-	 * 删除通知
-	 * @param response
+	 * 删除通知成功后返回原页面
+	 * @author ZHENGBIN
 	 * @param request
+	 * @return selInform.do
 	 */
 	@RequestMapping("/informDel.do")
-	public void del(HttpServletResponse response,HttpServletRequest request) {
-		
-		PrintWriter writer = null;
+	public ModelAndView del(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		//获取删除的id
 		int id = Integer.parseInt(request.getParameter("id"));
-		try {
-			writer = response.getWriter();
-			boolean flag = is.del(id);
-			if (flag) {
-				writer.println("1");
-			} else {
-				writer.print("0");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			writer.flush();
-			writer.close();
+		boolean flag = is.del(id);
+		//删除成功返回true
+		if (flag) {
+			modelAndView.setViewName("selInform.do");
+		} else {
+			modelAndView.setViewName("fail.jsp");
 		}
+		return modelAndView;
 	}
 	
 	/**
 	 * 点修改带id进来查询出数据到修改界面
+	 * @author ZHENGBIN
 	 * @param request
-	 * @return
+	 * @return backstage/inform/informMaintenance/informUpdate.jsp
 	 */
 	@RequestMapping("/informUpdate.do")
 	public ModelAndView informUpdate(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-		
+		//获取到该id的信息
 		TitleContent tc = is.selAllInformById(id);
 		
 		modelAndView.addObject("tc",tc);
