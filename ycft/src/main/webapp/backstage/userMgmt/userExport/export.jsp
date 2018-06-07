@@ -1,5 +1,3 @@
-<%@page import="com.ycft.ycft.system.Menu"%>
-<%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -9,12 +7,9 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/"+"backstage/";
 	//没有backstage的路径
-	String basePathNoBackstage = request.getScheme() + "://"
+	String basePathNoBackStage = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-%>
-<%
-	List<Privilege> privilegeList = Menu.pList;
 %>
 <%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,13 +28,104 @@
     <link href="<%=basePath %>assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+        <!-- Metis Menu Js -->
+        <!-- Morris Chart Js -->
+          <!-- /. PAGE INNER  -->
+    <script src="<%=basePath%>assets/js/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Js -->
+    <script src="<%=basePath%>assets/js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="<%=basePath%>assets/js/morris/morris.js"></script>
+	
+	
+	<script src="<%=basePath%>assets/js/easypiechart.js"></script>
+	<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
+	
+	 <script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
+	
+	<!-- Custom Js -->
+    <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+    <script src="<%=basePath%>assets/js/jquery.metisMenu.js"></script>
     <link rel="stylesheet" href="<%=basePath %>assets/js/Lightweight-Chart/cssCharts.css">
+   	<script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>
+	<script src="<%=basePath%>assets/js/morris/morris.js"></script>
+	<script src="<%=basePath%>assets/js/easypiechart.js"></script>
+	<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
+	<script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
         <style>
     	.padding{
     		
     		padding:15px;
     	}
     </style>
+    <script type="text/javascript">
+	function getRootPath(){
+		var curWwwPath=window.document.location.href;
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		var localhostPaht=curWwwPath.substring(0,pos);
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+2);
+		return (localhostPaht+projectName);
+	}
+	//获取地址栏的id和pid
+   	function getRequest() {
+   	  var url = window.location.search; //获取url中"?"符后的字串
+   	  var theRequest = new Object();
+   	  if (url.indexOf("?") != -1) {
+   	    var str = url.substr(1);
+   	    strs = str.split("&");
+   	    for(var i = 0; i < strs.length; i ++) {
+   	      theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+   	    }
+   	  }
+   	  return theRequest;
+   	}
+	//加载菜单
+   	function loadMenu(){
+   		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4){
+				var data= xmlhttp.responseText;
+				var menu = eval("("+data+")");
+				//加载菜单
+				var str = "";
+				var id = getRequest().id;
+				var pid = getRequest().pid;
+				for(var i = 0; i<menu.length;i++){
+					if(menu[i].id == pid){
+						str += "<li id='"+menu[i].id+"' class='active'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level collapse in'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+							if(menu[i].childMenus[j].id == id){
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a class='active-menu' href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}else{
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}
+						}
+						str += ul + "</ul></li>";
+					}else{
+						str += "<li id='"+menu[i].id+"'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+						 	ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+						}
+						str += ul + "</ul></li>";
+					}
+				}
+				$("#main-menu").html(str);
+				$('#main-menu').metisMenu();
+			}
+		};
+		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send("");
+   	}
+   	$(document).ready(function(){
+		loadMenu();
+   	});
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -51,7 +137,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<%=basePathNoBackstage %>jump.do"><strong>返回首页</strong></a>
+                <a class="navbar-brand" href="<%=basePathNoBackStage %>jump.do"><strong>返回首页</strong></a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
@@ -136,21 +222,6 @@
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <%for(int i = 0;i<privilegeList.size();i++){
-                    	%>
-                    	<li id="<%=privilegeList.get(i).getId()%>">
-                        <a href="#"><%=privilegeList.get(i).getIcon()%><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                        <%for(int j = 0;j<privilegeList.get(i).getChildMenus().size();j++){
-                        	%>
-                            <li id="<%=privilegeList.get(i).getChildMenus().get(j).getId()%>">
-                                <a href="<%=basePathNoBackstage%><%=privilegeList.get(i).getChildMenus().get(j).getmUrl()%>?id=<%=privilegeList.get(i).getChildMenus().get(j).getId() %>&pid=<%=privilegeList.get(i).getChildMenus().get(j).getpId()%>">
-                                <%=privilegeList.get(i).getChildMenus().get(j).getmName() %></a>
-                            </li>
-                        <%}%>
-                        </ul>
-                    </li>
-                    <% }%>
                 </ul>
 
             </div>
@@ -177,9 +248,9 @@
 	     <div class="panel-body">
 	     	<div>
 	     	<div class="col-lg-3">
-	     	<form action="<%=basePathNoBackstage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
+	     	<form action="<%=basePathNoBackStage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
 				 <div class="form-group">
-                 	<a href="<%=basePathNoBackstage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
+                 	<a href="<%=basePathNoBackStage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
                  </div>
                  <div class="form-group">
                  	<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
@@ -201,7 +272,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">用户信息详情</h4>  
 		            </div>    
-		             <form action="<%=basePathNoBackstage%>addOneUser.do" method="post">
+		             <form action="<%=basePathNoBackStage%>addOneUser.do" method="post">
 		            <div class="modal-body">  
 		            	<fieldset>
                     <div class="form-group padding">
@@ -264,49 +335,17 @@
          <!-- /. ROW  -->
      </div>
      
-     <!-- /. PAGE INNER  -->
-    <script src="<%=basePath%>assets/js/jquery-1.10.2.js"></script>
-    <!-- Bootstrap Js -->
-    <script src="<%=basePath%>assets/js/bootstrap.min.js"></script>
+   
 	 
-    <!-- Metis Menu Js -->
-    <script src="<%=basePath%>assets/js/jquery.metisMenu.js"></script>
-	<!-- Morris Chart Js -->
-    <script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="<%=basePath%>assets/js/morris/morris.js"></script>
+
 	
-	
-	<script src="<%=basePath%>assets/js/easypiechart.js"></script>
-	<script src="<%=basePath%>assets/js/easypiechart-data.js"></script>
-	
-	 <script src="<%=basePath%>assets/js/Lightweight-Chart/jquery.chart.js"></script>
-	
-	<!-- Custom Js -->
-    <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
 <script type="text/javascript">
-//监听被点击的一级菜单
-$(function(){   
-	var id = "#sp"+ ${param.pid};
-    $(id).trigger("click");  
-}); 
-    var urlstatus=false;
-    var count = 0;
-    $(".nav-second-level li a").each(function () {  
-      if ($(".nav-second-level li:eq("+count+++")").attr('id') == ${param.id}) {
-        $(this).addClass('active-menu'); 
-        urlstatus = true;
-      } else {
-        $(this).removeClass('active-menu');
-      }
-    });
-    </script>
-        <script>
     	function importFile(){
     		alert("您将要导入excel文件,导入学员信息前请下载并阅读导入模版，格式不符将会导致导入失败.");
     	}
     	function exportFile(){
     		if(confirm('导出 全部用户信息吗?')){
-    			document.getElementById("fileForm").action="<%=basePathNoBackstage%>exportExcel.do";
+    			document.getElementById("fileForm").action="<%=basePathNoBackStage%>exportExcel.do";
     			document.getElementById("fileForm").submit();
     		}
     	}
@@ -328,5 +367,5 @@ $(function(){
    		 
     	}
    	</script>
-</body>
+	</body>
 </html>
