@@ -352,6 +352,16 @@ public class UserSrv {
 				flag = true;
 			}
 		}
+		if (user.getCollege().equals("不选则不修改")) {
+			user.setCollege(null);
+		}
+		if (user.getDepartment().equals("不选则不修改")) {
+			user.setDepartment(null);
+		}
+		if (user.getProfession().equals("不选则不修改")) {
+			user.setProfession(null);
+		}
+		
 		resultTwo = um.updateByPrimaryKeySelective(user);
 		if (resultTwo > 0) {
 			flag = true;

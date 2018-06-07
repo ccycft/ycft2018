@@ -64,21 +64,7 @@
     <script type="text/javascript">
     	function del(id,name){
     		if (confirm("您确认删除\""+name+"\"吗?")) {
-    			var xmlhttp = new XMLHttpRequest();
-	    		xmlhttp.onreadystatechange = function(){
-	    			if(xmlhttp.readyState == 4){
-	    				var data= xmlhttp.responseText;
-	    				if (data == 1) {
-	    					alert("删除成功！");
-	    					document.location.reload();
-	    				} else {
-	    					alert("删除失败！");
-	    	    		}
-	    			}
-	    		};
-	    		xmlhttp.open("post","articleDel.do",true);
-	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	    		xmlhttp.send("id="+id);
+    			window.location.href = "articleDel.do?id="+id;
     		}
     	}
     
