@@ -76,6 +76,11 @@
 			window.open(basePath + 'fore/title/articleDetail.do?id='+id,'_self');	
 			
 		}
+		function openInformDetails(id){
+			window.open(basePath + 'fore/title/informDetail.do?id='+id,'_self');	
+			
+		}
+		 
 	
 	</script>
 	
@@ -106,14 +111,14 @@
 				   				Slide slide = sList.get(i);
 				   				if(i == 0){
 				   	%>
-					   				<div class="item active">
+					   				<div class="item active" onclick="openDetails('<%=slide.getId()%>')" >
 								      <img src="<%=( photoPath + slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}else{
 				   					
 				   	%>
-				   					<div class="item">
+				   					<div class="item"  onclick="openDetails('<%=slide.getId()%>')">
 								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">
 								    </div>
 				   	<%
@@ -225,7 +230,7 @@
 			 		if(iList != null && iList.size() > 0){
 			 			for(Title t : iList){
 			 			%>
-		 				<div class="row">
+		 				<div class="row" onclick="openInformDetails('<%=t.getId()%>')">
 					      <div class="col-xs-7 col-">
 						      <div class="thumbnail">
 						      	<img src="<%= (photoPath + "/" + t.getImgName()) %>" alt="...">
