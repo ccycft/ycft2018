@@ -39,7 +39,6 @@
 			height:100%;
 			width:10rem;
 			border:1px solid #ccc;
-			
 		}
 		.forum-img{
 		
