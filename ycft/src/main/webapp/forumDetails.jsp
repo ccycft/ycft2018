@@ -49,7 +49,28 @@
 		line-height:2rem;
 		margin-top:1.5rem;
 	}
+	.min_icon{
+		height:2rem;
+		width:2rem;
+	}
 	
+	.bottom—navs{
+		width:100%;
+		height:5rem;
+		background:#fff;
+		border-top:1px solid #ccc;
+		position:fixed;
+		bottom:0px;
+		left:0px;
+	}
+	.bottom-input{
+		width:100%;
+		height:2.8rem;
+		margin-top:1.1rem;
+		border:1px solid #eee;
+		border-top:none;
+		border-radius:4rem;
+	}
 </style>
 </head>
 <body class="container-fluid">
@@ -107,9 +128,15 @@
 		    </div>
 	  	</div>
 		
-		<div class="row">
-			<div class="col-xs-12 text-center" style="margin-top:1rem;">
-				<span class="forum-title">评论区:</span>
+		<div class="row" style="border-bottom:1px solid #ccc;line-height:2rem;margin-top:4rem;">
+			<div class="col-xs-4" style="border-bottom:2px solid  #5bc0de;height:3rem;">
+				<span class="forum-title">评论(999+)</span>
+			</div>
+			<div class="col-xs-1 col-xs-offset-5" >
+				<img src="<%=basePath%>images/dianzan.png"  class="min_icon">
+			</div>
+			<div class="col-xs-1">
+				<span>123</span>
 			</div>
 		</div>
 		
@@ -143,10 +170,9 @@
 			</div>
 			
 		</div>
-		<hr>
-		<div class="row text-center">
-			<a class="btn btn-info">点击展开更多评论</a>
+	
+		<div class="bottom—navs">
+			<input class="bottom-input" type="text" placeholder="爱评论的人粉丝多~"/>
 		</div>
-		<hr>
-</body>
+	</body>
 </html>

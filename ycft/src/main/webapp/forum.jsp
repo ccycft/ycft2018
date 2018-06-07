@@ -145,7 +145,7 @@
 					<div class="row">
 					
 						<div class="col-xs-1 col-xs-offset-7" >
-							<img src="<%=basePath%>images/点赞.png"  class="min_icon">
+							<img src="<%=basePath%>images/dianzan.png"  class="min_icon">
 						</div>
 						
 						<div class="col-xs-1">
@@ -153,7 +153,7 @@
 						</div>
 						
 						<div class="col-xs-1 " >
-							<img src="<%=basePath%>images/评论.png"  class="min_icon">
+							<img src="<%=basePath%>images/pinglun.png"  class="min_icon">
 						</div>
 						
 						<div class="col-xs-1">
@@ -178,69 +178,6 @@
 	<%
 	    }
     %>
-   <%--  <div class="row ">
-	
-		<div class="row">
-			
-			<div class="col-xs-4 text-center">
-				<img class="img-circle icon" src="<%=basePath%>images/users.png">
-			</div>
-			
-			<div class="col-xs-6">
-				<div class="row">
-					<span>郑斌斌</span>
-				</div>
-				<div class="row">
-					<span>2018.6.6 18:13</span>
-				</div>
-			</div>
-		
-		</div>
-	
-		<div class="row">
-			<div class="col-xs-5 col-xs-offset-1">
-				<span class="forum-title">文章标题</span>
-			</div>
-		</div>
-		
-		<div class="row context ">
-			<div class="col-xs-10 col-xs-offset-1">
-				<p>吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司</p>
-			</div>
-		</div>
-		
-		<div class="row">
-		
-			<div class="col-xs-1 col-xs-offset-7" >
-				<img src="<%=basePath%>images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>10</span>
-			</div>
-			
-			<div class="col-xs-1 " >
-				<img src="<%=basePath%>images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>5</span>
-			</div>
-			
-		</div>
-		
-    </div>
-    
-    <hr> --%>
+  
 </body>
 </html>

@@ -135,6 +135,7 @@
 	</script>
 	
 	<style>
+	
 	.container-fluid{
 		position:absolute;
 		background:#fff;
