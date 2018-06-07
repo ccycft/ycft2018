@@ -1,5 +1,11 @@
 package com.ycft.ycft.po;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+import com.ycft.ycft.system.Core;
+
 //论坛model  自title表继承
 public class Forum { 
 		//文章id
@@ -14,8 +20,16 @@ public class Forum {
 	    private Integer praise;
 	    //首页图片名称
 	    private String imgName;
+	    //发布的文章
+	    private String text;
 	      
-	    public Integer getId() {
+	    public String getText() {
+			return text;
+		}
+		public void setText(String text) {
+			this.text = text;
+		}
+		public Integer getId() {
 			return id;
 		}
 		public void setId(Integer id) {
@@ -51,11 +65,11 @@ public class Forum {
 		public void setImgName(String imgName) {
 			this.imgName = imgName;
 		}
-		public Integer getCmtcnts() {
-			return cmtcnts;
+		public Integer getComment() {
+			return comment;
 		}
-		public void setCmtcnts(Integer cmtcnts) {
-			this.cmtcnts = cmtcnts;
+		public void setComment(Integer cmtcnts) {
+			this.comment = cmtcnts;
 		}
 		public Integer getUserid() {
 			return userid;
@@ -76,13 +90,45 @@ public class Forum {
 			this.userImg = userImg;
 		}
 		public String getUserImgName() {
+			//获取用户头像名
+			//如果用户头像没有缓存到服务器中 那么缓存一个
+			//查询缓存目录是否存在
+			File file = new File(Core.ICONPATH);
+			
+			if(file.exists()) {
+				
+			}else {
+				//创建这个目录
+				file.mkdirs();
+			}
+			//查询缓存目录中用户的图片是否存在
+			file = new File(Core.ICONPATH + userImgName);
+			
+			//如果文件已经缓存
+			if(file.exists()) {
+				
+			}else {
+				if( getUserImg() != null) {
+					//没有缓存须要重新缓存
+					OutputStream out;
+					try {
+						out = new FileOutputStream(file);
+						out.write(getUserImg());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+			}
 			return userImgName;
 		}
 		public void setUserImgName(String userImgName) {
 			this.userImgName = userImgName;
 		}
 		//评论数 -->
-	    private Integer cmtcnts ;
+	    private Integer comment ;
 	    //用户ID -->
 	    private Integer userid ;
 	    // 用户名 -->

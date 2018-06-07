@@ -60,10 +60,12 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" /> 
+    <!-- 文本 -->
+    <result column="text" property="text" jdbcType="LONGVARCHAR" /> 
     <!-- 评论数 -->
     <result column="cmtcnts" property="cmtcnts" jdbcType="INTEGER"/>
     <!-- 用户ID -->
-    <result column="userid" property="userId" jdbcType="INTEGER"/>
+    <result column="userid" property="userid" jdbcType="INTEGER"/>
     <!-- 用户名 -->
     <result column="username" property="userName" jdbcType="VARCHAR"/>
     <!-- 用户头像 -->
@@ -96,21 +98,20 @@
       select count(*) from activity where tid = #{0} and uid = #{1}
   </select>
   <!-- 论坛查询 -->
-  <select id="selectForum" resultMap="ForumResultMap">
+  <select id="selectForum" resultMap="ForumResultMap" parameterType="java.lang.Integer">
       <!-- 评论数  -->
-      SELECT COUNT(comment.uid) cmtcnts,title.*,
+       SELECT  title.*,content.*
       <!-- 用户姓名和头像信息 -->
-      user.id userid , user.sname username,user.img userimg,user.img_name userimgname
+      ,user.id userid , user.sname username,user.img userimg,user.img_name userimgname 
       <!-- 评论表 文章表  用户表 -->
-      FROM COMMENT ,title,USER  
-      WHERE title.id = comment.tid 
-      AND title.uid = user.id  
+      FROM  title,content, USER   
+      WHERE title.uid = user.id   
+      AND title.id = content.tid
       <!-- 4代表是论坛文章 -->
-      AND title.type = 4 
-      <!-- 根据id分组 再根据时间降序 -->
-      GROUP BY comment.tid 
+      AND title.type = 4    
+      <!--  根据时间降序 -->
       ORDER BY title.time DESC
-      
+      limit #{0} , #{1}
   </select>
   <!-- 客户端方法 结束 -->
   

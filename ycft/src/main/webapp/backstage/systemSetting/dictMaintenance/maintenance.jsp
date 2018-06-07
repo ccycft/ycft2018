@@ -1,6 +1,4 @@
 <%@page import="com.ycft.ycft.po.DictDepict"%>
-<%@page import="com.ycft.ycft.system.Menu"%>
-<%@page import="com.ycft.ycft.po.Privilege"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,9 +11,6 @@
     		+ request.getServerName() + ":" + request.getServerPort()
     		+ path + "/";
     %>
-    <%
-	List<Privilege> privilegeList = Menu.pList;
-	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,6 +41,8 @@
 <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
 <!-- Custom Js -->
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
+<script src="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.js"></script>
+<link href="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.css" rel="stylesheet"/>
 <title>Insert title here</title>
 <script>
 	$(document).ready(function () {
@@ -90,9 +87,6 @@
 	#note{
 		color:#f00;
 	}
-	.padding{
-		padding:15px;
-	}
 </style>
 <script type="text/javascript">
  	$(function(){
@@ -108,6 +102,237 @@
  		}
  	})
 </script>
+<script type="text/javascript">
+$(function () {
+    $('#addDictType').bootstrapValidator({
+        fields: {
+            dictType: {
+                message: '类型代码验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '类型代码不能为空'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 16,
+                        message: '类型代码长度必须在1到16位之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z]+$/,
+                        message: '类型代码只为英文'
+                    }
+                }
+            },
+            dictTypeName: {
+                message: '类型名称验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '类型名称不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 20,
+                    	message: '类型名称长度必须在1到20位之间'
+                    }
+                }
+            },
+            dictName: {
+            	message: '字典项验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '字典项不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 20,
+                    	message: '字典项长度必须在1到20位之间'
+                    }
+                }
+            },
+            sort: {
+                message: '排序验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '排序不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 3,
+                    	message: '排序长度必须在1到3位之间'
+                    },
+                    regexp: {
+                    	regexp: /^[0-9]+$/,
+                    	message: '排序只能为数字'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+$(function () {
+    $('#addForm').bootstrapValidator({
+        fields: {
+            dictName: {
+            	message: '字典项验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '字典项不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 20,
+                    	message: '字典项长度必须在1到20位之间'
+                    }
+                }
+            },
+            sort: {
+                message: '排序验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '排序不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 3,
+                    	message: '排序长度必须在1到3位之间'
+                    },
+                    regexp: {
+                    	regexp: /^[0-9]+$/,
+                    	message: '排序只能为数字'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+$(function () {
+    $('#updateForm').bootstrapValidator({
+        fields: {
+            dictName: {
+            	message: '字典项验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '字典项不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 20,
+                    	message: '字典项长度必须在1到20位之间'
+                    }
+                }
+            },
+            sort: {
+                message: '排序验证失败',
+                validators: {
+                    notEmpty: {
+                        message: '排序不能为空'
+                    },
+                    stringLength: {
+                    	min: 1,
+                    	max: 3,
+                    	message: '排序长度必须在1到3位之间'
+                    },
+                    regexp: {
+                    	regexp: /^[0-9]+$/,
+                    	message: '排序只能为数字'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+	function addAssignment(id,dictType,title){
+		document.getElementById("addForm").reset();
+		$("#addId").attr("value",id);
+		$("#addDictItemType").attr("value",dictType);
+		$("#addTitle").html("新增的类型代码为："+title);
+	}
+
+</script>
+<script type="text/javascript">
+	function updateAssignment(id,dictName,sort,title){
+		document.getElementById("updateForm").reset();
+		$("#updateId").attr("value",id);
+		$("#updateDictName").attr("value",dictName);
+		$("#updateSort").attr("value",sort);
+		$("#updateTitle").html("修改的类型代码为："+title);
+	}
+
+</script>
+    <script type="text/javascript">
+	function getRootPath(){
+		var curWwwPath=window.document.location.href;
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		var localhostPaht=curWwwPath.substring(0,pos);
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+2);
+		return (localhostPaht+projectName);
+	}
+	//获取地址栏的id和pid
+   	function getRequest() {
+   	  var url = window.location.search; //获取url中"?"符后的字串
+   	  var theRequest = new Object();
+   	  if (url.indexOf("?") != -1) {
+   	    var str = url.substr(1);
+   	    strs = str.split("&");
+   	    for(var i = 0; i < strs.length; i ++) {
+   	      theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+   	    }
+   	  }
+   	  return theRequest;
+   	}
+	//加载菜单
+   	function loadMenu(){
+   		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4){
+				var data= xmlhttp.responseText;
+				var menu = eval("("+data+")");
+				//加载菜单
+				var str = "";
+				var id = getRequest().id;
+				var pid = getRequest().pid;
+				for(var i = 0; i<menu.length;i++){
+					if(menu[i].id == pid){
+						str += "<li id='"+menu[i].id+"' class='active'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level collapse in'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+							if(menu[i].childMenus[j].id == id){
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a class='active-menu' href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}else{
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}
+						}
+						str += ul + "</ul></li>";
+					}else{
+						str += "<li id='"+menu[i].id+"'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+						 	ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+						}
+						str += ul + "</ul></li>";
+					}
+				}
+				$("#main-menu").html(str);
+				$('#main-menu').metisMenu();
+			}
+		};
+		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send("");
+   	}
+   	$(document).ready(function(){
+		loadMenu();
+   	});
+    </script>
 </head>
 <body>
 <%
@@ -206,21 +431,6 @@
   <nav class="navbar-default navbar-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
-                <%for(int i = 0;i<privilegeList.size();i++){
-                	%>
-                	<li id="<%=privilegeList.get(i).getId()%>">
-                    <a href="#"><%=privilegeList.get(i).getIcon()%><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                    <%for(int j = 0;j<privilegeList.get(i).getChildMenus().size();j++){
-                    	%>
-                        <li id="<%=privilegeList.get(i).getChildMenus().get(j).getId()%>">
-                            <a href="<%=basePathNoBackStage%><%=privilegeList.get(i).getChildMenus().get(j).getmUrl()%>?id=<%=privilegeList.get(i).getChildMenus().get(j).getId() %>&pid=<%=privilegeList.get(i).getChildMenus().get(j).getpId()%>">
-                            <%=privilegeList.get(i).getChildMenus().get(j).getmName() %></a>
-                        </li>
-                    <%}%>
-                    </ul>
-                </li>
-                <% }%>
             </ul>
 
         </div>
@@ -258,37 +468,43 @@
 					            <form action="addDictType.do" method="post" id="addDictType"> 
 					            	<input type="hidden" name="dictCode" value="<%=ddList.get(ddList.size()-1).getId() + "-" + ddList.get(ddList.size()-1).getdList().get(ddList.get(ddList.size()-1).getdList().size()-1).getId() %>">
 						            <div class="modal-body">  
-						            	<fieldset> 
-						            		<div class="form-group padding">
-					                          <label class="col-sm-2 control-label" for="ds_host">类型代码</label>
-					                          <div class="col-sm-4">
-					                             <input class="form-control" id="dictType" type="text" name="dictType"/>
-					                          </div>
-					                          <label class="col-sm-2 control-label" for="ds_name">类型名称</label>
-					                          <div class="col-sm-4">
-					                             <input class="form-control" id="ds_name" type="text" name="dictTypeName"/>
-					                          </div>
-					                       </div>
-					                       <div class="form-group padding">
-					                          <label class="col-sm-2 control-label" for="ds_host">字典项</label>
-					                          <div class="col-sm-4">
-					                             <input class="form-control" id="ds_host" type="text" name="dictName"/>
-					                          </div>
-					                          <label class="col-sm-2 control-label" for="ds_name">排序</label>
-					                          <div class="col-sm-4">
-					                             <input class="form-control" id="ds_name" type="text" name="sort"/>
-					                          </div>
-					                       </div>
-					                       <div class="form-group padding">
-					                          <label class="col-sm-2 control-label" for="ds_host">备注</label>
-					                          <div class="col-sm-4">
-					                             <input class="form-control" id="ds_host" type="text" name="remark"/>
-					                          </div>
-					                          <label class="col-sm-2 control-label" for="ds_name"></label>
-					                          <div class="col-sm-4">
-					                          	<span id="note" class="control">注意：排序为数字！</span>
-					                          </div>
-					                       </div>
+						            	<fieldset>
+						            		<div class="row">
+						            			<div>
+						            				<label class="col-sm-2 control-label" for="ds_host">类型代码</label>
+						            				<div class="form-group col-sm-4">
+							                             <input class="form-control" id="dictType" type="text" name="dictType"/>
+							                       </div>
+						            			</div>
+						            			<div>
+						            				<label class="col-sm-2 control-label" for="ds_name">类型名称</label>
+						            				<div class="form-group col-sm-4">
+						                             	<input class="form-control" id="ds_name" type="text" name="dictTypeName"/>
+						                      	 	</div>	
+						            			</div>
+						            		</div> 
+						            		<div class="row">
+						            			<div>
+						            				<label class="col-sm-2 control-label" for="ds_host">字典项</label>
+						            				<div class="form-group col-sm-4">
+							                             <input class="form-control" id="dictName" type="text" name="dictName"/>
+							                       </div>
+						            			</div>
+						            			<div>
+						            				<label class="col-sm-2 control-label" for="ds_name">排序</label>
+						            				<div class="form-group col-sm-4">
+						                             	<input class="form-control" id="sort" type="text" name="sort"/>
+						                      	 	</div>	
+						            			</div>
+						            		</div> 
+						            		<div class="row">
+						            			<div>
+						            				<label class="col-sm-2 control-label" for="ds_host">备注</label>
+						            				<div class="form-group col-sm-4">
+							                             <input class="form-control" id="remark" type="text" name="remark"/>
+							                       </div>
+						            			</div>
+						            		</div> 
 					                    </fieldset>
 						            </div>  
 						            <div class="modal-footer">  
@@ -326,8 +542,8 @@
 				                            <td class="col-md-1"><%=ddList.get(i).getdList().get(j).getEnabled() %></td>
 				                            <td class="col-md-2"><%=ddList.get(i).getRemark() %></td>
 				                            <td class="col-md-3">
-				                            	<input type="button" value="新增字典项" class="btn btn-success" data-toggle="modal" data-backdrop="static" data-target="#add<%=ddList.get(i).getId() %>"/>
-				                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=ddList.get(i).getdList().get(j).getId()%>"/>
+				                            	<input type="button" value="新增字典项" class="btn btn-success" data-toggle="modal" data-backdrop="static" data-target="#addModal" onclick="addAssignment('<%=ddList.get(i).getdList().get(ddList.get(i).getdList().size()-1).getId() %>','<%=ddList.get(i).getDictType() %>','<%=ddList.get(i).getDictType() %>')"/>
+				                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#updateModal" onclick="updateAssignment('<%=ddList.get(i).getdList().get(j).getId()%>','<%=ddList.get(i).getdList().get(j).getDictName() %>','<%=ddList.get(i).getdList().get(j).getSort()%>','<%=ddList.get(i).getDictType() %>')"/>
 				                            	<%
 				                            		if (ddList.get(i).getdList().get(j).getEnabled().equals("1")) {
 				                            	%>
@@ -341,97 +557,8 @@
 				                            	%>
 				                            </td>
 				                        </tr>
-				                        <!-- 修改的弹出层 -->
-										<div class="modal fade" id="update<%=ddList.get(i).getdList().get(j).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
-										    <div class="modal-dialog" role="document">  
-										        <div class="modal-content">  
-										            <div class="modal-header">  
-										                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
-										                    <span aria-hidden="true">×</span>  
-										                </button>  
-										                <h4 class="modal-title" id="myModalLabel">修改的类型代码为：<%=ddList.get(i).getDictType() %></h4>  
-										            </div>
-										            <form action="updateDict.do" method="post" id="updateForm"> 
-										            	<input type="hidden" name="id" value="<%=ddList.get(i).getdList().get(j).getId() %>"/>  
-											            <div class="modal-body">  
-											            	<fieldset>
-										                       <div class="form-group">
-										                          <label class="col-sm-2 control-label" for="ds_host"></label>
-										                          <div class="col-sm-4">
-										                          </div>
-										                          <label class="col-sm-2 control-label" for="ds_name"></label>
-										                          <div class="col-sm-4">
-										                          	<span id="note">注意：排序为数字！</span>
-										                          </div>
-										                       </div>
-										                       <div class="form-group">
-										                          <label class="col-sm-2 control-label" for="ds_host">字典项</label>
-										                          <div class="col-sm-4">
-										                             <input class="form-control" id="ds_host" type="text" value="<%=ddList.get(i).getdList().get(j).getDictName() %>" name="dictName"/>
-										                          </div>
-										                          <label class="col-sm-2 control-label" for="ds_name">排序</label>
-										                          <div class="col-sm-4">
-										                             <input class="form-control" id="ds_name" type="text" value="<%=ddList.get(i).getdList().get(j).getSort() %>" name="sort"/>
-										                          </div>
-										                       </div>
-										                    </fieldset>
-											            </div>  
-											            <div class="modal-footer">  
-											                <button type="submit" class="btn btn-info">保存</button>  
-											                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-											            </div>
-										            </form>  
-										        </div>  
-										    </div>  
-										</div>	
 									<%	
 											}
-									%>
-										<!-- 新增的弹出层 -->
-										<div class="modal fade" id="add<%=ddList.get(i).getId() %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
-										    <div class="modal-dialog" role="document">  
-										        <div class="modal-content">  
-										            <div class="modal-header">  
-										                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
-										                    <span aria-hidden="true">×</span>  
-										                </button>  
-										                <h4 class="modal-title" id="myModalLabel">新增的类型代码为：<%=ddList.get(i).getDictType() %></h4>  
-										            </div>
-										            <form action="addDictItem.do" method="post" id="addForm"> 
-										            	<input type="hidden" name="id" value="<%=ddList.get(i).getdList().get(ddList.get(i).getdList().size()-1).getId() %>"/>  
-										            	<input type="hidden" name="dictType" value="<%=ddList.get(i).getDictType() %>"/>  
-											            <div class="modal-body">  
-											            	<fieldset>
-										                       <div class="form-group">
-										                          <label class="col-sm-2 control-label" for="ds_host"></label>
-										                          <div class="col-sm-4">
-										                          </div>
-										                          <label class="col-sm-2 control-label" for="ds_name"></label>
-										                          <div class="col-sm-4">
-										                          	<span id="note">注意：排序为数字！</span>
-										                          </div>
-										                       </div>
-										                       <div class="form-group">
-										                          <label class="col-sm-2 control-label" for="ds_host">字典项</label>
-										                          <div class="col-sm-4">
-										                             <input class="form-control" id="ds_host" type="text" name="dictName"/>
-										                          </div>
-										                          <label class="col-sm-2 control-label" for="ds_name">排序</label>
-										                          <div class="col-sm-4">
-										                             <input class="form-control" id="ds_name" type="text" name="sort"/>
-										                          </div>
-										                       </div>
-										                    </fieldset>
-											            </div>  
-											            <div class="modal-footer">  
-											                <button type="submit" class="btn btn-info">确定</button>  
-											                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
-											            </div>
-										            </form>  
-										        </div>  
-										    </div>  
-										</div>
-									<%
 										}
 									%>
 								</tbody>
@@ -442,6 +569,83 @@
 			</div>
 		</div>
 	</div>
+</div>
+<!-- 新增字典项的弹出层 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+ <div class="modal-dialog" role="document">  
+     <div class="modal-content">  
+         <div class="modal-header">  
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                 <span aria-hidden="true">×</span>  
+             </button>  
+             <h4 class="modal-title" id="addTitle"></h4>  
+         </div>
+         <form action="addDictItem.do" method="post" id="addForm"> 
+         	<input type="hidden" name="id" id="addId"/> 
+         	<input type="hidden" name="dictType" id="addDictItemType"/>   
+          <div class="modal-body">  
+          	<fieldset>
+               <div class="row">
+	               	<div>
+	               		<label class="col-sm-2 control-label" for="ds_host">字典项</label>
+	               		<div class="form-group col-sm-4">
+	                      <input class="form-control" id="addDictName" type="text" name="dictName"/>
+	                   </div>
+	               	</div>
+	               	<div>
+	               		<label class="col-sm-2 control-label" for="ds_name">排序</label>
+	               		<div class="form-group col-sm-4">
+	               			<input class="form-control" id="addSort" type="text" name="sort"/>
+	               		</div>
+	               	</div>
+               </div>
+            </fieldset>
+          </div>  
+          <div class="modal-footer">  
+              <button type="submit" class="btn btn-info">保存</button>  
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+	            </div>
+            </form>  
+        </div>  
+    </div>  
+</div>
+<!-- 修改的弹出层 -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
+ <div class="modal-dialog" role="document">  
+     <div class="modal-content">  
+         <div class="modal-header">  
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                 <span aria-hidden="true">×</span>  
+             </button>  
+             <h4 class="modal-title" id="updateTitle"></h4>  
+         </div>
+         <form action="updateDict.do" method="post" id="updateForm"> 
+         	<input type="hidden" name="id" id="updateId"/>  
+          <div class="modal-body">  
+          	<fieldset>
+               <div class="row">
+	               	<div>
+	               		<label class="col-sm-2 control-label" for="ds_host">字典项</label>
+	               		<div class="form-group col-sm-4">
+	                      <input class="form-control" id="updateDictName" type="text" name="dictName"/>
+	                   </div>
+	               	</div>
+	               	<div>
+	               		<label class="col-sm-2 control-label" for="ds_name">排序</label>
+	               		<div class="form-group col-sm-4">
+	               			<input class="form-control" id="updateSort" type="text" name="sort"/>
+	               		</div>
+	               	</div>
+               </div>
+            </fieldset>
+          </div>  
+          <div class="modal-footer">  
+              <button type="submit" class="btn btn-info">保存</button>  
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
+	            </div>
+            </form>  
+        </div>  
+    </div>  
 </div>
 <!-- Morris Chart Js -->
     <script src="<%=basePath%>assets/js/morris/raphael-2.1.0.min.js"></script>

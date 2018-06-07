@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="com.ycft.ycft.po.SignEvent"%>
 <%@page import="com.ycft.ycft.system.Core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -17,16 +19,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>签到详情</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/bootstrap/css/fileinput.min.css">
-    <script type="text/javascript" src="./assets/bootstrap/js/fileinput.min.js"></script>
-    <script type="text/javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./css/navs.css">
-    <link rel="stylesheet" href="./assets/date-plugin/bootstrap-datetimepicker.min.css">
-    <script type="text/javascript" src="./assets/date-plugin/bootstrap-datetimepicker.min.js"></script>
-    <script type="text/javascript" src="./assets/date-plugin/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="./assets/date-plugin/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/fileinput.min.css">
+    <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<%=basePath%>css/navs.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="<%=basePath%>assets/date-plugin/moment-with-locales.min.js"></script>
 	<style type="text/css">
     	.icon{
     		display:inline;
@@ -68,44 +70,72 @@
 		        autoclose:true//自动关闭
 		    });  
 		}); 
-	
+		function back(){ 
+			
+			if(typeof(window.ceshi) != 'undefined'){
+				//说明 可以调用安卓的返回功能
+				window.ceshi.back(); 
+			}else{
+				window.history.back();
+			}
+			
+		}
 	</script>
 </head>
 <body>
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">签到详情</span>	
-		<img class="right-icon" src="./images/add.png">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
+		<span class="nav-title">签到列表</span>	
+		<img class="right-icon" src="<%=basePath%>images/add.png">
 	</div>
 
 	<div class="list-group" >
-		  <div class="list-group-item ">
-		   	<img class="img-responsive logo_icon" src="./images/wode.png">
+		  <!-- <div class="list-group-item ">
+		   	<img class="img-responsive logo_icon" src="<%=basePath%>images/wode.png">
 		    <span class="name_item">我的签到</span>
 		  	<img data-toggle="modal" data-target="#myModal"
-		  		 class="img-responsive icon pull-right add_sign" src="./images/add.png">	
-		  </div>
-		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="./images/huodong.png">
-		    <span class="a_item">活动 | 互联网+ 网页设计大赛 </span>
-		   	<img class="img-responsive icon pull-right " src="./images/success.png">
-		  </a>
-		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="./images/tongzhi.png">
+		  		 class="img-responsive icon pull-right add_sign" src="<%=basePath%>images/add.png">	
+		  </div> -->
+		  <% 
+		  	List<SignEvent> sList = (List<SignEvent>)request.getAttribute("sList");
+			  if(sList != null && sList.size() > 0){
+				  for(SignEvent sign : sList){
+					%>
+					
+					<a  href="<%=basePath%>fore/signEvent/selDetailById.do?id=<%=sign.getId()%>" class="list-group-item ">
+					   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
+					    <span class="a_item"><%=sign.getName() %> </span>
+					   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/success.png">
+					  </a>
+					
+					
+					
+					<%
+				  }
+			  }else{
+		  %>
+		  		未查询到任何签到发布信息
+		  
+		  <%
+			  }
+		  %>
+		  
+		  <!-- <a  href="#" class="list-group-item ">
+		   	<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
 		    <span class="a_item">课程 | 网络工程-13-李老师 </span>
-		   	<img class="img-responsive icon pull-right " src="./images/error.png">
+		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/error.png">
 		  </a>
 		   <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="./images/huodong.png">
+		   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
 		    <span class="a_item">活动 | 互联网+ 网页设计大赛 </span>
-		   	<img class="img-responsive icon pull-right " src="./images/success.png">
+		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/success.png">
 		  </a>
 		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="./images/tongzhi.png">
+		   	<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
 		    <span class="a_item">课程 | 网络工程-13-李老师 </span>
-		   	<img class="img-responsive icon pull-right " src="./images/error.png">
-		  </a>
+		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/error.png">
+		  </a> -->
 	</div>
 
 	

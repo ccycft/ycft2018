@@ -21,7 +21,7 @@ public interface TitleMapper {
 	//根据uid和tid查询
 	public int selectActivityByTidUid(Integer tid , Integer uid);
 	//论坛查询
-	public List<Forum> selectForum();
+	public List<Forum> selectForum(Integer nowPage , Integer pageSize);
 	/**
 	 * 客户端方法结束
 	 * */

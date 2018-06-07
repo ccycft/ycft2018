@@ -72,8 +72,8 @@ public class TitleSrv {
 	}
 	
 	//≤È—Ø¬€Ã≥
-	public List<Forum> selectForum(){
+	public List<Forum> selectForum(Integer nowPage , Integer pageSize){
 		 
-		return tm.selectForum();
+		return tm.selectForum(nowPage , pageSize);
 	}
 }

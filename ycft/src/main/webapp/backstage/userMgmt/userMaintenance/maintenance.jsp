@@ -1,6 +1,4 @@
 <%@page import="com.ycft.ycft.po.Role"%>
-<%@page import="com.ycft.ycft.po.Privilege"%>
-<%@page import="com.ycft.ycft.system.Menu"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ycft.ycft.po.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,12 +9,9 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/"+"backstage/";
 	//没有backstage的路径
-	String basePathNoBackstage = request.getScheme() + "://"
+	String basePathNoBackStage = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-%>
-<%
-	List<Privilege> privilegeList = Menu.pList;
 %>
 <%@ taglib prefix="ex" uri="/WEB-INF/dict.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -106,10 +101,78 @@
                       clearInterval(timer);
                   }
                   document.documentElement.scrollTop=document.body.scrollTop=scrollTop+ispeed;
-               },0)
+               },0);
     		}
     	}
    </script>
+    <script type="text/javascript">
+	function getRootPath(){
+		var curWwwPath=window.document.location.href;
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		var localhostPaht=curWwwPath.substring(0,pos);
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+2);
+		return (localhostPaht+projectName);
+	}
+	//获取地址栏的id和pid
+   	function getRequest() {
+   	  var url = window.location.search; //获取url中"?"符后的字串
+   	  var theRequest = new Object();
+   	  if (url.indexOf("?") != -1) {
+   	    var str = url.substr(1);
+   	    strs = str.split("&");
+   	    for(var i = 0; i < strs.length; i ++) {
+   	      theRequest[strs[i].split("=")[0]]=decodeURI(strs[i].split("=")[1]);
+   	    }
+   	  }
+   	  return theRequest;
+   	}
+	//加载菜单
+   	function loadMenu(){
+   		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4){
+				var data= xmlhttp.responseText;
+				var menu = eval("("+data+")");
+				//加载菜单
+				var str = "";
+				var id = getRequest().id;
+				var pid = getRequest().pid;
+				for(var i = 0; i<menu.length;i++){
+					if(menu[i].id == pid){
+						str += "<li id='"+menu[i].id+"' class='active'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level collapse in'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+							if(menu[i].childMenus[j].id == id){
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a class='active-menu' href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}else{
+								ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+							}
+						}
+						str += ul + "</ul></li>";
+					}else{
+						str += "<li id='"+menu[i].id+"'>"+
+						"<a href='#'>"+menu[i].icon+"<span id='sp"+menu[i].id+"'>"+menu[i].mName+"</span><span class='fa arrow'></span></a>";
+						var ul = "<ul class='nav nav-second-level'>";
+						for(var j = 0;j<menu[i].childMenus.length;j++){
+						 	ul += "<li id='"+menu[i].childMenus[j].id+"'><a href='"+getRootPath()+menu[i].childMenus[j].mUrl+"?id="+menu[i].childMenus[j].id+"&pid="+menu[i].childMenus[j].pId+"'>"+menu[i].childMenus[j].mName+"</a></li>";
+						}
+						str += ul + "</ul></li>";
+					}
+				}
+				$("#main-menu").html(str);
+				$('#main-menu').metisMenu();
+			}
+		};
+		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xmlhttp.send("");
+   	}
+   	$(document).ready(function(){
+		loadMenu();
+   	});
+    </script>
 <title>Insert title here</title>
 </head>
 <body onload="load()">
@@ -210,21 +273,6 @@
   <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-                    <%for(int i = 0;i<privilegeList.size();i++){
-                    	%>
-                    	<li id="<%=privilegeList.get(i).getId()%>">
-                        <a href="#"><%=privilegeList.get(i).getIcon()%><span id="sp<%=privilegeList.get(i).getId()%>"><%=privilegeList.get(i).getmName() %></span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                        <%for(int j = 0;j<privilegeList.get(i).getChildMenus().size();j++){
-                        	%>
-                            <li id="<%=privilegeList.get(i).getChildMenus().get(j).getId()%>">
-                                <a href="<%=basePathNoBackstage%><%=privilegeList.get(i).getChildMenus().get(j).getmUrl()%>?id=<%=privilegeList.get(i).getChildMenus().get(j).getId() %>&pid=<%=privilegeList.get(i).getChildMenus().get(j).getpId()%>">
-                                <%=privilegeList.get(i).getChildMenus().get(j).getmName() %></a>
-                            </li>
-                        <%}%>
-                        </ul>
-                    </li>
-                    <% }%>
                 </ul>
 
             </div>
@@ -446,7 +494,7 @@
 	
 <script type="text/javascript">
 //监听被点击的一级菜单
-$(function(){   
+$(function(){
 	var id = "#sp"+ ${param.pid};
     $(id).trigger("click");  
 }); 

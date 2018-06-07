@@ -118,6 +118,9 @@ public class UserCtrl {
 		}
 		 
 	}	
+	
+	
+	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		 String a = URLEncoder.encode("ишк╖", "UTF-8");
 		 System.out.println(a);

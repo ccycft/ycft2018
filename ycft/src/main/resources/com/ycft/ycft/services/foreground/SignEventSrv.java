@@ -39,4 +39,14 @@ public class SignEventSrv {
 		//返回true  代表用户已经签到了  无法再次签到
 		return sem.selSignByUidAndSid(uid , sid) > 0 ? true : false;
 	}
+	
+	//查询我的签到
+	public List<SignEvent> selectSignById(Integer uid , Integer nowPage , Integer pageSize){
+		return sem.selSignByUid(uid , nowPage , pageSize);
+	}
+	
+	public SignEvent selDetailById(Integer id) {
+		return sem.selDetailById(id);
+	}
+	
 }

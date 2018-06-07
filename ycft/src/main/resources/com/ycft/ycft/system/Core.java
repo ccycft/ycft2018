@@ -7,4 +7,7 @@ public class Core {
 	//本地头像的存储位置
 	public static final String ICONPATH = "C://upload/icon/"; 
 	public static final String PATH = "/photo";
+	
+	//签到默认截止的时间   (以分钟计算)
+	public static final int SIGNDEADTIME = 20;
 }

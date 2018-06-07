@@ -40,20 +40,35 @@
     		display:inline;
     		margin-left:1rem;
     		width:4.5rem;
+		    height: 4.5rem;
+		    border-radius: 50%;
     	}
     	.name_item{
     		line-height:6rem;
     		font-size:1.8rem;
     		margin-left:3rem;
     	}
+    	.nav-area{
+    		position:relative;
+    		border:0;
+    	}
     </style>
+    <script>
+    	function logout(){
+    		if(confirm("确认退出当前登录吗?")){
+    			alert("就不退");
+    		}
+    	}
+    
+    </script>
+    
+    
 </head>
 <body>
 	<!-- 页面顶端导航栏 -->
-	<div class="nav-area">
-		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="javascript:window.history.back();return false;">	
-		<span class="nav-title">校园导航</span>	
-		<img class="right-icon" src="<%=basePath%>images/add.png">
+	<div class="nav-area" style="position:relative;top:0">
+		<span class="nav-title">个人中心</span>	
+		<img class="right-icon" src="<%=basePath%>images/注销.png" onClick="logout()" style="position:absolute;right:0.6rem;">
 	</div>
 	<div class="list-group" >
 		  <a  href="#" class="list-group-item ">
@@ -63,17 +78,17 @@
 		  %>
 		  		
 		  		<img class="img-responsive logo_icon" src="<%=photoPath+"icon/" + u.getImgName()%>">
-				    <span class="name_item">Jerry</span></a>
+				    <span class="name_item"><%=u.getSname()%></span></a>
 				  <a  href="#" class="list-group-item ">
 				   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
 				    <span class="a_item">我的活动 </span></a>
-				  <a href="<%=basePath%>signDetails.jsp" class="list-group-item ">
+				  <a href="<%=basePath%>fore/signEvent/myReleaseSign.do" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/qiandao.png">	
 				  	<span class="a_item">我的签到</span></a>
 				  <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/fabu.png">
 				  	<span class="a_item">我的发布</span></a>
-				  <a href="#" class="list-group-item ">
+				  <a href="http://www.cchzyc.com" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/jiaowurukou.png">
 				  	<span class="a_item">教务信息</span></a>
 				  <a href="#" class="list-group-item ">
