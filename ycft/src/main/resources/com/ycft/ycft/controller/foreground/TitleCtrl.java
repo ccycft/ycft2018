@@ -157,6 +157,7 @@ public class TitleCtrl {
 	}
 	
 	//查询论坛
+	@RequestMapping("selectForum.do")
 	public ModelAndView selectForum(Integer nowPage , Integer pageSize) {
 		if(pageSize == null || pageSize == 0) {
 			//如果前端未指定查询几条数据  那后台指定为4条
@@ -165,9 +166,10 @@ public class TitleCtrl {
 		if(nowPage == null || nowPage <= 0) {
 			nowPage = 1;
 		}
+		int start = (nowPage - 1 ) * pageSize;
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("论坛.jsp");
-		List<Forum> fList = ts.selectForum();
+		mav.setViewName("forum.jsp");
+		List<Forum> fList = ts.selectForum(start , pageSize);
 		mav.addObject("sList",fList);
 		return mav;
 	}

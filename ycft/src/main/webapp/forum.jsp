@@ -1,3 +1,6 @@
+<%@page import="com.ycft.ycft.po.Forum"%>
+<%@page import="java.util.List"%>
+<%@page import="com.ycft.ycft.po.Title"%>
 <%@page import="com.ycft.ycft.system.Core"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -20,13 +23,13 @@
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./css/navs.css">
+	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
 	
 	<style>
 		.icon{
 			
-			height:3.5rem;
-			width:3.5rem;
+			height:3.8rem;
+			width:3.8rem;
 		}
 		
 		.context img{
@@ -66,6 +69,12 @@
 		
 			font-size:1.5rem;
 			font-weight:bold;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 1;
+			overflow: hidden;
+			text-align:left;
+			line-height:2rem;
 		}
 	</style>
 	
@@ -94,147 +103,87 @@
 	
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
-		<img class="left-icon"  src="./images/back.png" onClick="back()">	
 		<span class="nav-title">校园论坛</span>	
-		<img class="right-icon" src="./images/add.png" onClick="addPost()">
+		<img class="right-icon" src="<%=basePath%>images/add.png" onClick="addPost()">
 	</div>
-	
-	<div class="row ">
-	
-		<div class="row">
-			
-			<div class="col-xs-4 text-center">
-				<img class="img-circle icon" src="./images/users.png">
-			</div>
-			
-			<div class="col-xs-6">
-				<div class="row">
-					<span>郑斌斌</span>
-				</div>
-				<div class="row">
-					<span>2018.6.6 18:13</span>
-				</div>
-			</div>
-		
-		</div>
-	
-		<div class="row">
-			<div class="col-xs-5 col-xs-offset-1" style="margin-top:1rem;">
-				<span class="forum-title">文章标题</span>
-			</div>
-		</div>
-		
-		<div class="row context ">
-			<div class="col-xs-10 col-xs-offset-1">
-				<p>吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司</p>
-			</div>
-		</div>
-		
-		<div class="row">
-		
-			<div class="col-xs-1 col-xs-offset-7" >
-				<img src="./images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>10</span>
-			</div>
-			
-			<div class="col-xs-1 " >
-				<img src="./images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>5</span>
-			</div>
-			
-		</div>
-		
-    </div>
-    
-    <hr>
-    
-    <div class="row ">
-	
-		<div class="row">
-			
-			<div class="col-xs-4 text-center">
-				<img class="img-circle icon" src="./images/users.png">
-			</div>
-			
-			<div class="col-xs-6">
-				<div class="row">
-					<span>郑斌斌</span>
-				</div>
-				<div class="row">
-					<span>2018.6.6 18:13</span>
-				</div>
-			</div>
-		
-		</div>
-	
-		<div class="row">
-			<div class="col-xs-5 col-xs-offset-1">
-				<span class="forum-title">文章标题</span>
-			</div>
-		</div>
-		
-		<div class="row context ">
-			<div class="col-xs-10 col-xs-offset-1">
-				<p>吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
-长春市铖金科技有限公司
-长春派瑞特网络科技有限公司</p>
-			</div>
-		</div>
-		
-		<div class="row">
-		
-			<div class="col-xs-1 col-xs-offset-7" >
-				<img src="./images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>10</span>
-			</div>
-			
-			<div class="col-xs-1 " >
-				<img src="./images/tongzhi.png"  class="min_icon">
-			</div>
-			
-			<div class="col-xs-1">
-				<span>5</span>
-			</div>
-			
-		</div>
-		
-    </div>
-    
-    <hr>
-    
-    <div class="row ">
+    <%
+    	List<Forum> sList =  (List<Forum>)request.getAttribute("sList");
+	    if(sList != null){
+	    	for(Forum f : sList){
+	 %>
+	 			<div class="row ">
+				
+					<div class="row">
+						
+						<div class="col-xs-4 text-center">
+							<img class="img-circle icon" src="<%=photoPath + "icon/"%><%=f.getUserImgName()%>">
+						</div>
+						
+						<div class="col-xs-6">
+							<div class="row">
+								<span><%=f.getUserName()%></span>
+							</div>
+							<div class="row">
+								<span><%=f.getTime() %></span>
+							</div>
+						</div>
+					
+					</div>
+				
+					<div class="row">
+						<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">
+							<span class="forum-title"><%=f.getName() %></span>
+						</div>
+					</div>
+					
+					<div class="row context ">
+						<div class="col-xs-10 col-xs-offset-1">
+							<p><%=f.getText()%></p>
+						</div>
+					</div>
+					
+					<div class="row">
+					
+						<div class="col-xs-1 col-xs-offset-7" >
+							<img src="<%=basePath%>images/点赞.png"  class="min_icon">
+						</div>
+						
+						<div class="col-xs-1">
+							<span><%=f.getPraise() %></span>
+						</div>
+						
+						<div class="col-xs-1 " >
+							<img src="<%=basePath%>images/评论.png"  class="min_icon">
+						</div>
+						
+						<div class="col-xs-1">
+							<span><%=f.getComment() %></span>
+						</div>
+						
+					</div>
+					
+			    </div>
+			    
+			    <hr>
+	 
+	 
+	 <%
+	 		}
+	    }else{
+	 %>
+	 
+	 	未查询到任何论坛文章...
+	 
+	 
+	<%
+	    }
+    %>
+   <%--  <div class="row ">
 	
 		<div class="row">
 			
 			<div class="col-xs-4 text-center">
-				<img class="img-circle icon" src="./images/users.png">
+				<img class="img-circle icon" src="<%=basePath%>images/users.png">
 			</div>
 			
 			<div class="col-xs-6">
@@ -273,7 +222,7 @@
 		<div class="row">
 		
 			<div class="col-xs-1 col-xs-offset-7" >
-				<img src="./images/tongzhi.png"  class="min_icon">
+				<img src="<%=basePath%>images/tongzhi.png"  class="min_icon">
 			</div>
 			
 			<div class="col-xs-1">
@@ -281,7 +230,7 @@
 			</div>
 			
 			<div class="col-xs-1 " >
-				<img src="./images/tongzhi.png"  class="min_icon">
+				<img src="<%=basePath%>images/tongzhi.png"  class="min_icon">
 			</div>
 			
 			<div class="col-xs-1">
@@ -292,6 +241,6 @@
 		
     </div>
     
-    <hr>
+    <hr> --%>
 </body>
 </html>

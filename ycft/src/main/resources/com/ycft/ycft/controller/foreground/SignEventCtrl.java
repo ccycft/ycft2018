@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.services.foreground.SignEventSrv;
+import com.ycft.ycft.system.Core;
 
 @Controller(value="foreSignEventCtrl")
 @RequestMapping("fore/signEvent/")
@@ -46,7 +47,7 @@ public class SignEventCtrl {
 				Date date = sdf.parse(beforeTime);
 				//设置日历时间
 				c.setTime(date);
-				c.add(Calendar.MINUTE, 20);
+				c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
 				date = c.getTime();
 				String deadTime = sdf.format(date);
 				//设置终止时间
@@ -90,6 +91,66 @@ public class SignEventCtrl {
 		mav.addObject("signEvent" , se);
 		//查询详情
 		mav.setViewName("signDetails.jsp");
+		return mav;
+	}
+	
+	//查询我的签到信息
+	@RequestMapping("myReleaseSign.do")
+	public ModelAndView myReleaseSign(HttpServletRequest req , Integer nowPage , Integer pageSize) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("signList.jsp");
+		Cookie[] cs = req.getCookies();
+		int uid = 0;
+		try {
+			for(Cookie c : cs) {
+				if(c.getName().equals("uid")) {
+					uid = (Integer.valueOf(c.getValue()));
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mav.setViewName("exception.jsp");
+		}
+		if(uid == 0) {
+			//未取到用户信息 可能用户未登录或者cookie丢失
+			mav.setViewName("no_userinfo.jsp");
+		}
+		if(nowPage == null || nowPage == 0) {
+			nowPage = 1;
+		}
+		//开始计算开始索引
+		
+		if(pageSize == null || pageSize == 0) {
+			pageSize = 4;
+		}
+		int start = (nowPage - 1) * pageSize ; 
+		List<SignEvent> list = ss.selectSignById(uid , start , pageSize);
+		mav.addObject("sList" , list);
+		return mav;
+	}
+	
+	@RequestMapping("selDetailById.do")
+	public ModelAndView selDetailById(Integer id) {
+		SignEvent sign = ss.selDetailById(id);
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			String beforeTime = sign.getTime();
+			Date date = sdf.parse(beforeTime);
+			//设置日历时间
+			c.setTime(date);
+			c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
+			date = c.getTime();
+			String deadTime = sdf.format(date);
+			//设置终止时间
+			sign.setDeadLine(deadTime);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("signEvent" , sign);
+		mav.setViewName("myReleaseSignDetails.jsp" );;
 		return mav;
 	}
 	

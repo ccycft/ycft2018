@@ -32,8 +32,8 @@ public class TestTitleSrv  {
 	    }  
 	    @Test
 	    public void testPing() {
-	    	ss.selSignEvent(1,4);
-	          //ts.index();
+	    	ts.selectForum(1,4);
+	    	//ts.index();
 	    /*	Praise p = new Praise();
 	    	p.setTid(1);
 	    	p.setUid(1);

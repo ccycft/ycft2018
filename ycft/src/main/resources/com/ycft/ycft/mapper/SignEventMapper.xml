@@ -72,6 +72,17 @@
   <insert id="insertSign" parameterType="java.lang.Integer">
       insert into sign (sid,uid) values(#{0} , #{1} )
   </insert>
+  <!-- 查询我的签到 -->
+  <select id="selSignByUid" parameterType="java.lang.Integer" resultMap="foreSelSignEventMap">
+       SELECT sign_event.*,user.sname FROM sign_event , USER WHERE user.id = sign_event.uid
+       and sign_event.uid = #{0}
+      order by time desc limit #{1} , #{2}  
+  </select>
+  <!-- 查询详情根据id -->
+  <select id="selDetailById" parameterType="java.lang.Integer" resultMap="foreSelSignEventMap">
+        SELECT sign_event.*,user.sname FROM sign_event , USER WHERE user.id = sign_event.uid
+      and sign_event.id = #{value}
+  </select>
   <!-- 客户端方法结束 -->
   <!-- 服务端方法开始 -->
   <select id="selSignUser" resultMap="SigneventUser" parameterType="com.ycft.ycft.po.SignEvent">
