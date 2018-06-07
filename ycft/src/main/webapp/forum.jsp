@@ -99,12 +99,12 @@
 
 </script>
 </head>
-<body class="container-fluid ">
+<body>
 	
 	<!-- 页面顶端导航栏 -->
-	<div class="nav-area">
+	<div class="nav-area" style="position:relative;top:0">
 		<span class="nav-title">校园论坛</span>	
-		<img class="right-icon" src="<%=basePath%>images/add.png" onClick="addPost()">
+		<img class="right-icon" src="<%=basePath%>images/add.png" onClick="addPost()" style="position:absolute;right:0.6rem;">
 	</div>
     <%
     	List<Forum> sList =  (List<Forum>)request.getAttribute("sList");

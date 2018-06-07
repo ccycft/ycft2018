@@ -53,13 +53,22 @@
     		border:0;
     	}
     </style>
+    <script>
+    	function logout(){
+    		if(confirm("确认退出当前登录吗?")){
+    			alert("就不退");
+    		}
+    	}
+    
+    </script>
+    
+    
 </head>
 <body>
 	<!-- 页面顶端导航栏 -->
-	<div class="nav-area">
-		<%-- <img class="left-icon"  src="<%=basePath%>images/back.png"  >	 --%>
+	<div class="nav-area" style="position:relative;top:0">
 		<span class="nav-title">个人中心</span>	
-		<img class="right-icon" src="<%=basePath%>images/add.png"> 
+		<img class="right-icon" src="<%=basePath%>images/注销.png" onClick="logout()" style="position:absolute;right:0.6rem;">
 	</div>
 	<div class="list-group" >
 		  <a  href="#" class="list-group-item ">
