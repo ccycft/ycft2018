@@ -25,8 +25,8 @@
 	<style>
 		.icon{
 			
-			height:5rem;
-			width:5rem;
+			height:3.5rem;
+			width:3.5rem;
 		}
 		
 		.context img{
@@ -48,7 +48,25 @@
 			height:2rem;
 			width:2rem;
 		}
-	
+		
+		.context p{
+		
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-align:left;
+			line-height:2rem;
+		}
+		.row{
+			margin-top:1rem;
+			line-height:1rem;
+		}
+		.forum-title{
+		
+			font-size:1.5rem;
+			font-weight:bold;
+		}
 	</style>
 	
 <title>论坛</title>
@@ -72,16 +90,16 @@
 
 </script>
 </head>
-<body class="container-fluid">
+<body class="container-fluid ">
 	
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area">
 		<img class="left-icon"  src="./images/back.png" onClick="back()">	
 		<span class="nav-title">校园论坛</span>	
-		<img class="right-icon" src="./images/location.png" onClick="addPost()">
+		<img class="right-icon" src="./images/add.png" onClick="addPost()">
 	</div>
 	
-	<div class="row">
+	<div class="row ">
 	
 		<div class="row">
 			
@@ -100,14 +118,14 @@
 		
 		</div>
 	
-		<div class="row context">
-			<div class="col-xs-12">
-				<span>文章标题</span>
+		<div class="row">
+			<div class="col-xs-5 col-xs-offset-1" style="margin-top:1rem;">
+				<span class="forum-title">文章标题</span>
 			</div>
 		</div>
 		
-		<div class="row context">
-			<div class="col-xs-12">
+		<div class="row context ">
+			<div class="col-xs-10 col-xs-offset-1">
 				<p>吉林省慕蝶商贸有限公司
 长春市铖金科技有限公司
 长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
@@ -124,7 +142,7 @@
 		
 		<div class="row">
 		
-			<div class="col-xs-1" >
+			<div class="col-xs-1 col-xs-offset-7" >
 				<img src="./images/tongzhi.png"  class="min_icon">
 			</div>
 			
@@ -143,5 +161,137 @@
 		</div>
 		
     </div>
+    
+    <hr>
+    
+    <div class="row ">
+	
+		<div class="row">
+			
+			<div class="col-xs-4 text-center">
+				<img class="img-circle icon" src="./images/users.png">
+			</div>
+			
+			<div class="col-xs-6">
+				<div class="row">
+					<span>郑斌斌</span>
+				</div>
+				<div class="row">
+					<span>2018.6.6 18:13</span>
+				</div>
+			</div>
+		
+		</div>
+	
+		<div class="row">
+			<div class="col-xs-5 col-xs-offset-1">
+				<span class="forum-title">文章标题</span>
+			</div>
+		</div>
+		
+		<div class="row context ">
+			<div class="col-xs-10 col-xs-offset-1">
+				<p>吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司</p>
+			</div>
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-xs-1 col-xs-offset-7" >
+				<img src="./images/tongzhi.png"  class="min_icon">
+			</div>
+			
+			<div class="col-xs-1">
+				<span>10</span>
+			</div>
+			
+			<div class="col-xs-1 " >
+				<img src="./images/tongzhi.png"  class="min_icon">
+			</div>
+			
+			<div class="col-xs-1">
+				<span>5</span>
+			</div>
+			
+		</div>
+		
+    </div>
+    
+    <hr>
+    
+    <div class="row ">
+	
+		<div class="row">
+			
+			<div class="col-xs-4 text-center">
+				<img class="img-circle icon" src="./images/users.png">
+			</div>
+			
+			<div class="col-xs-6">
+				<div class="row">
+					<span>郑斌斌</span>
+				</div>
+				<div class="row">
+					<span>2018.6.6 18:13</span>
+				</div>
+			</div>
+		
+		</div>
+	
+		<div class="row">
+			<div class="col-xs-5 col-xs-offset-1">
+				<span class="forum-title">文章标题</span>
+			</div>
+		</div>
+		
+		<div class="row context ">
+			<div class="col-xs-10 col-xs-offset-1">
+				<p>吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司吉林省慕蝶商贸有限公司
+长春市铖金科技有限公司
+长春派瑞特网络科技有限公司</p>
+			</div>
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-xs-1 col-xs-offset-7" >
+				<img src="./images/tongzhi.png"  class="min_icon">
+			</div>
+			
+			<div class="col-xs-1">
+				<span>10</span>
+			</div>
+			
+			<div class="col-xs-1 " >
+				<img src="./images/tongzhi.png"  class="min_icon">
+			</div>
+			
+			<div class="col-xs-1">
+				<span>5</span>
+			</div>
+			
+		</div>
+		
+    </div>
+    
+    <hr>
 </body>
 </html>
