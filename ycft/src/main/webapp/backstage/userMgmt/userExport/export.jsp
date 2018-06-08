@@ -303,7 +303,7 @@
 	     <div class="panel-body">
 	     	<div>
 	     	<div class="col-lg-3">
-	     	<form action="<%=basePathNoBackStage%>importExcel.do" enctype="multipart/form-data" method="post" id="fileForm">
+	     	<form action="" enctype="multipart/form-data" method="post" id="fileForm">
 				 <div class="form-group">
                  	<a href="<%=basePathNoBackStage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
                  </div>
@@ -434,6 +434,7 @@
    		    	if(confirm('您将要导入 ['+filename+"] 文件?")){
    		    		//开始导入
    		    		alert("开始提交");
+   		    		document.getElementById("fileForm").action="<%=basePathNoBackStage%>importExcel.do";
    		    		document.getElementById("fileForm").submit();
    		    	}
    		    }  
