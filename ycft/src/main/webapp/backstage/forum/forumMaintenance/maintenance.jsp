@@ -30,7 +30,7 @@
     <link href="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 	<!-- Summernot Styles -->
     <link rel="stylesheet" href="<%=basePath%>summernote/dist/summernote.css">
-
+	<link rel="stylesheet" href="<%=basePath%>css/style.css">
 	<!-- jQuery Js -->
     <script src="<%=basePath%>assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
@@ -248,7 +248,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="jump.do"><strong>返回首页</strong></a>
+        <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
