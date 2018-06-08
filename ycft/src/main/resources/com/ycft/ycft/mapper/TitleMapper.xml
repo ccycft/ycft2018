@@ -105,22 +105,22 @@
     </collection>
     <!-- 对应多个评论 --> 
   </resultMap>
-  <!-- 查文章论坛评论和详情 -->
-  <select id="selDetailAndComment" parameterType="java.lang.Integer" resultMap="ForumDetailResultMap">
-       SELECT title.id ,title.name,title.time,title.user,title.type,title.praise,title.comment , title.img_name
-       ,title.uid , title.user username ,
-       user.img_name userimgname,
-       content.text,
-       <!-- 多   开始 -->
-       comment.id cid , comment.time ctime , comment.uid cuid , comment.content ccontent,
-       user.sname csname
-       FROM title , content , COMMENT , USER  
-       WHERE title.id = comment.tid 
-       AND comment.uid = user.id  
-        AND title.id = content.tid
-        and title.id = #{value}
-       ORDER BY comment.time DESC 
+  <!-- 查文章 详情 -->
+  <select id="selDetail" parameterType="java.lang.Integer" resultMap="ForumResultMap">
+        <!-- 评论数  -->
+       SELECT  title.*,content.*
+      <!-- 用户姓名和头像信息 -->
+      ,user.id userid , user.sname username,user.img userimg,user.img_name userimgname 
+      <!-- 评论表 文章表  用户表 -->
+      FROM  title,content, USER   
+      WHERE title.uid = user.id   
+      AND title.id = content.tid
+      <!-- 4代表是论坛文章 -->
+      AND title.type = 4    
+      and title.id = #{value}
   </select>
+  
+      
   <!--  [查询文章]根据点赞数数量排序-->
   <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>

@@ -77,7 +77,7 @@ public class TitleSrv {
 		return tm.selectForum(nowPage , pageSize);
 	}
 	
-	public List<Forum> selDetailAndComment(Integer id){
-		return tm.selDetailAndComment(id);
+	public List<Forum> selDetail(Integer id){
+		return tm.selDetail(id);
 	}
 }

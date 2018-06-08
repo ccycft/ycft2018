@@ -85,13 +85,43 @@
 			window.history.back();
 		}
 	}
+	$(document).ready(function(){
+		var id = $("#fid").val();
+		var cmt = $("#cmts").val();
+		var html = '';
+		if(cmt > 0 ){
+			//如果评论数大于0 加载评论
+			  //加载评论
+			htmlobj=$.ajax({url:"<%=basePath%>fore/title/selComment.do?id="+id,async:false});
+			var obj = JSON.parse(htmlobj.responseText);
+			
+			for(var i = 0 ; i< obj.length ; i++){
+				html += '<div class="row">'+
+				
+					'<div class="col-xs-3 text-center">'+
+						'<span class="a_item">' + obj[i].sname +' 说: </span>'+
+					'</div>'+
+					'<div class="col-xs-9 ">'+
+						'<span>'+
+						obj[i].content +
+	<%-- 					评论时间			<%=comment.getTime() %> --%>
+					'</span>'+
+				'</div>'+
+				'</div>';
+			}
+		}else{
+			html = '暂无评论...';
+		}
+		
+		$("#comment-wrapper").append(html);
+	})
 </script>
 </head>
-<body class="container-fluid">
+<body >
 
 	<!-- 页面顶端导航栏 -->
-	<div class="nav-area">
-		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
+	<div class="nav-area" style="position:relative;top:0">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()" style="position:absolute;left:0;">	
 		<span class="nav-title">论坛详情</span>	
 	</div>
 		
@@ -102,7 +132,8 @@
 			Forum f = list.get(0);
 			 
 	%>
-	
+		<input type="hidden" value="<%=f.getId() %>" id="fid" />
+		<input type="hidden" value="<%=f.getComment()%>" id="cmts" />
 		<div class="row">
 			
 			<div class="col-xs-2 text-center">
@@ -153,30 +184,9 @@
 				</div>
 			</div>
 			
-			<%
-				List<Comment> cList =  f.getCommentList() ; 
-				if(cList != null && cList.size() > 0 ){
-					for(Comment comment : cList){
-			%>
-					<div class="row">
-	
-						<div class="col-xs-3 text-center">
-							<span class="a_item"><%=comment.getSname()%> 说: </span>
-						</div>
-						<div class="col-xs-9 ">
-							<span>
-								<%=comment.getContent() %>
-<%-- 					评论时间			<%=comment.getTime() %> --%>
-							</span>
-						</div>
-					</div>
-			
-			<%
-					}
-				}else{
-					out.print("暂无评论");
-				}
-			%>
+			 <div id="comment-wrapper">
+			 
+			 </div>
 		
 			 <div style="height:100px">
 			 
