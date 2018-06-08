@@ -184,14 +184,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
-				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
         </nav>
@@ -229,8 +222,11 @@
 				 <div class="form-group">
                  	<a href="<%=basePathNoBackStage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
                  </div>
-                 <div class="form-group">
-                 	<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
+                 <div class="row">
+                 <label class="col-sm-4 control-label" for="ds_host">请先选择</label>
+                 	<div class="form-group col-sm-4">
+                 		<input type="file" name="file" onclick="javascript:importFile()"  id="file" style="vertical-align:middle" >
+       				</div>
                  </div>
                  <div class="form-group">
                  
@@ -249,7 +245,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">用户信息添加</h4>  
 		            </div>    
-		             <form action="<%=basePathNoBackStage%>addOneUser.do" method="post" id="addOneUser">
+		           <form action="<%=basePathNoBackStage%>addOneUser.do" method="post" id="addOneUser">
 		            <div class="modal-body">  
 		            	<fieldset>
 		            	<div class="row">
@@ -318,19 +314,18 @@
 	        			</div>
                     </fieldset>
             	</div>
-             </form>
 		            <div class="modal-footer">  
 			            <button type="submit" class="btn btn-info">保存</button>
 		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>  
 		            </div>  
-		 	</div>
+		     </form>
+		 		</div>
+	    	</div>
 	    </div>
-	    </div>
-         </div>
-         <!-- /. ROW  -->
+        </div>
      </div>
      
-   
+ </div>  
 	 
 
 	
