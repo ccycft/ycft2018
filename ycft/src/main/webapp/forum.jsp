@@ -96,6 +96,9 @@
 		window.open('<%=basePath%>addPost.jsp','_self');
 		
 	}
+	function openDetail(id){
+		window.location.href = "<%=basePath%>fore/title/selDetailAndComment.do?id="+id;
+	}
 
 </script>
 </head>
@@ -111,7 +114,7 @@
 	    if(sList != null){
 	    	for(Forum f : sList){
 	 %>
-	 			<div class="row ">
+	 			<div class="row " onclick="openDetail('<%=f.getId()%>')">
 				
 					<div class="row">
 						

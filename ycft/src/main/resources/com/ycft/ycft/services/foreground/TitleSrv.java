@@ -76,4 +76,8 @@ public class TitleSrv {
 		 
 		return tm.selectForum(nowPage , pageSize);
 	}
+	
+	public List<Forum> selDetailAndComment(Integer id){
+		return tm.selDetailAndComment(id);
+	}
 }
