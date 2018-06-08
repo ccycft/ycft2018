@@ -104,7 +104,7 @@ public class UserCtrl {
 		}
 		if(b){
 			//成功页面
-			mav.setViewName("backstage/success.jsp");
+			mav.setViewName("selAll.do");
 		}else{
 			//失败页面
 			mav.setViewName("backstage/fail.jsp");
