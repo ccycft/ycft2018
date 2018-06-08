@@ -73,6 +73,54 @@
     <!-- 用户头像名 -->
     <result column="userimgname" property="userImgName" jdbcType="VARCHAR"/>
   </resultMap>
+  <!-- 显示文章详情和评论  [一对多] -->
+   <resultMap id="ForumDetailResultMap" type="com.ycft.ycft.po.Forum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" /> 
+    <!-- 发布用户名-->
+    <result column="user" property="user" jdbcType="INTEGER"/>
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="praise" property="praise" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" /> 
+    <!-- 发布用户Id -->
+    <result column="uid" property="uid" jdbcType="INTEGER" /> 
+   
+    <!-- 文本 -->
+    <result column="text" property="text" jdbcType="LONGVARCHAR" /> 
+    <!-- 用户名 -->
+    <result column="username" property="userName" jdbcType="VARCHAR"/>
+    <!-- 用户头像 -->
+    <result column="userimg" property="userImg" jdbcType="LONGVARBINARY"/>
+    <!-- 用户头像名 -->
+    <result column="userimgname" property="userImgName" jdbcType="VARCHAR"/>
+    <collection property="commentList" ofType="com.ycft.ycft.po.Comment" >
+ 		<id column="cid" property="id" jdbcType="INTEGER" />
+	    <result column="ctime" property="time" jdbcType="LONGVARCHAR" />
+	    <result column="csname" property="sname" jdbcType="LONGVARCHAR" />
+	    <result column="cuid" property="uid" jdbcType="INTEGER" />
+	    <result column="ccontent" property="content" jdbcType="LONGVARCHAR" />
+	    <result column="csname" property="sname" jdbcType="LONGVARCHAR" />
+    </collection>
+    <!-- 对应多个评论 --> 
+  </resultMap>
+  <!-- 查文章论坛评论和详情 -->
+  <select id="selDetailAndComment" parameterType="java.lang.Integer" resultMap="ForumDetailResultMap">
+       SELECT title.id ,title.name,title.time,title.user,title.type,title.praise,title.comment , title.img_name
+       ,title.uid , title.user username ,
+       user.img_name userimgname,
+       content.text,
+       <!-- 多   开始 -->
+       comment.id cid , comment.time ctime , comment.uid cuid , comment.content ccontent,
+       user.sname csname
+       FROM title , content , COMMENT , USER  
+       WHERE title.id = comment.tid 
+       AND comment.uid = user.id  
+        AND title.id = content.tid
+        and title.id = #{value}
+       ORDER BY comment.time DESC 
+  </select>
   <!--  [查询文章]根据点赞数数量排序-->
   <select id="selectByPraiseCount" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
       	select <include refid="Base_Column_List"></include>

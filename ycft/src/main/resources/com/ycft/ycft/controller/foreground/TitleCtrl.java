@@ -173,4 +173,13 @@ public class TitleCtrl {
 		mav.addObject("sList",fList);
 		return mav;
 	}
+	
+	@RequestMapping("selDetailAndComment.do")
+	public ModelAndView selDetailAndComment(Integer id) {
+		List<Forum> fList = ts.selDetailAndComment(id);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("forumDetails.jsp");
+		mav.addObject("fList",fList);
+		return mav;
+	}
 }

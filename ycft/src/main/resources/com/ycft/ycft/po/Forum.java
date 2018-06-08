@@ -3,6 +3,7 @@ package com.ycft.ycft.po;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import com.ycft.ycft.system.Core;
 
@@ -12,7 +13,23 @@ public class Forum {
 	    private Integer id;
 	    //文章名
 	    private String name;
-	    //文章发布时间
+	    //发布的用户用户名
+	    private String user;
+	    public Integer getUid() {
+			return uid;
+		}
+		public void setUid(Integer uid) {
+			this.uid = uid;
+		}
+		private Integer uid;
+	    
+	    public String getUser() {
+			return user;
+		}
+		public void setUser(String user) {
+			this.user = user;
+		}
+		//文章发布时间
 	    private String time; 
 	    //文章类型： 
 	    private Integer type;
@@ -23,7 +40,15 @@ public class Forum {
 	    //发布的文章
 	    private String text;
 	      
-	    public String getText() {
+	    //对应的评论一对多
+	    List<Comment> commentList;
+	    public List<Comment> getCommentList() {
+			return commentList;
+		}
+		public void setCommentList(List<Comment> commentList) {
+			this.commentList = commentList;
+		}
+		public String getText() {
 			return text;
 		}
 		public void setText(String text) {

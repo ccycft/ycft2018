@@ -8,8 +8,29 @@ public class Comment {
     private Integer tid;
 
     private String content;
+    
+    //时间
+    private String time;
+    //评论用户名
+    private String sname;
+    
+    public String getTime() {
+		return time;
+	}
 
-    public Integer getId() {
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+	public Integer getId() {
         return id;
     }
 
