@@ -245,6 +245,11 @@
         });
     });
     </script>
+    <style type="text/css">
+    .padding{
+    	padding:15px;
+    }
+    </style>
 <title>Insert title here</title>
 </head>
 <body onload="load()">
@@ -335,7 +340,7 @@
 						            </div>  
 						            <div class="modal-body">  
 						            	<fieldset>
-					                       <div class="form-group">
+					                       <div class="form-group padding">
 					                          <label class="col-sm-2 control-label" for="ds_host">姓名</label>
 					                          <div class="col-sm-4">
 					                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getSname() %>"/>
@@ -345,7 +350,7 @@
 					                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getSno() %>"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
+					                       <div class="form-group padding">
 					                          <label class="col-sm-2 control-label" for="ds_host">电话</label>
 					                          <div class="col-sm-4">
 					                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getTel() %>"/>
@@ -355,7 +360,7 @@
 					                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getSchool() %>"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
+					                       <div class="form-group padding">
 					                          <label class="col-sm-2 control-label" for="ds_host">学院</label>
 					                          <div class="col-sm-4">
 					                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getCollege() %>"/>
@@ -365,7 +370,7 @@
 					                             <input class="form-control" id="ds_name" type="text" value="<%=uList.get(i).getDepartment() %>"/>
 					                          </div>
 					                       </div>
-					                       <div class="form-group">
+					                       <div class="form-group padding">
 					                          <label class="col-sm-2 control-label" for="ds_host">专业</label>
 					                          <div class="col-sm-4">
 					                             <input class="form-control" id="ds_host" type="text" value="<%=uList.get(i).getProfession() %>"/>
