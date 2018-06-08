@@ -97,7 +97,7 @@
 		
 	}
 	function openDetail(id){
-		window.location.href = "<%=basePath%>fore/title/selDetailAndComment.do?id="+id;
+		window.location.href = "<%=basePath%>fore/title/selDetail.do?id="+id;
 	}
 
 </script>
@@ -116,14 +116,14 @@
 	 %>
 	 			<div class="row " onclick="openDetail('<%=f.getId()%>')">
 				
-					<div class="row">
+					<div class="row" >
 						
-						<div class="col-xs-4 text-center">
+						<div class="col-xs-4 text-right" style="width: 24.333333%;">
 							<img class="img-circle icon" src="<%=photoPath + "icon/"%><%=f.getUserImgName()%>">
 						</div>
 						
-						<div class="col-xs-6">
-							<div class="row">
+						<div class="col-xs-6" >
+							<div class="row" style="line-height:0.5rem">
 								<span><%=f.getUserName()%></span>
 							</div>
 							<div class="row">
@@ -151,7 +151,7 @@
 							<img src="<%=basePath%>images/dianzan.png"  class="min_icon">
 						</div>
 						
-						<div class="col-xs-1">
+						<div class="col-xs-1" style="line-height: 2rem">
 							<span><%=f.getPraise() %></span>
 						</div>
 						
@@ -159,7 +159,7 @@
 							<img src="<%=basePath%>images/pinglun.png"  class="min_icon">
 						</div>
 						
-						<div class="col-xs-1">
+						<div class="col-xs-1" style="line-height: 2rem">
 							<span><%=f.getComment() %></span>
 						</div>
 						

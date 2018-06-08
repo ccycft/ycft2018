@@ -1,6 +1,9 @@
 package com.ycft.ycft.mapper;
 
+import java.util.List;
+
 import com.ycft.ycft.po.Comment;
+import com.ycft.ycft.po.Forum;
 
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,6 @@ public interface CommentMapper {
     int updateByPrimaryKeyWithBLOBs(Comment record);
 
     int updateByPrimaryKey(Comment record);
+    
+    public List<Comment> selComment(Integer id);
 }

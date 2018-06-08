@@ -11,7 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.ycft.ycft.mapper.CommentMapper;
 import com.ycft.ycft.mapper.TitleMapper;
+import com.ycft.ycft.po.Comment;
 import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
@@ -174,12 +177,33 @@ public class TitleCtrl {
 		return mav;
 	}
 	
-	@RequestMapping("selDetailAndComment.do")
+	@RequestMapping("selDetail.do")
 	public ModelAndView selDetailAndComment(Integer id) {
-		List<Forum> fList = ts.selDetailAndComment(id);
+		List<Forum> fList = ts.selDetail(id);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("forumDetails.jsp");
 		mav.addObject("fList",fList);
 		return mav;
+	}
+	
+	@Autowired
+	CommentMapper cm;
+	//≤È—Ø∆¿¬€
+	@RequestMapping("selComment.do")
+	public void selDetail(Integer id , HttpServletResponse rspn) {
+		List<Comment> fList = cm.selComment(id);
+		Gson g = new Gson();
+		String rtn = g.toJson(fList);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			out.print(rtn);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
 	}
 }
