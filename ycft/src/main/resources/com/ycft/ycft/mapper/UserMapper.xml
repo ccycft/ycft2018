@@ -105,9 +105,7 @@
 	</select>
 	
 	<select id="selCls" resultMap="BaseResultMap">
-		SELECT cls 
-		FROM USER 
-		GROUP BY cls
+		SELECT cls FROM USER WHERE cls IS NOT NULL  GROUP BY cls
 	</select>
   <!-- 服务端方法结束 -->
   
