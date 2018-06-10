@@ -111,14 +111,14 @@
 				   				Slide slide = sList.get(i);
 				   				if(i == 0){
 				   	%>
-					   				<div class="item active" onclick="openDetails('<%=slide.getId()%>')" >
+					   				<div class="item active" onclick="openDetails('<%=slide.getCid()%>')" >
 								      <img src="<%=( photoPath + slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}else{
 				   					
 				   	%>
-				   					<div class="item"  onclick="openDetails('<%=slide.getId()%>')">
+				   					<div class="item"  onclick="openDetails('<%=slide.getCid()%>')">
 								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">
 								    </div>
 				   	<%
