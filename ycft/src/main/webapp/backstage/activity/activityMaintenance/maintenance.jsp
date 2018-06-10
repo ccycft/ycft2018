@@ -129,6 +129,7 @@
 	    	alert("请仔细核对学号，如若错误则无法导入！");
 	    	if(confirm('您将要导入 ['+filename+"] 文件?")){
 	    		//开始导入
+	    		document.getElementById("fileForm"+id).action="<%=basePathNoBackStage%>importActivityExcel.do";
 	    		document.getElementById("fileForm"+id).submit();
 	    	} else {
 	    		return false;
@@ -423,7 +424,7 @@
 						                </button>  
 						                <h4 class="modal-title" id="myModalLabel">导入活动报名人</h4>  
 						            </div>
-						            <form action="<%=basePathNoBackStage%>importActivityExcel.do" method="post" id="fileForm<%=tcList.get(i).getId() %>" enctype="multipart/form-data"> 
+						            <form action="" method="post" id="fileForm<%=tcList.get(i).getId() %>" enctype="multipart/form-data"> 
 						            	<input type="hidden" name="id" value="<%=tcList.get(i).getId() %>"/>  
 							            <div class="modal-body">  
 							            	<fieldset>
