@@ -118,7 +118,7 @@ public class ArticleCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('ÐÞ¸Ä³É¹¦');"); 
-        	out.println("window.opener=null;window.close();");
+        	out.println("window.open('selArticle.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");
