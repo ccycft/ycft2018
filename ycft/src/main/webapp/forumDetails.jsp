@@ -76,6 +76,8 @@
 	}
 </style>
 <script>
+ 
+
 	function back(){ 
 		
 		if(typeof(window.ceshi) != 'undefined'){
@@ -86,6 +88,23 @@
 		}
 	}
 	$(document).ready(function(){
+		var sizeStore = 0;
+		if(window.localStorage) {
+			// 遍历所有存储
+			for(item in window.localStorage) {
+				if(window.localStorage.hasOwnProperty(item)) {
+				sizeStore += window.localStorage.getItem(item).length;
+				}
+			}
+		}
+		var shengyu = (sizeStore / 1024 / 1024).toFixed(2);
+		console.log( shengyu + 'M');
+		//如果剩余空间太小  清空localstorage
+		if(shengyu > 3){
+			window.localStorage.clear();
+			//以防止空间满了 无法点赞
+		}
+		
 		var id = $("#fid").val();
 		var cmt = $("#cmts").val();
 		var html = '';
@@ -110,72 +129,92 @@
 				'</div>';
 			}
 		}else{
-			html = '暂无评论...';
+			html = '';
 		}
 		
 		$("#comment-wrapper").append(html);
 		
-		
+		var isDianzan = 0;
 		//  //写入c字段
         var fid1 = $("#fid").val();
         var isNull = localStorage.getItem(fid1+"");
         //如果fid等于这个id说明已经点过赞了
         if(typeof(isNull) && isNull == 'fid'){
         	$("#dianzan").attr('src', "<%=basePath%>images/dianzan.png"); 
-        	$("#dianzan").remoteAttr("onclick");
+        	 $("#dianzan").click(function(){
+        	        return false;
+        	    });
+        	
+        }else{
+        	 $("#dianzan").click(function(){
+        		 if(isDianzan == 1 ){
+        			 
+        			 return false;
+        		 }
+         		var id = $("#fid").val();
+         		htmlobj=$.ajax({url:"<%=basePath%>fore/title/dianzan.do?tid="+id ,async:false});
+         		var rtn = htmlobj.responseText;
+         		if(rtn == 1){
+         			isDianzan = 1;
+         			//变色
+         			$("#dianzan").attr('src', "<%=basePath%>images/dianzan.png"); 
+         			//加一
+         			var old = parseInt($("#praise-cnt").text());
+         			$("#praise-cnt").text((old+1));
+         			//将文章ID   存入localstage  代表已经点过赞了
+         			if(!window.localStorage){
+         	            
+         	            return false;
+         	        }else{
+         	            //主逻辑业务
+         	        	var storage=window.localStorage;
+         	            //写入c字段  格式   40:fid
+         	            storage.setItem(id+"", "fid");
+         	        }
+         		}
+         		
+         	});
         }
         
         
         
-        $("#dianzan").click(function(){
-    		var id = $("#fid").val();
-    		htmlobj=$.ajax({url:"<%=basePath%>fore/title/dianzan.do?tid="+id ,async:false});
-    		var rtn = htmlobj.responseText;
-    		if(rtn == 1){
-    			//变色
-    			$("#dianzan").attr('src', "<%=basePath%>images/dianzan.png"); 
-    			//加一
-    			var old = parseInt($("#praise-cnt").text());
-    			$("#praise-cnt").text((old+1));
-    			//将文章ID   存入localstage  代表已经点过赞了
-    			if(!window.localStorage){
-    	            
-    	            return false;
-    	        }else{
-    	            //主逻辑业务
-    	        	var storage=window.localStorage;
-    	            //写入c字段  格式   40:fid
-    	            storage.setItem(id+"", "fid");
-    	        }
-    		}
-    		
-    	});
+       
 	})
 	
 	function pinglun(){
 		
 		var id = $("#fid").val();
-		var content = $("#content").val();
-		htmlobj=$.ajax({url:"<%=basePath%>fore/title/comment.do?tid="+id+"&content="+content,async:false});
-		//alert(htmlobj);
-		var rtn = htmlobj.responseText;
-		if(rtn == 1){
-			 
-		 	//成功
-			  var html =  '<div class="row">'+
-							
-							'<div class="col-xs-3 text-center">'+
-								'<span class="a_item">' + '我' +' 说: </span>'+
+		var content = $("#content").val().trim();
+		if(content != ''){
+			htmlobj=$.ajax({url:"<%=basePath%>fore/title/comment.do?tid="+id+"&content="+content,async:false});
+			//alert(htmlobj);
+			var rtn = htmlobj.responseText;
+			if(rtn == 1){
+				 
+			 	//成功
+				  var html =  '<div class="row">'+
+								
+								'<div class="col-xs-3 text-center">'+
+									'<span class="a_item">' + '我' +' 说: </span>'+
+								'</div>'+
+								'<div class="col-xs-9 ">'+
+									'<span>'+
+									 content +
+									 
+								'</span>'+
 							'</div>'+
-							'<div class="col-xs-9 ">'+
-								'<span>'+
-								 content +
-								 
-							'</span>'+
-						'</div>'+
-						'</div>';
-			
-			$("#comment-wrapper").prepend(html);  
+							'</div>';
+				
+				$("#comment-wrapper").prepend(html);  
+				
+				//清空输入框...
+				$("#content").val("");
+				//评论数加1
+				var cnt = parseInt($("#commentcount").text()) + 1;
+				$("#commentcount").text(cnt);
+			}
+		}else{
+			alert("请输入评论内容!");
 		}
 	}
 	 
@@ -238,7 +277,7 @@
 			
 			<div class="row" style="border-bottom:1px solid #ccc;line-height:2rem;margin-top:4rem;">
 				<div class="col-xs-4" style="border-bottom:2px solid  #5bc0de;height:3rem;">
-					<span class="forum-title">评论(<%=f.getComment()%>)</span>
+					<span class="forum-title" >评论(<span id="commentcount""><%=f.getComment()%></span>)</span>
 				</div>
 				<script>
 		          
