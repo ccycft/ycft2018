@@ -107,7 +107,6 @@
 	    	<img src="./images/add.png" class="add-icon"/>
 	    </div>
 	  </div>
-	  
 	</form>
 	
 </body>
