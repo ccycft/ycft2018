@@ -379,7 +379,7 @@
 	                	<tr class="gradeA">
                             <td class="col-md-2"><%=tcList.get(i).getName() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
-                            <td class="col-md-1"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-1"><%=tcList.get(i).getSname() %></td>
                             <td class="col-md-2"><img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/></td>
                             <td class="col-md-5">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
