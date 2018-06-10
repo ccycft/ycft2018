@@ -89,6 +89,7 @@ public class ActivitySrv {
 		//截取一下获取图片名
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
+		title.setUid(user.getId()+"");
 		//插入标题
 		tm.insertTitle(title);
 		content.setTid(title.getId());
@@ -157,7 +158,7 @@ public class ActivitySrv {
 		//获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
-		
+		title.setUid(user.getId()+"");
 		int resultOne = tm.updateByPrimaryKeySelective(title);
 		int resultTwo = contentMapper.updateByTid(content);
 		//只有两个都修改成功则返回true

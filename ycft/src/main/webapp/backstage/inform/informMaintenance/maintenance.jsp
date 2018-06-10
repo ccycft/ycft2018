@@ -352,7 +352,7 @@
 	                	<tr class="gradeA">
                             <td class="col-md-2"><%=tcList.get(i).getName() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
-                            <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getSname() %></td>
                             <td class="col-md-2">
                             <img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/>
                             </td>

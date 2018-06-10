@@ -13,7 +13,8 @@ public class Title {
     private String user;
     //文章发布用户id
     private String uid;
-    public String getUid() {
+
+	public String getUid() {
 		return uid;
 	}
 
