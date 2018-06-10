@@ -29,7 +29,7 @@
   <select id="selComment" parameterType="java.lang.Integer" resultMap="CommentMap">
       SELECT comment.* , user.sname  FROM title , COMMENT , user   WHERE
        title.id = comment.tid AND user.id = comment.uid AND 
-       title.id = #{value}
+       title.id = #{value} order by comment.time desc
   </select>
   <!-- 客户端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >

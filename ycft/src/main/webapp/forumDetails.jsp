@@ -114,7 +114,71 @@
 		}
 		
 		$("#comment-wrapper").append(html);
+		
+		
+		//  //写入c字段
+        var fid1 = $("#fid").val();
+        var isNull = localStorage.getItem(fid1+"");
+        //如果fid等于这个id说明已经点过赞了
+        if(typeof(isNull) && isNull == 'fid'){
+        	$("#dianzan").attr('src', "<%=basePath%>images/dianzan.png"); 
+        	$("#dianzan").remoteAttr("onclick");
+        }
+        
+        
+        
+        $("#dianzan").click(function(){
+    		var id = $("#fid").val();
+    		htmlobj=$.ajax({url:"<%=basePath%>fore/title/dianzan.do?tid="+id ,async:false});
+    		var rtn = htmlobj.responseText;
+    		if(rtn == 1){
+    			//变色
+    			$("#dianzan").attr('src', "<%=basePath%>images/dianzan.png"); 
+    			//加一
+    			var old = parseInt($("#praise-cnt").text());
+    			$("#praise-cnt").text((old+1));
+    			//将文章ID   存入localstage  代表已经点过赞了
+    			if(!window.localStorage){
+    	            
+    	            return false;
+    	        }else{
+    	            //主逻辑业务
+    	        	var storage=window.localStorage;
+    	            //写入c字段  格式   40:fid
+    	            storage.setItem(id+"", "fid");
+    	        }
+    		}
+    		
+    	});
 	})
+	
+	function pinglun(){
+		
+		var id = $("#fid").val();
+		var content = $("#content").val();
+		htmlobj=$.ajax({url:"<%=basePath%>fore/title/comment.do?tid="+id+"&content="+content,async:false});
+		//alert(htmlobj);
+		var rtn = htmlobj.responseText;
+		if(rtn == 1){
+			 
+		 	//成功
+			  var html =  '<div class="row">'+
+							
+							'<div class="col-xs-3 text-center">'+
+								'<span class="a_item">' + '我' +' 说: </span>'+
+							'</div>'+
+							'<div class="col-xs-9 ">'+
+								'<span>'+
+								 content +
+								 
+							'</span>'+
+						'</div>'+
+						'</div>';
+			
+			$("#comment-wrapper").prepend(html);  
+		}
+	}
+	 
 </script>
 </head>
 <body >
@@ -176,11 +240,14 @@
 				<div class="col-xs-4" style="border-bottom:2px solid  #5bc0de;height:3rem;">
 					<span class="forum-title">评论(<%=f.getComment()%>)</span>
 				</div>
-				<div class="col-xs-1 col-xs-offset-5" >
-					<img src="<%=basePath%>images/dianzan.png"  class="min_icon">
+				<script>
+		          
+				</script>
+				<div class="col-xs-1 col-xs-offset-5" id="dianzan-wrapper" >
+					<img src="<%=basePath%>images/no_dianzan.png"  id="dianzan" class="min_icon"   >
 				</div>
 				<div class="col-xs-1">
-					<span><%=f.getPraise() %></span>
+					<span id="praise-cnt"><%=f.getPraise() %></span>
 				</div>
 			</div>
 			
@@ -193,7 +260,10 @@
 			 </div>
 		
 			<div class="bottom—navs">
-				<input class="bottom-input" type="text" placeholder="爱评论的人粉丝多~"/>
+				 	<!-- 评论 -->
+					<input class="bottom-input" type="text" id="content" style="width: 86%" placeholder="爱评论的人粉丝多~"/>
+					<input class="" type="button" id="submit-comment" onclick="pinglun()" value="发送"/>
+				 
 			</div>
 	
 	

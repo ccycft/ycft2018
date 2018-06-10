@@ -161,6 +161,12 @@
       ORDER BY title.time DESC
       limit #{0} , #{1}
   </select>
+  <!-- 插入用户评论 -->
+  <insert id="insertComment" parameterType="Comment">
+      
+      insert into comment(uid,tid,content,time) values
+      (#{uid},#{tid},#{content},#{time})
+  </insert>
   <!-- 客户端方法 结束 -->
   
   <!-- 服务端方法开始 -->

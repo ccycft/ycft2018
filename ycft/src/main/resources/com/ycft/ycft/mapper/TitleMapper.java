@@ -2,6 +2,7 @@ package com.ycft.ycft.mapper;
 
 import java.util.List;
 
+import com.ycft.ycft.po.Comment;
 import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
@@ -23,6 +24,10 @@ public interface TitleMapper {
 	//论坛查询
 	public List<Forum> selectForum(Integer nowPage , Integer pageSize);
 	public List<Forum> selDetail(Integer id);
+	
+	//插入用户评论
+	public int insertComment(Comment comment);
+	
 	/**
 	 * 客户端方法结束
 	 * */
