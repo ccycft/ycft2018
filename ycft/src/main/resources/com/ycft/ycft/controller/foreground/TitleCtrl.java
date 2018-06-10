@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -20,6 +22,7 @@ import com.ycft.ycft.mapper.CommentMapper;
 import com.ycft.ycft.mapper.PraiseMapper;
 import com.ycft.ycft.mapper.TitleMapper;
 import com.ycft.ycft.po.Comment;
+import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Praise;
 import com.ycft.ycft.po.Title;
@@ -301,5 +304,20 @@ public class TitleCtrl {
 		} finally {
 			out.close();
 		}
+	}
+	
+	@RequestMapping("addForum.do")
+	public ModelAndView addForum(@RequestParam("files")MultipartFile[] files , Title t , Content c ) {
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(files.length);
+		for(int i = 0 ; i < files.length ; i++) {
+			System.out.println(files[i].getOriginalFilename());
+		}
+		int i = ts.insertTitleAffairs( files , t, c);
+		if(i > 0) {
+			mav.setViewName("fore/title/selectForum.do");
+		}
+		return mav;
 	}
 }

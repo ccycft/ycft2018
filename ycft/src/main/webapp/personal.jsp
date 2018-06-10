@@ -56,7 +56,7 @@
     <script>
     	function logout(){
     		if(confirm("确认退出当前登录吗?")){
-    			alert("就不退");
+    			window.location.href = "<%=basePath%>fore/user/logout.do";
     		}
     	}
     

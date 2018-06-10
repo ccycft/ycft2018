@@ -120,6 +120,38 @@ public class UserCtrl {
 	}	
 	
 	
+	@RequestMapping("logout.do")
+	public ModelAndView logout( HttpServletRequest req , HttpServletResponse rspn) {
+		ModelAndView mav = new ModelAndView();
+		Cookie[] cookies = req.getCookies();
+		for(Cookie cookie : cookies) {
+			
+			
+			
+			if(cookie.getName().equals("uid")) {
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				rspn.addCookie(cookie);
+			}if(cookie.getName().equals("sno")) {
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				rspn.addCookie(cookie);
+			}if(cookie.getName().equals("sname")) {
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				rspn.addCookie(cookie);
+			}if(cookie.getName().equals("tel")) {
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				rspn.addCookie(cookie);
+			}
+			
+		}
+		mav.setViewName("preLogin.jsp");
+		return mav;
+	}
+	
+	
 	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		 String a = URLEncoder.encode("ишк╖", "UTF-8");

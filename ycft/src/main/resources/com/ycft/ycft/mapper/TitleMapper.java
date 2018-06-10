@@ -24,7 +24,8 @@ public interface TitleMapper {
 	//论坛查询
 	public List<Forum> selectForum(Integer nowPage , Integer pageSize);
 	public List<Forum> selDetail(Integer id);
-	
+	//论坛title插入
+	public int insertForum(Title t);
 	//插入用户评论
 	public int insertComment(Comment comment);
 	

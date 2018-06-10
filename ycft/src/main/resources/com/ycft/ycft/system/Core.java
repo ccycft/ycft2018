@@ -6,6 +6,8 @@ public class Core {
 	public static final String PhotoPath = "C://upload/";
 	//本地头像的存储位置
 	public static final String ICONPATH = "C://upload/icon/"; 
+	//论坛图片的存储位置
+	public static final String FORUMPATH = "C://upload/forum/";
 	public static final String PATH = "/photo";
 	
 	//签到默认截止的时间   (以分钟计算)

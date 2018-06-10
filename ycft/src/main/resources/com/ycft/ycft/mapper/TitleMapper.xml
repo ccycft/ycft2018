@@ -72,6 +72,10 @@
     <result column="userimg" property="userImg" jdbcType="LONGVARBINARY"/>
     <!-- 用户头像名 -->
     <result column="userimgname" property="userImgName" jdbcType="VARCHAR"/>
+    <!-- 三张图片 -->
+    <result column="img1_name" property="img1Name" jdbcType="VARCHAR"/>
+    <result column="img2_name" property="img2Name" jdbcType="VARCHAR"/>
+    <result column="img3_name" property="img2Name" jdbcType="VARCHAR"/>
   </resultMap>
   <!-- 显示文章详情和评论  [一对多] -->
    <resultMap id="ForumDetailResultMap" type="com.ycft.ycft.po.Forum" >
@@ -166,6 +170,15 @@
       
       insert into comment(uid,tid,content,time) values
       (#{uid},#{tid},#{content},#{time})
+  </insert>
+  <!-- 插入论坛type=4 -->
+  <insert id="insertForum" parameterType="Title" >
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into title(name , time , user , type , uid )
+      values
+      ( #{name} , #{time}  , #{user}  , #{type} , #{uid} )
   </insert>
   <!-- 客户端方法 结束 -->
   
