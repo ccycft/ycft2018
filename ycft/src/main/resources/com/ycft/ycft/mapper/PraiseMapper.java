@@ -8,7 +8,7 @@ public interface PraiseMapper {
 	 * 客户端方法开始
 	 * */
 	//点赞
-	public int insertUid(Praise p);
+	public int dianzan(Praise p);
 	/**
 	 * 客户端方法结束
 	 * */

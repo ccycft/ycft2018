@@ -2,8 +2,12 @@ package com.ycft.ycft.controller.foreground;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.ycft.ycft.mapper.CommentMapper;
+import com.ycft.ycft.mapper.PraiseMapper;
 import com.ycft.ycft.mapper.TitleMapper;
 import com.ycft.ycft.po.Comment;
 import com.ycft.ycft.po.Forum;
+import com.ycft.ycft.po.Praise;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.foreground.TitleSrv;
@@ -28,6 +34,8 @@ public class TitleCtrl {
 	TitleMapper tm;
 	@Autowired
 	TitleSrv ts;
+	@Autowired
+	PraiseMapper pm;
 	
 	/**
 	 * 根据时间降序 查询文章
@@ -198,6 +206,94 @@ public class TitleCtrl {
 		try {
 			out =  rspn.getWriter();
 			out.print(rtn);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+	}
+	
+	//ajax 用户评论
+	@RequestMapping("comment.do")
+	public void comment(Comment comment , HttpServletRequest req , HttpServletResponse rspn) {
+		Cookie[] cookies = req.getCookies();
+		int uid = 0;
+		if(cookies != null && cookies.length > 0) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("uid")) {
+					uid = Integer.parseInt(cookie.getValue());
+				}
+			}
+		}
+		//缺少用户信息直接结束
+		if(uid == 0) {
+			return ; 
+		}
+		
+		//设置用户信息
+		comment.setUid(uid);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		//设置当前时间
+		comment.setTime(sdf.format(date));
+		//开始插入用户评论
+		System.out.println(comment.getContent()+"==========");
+		int i = tm.insertComment(comment);
+		
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			
+			//1代表成功  0代表失败...
+			out.print(i > 0 ? 1 : 0);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+		
+	}
+	
+	@RequestMapping("dianzan.do")
+	public void dianzan(Integer tid , HttpServletRequest req , HttpServletResponse rspn) {
+		Cookie[] cookies = req.getCookies();
+		int uid = 0;
+		if(cookies != null && cookies.length > 0) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("uid")) {
+					uid = Integer.parseInt(cookie.getValue());
+				}
+			}
+		}
+		//缺少用户信息直接结束
+		if(uid == 0) {
+			return ; 
+		}
+		
+		//设置用户信息
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		//设置当前时间
+		//开始插入用户点赞
+		System.out.println("点赞==========");
+		Praise p = new Praise();
+		p.setStatus("点赞");
+		p.setTime(sdf.format(date) );
+		p.setUid(uid);
+		p.setTid(tid);
+		//插入点赞
+		int i = pm.dianzan(p );
+		
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			
+			//1代表成功  0代表失败...
+			out.print(i > 0 ? 1 : 0);
 			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

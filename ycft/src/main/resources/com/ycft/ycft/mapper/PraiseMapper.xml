@@ -14,9 +14,9 @@
   
   <!-- 客户端方法开始 -->
   <!-- 点赞 -->
-  <insert id="insertUid" parameterType="com.ycft.ycft.po.Praise" >
-      insert into praise(tid,uid,time) 
-      	values(#{tid} , #{uid} , NOW())
+  <insert id="dianzan" parameterType="com.ycft.ycft.po.Praise" >
+      insert into praise(tid,uid,time,status) 
+      	values(#{tid} , #{uid} , #{time} ,#{status})
   </insert>
   <!-- 客户端方法结束 -->
   

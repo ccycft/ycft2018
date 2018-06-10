@@ -12,9 +12,9 @@ public class PraiseSrv {
 	@Autowired
 	private PraiseMapper pm;
 	
-	public boolean praise(Praise p) {
+	/*public boolean praise(Praise p) {
 		
 		int i = pm.insertUid(p);
 		return i > 0 ? true : false ;
-	}
+	}*/
 }
