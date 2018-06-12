@@ -30,6 +30,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
     <collection property="commentList" ofType="com.ycft.ycft.po.Comment">
 	    <result column="cid" property="id" jdbcType="INTEGER" />
 	    <result column="uid" property="uid" jdbcType="INTEGER" />
@@ -189,15 +190,15 @@
   </select>
   
   <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-  		SELECT title.id,NAME,TIME,USER,img_name,TEXT,praise 
-  		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = #{1}
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		FROM content,title,USER 
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1}
   </select>
   
   <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-  		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
-  		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		FROM content,title,USER 
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
   </select>
   <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
 		<!-- 将插入数据的主键返回，返回到User对象中 -->

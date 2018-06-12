@@ -129,6 +129,7 @@
 	    	alert("请仔细核对学号，如若错误则无法导入！");
 	    	if(confirm('您将要导入 ['+filename+"] 文件?")){
 	    		//开始导入
+	    		document.getElementById("fileForm"+id).action="<%=basePathNoBackStage%>importActivityExcel.do";
 	    		document.getElementById("fileForm"+id).submit();
 	    	} else {
 	    		return false;
@@ -378,7 +379,7 @@
 	                	<tr class="gradeA">
                             <td class="col-md-2"><%=tcList.get(i).getName() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
-                            <td class="col-md-1"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-1"><%=tcList.get(i).getSname() %></td>
                             <td class="col-md-2"><img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/></td>
                             <td class="col-md-5">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
@@ -423,7 +424,7 @@
 						                </button>  
 						                <h4 class="modal-title" id="myModalLabel">导入活动报名人</h4>  
 						            </div>
-						            <form action="<%=basePathNoBackStage%>importActivityExcel.do" method="post" id="fileForm<%=tcList.get(i).getId() %>" enctype="multipart/form-data"> 
+						            <form action="" method="post" id="fileForm<%=tcList.get(i).getId() %>" enctype="multipart/form-data"> 
 						            	<input type="hidden" name="id" value="<%=tcList.get(i).getId() %>"/>  
 							            <div class="modal-body">  
 							            	<fieldset>
