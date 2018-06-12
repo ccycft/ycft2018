@@ -108,7 +108,8 @@
    	$(document).ready(function(){
 		loadMenu();
    	});
-    </script>le here</title>
+    </script>
+    <title></title>
 <style type="text/css">
 	.img-responsive {
 		  display: inline-block;
