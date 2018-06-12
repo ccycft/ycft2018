@@ -281,6 +281,7 @@
 								    </table>
 								</div>
 								<div class="button-group">
+									<input type="button" class="button" value="删除最后一次操作" onclick="closeMarker()" />
 								    <input type="button" class="button" value="清空所有选中点" onclick="clearPoint()" />
 								</div>
 							</div>		
