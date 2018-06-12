@@ -17,12 +17,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>文章</title>
+<title>通知</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+      <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>css/article.css">
-    <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<style>
 		.tab-p{
@@ -32,6 +31,11 @@
 			-webkit-line-clamp: 7;
 			overflow: hidden;
 			text-align:left;
+		}
+		ul{
+			padding:0px;
+			margin:0px;
+			list-style:none;
 		}
 	
 	</style>
@@ -48,7 +52,6 @@
     var basePath = localhostPath + projectName + "/";	
 	function openDetail(id){
 		window.open(basePath + 'fore/title/informDetail.do?id='+id,'_self');	
-		
 	}
 	function back(){ 
 		
@@ -60,6 +63,9 @@
 		}
 		
 	}
+	
+	//华丽的分割线-------------------------------------------------------------------------------------
+	
 	</script>
 </head>
 <body class="text-center">
@@ -70,44 +76,52 @@
 		<a href="<%=basePath%>fore/index/index.do"><img class="right-icon" src="<%=basePath%>images/backhome.png"></a>
 	</div>
 	
-	<div class="container-fluid">
-			<div class="row" >
-			 <div class="col-xs-12">
-			 	  <%
-			 		List<Title> tList = (List<Title>)request.getAttribute("tList");
-			 	  	
-			 		if(tList != null && tList.size() > 0){
-			 			for(Title t : tList){
-			 			%>
-		 				<div class="row" onclick="openDetail('<%=t.getId()%>')">
-					      <div class="col-xs-7 ">
-						      <div class="thumbnail">
-						      	<img  src="<%=photoPath%><%=t.getImgName() %>" alt="...">
-						  	  </div>
-					      </div>
-					     <div class="col-xs-5 ">
-						       	<p class="tab-p">
-						       		<%=t.getName() %>
-								</p>
-					      </div>
-				      </div>
-				      <div class="row">
-				      		<div class="col-xs-6">
-				      			<span style="float:left"><%=t.getUser() %></span>
-				      		</div>
-				      		<div class="col-xs-6">
-				      			<span style="float:right"><%=t.getTime() %></span>
-				      		</div>
-				      </div>
-				      
-				      <hr><!--    华丽丽的分割线———————————————————————————————————— -->
-			 			<%
-			 			}
-			 		}
-			 			
-			 	   %> 
-			 </div>
-		</div>
+	
+	
+	<div id="scroller" class="container-fluid">
+		
+		<ul id="thislist">
+			<%
+					 		List<Title> tList = (List<Title>)request.getAttribute("tList");
+					 	  	
+					 		if(tList != null && tList.size() > 0){
+					 			for(Title t : tList){
+					 			%>
+			<li>
+				<div class="row" >
+					 <div class="col-xs-12">
+					 	  
+				 				<div class="row" onclick="openDetail('<%=t.getId()%>')">
+							      <div class="col-xs-7 ">
+								      <div class="thumbnail">
+								      	<img  src="<%=photoPath%><%=t.getImgName() %>" alt="...">
+								  	  </div>
+							      </div>
+							     <div class="col-xs-5 ">
+								       	<p class="tab-p">
+								       		<%=t.getName() %>
+										</p>
+							      </div>
+						      </div>
+						      <div class="row">
+						      		<div class="col-xs-6">
+						      			<span style="float:left"><%=t.getUser() %></span>
+						      		</div>
+						      		<div class="col-xs-6">
+						      			<span style="float:right"><%=t.getTime() %></span>
+						      		</div>
+						      </div>
+						      
+						      <hr><!--    华丽丽的分割线———————————————————————————————————— -->
+					 			<%
+					 			}
+					 		}
+					 	   %> 
+					 </div>
+				</div>
+			</li>
+			
+		</ul>
 	</div>
 </body>
 </html>
