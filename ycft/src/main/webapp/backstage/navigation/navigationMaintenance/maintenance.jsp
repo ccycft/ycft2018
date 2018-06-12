@@ -60,6 +60,9 @@
 </style>
 <script type="text/javascript">
 	function pointOver(id){
+		//改变点击的按钮的颜色
+		$(".btn-info").attr("class","btn btn-success");
+		$("#btn"+id).attr("class","btn btn-info");
 		//先清除已经有的点
 		clearPoint();
 		document.getElementById("id").value = id;
@@ -213,7 +216,7 @@
         		<div class="col-md-12">
 	       			<div class="panel panel-default">
 					    <div class="panel-heading">
-					         	校园导航<span id="cue">(使用说明:请先点击页面上绿色的八个按钮中的一个，点击之后点击下面地图上为对应的地点赋值)</span>
+					         	校园导航<span id="cue">(使用说明:请先点击页面上绿色的按钮，然后点击下面地图，为对应的地点赋值，设置完一个导航键请点击一次确定)</span>
 					    </div>
 						<div class="modal fade" id="mapName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">  
 						    <div class="modal-dialog" role="document">  
@@ -230,7 +233,7 @@
 						            		名称
 						            		</div>
 						            		<div class="col-sm-6">
-						            			<input type="text" class="form-control" placeholder="" id="pointName" onblur="if(this.value == '')this.value='默认';" onclick="if(this.value == '默认')this.value='';" value="默认">
+						            			<input type="text" class="form-control" placeholder="" id="pointName" value="默认">
 						            			<input type="hidden" id="content">
 						            		</div>
 					            		</div>
@@ -360,7 +363,12 @@
     		}
     	}
     	$("#coordinate").val(data);
-    	$("#navigationUpDate").submit();
+    	//判断是否选择了对应的按钮和对应的地点
+    	if($("#id").val()=="" || $("#coordinate").val()==""){
+    		alert("请选择地点");
+    	}else{
+    		$("#navigationUpDate").submit();
+    	}
     }
 </script>
 </body>
