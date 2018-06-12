@@ -164,13 +164,13 @@
 		     </div>
 		     
 		   	<div class="col-xs-4 forum-img" >
-	    		<label class="labInput" for="file">　　 
+	    		<label class="labInput" >　　 
 			　　　　<img src="<%=basePath%>images/z_add.png" id="img_2"  name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
 			　　</label> 
 		    </div>
 		    
 		    <div class="col-xs-4 forum-img" >
-		    	<label class="labInput" for="file">　　 
+		    	<label class="labInput" >　　 
 			　　　　<img src="<%=basePath%>images/z_add.png" id="img_3" name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
 			　　</label> 
 		    </div>
