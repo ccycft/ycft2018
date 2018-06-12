@@ -30,6 +30,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
     <collection property="commentList" ofType="com.ycft.ycft.po.Comment">
 	    <result column="cid" property="id" jdbcType="INTEGER" />
 	    <result column="uid" property="uid" jdbcType="INTEGER" />
@@ -72,6 +73,10 @@
     <result column="userimg" property="userImg" jdbcType="LONGVARBINARY"/>
     <!-- 用户头像名 -->
     <result column="userimgname" property="userImgName" jdbcType="VARCHAR"/>
+    <!-- 三张图片 -->
+    <result column="img1_name" property="img1Name" jdbcType="VARCHAR"/>
+    <result column="img2_name" property="img2Name" jdbcType="VARCHAR"/>
+    <result column="img3_name" property="img3Name" jdbcType="VARCHAR"/>
   </resultMap>
   <!-- 显示文章详情和评论  [一对多] -->
    <resultMap id="ForumDetailResultMap" type="com.ycft.ycft.po.Forum" >
@@ -167,6 +172,15 @@
       insert into comment(uid,tid,content,time) values
       (#{uid},#{tid},#{content},#{time})
   </insert>
+  <!-- 插入论坛type=4 -->
+  <insert id="insertForum" parameterType="Title" >
+      <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into title(name , time    , type , uid )
+      values
+      ( #{name} , #{time}     , #{type} , #{uid} )
+  </insert>
   <!-- 客户端方法 结束 -->
   
   <!-- 服务端方法开始 -->
@@ -176,15 +190,15 @@
   </select>
   
   <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-  		SELECT title.id,NAME,TIME,USER,img_name,TEXT,praise 
-  		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = #{1}
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		FROM content,title,USER 
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1}
   </select>
   
   <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-  		SELECT title.id,NAME,TIME,USER,img_name,TEXT 
-  		FROM content,title 
-  		WHERE title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		FROM content,title,USER 
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
   </select>
   <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
 		<!-- 将插入数据的主键返回，返回到User对象中 -->

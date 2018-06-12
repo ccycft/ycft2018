@@ -17,6 +17,15 @@ public class TitleContent {
     private String imgName;
     //文章内容
     private String text;
+    //用户名
+    private String sname;
+    
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -44,6 +44,15 @@
       <if test="text != null" >
         text,
       </if>
+      <if test="img1Name != null" >
+        img1_name,
+      </if>
+      <if test="img2Name != null" >
+        img2_name,
+      </if>
+      <if test="img3Name != null" >
+        img3_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -54,6 +63,15 @@
       </if>
       <if test="text != null" >
         #{text,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="img1Name != null" >
+        #{img1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="img2Name != null" >
+        #{img2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="img3Name != null" >
+        #{img3Name,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

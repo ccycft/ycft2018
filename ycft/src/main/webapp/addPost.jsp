@@ -144,13 +144,13 @@
 	<form class="form-horizontal" method="post" enctype="multipart/form-data" action="http://192.168.1.200:8080/ycft/fore/title/addForum.do">
 	  <div class="form-group">
     	<div class="col-xs-12">
-      		<input type="text" class="form-control" id="forum-title" placeholder="请输入标题">
+      		<input type="text" name="name" class="form-control" id="forum-title" placeholder="请输入标题">
     	</div>
   	  </div>
   	  	<hr>
 	  <div class="form-group">
 	    <div class="col-xs-12">
-	    	<textarea class="form-control" id="forum-content" rows="10" placeholder="快来说点啥~"></textarea>
+	    	<textarea name="text" class="form-control" id="forum-content" rows="10" placeholder="快来说点啥~"></textarea>
 	    </div>
 	  </div>
 	  <div class="form-group" style="margin-bottom:0px">
@@ -165,14 +165,18 @@
 		     
 		   	<div class="col-xs-4 forum-img" >
 	    		<label class="labInput" >　　 
-			　　　　<img src="<%=basePath%>images/z_add.png" id="img_2"  name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
+
+			　　　　<img src="<%=basePath%>images/z_add_hidden.png" id="img_2"  name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
+
 			　　</label> 
 		    </div>
 		    
 		    <div class="col-xs-4 forum-img" >
 		    	<label class="labInput" >　　 
-			　　　　<img src="<%=basePath%>images/z_add.png" id="img_3" name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
-			　　</label> 
+
+			　　　　<img src="<%=basePath%>images/z_add_hidden.png" id="img_3" name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
+			　　
+				</label> 
 		    </div>
 		    
 	  </div>

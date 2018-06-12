@@ -93,6 +93,7 @@ public class InformSrv {
 		title.setType(2);
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
+		title.setUid(user.getId() );
 		//插入标题
 		int resultOne = tm.insertTitle(title);
 		////插入标题的id
@@ -149,7 +150,8 @@ public class InformSrv {
 		//获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
-		
+		//设置用户id
+		title.setUid(user.getId() );
 		int returnValue1 = tm.updateByPrimaryKeySelective(title);
 		int returnValue2 = contentMapper.updateByTid(content);
 		if(returnValue1 > 0 && returnValue2>0) {

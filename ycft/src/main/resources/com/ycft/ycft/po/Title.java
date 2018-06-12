@@ -11,7 +11,25 @@ public class Title {
     private String time;
     //文章发布用户
     private String user;
-    //文章类型： 
+    //文章发布用户id
+    private Integer uid;
+    public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
+
+	//文章类型： 
     private Integer type;
     //暂不使用
     private Integer praise;

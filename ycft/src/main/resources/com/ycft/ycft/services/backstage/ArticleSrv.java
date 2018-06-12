@@ -96,6 +96,7 @@ public class ArticleSrv {
 		//文件名截取
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
+		title.setUid(user.getId() );
 		//插入标题
 		tm.insertTitle(title);
 		//插入标题的id
@@ -152,6 +153,7 @@ public class ArticleSrv {
 		//获取用户信息
 		User user = (User)request.getSession().getAttribute("user");
 		title.setUser(user.getSname());
+		title.setUid(user.getId() );
 		//选择性修改
 		int returnValue1 = tm.updateByPrimaryKeySelective(title);
 		//通过id修改
