@@ -16,6 +16,7 @@ import com.ycft.ycft.po.User;
 import com.ycft.ycft.services.PrivilegeService;
 
 @Controller
+@RequestMapping("backstage/")
 public class PrivilegeCtrl {
 	
 	@Autowired

@@ -97,6 +97,7 @@ public class ArticleSrv {
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
 		title.setUid(user.getId() );
+		System.out.println(title.getUid()+"-------------------===============");
 		//插入标题
 		tm.insertTitle(title);
 		//插入标题的id

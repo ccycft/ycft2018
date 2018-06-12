@@ -232,6 +232,9 @@
       <if test="imgName != null" >
         img_name,
       </if>
+      <if test="uid != null" >
+        uid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -254,6 +257,9 @@
       </if>
       <if test="imgName != null" >
         #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
     </trim>
 	</insert>
@@ -304,6 +310,9 @@
       <if test="imgName != null" >
         img_name,
       </if>
+      <if test="uid != null" >
+        uid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -326,6 +335,9 @@
       </if>
       <if test="imgName != null" >
         #{imgName,jdbcType=VARCHAR},
+      </if>
+       <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>

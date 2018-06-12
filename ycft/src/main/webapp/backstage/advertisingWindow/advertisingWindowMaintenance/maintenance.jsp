@@ -101,14 +101,15 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath%>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
    	$(document).ready(function(){
 		loadMenu();
    	});
-    </script>le here</title>
+    </script>
+    <title></title>
 <style type="text/css">
 	.img-responsive {
 		  display: inline-block;
@@ -214,7 +215,7 @@
 									                </button>  
 									                <h4 class="modal-title" id="myModalLabel">广告窗修改</h4>  
 									            </div>
-									            <form action="uploadAdvertisingWindow.do" method="post" id="updateForm" enctype="multipart/form-data"> 
+									            <form action="<%=basePath%>uploadAdvertisingWindow.do" method="post" id="updateForm" enctype="multipart/form-data"> 
 										            <input type="hidden" name="id" value="<%=scList.get(i).getId()%>"/>
 										            <div class="modal-body">  
 										            	<fieldset>

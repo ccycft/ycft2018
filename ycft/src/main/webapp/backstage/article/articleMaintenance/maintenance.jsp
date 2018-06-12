@@ -64,7 +64,7 @@
     <script type="text/javascript">
     	function del(id,name){
     		if (confirm("您确认删除\""+name+"\"吗?")) {
-    			window.location.href = "articleDel.do?id="+id;
+    			window.location.href = "<%=basePath%>articleDel.do?id="+id;
     		}
     	}
     
@@ -98,7 +98,7 @@
         $.ajax({
             data : data,
             type : "POST",
-            url : "<%=basePathNoBackStage%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
+            url : "<%=basePath%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
             cache : false,
             contentType : false,
             processData : false,
@@ -177,7 +177,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath%>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -201,7 +201,7 @@
     </style>
     <script type="text/javascript">
     	function update(id){
-    		window.open("articleUpdate.do?id="+id);
+    		window.open("<%=basePath%>articleUpdate.do?id="+id);
     	}
     	function filter(id){
     	    var html=$($("#test"+id).val());
@@ -298,7 +298,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">文章内容发布</h4>  
 		            </div>
-		            <form action="addArticle.do" method="post" id="addArticle" enctype="multipart/form-data">
+		            <form action="<%=basePath%>addArticle.do" method="post" id="addArticle" enctype="multipart/form-data">
 		            		<input type="hidden" id="contentId" name="text">
 		            <div class="modal-body">
 		            	<div class="row">

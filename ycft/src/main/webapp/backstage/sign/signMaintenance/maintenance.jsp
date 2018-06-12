@@ -49,11 +49,11 @@
         $('#dataTables-example').dataTable();
     });
     function changeId(){
-    	$("#signId").attr("action","<%=basePathNoBackStage %>selSignEvent.do");
+    	$("#signId").attr("action","<%=basePath %>selSignEvent.do");
     	$("#signId").submit();
     }
     function exportSignInfo(){
-    	$("#signId").attr("action","<%=basePathNoBackStage %>exportSignInfo.do");
+    	$("#signId").attr("action","<%=basePath %>exportSignInfo.do");
     	$("#signId").submit();
     }
     </script>
@@ -117,7 +117,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -201,7 +201,7 @@
 					                </button>  
 					                <h4 class="modal-title" id="myModalLabel">请选择条件</h4>  
 					            </div>
-					            <form action="signSel.do" method="post">  
+					            <form action="<%=basePath%>signSel.do" method="post">  
 					            <div class="modal-body">
 						            	<input type="hidden" name="id" value="${eventList[0].id}"/> 
 						            	<input type="hidden" name="r3" value="${eventList[0].name}"/> 

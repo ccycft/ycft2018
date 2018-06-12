@@ -46,7 +46,7 @@
 		$("#button").modal();
 	}
 	function closeWindow(){
-		window.location.href = "selSignEvent.do";		
+		window.location.href = "<%=basePath%>selSignEvent.do";		
 	}
 </script>
     <script type="text/javascript">
@@ -109,7 +109,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}

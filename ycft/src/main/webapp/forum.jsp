@@ -78,7 +78,7 @@
 		}
 	</style>
 	
-<title>论坛</title>
+<title>Forum</title>
 <script type="text/javascript">
 
 	function back(){ 

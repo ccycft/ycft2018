@@ -26,6 +26,14 @@
     
 	<script src="plugin/toast/js/toast.js"></script>
     <script type="text/javascript">
+    function getRootPath(){
+		var curWwwPath=window.document.location.href;
+		var pathName=window.document.location.pathname;
+		var pos=curWwwPath.indexOf(pathName);
+		var localhostPaht=curWwwPath.substring(0,pos);
+		var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+2);
+		return (localhostPaht+projectName);
+	}
 	    function check(){
 	    	var username = $("#form-username").val().trim();
 	    	var pwd  = $("#form-password").val().trim(); 
@@ -44,7 +52,7 @@
 	    			if(xmlhttp.readyState == 4){
 	    				var data= xmlhttp.responseText;
 	    				if (data == 1) {
-	    					window.location.href="jump.do";
+	    					window.location.href=getRootPath()+"backstage/jump.do";
 	    				} else {
 	    	    			showMessage('用户名或密码错误!');
 	    	    			$("#form-username").focus();
@@ -52,20 +60,15 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","userAjax.do",true);
+	    		xmlhttp.open("post",getRootPath()+"backstage/userAjax.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("sno="+username+"&psd="+pwd);
 	    	}
 	    	
 	    }
     </script>
-    <script type="text/javascript">
-		function test(){
-			document.getElementById("login").onclick();
-		}    
-    </script>
 </head>
-<body onload="test()">
+<body>
 <div class="top-content">
     <div class="inner-bg">
         <div class="container">

@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ycft.ycft.tools.UploadUtil;
 
 @Controller
+@RequestMapping("backstage/")
 public class ToolCtrl {
 	
 	/**

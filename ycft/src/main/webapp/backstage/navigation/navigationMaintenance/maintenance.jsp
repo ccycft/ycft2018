@@ -100,7 +100,7 @@
 				} 
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>selNavigationById.do",true);
+		xmlhttp.open("post","<%=basePath%>selNavigationById.do",true);
 		xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 		xmlhttp.send("id="+id);
 	}
@@ -171,7 +171,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -261,7 +261,7 @@
 						  		<div class="col-md-1"><input type="button" value="确认" class="btn btn-primary" onclick="submitMap()"/></div>
 							</div>
 						    <div class="col-md-12" id="customize">
-								<form action="<%=basePathNoBackStage %>navigationUpdate.do" method="post" id="navigationUpDate">
+								<form action="<%=basePath %>navigationUpdate.do" method="post" id="navigationUpDate">
 									<input type="hidden" name="id" id="id" />
 									<input type="hidden" name="coordinate" id="coordinate"/>
 								</form>
@@ -281,6 +281,7 @@
 								    </table>
 								</div>
 								<div class="button-group">
+									<input type="button" class="button" value="删除最后一次操作" onclick="closeMarker()" />
 								    <input type="button" class="button" value="清空所有选中点" onclick="clearPoint()" />
 								</div>
 							</div>		

@@ -16,6 +16,7 @@ import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.ArticleSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class ArticleCtrl {
 
 	@Autowired
@@ -53,9 +54,9 @@ public class ArticleCtrl {
 		//录入文章
 		boolean flag = articleSrv.addArticleAffairs(request,content,title,titleFile);
 		if(flag) {
-			return "selArticle.do";
+			return "backstage/selArticle.do";
 		}else {
-			return "selArticle.do";
+			return "backstage/selArticle.do";
 		}
 		
 	}
@@ -70,9 +71,9 @@ public class ArticleCtrl {
 		ModelAndView modelAndView = new ModelAndView();
 		boolean flag = articleSrv.del(id);
 		if (flag) {
-			modelAndView.setViewName("selArticle.do");
+			modelAndView.setViewName("backstage/selArticle.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 			//向前台返回信息
 		return modelAndView;
@@ -118,7 +119,7 @@ public class ArticleCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('修改成功');"); 
-        	out.println("window.open('selArticle.do','_top');");
+        	out.println("window.open('backstage/selArticle.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");

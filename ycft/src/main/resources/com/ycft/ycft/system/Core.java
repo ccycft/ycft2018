@@ -11,5 +11,5 @@ public class Core {
 	public static final String PATH = "/photo";
 	
 	//签到默认截止的时间   (以分钟计算)
-	public static final int SIGNDEADTIME = 20;
+	public static final int SIGNDEADTIME = 60;
 }

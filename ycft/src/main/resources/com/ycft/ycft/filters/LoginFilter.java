@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
 	
 	//不过滤请求
 	private static final String LOGINJSP = "backstagelogin.html";
-	private static final String LOGINACTION = "userAjax.do";
+	private static final String LOGINACTION = "backstage/userAjax.do";
 	//项目名
 	private static final String PROJECTNAME = "ycft";
     /**
@@ -62,30 +62,34 @@ public class LoginFilter implements Filter {
 		int index = requestURI.indexOf(PROJECTNAME) + PROJECTNAME.length() + 1;
 		String resource = requestURI.substring(index);
 		System.out.println(resource+"+0++++");
-		if(user != null) {
-			//把地址栏的数据和用户应有的数据进行比较，如果是true，则放过
-			SysPrivilege s = new SysPrivilege();
-			//如果是true说明数据库里面有这个菜单
-			boolean flag = s.compareMenuIsTrue(resource, req);
-			if(flag) {
-				//判断用户时候有这个菜单
-				boolean state = s.compareMenu(resource, req);
-				if(state) {
-					chain.doFilter(request, response);
+		if(resource.startsWith("backstage")) {
+			if(user != null) {
+				//把地址栏的数据和用户应有的数据进行比较，如果是true，则放过
+				SysPrivilege s = new SysPrivilege();
+				//如果是true说明数据库里面有这个菜单
+				boolean flag = s.compareMenuIsTrue(resource, req);
+				if(flag) {
+					//判断用户时候有这个菜单
+					boolean state = s.compareMenu(resource, req);
+					if(state) {
+						chain.doFilter(request, response);
+					}else {
+						out.print("<script>window.top.location.href='" + basePath + LOGINJSP +"';</script>");
+					}
 				}else {
-					out.print("<script>window.top.location.href='" + basePath + LOGINJSP +"';</script>");
+					//没有菜单直接放过
+					chain.doFilter(request, response);
 				}
 			}else {
-				//没有菜单直接放过
-				chain.doFilter(request, response);
+				if(LOGINACTION.equals(resource) || LOGINJSP.equals(resource)){
+					chain.doFilter(request, response);
+				}else {
+					//返回登录
+					out.print("<script>window.top.location.href='" + basePath + LOGINJSP +"';</script>");
+				}
 			}
 		}else {
-			if(LOGINACTION.equals(resource) || LOGINJSP.equals(resource)){
-				chain.doFilter(request, response);
-			}else {
-				//返回登录
-				out.print("<script>window.top.location.href='" + basePath + LOGINJSP +"';</script>");
-			}
+			chain.doFilter(request, response);
 		}
 		
 	}

@@ -15,6 +15,7 @@ import com.ycft.ycft.services.PrivilegeService;
 
 
 @Controller
+@RequestMapping("backstage/")
 public class LoginCtrl {
 	
 	@Autowired
@@ -33,7 +34,7 @@ public class LoginCtrl {
 			String url = privilegeList.get(0).getChildMenus().get(0).getmUrl();
 			modelAndView.setViewName(url);
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		
 		
