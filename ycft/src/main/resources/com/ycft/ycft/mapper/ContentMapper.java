@@ -6,7 +6,7 @@ public interface ContentMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Content record);
-
+    //插入文章内容
     int insertSelective(Content record);
 
     Content selectByPrimaryKey(Integer id);
@@ -16,6 +16,8 @@ public interface ContentMapper {
     int updateByPrimaryKeyWithBLOBs(Content record);
 
     int updateByPrimaryKey(Content record);
+    
+   
     
     /*===============服务端方法================*/
     

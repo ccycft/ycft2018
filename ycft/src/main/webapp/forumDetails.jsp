@@ -264,15 +264,28 @@
 			</div>
 			
 			<div class="row">
-			    <div class="col-xs-4 forum-img" >
-			    	<img src="<%=basePath%>images/add.png" class="add-icon"/>
+				<%
+					if (f.getImg1Name() != null){
+				%>
+			    <div class="col-xs-4 forum-img"   >
+			    	<img src="<%=photoPath%>forum/<%=f.getImg1Name()%>" class="add-icon" style="width: 10rem;height: 80px;border: 1px solid #ccc;"/>
 			    </div>
-			    <div class="col-xs-4 forum-img" >
-			    	<img src="<%=basePath%>images/add.png" class="add-icon"/>
+			    <%
+					}if(f.getImg2Name() != null){
+						
+			    %>
+			    <div class="col-xs-4 forum-img"   >
+			    	<img src="<%=photoPath%>forum/<%=f.getImg2Name()%>" class="add-icon" style="width: 10rem;height: 80px;border: 1px solid #ccc;"/>
 			    </div>
-			    <div class="col-xs-4 forum-img" >
-			    	<img src="<%=basePath%>images/add.png" class="add-icon"/>
+			     <%
+					}if(f.getImg3Name() != null){
+			    %>
+			    <div class="col-xs-4 forum-img"  >
+			    	<img src="<%=photoPath%>forum/<%=f.getImg3Name()%>" class="add-icon" style="width: 10rem;height: 80px;border: 1px solid #ccc;"/>
 			    </div>
+			     <%
+					}
+			    %>
 		  	</div>
 			
 			<div class="row" style="border-bottom:1px solid #ccc;line-height:2rem;margin-top:4rem;">

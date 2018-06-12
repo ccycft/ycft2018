@@ -116,7 +116,9 @@ public class TitleSrv {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String nowDate = sdf.format(date);
 		
+		//时间
 		t.setTime(nowDate);
+		//类型
 		t.setType(type);
 		
 		//开始插入title
@@ -143,6 +145,16 @@ public class TitleSrv {
 					//转存到该路径
 					try {
 						files[i].transferTo(photo);
+						if(i == 0) {
+							con.setImg1Name(newName);
+						}if(i == 1) {
+							con.setImg2Name(newName);
+						}if(i == 2) {
+							con.setImg3Name(newName);
+						}
+						
+						
+						
 					} catch (IllegalStateException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -156,7 +168,7 @@ public class TitleSrv {
 		}
 		
 		//插入content
-		cm.insert(con);
+		cm.insertSelective(con);
 		return 1;
 	}
 }

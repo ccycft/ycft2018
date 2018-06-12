@@ -12,12 +12,12 @@ public class Title {
     //文章发布用户
     private String user;
     //文章发布用户id
-    private String uid;
-    public String getUid() {
+    private Integer uid;
+    public Integer getUid() {
 		return uid;
 	}
 
-	public void setUid(String uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 

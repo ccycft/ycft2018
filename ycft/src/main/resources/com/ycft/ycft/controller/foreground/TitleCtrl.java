@@ -307,9 +307,20 @@ public class TitleCtrl {
 	}
 	
 	@RequestMapping("addForum.do")
-	public ModelAndView addForum(@RequestParam("files")MultipartFile[] files , Title t , Content c ) {
+	public ModelAndView addForum(@RequestParam("files")MultipartFile[] files ,HttpServletRequest req, Title t , Content c ) {
 		ModelAndView mav = new ModelAndView();
 		
+		Cookie[] cookies = req.getCookies();
+		int uid = 0;
+		if(cookies != null && cookies.length > 0) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("uid")) {
+					uid = Integer.parseInt(cookie.getValue());
+				}
+			}
+		}
+		//…Ë÷√uid
+		t.setUid(uid);
 		System.out.println(files.length);
 		for(int i = 0 ; i < files.length ; i++) {
 			System.out.println(files[i].getOriginalFilename());
