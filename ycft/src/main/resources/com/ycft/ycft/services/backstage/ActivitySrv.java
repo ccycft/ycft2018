@@ -89,7 +89,9 @@ public class ActivitySrv {
 		//截取一下获取图片名
 		String imgName = imgNamePath.substring(imgNamePath.lastIndexOf("/")+1);
 		title.setImgName(imgName);
+ 
 		title.setUid(user.getId() );
+ 
 		//插入标题
 		tm.insertTitle(title);
 		content.setTid(title.getId());
