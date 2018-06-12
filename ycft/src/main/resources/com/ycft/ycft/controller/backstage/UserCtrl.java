@@ -18,6 +18,7 @@ import com.ycft.ycft.services.backstage.RoleSrv;
 import com.ycft.ycft.services.backstage.UserSrv;
 
 @Controller(value="BSUserCon")
+@RequestMapping("backstage/")
 public class UserCtrl {
 	
 	@Autowired
@@ -104,7 +105,7 @@ public class UserCtrl {
 		}
 		if(b){
 			//成功页面
-			mav.setViewName("selAll.do");
+			mav.setViewName("backstage/selAll.do");
 		}else{
 			//失败页面
 			mav.setViewName("backstage/fail.jsp");
@@ -141,7 +142,7 @@ public class UserCtrl {
 		boolean flag = us.addOneUser(user);
 		if (flag) {
 			//返回首页
-			modelAndView.setViewName("jump.do");
+			modelAndView.setViewName("backstage/jump.do");
 		} else {
 			modelAndView.setViewName("backstage/fail.jsp");
 		}
@@ -187,7 +188,7 @@ public class UserCtrl {
 		boolean flag = us.updateAffairs(user,role);
 		//删除成功后返回原页面
 		if (flag) {
-			modelAndView.setViewName("selAll.do");
+			modelAndView.setViewName("backstage/selAll.do");
 		} else {
 			//modelAndView.setViewName("backstage/fail");
 		}

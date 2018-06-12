@@ -16,6 +16,7 @@ import com.ycft.ycft.services.backstage.AdvertisingWindowSrv;
 import com.ycft.ycft.services.backstage.ArticleSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class AdvertisingWindowCtrl {
 	
 	@Autowired
@@ -39,7 +40,7 @@ public class AdvertisingWindowCtrl {
 			modelAndView.addObject("tList",tList);
 			modelAndView.setViewName("backstage/advertisingWindow/advertisingWindowMaintenance/maintenance.jsp");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		
 		return modelAndView;
@@ -59,9 +60,9 @@ public class AdvertisingWindowCtrl {
 		boolean flag = aws.uploadAdvertisingWindow(request,titleFile,slide);
 		//修改成功后返回原页面
 		if (flag) {
-			modelAndView.setViewName("advertisingWindowSel.do");
+			modelAndView.setViewName("backstage/advertisingWindowSel.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

@@ -17,6 +17,7 @@ import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.ForumSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class ForumCtrl {
 	
 	@Autowired

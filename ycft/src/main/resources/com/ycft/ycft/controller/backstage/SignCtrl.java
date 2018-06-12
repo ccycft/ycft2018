@@ -17,6 +17,7 @@ import com.ycft.ycft.services.backstage.SignSrv;
 import com.ycft.ycft.services.backstage.UserSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class SignCtrl {
 	
 	@Autowired

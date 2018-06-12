@@ -17,6 +17,7 @@ import com.ycft.ycft.po.Navigation;
 import com.ycft.ycft.services.backstage.NavigationSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class NavigationCtrl {
 	
 	@Autowired
@@ -35,7 +36,7 @@ public class NavigationCtrl {
 			modelAndView.addObject("nList",nList);
 			modelAndView.setViewName("backstage/navigation/navigationMaintenance/maintenance.jsp");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -75,9 +76,9 @@ public class NavigationCtrl {
 		boolean flag = ns.navigationUpDate(navigation);
 		//修改成功后返回显示页面
 		if (flag) {
-			modelAndView.setViewName("navigationSel.do");
+			modelAndView.setViewName("backstage/navigationSel.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -94,9 +95,9 @@ public class NavigationCtrl {
 		boolean flag = ns.navigationDel(navigation);
 		//删除成功后返回显示页面
 		if (flag) {
-			modelAndView.setViewName("navigationSel.do");
+			modelAndView.setViewName("backstage/navigationSel.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

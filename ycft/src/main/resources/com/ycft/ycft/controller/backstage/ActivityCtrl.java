@@ -20,6 +20,7 @@ import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.ActivitySrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class ActivityCtrl {
 	
 	@Autowired
@@ -59,9 +60,9 @@ public class ActivityCtrl {
 		boolean flag = as.addActivityAffairs(request,content,title,titleFile);
 		//true为发布成功
 		if(flag) {
-			return "selActivity.do";
+			return "backstage/selActivity.do";
 		}else {
-			return "selActivity.do";
+			return "backstage/selActivity.do";
 		}
 		
 	}
@@ -80,9 +81,9 @@ public class ActivityCtrl {
 		boolean flag = as.del(id);
 		//删除成功返回显示页面
 		if (flag) {
-			modelAndView.setViewName("selActivity.do");
+			modelAndView.setViewName("backstage/selActivity.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -128,7 +129,7 @@ public class ActivityCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('修改成功');"); 
-        	out.println("window.open('selActivity.do','_top');");
+        	out.println("window.open('backstage/selActivity.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");
@@ -172,7 +173,7 @@ public class ActivityCtrl {
 		}
 		//true 导入成功
 		if(flag){
-			modelAndView.setViewName("selActivity.do");
+			modelAndView.setViewName("backstage/selActivity.do");
 		}else{
 			modelAndView.setViewName("backstage/fail.jsp");
 		}

@@ -18,6 +18,7 @@ import com.ycft.ycft.services.backstage.DictSrv;
 import com.ycft.ycft.tools.BeanUtil;
 
 @Controller
+@RequestMapping("backstage/")
 public class DictCtrl {
 	
 	@Autowired
@@ -75,9 +76,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("selDictDictionary.do");
+			modelAndView.setViewName("backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -96,9 +97,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("selDictDictionary.do");
+			modelAndView.setViewName("backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -116,9 +117,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("selDictDictionary.do");
+			modelAndView.setViewName("backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -137,9 +138,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("selDictDictionary.do");
+			modelAndView.setViewName("backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		
 		return modelAndView;
@@ -188,9 +189,9 @@ public class DictCtrl {
 		if (flag) {
 			//成功后重新缓存数据字典
 			reCache();
-			modelAndView.setViewName("selDictDictionary.do");
+			modelAndView.setViewName("backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

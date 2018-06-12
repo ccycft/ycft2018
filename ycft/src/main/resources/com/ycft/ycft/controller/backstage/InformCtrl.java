@@ -19,6 +19,7 @@ import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.backstage.InformSrv;
 
 @Controller
+@RequestMapping("backstage/")
 public class InformCtrl {
 	
 	@Autowired
@@ -55,9 +56,9 @@ public class InformCtrl {
 	public String addInform(HttpServletResponse response,HttpServletRequest request, Content content,Title title,MultipartFile titleFile) throws IOException { 
 		boolean flag = is.addInformAffairs(request,content,title,titleFile);
 		if(flag) {
-			return "selInform.do";
+			return "backstage/selInform.do";
 		}else {
-			return "selInform.do";
+			return "backstage/selInform.do";
 		}
 		
 	}
@@ -75,9 +76,9 @@ public class InformCtrl {
 		boolean flag = is.del(id);
 		//删除成功返回true
 		if (flag) {
-			modelAndView.setViewName("selInform.do");
+			modelAndView.setViewName("backstage/selInform.do");
 		} else {
-			modelAndView.setViewName("fail.jsp");
+			modelAndView.setViewName("backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -121,7 +122,7 @@ public class InformCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('修改成功');"); 
-        	out.println("window.open('selInform.do','_top');");
+        	out.println("window.open('backstage/selInform.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");
