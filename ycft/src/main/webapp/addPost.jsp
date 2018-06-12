@@ -128,6 +128,16 @@
 			
 		}
 		
+		function back(){ 
+			
+			if(typeof(window.ceshi) != 'undefined'){
+				//说明 可以调用安卓的返回功能
+				window.ceshi.back(); 
+			}else{
+				window.history.back();
+			}
+			
+		}
 	</script>
 	
 </head>
@@ -178,7 +188,6 @@
 			　　
 				</label> 
 		    </div>
-		    
 	  </div>
 	  <label class="ps-text">最多可以上传 3 张图呦~</label>
 	  <input type="submit" value="确认发布" class="btn btn-info"/>
