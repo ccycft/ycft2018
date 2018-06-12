@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ycft.ycft.po.User;
 
 @Controller
-@RequestMapping("backstage/")
 public class LogOut {
 	
 	/**

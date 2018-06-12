@@ -252,7 +252,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                  <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
+                  <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
                   
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
         </div>
