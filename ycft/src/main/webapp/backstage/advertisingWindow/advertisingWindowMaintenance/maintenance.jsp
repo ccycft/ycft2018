@@ -101,7 +101,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath%>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -131,7 +131,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	        </button>
-	         <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+	         <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 			<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
         </div>
 	</nav>
@@ -214,7 +214,7 @@
 									                </button>  
 									                <h4 class="modal-title" id="myModalLabel">广告窗修改</h4>  
 									            </div>
-									            <form action="uploadAdvertisingWindow.do" method="post" id="updateForm" enctype="multipart/form-data"> 
+									            <form action="<%=basePath%>uploadAdvertisingWindow.do" method="post" id="updateForm" enctype="multipart/form-data"> 
 										            <input type="hidden" name="id" value="<%=scList.get(i).getId()%>"/>
 										            <div class="modal-body">  
 										            	<fieldset>

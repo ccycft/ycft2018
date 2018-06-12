@@ -54,7 +54,7 @@
       $.ajax({
           data : data,
           type : "POST",
-          url : "<%=basePathNoBackstage%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
+          url : "<%=basePath%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
           cache : false,
           contentType : false,
           processData : false,
@@ -95,7 +95,7 @@
 	<%
 		TitleContent tc = (TitleContent)request.getAttribute("tc");
 	%>
-	<form action="updInform.do" method="post" id="updInform" enctype="multipart/form-data">
+	<form action="<%=basePath%>updInform.do" method="post" id="updInform" enctype="multipart/form-data">
 		<input type="hidden" id="updContentId" name="text">
    		<input type="hidden" name="id" value="<%=tc.getId() %>">
    		<input type="hidden" name="tid" value="<%=tc.getId() %>">

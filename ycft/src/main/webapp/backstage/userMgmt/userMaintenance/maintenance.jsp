@@ -66,7 +66,7 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","userDel.do",true);
+	    		xmlhttp.open("post","<%=basePath%>userDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
     		}
@@ -158,7 +158,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -266,7 +266,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+                <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
@@ -409,7 +409,7 @@
             </button>  
             <h4 class="modal-title" id="myModalLabel">学生信息修改</h4>  
         </div>
-        <form action="update.do" method="post" id="updateForm"> 
+        <form action="<%=basePath%>update.do" method="post" id="updateForm"> 
         	<input type="hidden" name="id" id="id"/>  
         <div class="modal-body">  
         	<fieldset>

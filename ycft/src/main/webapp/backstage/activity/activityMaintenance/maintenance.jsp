@@ -65,7 +65,7 @@
     <script type="text/javascript">
     	function del(id,name){
     		if (confirm("您确认删除\""+name+"\"吗?")) {
-    			window.location.href = "activityDel.do?id="+id;
+    			window.location.href = "<%=basePath%>activityDel.do?id="+id;
     		}
     	}
     
@@ -99,7 +99,7 @@
         $.ajax({
             data : data,
             type : "POST",
-            url : "<%=basePathNoBackStage%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
+            url : "<%=basePath%>upload.do", //图片上传出来的url，返回的是图片上传后的路径，http格式
             cache : false,
             contentType : false,
             processData : false,
@@ -129,7 +129,7 @@
 	    	alert("请仔细核对学号，如若错误则无法导入！");
 	    	if(confirm('您将要导入 ['+filename+"] 文件?")){
 	    		//开始导入
-	    		document.getElementById("fileForm"+id).action="<%=basePathNoBackStage%>importActivityExcel.do";
+	    		document.getElementById("fileForm"+id).action="<%=basePath%>importActivityExcel.do";
 	    		document.getElementById("fileForm"+id).submit();
 	    	} else {
 	    		return false;
@@ -139,7 +139,7 @@
     
     function exportFile(id){
 		if(confirm('导出 全部学生信息吗?')){
-			document.getElementById("fileForm"+id).action="<%=basePathNoBackStage%>exportActivityExcel.do";
+			document.getElementById("fileForm"+id).action="<%=basePath%>exportActivityExcel.do";
 			document.getElementById("fileForm"+id).submit();
 		}
 	}
@@ -204,7 +204,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath%>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -228,7 +228,7 @@
     </style>
     <script type="text/javascript">
     	function update(id){
-    		window.open("activityUpdate.do?id="+id);
+    		window.open("<%=basePath%>activityUpdate.do?id="+id);
     	}
     	function filter(id){
     	    var html=$($("#test"+id).val());
@@ -281,7 +281,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
              </button>
-             <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+             <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
@@ -325,7 +325,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">活动内容发布</h4>  
 		            </div>
-		            <form action="addActivity.do" method="post" id="addInform" enctype="multipart/form-data">
+		            <form action="<%=basePath%>addActivity.do" method="post" id="addInform" enctype="multipart/form-data">
 		            		<input type="hidden" id="contentId" name="text">
 		            <div class="modal-body">
 		            	<div class="row">
@@ -434,7 +434,7 @@
 						                       <div class="form-group">
 						                          <label class="col-sm-2 control-label" for="ds_host">导入需先下载模板</label>
 						                          <div class="col-sm-4">
-						                          	<a href="<%=basePathNoBackStage%>downloadActivityDemo.do" class ="btn btn-success">模版下载</a>
+						                          	<a href="<%=basePath%>downloadActivityDemo.do" class ="btn btn-success">模版下载</a>
 						                          </div>
 						                          <label class="col-sm-2 control-label" for="ds_host">请选择导入的表格</label>
 						                          <div class="col-sm-4">

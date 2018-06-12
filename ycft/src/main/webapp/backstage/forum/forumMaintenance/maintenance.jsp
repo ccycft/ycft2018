@@ -65,7 +65,7 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","forumDel.do",true);
+	    		xmlhttp.open("post","<%=basePath%>forumDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
     		}
@@ -80,7 +80,7 @@
 					appendLi(dataObj);
 				}
 			};
-			xmlhttp.open("post","selComment.do",true);
+			xmlhttp.open("post","<%=basePath%>selComment.do",true);
     		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     		xmlhttp.send("id="+id);
     	}
@@ -119,7 +119,7 @@
 	    	    		}
 	    			}
 	    		};
-	    		xmlhttp.open("post","commentDel.do",true);
+	    		xmlhttp.open("post","<%=basePath%>commentDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
     		}
@@ -228,7 +228,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath%>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -248,7 +248,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-        <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+        <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>

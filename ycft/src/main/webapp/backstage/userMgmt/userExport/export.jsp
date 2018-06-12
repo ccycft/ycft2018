@@ -113,7 +113,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -190,7 +190,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
              </button>
-             <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+             <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
         </nav>
@@ -226,7 +226,7 @@
 	     	<div class="col-lg-3">
 	     	<form action="" enctype="multipart/form-data" method="post" id="fileForm">
 				 <div class="form-group">
-                 	<a href="<%=basePathNoBackStage%>downloadDemo.do" class ="btn btn-success">模版下载</a> 
+                 	<a href="<%=basePath %>downloadDemo.do" class ="btn btn-success">模版下载</a> 
                  </div>
                  <div class="row">
                  <label class="col-sm-4 control-label" for="ds_host">请先选择</label>
@@ -251,7 +251,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">用户信息添加</h4>  
 		            </div>    
-		           <form action="<%=basePathNoBackStage%>addOneUser.do" method="post" id="addOneUser">
+		           <form action="<%=basePath %>addOneUser.do" method="post" id="addOneUser">
 		            <div class="modal-body">  
 		            	<fieldset>
 		            	<div class="row">
@@ -341,7 +341,7 @@
     	}
     	function exportFile(){
     		if(confirm('导出 全部用户信息吗?')){
-    			document.getElementById("fileForm").action="<%=basePathNoBackStage%>exportExcel.do";
+    			document.getElementById("fileForm").action="<%=basePath %>exportExcel.do";
     			document.getElementById("fileForm").submit();
     		}
     	}
@@ -357,7 +357,7 @@
    		    	if(confirm('您将要导入 ['+filename+"] 文件?")){
    		    		//开始导入
    		    		alert("开始提交");
-   		    		document.getElementById("fileForm").action="<%=basePathNoBackStage%>importExcel.do";
+   		    		document.getElementById("fileForm").action="<%=basePath %>importExcel.do";
    		    		document.getElementById("fileForm").submit();
    		    	}
    		    }  

@@ -52,19 +52,19 @@
 <script type="text/javascript">
 	function enabledDict(id){
 		if (confirm("确定要启用该选项吗？")) {
-			window.location.href="enabledDict.do?id="+id;
+			window.location.href="<%=basePath%>enabledDict.do?id="+id;
 		}
 	}
 	function disabledDict(id){
 		if (confirm("确定要禁用该选项吗？")) {
-			window.location.href="disabledDict.do?id="+id;
+			window.location.href="<%=basePath%>disabledDict.do?id="+id;
 		}
 	}
 	$(function(){
 		$("#dictType").change(function(){
 			var dictType = $("#dictType").val();
 			 $.ajax({
-				url: 'dictTypeAjax.do',
+				url: '<%=basePath%>dictTypeAjax.do',
 				type: 'post',
 				dataType: 'json',
 				data: {
@@ -325,7 +325,7 @@ $(function () {
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -347,7 +347,7 @@ $(function () {
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	        </button>
-	         <a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+	         <a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 				
 			<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
          </div>
@@ -389,7 +389,7 @@ $(function () {
 					                </button>  
 					                <h4 class="modal-title" id="myModalLabel">新增字典</h4>  
 					            </div>
-					            <form action="addDictType.do" method="post" id="addDictType"> 
+					            <form action="<%=basePath%>addDictType.do" method="post" id="addDictType"> 
 					            	<input type="hidden" name="dictCode" value="<%=ddList.get(ddList.size()-1).getId() + "-" + ddList.get(ddList.size()-1).getdList().get(ddList.get(ddList.size()-1).getdList().size()-1).getId() %>">
 						            <div class="modal-body">  
 						            	<fieldset>
@@ -504,7 +504,7 @@ $(function () {
              </button>  
              <h4 class="modal-title" id="addTitle"></h4>  
          </div>
-         <form action="addDictItem.do" method="post" id="addForm"> 
+         <form action="<%=basePath%>addDictItem.do" method="post" id="addForm"> 
          	<input type="hidden" name="id" id="addId"/> 
          	<input type="hidden" name="dictType" id="addDictItemType"/>   
           <div class="modal-body">  
@@ -543,7 +543,7 @@ $(function () {
              </button>  
              <h4 class="modal-title" id="updateTitle"></h4>  
          </div>
-         <form action="updateDict.do" method="post" id="updateForm"> 
+         <form action="<%=basePath%>updateDict.do" method="post" id="updateForm"> 
          	<input type="hidden" name="id" id="updateId"/>  
           <div class="modal-body">  
           	<fieldset>

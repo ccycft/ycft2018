@@ -46,7 +46,7 @@
 		$("#button").modal();
 	}
 	function closeWindow(){
-		window.location.href = "selSignEvent.do";		
+		window.location.href = "<%=basePath%>selSignEvent.do";		
 	}
 </script>
     <script type="text/javascript">
@@ -109,7 +109,7 @@
 				$('#main-menu').metisMenu();
 			}
 		};
-		xmlhttp.open("post","<%=basePathNoBackStage%>privilege.do",true);
+		xmlhttp.open("post","<%=basePath %>privilege.do",true);
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xmlhttp.send("");
    	}
@@ -133,7 +133,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-         		<a class="navbar-brand logout" href="<%=basePathNoBackStage %>logOut.do">注       销</a>
+         		<a class="navbar-brand logout" href="<%=basePath %>logOut.do">注       销</a>
 				
 		<div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
             </div>
