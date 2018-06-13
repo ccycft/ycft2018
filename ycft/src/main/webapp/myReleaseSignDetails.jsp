@@ -43,7 +43,8 @@
 	
 		//查询签到成员
 		function getMembers(id){
-			 window.location.href = "<%=basePath%>fore/signEvent/selMembersBySid.do?id="+id;
+			alert('系统构建中...');
+			<%--  window.location.href = "<%=basePath%>fore/signEvent/selMembersBySid.do?id="+id; --%>
 		 }
 		//解析定位结果
 		function onComplete(data) {
@@ -102,7 +103,17 @@
 		
 	</style>
 	<script type="text/javascript">
-		
+		function jieshu(id){
+			if(confirm('您确定要关闭该签到通道吗?')){
+				htmlobj=$.ajax({url:"<%=basePath%>fore/signEvent/deadSign.do?id="+id,async:false});
+				if(htmlobj.responseText == 1){
+					alert("关闭成功");
+					window.location.reload();
+				}
+				
+			} 
+			
+		}
 		
 	</script> 
 </head>
@@ -176,11 +187,22 @@
 				
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" style="margin-bottom:200px;">
 		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
 				<a class="btn btn-info" onclick="getMembers('<%=sign.getId()%>')"> 查看签到成员信息 </a> 
 			</div>
 		</div> 
+		
+		<%
+			if(sign.getState().equals("正在签到") ){
+		%>
+			<div style="background-color:#d00;opacity:0.6;width:100%;border:0px;line-height:5rem;font-size:19px;text-align:center;
+			height:5rem;position:fixed;left:0;bottom:0;color:#fff;" onclick="jieshu('<%=sign.getId()%>')">结束签到</div>
+		
+		<%		
+			}
+		%>
+		
 	</div>
 </body>
 </html>

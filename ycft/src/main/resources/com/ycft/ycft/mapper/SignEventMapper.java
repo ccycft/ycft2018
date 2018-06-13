@@ -31,6 +31,7 @@ public interface SignEventMapper {
    List<SignEvent> selSignByUid(Integer uid , Integer nowPage , Integer pageSize);
    //查询签到详情
    SignEvent selDetailById(Integer id);
+   boolean updateIsDead(Integer id);
    //查出该签到课程的人数
    int conditionSel(User user);
    //根据条件查询分母

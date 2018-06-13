@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.ycft.ycft.mapper.SignEventMapper;
 import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.services.foreground.SignEventSrv;
 import com.ycft.ycft.system.Core;
@@ -28,6 +29,8 @@ public class SignEventCtrl {
 
 	@Autowired
 	SignEventSrv ss; 
+	@Autowired
+	SignEventMapper sm;
 	
 	//查询签到事件
 	@RequestMapping("selSignEvent.do")
@@ -150,7 +153,7 @@ public class SignEventCtrl {
 	
 	//查询我的签到信息
 	@RequestMapping("myReleaseSign.do")
-	public ModelAndView myReleaseSign(HttpServletRequest req , Integer nowPage , Integer pageSize) {
+	public ModelAndView myReleaseSign(HttpServletRequest req , Integer nowPage , Integer pageSize) throws ParseException {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("signList.jsp");
 		Cookie[] cs = req.getCookies();
@@ -180,6 +183,25 @@ public class SignEventCtrl {
 		}
 		int start = (nowPage - 1) * pageSize ; 
 		List<SignEvent> list = ss.selectSignById(uid , start , pageSize);
+		if(list != null && list.size() > 0) {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			for(SignEvent sign : list) {
+				if(sign.getIsdead() == 1) {
+					sign.setState("已结束");
+				}else {
+					Long nowTime = date.getTime();
+					Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
+					if(nowTime >= qiandaoTime) {
+						sign.setState("正在签到");
+					}else {
+						sign.setState("未开始");
+					}
+					
+				}
+			}
+		}
+		
 		mav.addObject("sList" , list);
 		return mav;
 	}
@@ -187,18 +209,21 @@ public class SignEventCtrl {
 	@RequestMapping("selDetailById.do")
 	public ModelAndView selDetailById(Integer id) {
 		SignEvent sign = ss.selDetailById(id);
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
-			String beforeTime = sign.getTime();
-			Date date = sdf.parse(beforeTime);
-			//设置日历时间
-			/*c.setTime(date);
-			c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
-			date = c.getTime();
-			String deadTime = sdf.format(date);
-			//设置终止时间
-			sign.setDeadLine(deadTime);*/
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			if(sign.getIsdead() == 1) {
+				sign.setState("已结束");
+			}else {
+				Long nowTime = date.getTime();
+				Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
+				if(nowTime >= qiandaoTime) {
+					sign.setState("正在签到");
+				}else {
+					sign.setState("未开始");
+				}
+				
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -208,4 +233,21 @@ public class SignEventCtrl {
 		return mav;
 	}
 	
+	
+	@RequestMapping("deadSign.do")
+	public void deadSign(Integer id , HttpServletResponse rspn) {
+		 boolean b = sm.updateIsDead(id);
+		 PrintWriter out = null;
+			try {
+				out = rspn.getWriter();
+				out.print(b ? 1 : 0);
+				out.flush();
+			} catch (Exception e) {
+				// TODO: handle exception
+			} finally {
+				out.close();
+			}
+		 //重新刷新该页面
+		  
+	}
 }
