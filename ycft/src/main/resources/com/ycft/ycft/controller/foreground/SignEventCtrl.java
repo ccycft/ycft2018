@@ -1,5 +1,6 @@
 package com.ycft.ycft.controller.foreground;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.services.foreground.SignEventSrv;
 import com.ycft.ycft.system.Core;
@@ -62,6 +64,49 @@ public class SignEventCtrl {
 		mav.setViewName("sign.jsp");
 		return mav;
 	}
+	
+	//查询签到事件
+		@RequestMapping("selSignEventByPage.do")
+		public void selSignEventByPage(Integer nowPage , Integer pageSize , HttpServletResponse response)  {
+			if(pageSize == null || pageSize == 0) {
+				//如果前端未指定查询几条数据  那后台指定为4条
+				pageSize = 4;
+			}
+			if(nowPage == null || nowPage <= 0) {
+				nowPage = 1;
+			}
+			List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
+			//将签到截止时间  设置为20分钟之后
+			Calendar c = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			try {
+				for(SignEvent sign : slist) {
+					String beforeTime = sign.getTime();
+					Date date = sdf.parse(beforeTime);
+					//设置日历时间
+					c.setTime(date);
+					c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
+					date = c.getTime();
+					String deadTime = sdf.format(date);
+					//设置终止时间
+					sign.setDeadLine(deadTime);
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.print(new Gson().toJson(slist));
+				 out.flush();
+				 out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 
+		}
 	
 	//点击签到
 	@RequestMapping("sign.do")
