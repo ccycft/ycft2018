@@ -82,6 +82,7 @@
     		$("#password").focus();
     		return false;
   	  }
+    	dosubmit();
     }
     </script>
     <script type="text/javascript">
@@ -250,7 +251,7 @@
     	padding:15px;
     }
     </style>
-<title>Insert title here</title>
+<title>用户维护</title>
 </head>
 <body onload="load()">
 <%
