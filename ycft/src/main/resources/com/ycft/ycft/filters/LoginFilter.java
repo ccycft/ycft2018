@@ -9,14 +9,13 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ycft.ycft.po.User;
-import com.ycft.ycft.services.PrivilegeService;
 import com.ycft.ycft.system.SysPrivilege;
-import com.ycft.ycft.tools.BeanUtil;
 
 /**
  * Servlet Filter implementation class LoginFilter
@@ -94,7 +93,43 @@ public class LoginFilter implements Filter {
 				}
 			}
 		}else {
-			chain.doFilter(req,res);
+			
+			if(resource.contains("login.do") || resource.contains("preLogin.jsp")) {
+				chain.doFilter(req,res);
+				return ;
+			}
+			//
+			Cookie[] cs = req.getCookies();
+			int uid = 0;
+			try {
+				if(cs != null && cs.length > 0) {
+					for(Cookie c : cs) {
+						if(c.getName().equals("uid")) {
+							uid = Integer.parseInt(c.getValue());
+						}
+					}
+				}else {
+					if(cs == null) {
+						out.write("检测到应用未开启cookie功能,请手动开启...");
+						out.flush();
+						out.close();
+						return ;
+					}
+					
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				uid = 0;
+			}
+			//如果uid为0  说明无uid信息  则转向登录
+			if(uid == 0) {
+				res.sendRedirect(basePath + "preLogin.jsp");
+				return ;
+			}else {
+				chain.doFilter(req,res);
+			}
+			
 		}
 		
 	}

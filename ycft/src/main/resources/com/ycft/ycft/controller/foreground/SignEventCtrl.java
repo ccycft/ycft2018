@@ -43,28 +43,8 @@ public class SignEventCtrl {
 			nowPage = 1;
 		}
 		List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		 
-		try {
-			for(SignEvent sign : slist) {
-				//如果isdead==1说明已经结束
-				if(sign.getIsdead() == 1) {
-					sign.setState("已结束");
-				}else {
-					Long nowTime = date.getTime();
-					Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
-					if(nowTime >= qiandaoTime) {
-						sign.setState("正在签到");
-					}else {
-						sign.setState("未开始");
-					}
-					
-				}
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(SignEvent sign : slist) {
+			chooseState(sign);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sList", slist ); 
@@ -83,29 +63,10 @@ public class SignEventCtrl {
 				nowPage = 1;
 			}
 			List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			 
-			try {
-				for(SignEvent sign : slist) {
-					//如果isdead==1说明已经结束
-					if(sign.getIsdead() == 1) {
-						sign.setState("已结束");
-					}else {
-						Long nowTime = date.getTime();
-						Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
-						if(nowTime >= qiandaoTime) {
-							sign.setState("正在签到");
-						}else {
-							sign.setState("未开始");
-						}
-						
-					}
-				}
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(SignEvent sign : slist) {
+				chooseState(sign);
 			}
+			
 			 PrintWriter out;
 			try {
 				out = response.getWriter();
@@ -184,21 +145,8 @@ public class SignEventCtrl {
 		int start = (nowPage - 1) * pageSize ; 
 		List<SignEvent> list = ss.selectSignById(uid , start , pageSize);
 		if(list != null && list.size() > 0) {
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			for(SignEvent sign : list) {
-				if(sign.getIsdead() == 1) {
-					sign.setState("已结束");
-				}else {
-					Long nowTime = date.getTime();
-					Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
-					if(nowTime >= qiandaoTime) {
-						sign.setState("正在签到");
-					}else {
-						sign.setState("未开始");
-					}
-					
-				}
+				 chooseState(sign);
 			}
 		}
 		
@@ -210,20 +158,8 @@ public class SignEventCtrl {
 	public ModelAndView selDetailById(Integer id) {
 		SignEvent sign = ss.selDetailById(id);
 		try {
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			if(sign.getIsdead() == 1) {
-				sign.setState("已结束");
-			}else {
-				Long nowTime = date.getTime();
-				Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
-				if(nowTime >= qiandaoTime) {
-					sign.setState("正在签到");
-				}else {
-					sign.setState("未开始");
-				}
-				
-			}
+			//判断签到状态
+			chooseState(sign);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -249,5 +185,32 @@ public class SignEventCtrl {
 			}
 		 //重新刷新该页面
 		  
+	}
+	
+	
+	//判断签到状态
+	public SignEvent chooseState(SignEvent sign) {
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		if(sign.getIsdead() == 1) {
+			sign.setState("已结束");
+		}else {
+			Long nowTime = date.getTime();
+			Long qiandaoTime;
+			try {
+				qiandaoTime = sdf.parse(sign.getTime()).getTime();
+				if(nowTime >= qiandaoTime) {
+					sign.setState("签到中");
+				}else {
+					sign.setState("未开始");
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		return sign;
 	}
 }

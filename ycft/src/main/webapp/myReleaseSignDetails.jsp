@@ -194,9 +194,9 @@
 		</div> 
 		
 		<%
-			if(sign.getState().equals("正在签到") ){
+			if(sign.getState().equals("签到中") ){
 		%>
-			<div style="background-color:#d00;opacity:0.6;width:100%;border:0px;line-height:5rem;font-size:19px;text-align:center;
+			<div style="background-color:#d00;opacity:0.7;width:100%;border:0px;line-height:5rem;font-size:19px;text-align:center;
 			height:5rem;position:fixed;left:0;bottom:0;color:#fff;" onclick="jieshu('<%=sign.getId()%>')">结束签到</div>
 		
 		<%		
