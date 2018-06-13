@@ -21,14 +21,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/fileinput.min.css">
-    <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/fileinput.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <link rel="stylesheet" href="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.min.css">
     <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="<%=basePath%>assets/date-plugin/moment-with-locales.min.js"></script>
+	<script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
+    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+    
 	<style type="text/css">
     	.icon{
     		display:inline;
@@ -62,24 +63,61 @@
     </style>
 
 	<script>
+	var map, geolocation;
 	
-		$(function () {  
-		    $('#datetimepicker').datetimepicker({  
-		    	language:  'zh-CN',  //日期
-		    	format: 'yyyy-mm-dd hh:ii',  
-		        autoclose:true//自动关闭
-		    });  
-		}); 
-		function back(){ 
-			
-			if(typeof(window.ceshi) != 'undefined'){
-				//说明 可以调用安卓的返回功能
-				window.ceshi.back(); 
-			}else{
-				window.history.back();
-			}
-			
+	$(function(){
+	    //加载地图，调用浏览器定位服务
+	    map = new AMap.Map('container', {
+	    	/*  resizeEnable: true,
+		     zoom:15,
+		     //可变坐标
+		     center: [125.277062,43.823759] */
+	    });
+	    
+	    $('#datetimepicker').datetimepicker({  
+	    	language:  'zh-CN',  //日期
+	    	format: 'yyyy-mm-dd hh:ii',  
+	        autoclose:true//自动关闭
+	    }); 
+	    getGeolocation();
+	});	
+	
+	
+	
+	function getGeolocation(){
+		
+		map.plugin('AMap.Geolocation', function() {
+		   	geolocation = new AMap.Geolocation({
+				enableHighAccuracy: true,//是否使用高精度定位，默认:true
+	            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+			    buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+			});
+		   	map.addControl(geolocation);
+	        geolocation.getCurrentPosition();
+	        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+	        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息 
+	   });
+	
+	
+	
+		//解析定位结果
+		function onComplete(data) {
+			var info = data.position.getLng()+","+data.position.getLat();
+			$('.position').val(info);
 		}
+		
+	}
+	
+	function back(){ 
+		
+		if(typeof(window.ceshi) != 'undefined'){
+			//说明 可以调用安卓的返回功能
+			window.ceshi.back(); 
+		}else{
+			window.history.back();
+		}
+		
+	}
 	</script>
 </head>
 <body>
@@ -87,7 +125,7 @@
 	<div class="nav-area">
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 		<span class="nav-title">签到列表</span>	
-		<img class="right-icon" src="<%=basePath%>images/add.png">
+		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
 	</div>
 
 	<div class="list-group" >
@@ -108,9 +146,6 @@
 					    <span class="a_item"><%=sign.getName() %> </span>
 					   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/success.png">
 					  </a>
-					
-					
-					
 					<%
 				  }
 			  }else{
@@ -144,19 +179,17 @@
 						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到名称"></div>
 					  </div>
 					  <div class="row form-group">
-					  	<div class="col-xs-4"><label >签到发起人:</label></div>
+					  	<div class="col-xs-4"><label >发起人:</label></div>
 						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到发起人"></div>
 					  </div>
 					   <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到地点:</label></div>
-						<div class="col-xs-8 form-inline">
+						<div class="col-xs-8 form-inline" onClick="getGeolocation()">
 						    <div class="input-group">
-						      <input type="text" class="form-control"  placeholder="请输入签到位置">
+						      <input type="text" class="form-control position" disabled="disabled" placeholder="当前位置" >
 						      <div class="input-group-addon">∨</div>
 						    </div>
 						</div>
-						
-						
 					  </div>
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到时间:</label></div>
@@ -175,7 +208,7 @@
 							<select class="form-control">
 							  <option>课程考勤</option>
 							  <option>活动考勤</option>
-							  <option>…</option>
+							  <option>其他</option>
 							  <option>…</option>
 							</select>
 						</div>
