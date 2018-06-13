@@ -1,5 +1,6 @@
 package com.ycft.ycft.system;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,14 +18,12 @@ public class LogOut {
 	 * @return backstagelogin.html
 	 */
 	@RequestMapping("logOut.do")
-	public ModelAndView logOut(HttpSession session) {
-		ModelAndView modelAndView = new ModelAndView();
+	public String logOut(HttpSession session,HttpServletResponse response) {
 		User user = (User)session.getAttribute("user");
 		System.out.println(user.getSname() + "×¢ÏúÁË£¡");
 		//×¢Ïúsession
 		session.invalidate();
 		
-		modelAndView.setViewName("backstagelogin.html");
-		return modelAndView;
+		return "redirect:/backstagelogin.html";
 	}
 }

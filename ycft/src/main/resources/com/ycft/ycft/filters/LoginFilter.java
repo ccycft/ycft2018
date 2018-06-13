@@ -46,10 +46,14 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+		request.setCharacterEncoding("utf-8");  
+		response.setCharacterEncoding("utf-8"); 
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
-		
+		//设置编码格式
+		req.setCharacterEncoding("utf-8");  
+		res.setCharacterEncoding("utf-8");  
+       // res.setContentType("text/html;charset=utf-8");  
 		//获取session
 		HttpSession session = req.getSession();
 		//用户
@@ -82,14 +86,15 @@ public class LoginFilter implements Filter {
 				}
 			}else {
 				if(LOGINACTION.equals(resource) || LOGINJSP.equals(resource)){
-					chain.doFilter(request, response);
+					chain.doFilter(req, res);
+					//res.sendRedirect( basePath + LOGINJSP );
 				}else {
 					//返回登录
 					out.print("<script>window.top.location.href='" + basePath + LOGINJSP +"';</script>");
 				}
 			}
 		}else {
-			chain.doFilter(request, response);
+			chain.doFilter(req,res);
 		}
 		
 	}

@@ -40,20 +40,24 @@ public class SignEventCtrl {
 			nowPage = 1;
 		}
 		List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
-		//将签到截止时间  设置为20分钟之后
-		Calendar c = Calendar.getInstance();
+		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		 
 		try {
 			for(SignEvent sign : slist) {
-				String beforeTime = sign.getTime();
-				Date date = sdf.parse(beforeTime);
-				//设置日历时间
-				c.setTime(date);
-				c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
-				date = c.getTime();
-				String deadTime = sdf.format(date);
-				//设置终止时间
-				sign.setDeadLine(deadTime);
+				//如果isdead==1说明已经结束
+				if(sign.getIsdead() == 1) {
+					sign.setState("已结束");
+				}else {
+					Long nowTime = date.getTime();
+					Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
+					if(nowTime >= qiandaoTime) {
+						sign.setState("正在签到");
+					}else {
+						sign.setState("未开始");
+					}
+					
+				}
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -76,20 +80,24 @@ public class SignEventCtrl {
 				nowPage = 1;
 			}
 			List<SignEvent> slist = ss.selSignEvent(nowPage, pageSize);
-			//将签到截止时间  设置为20分钟之后
-			Calendar c = Calendar.getInstance();
+			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			 
 			try {
 				for(SignEvent sign : slist) {
-					String beforeTime = sign.getTime();
-					Date date = sdf.parse(beforeTime);
-					//设置日历时间
-					c.setTime(date);
-					c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
-					date = c.getTime();
-					String deadTime = sdf.format(date);
-					//设置终止时间
-					sign.setDeadLine(deadTime);
+					//如果isdead==1说明已经结束
+					if(sign.getIsdead() == 1) {
+						sign.setState("已结束");
+					}else {
+						Long nowTime = date.getTime();
+						Long qiandaoTime = sdf.parse(sign.getTime()).getTime();
+						if(nowTime >= qiandaoTime) {
+							sign.setState("正在签到");
+						}else {
+							sign.setState("未开始");
+						}
+						
+					}
 				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
@@ -133,6 +141,7 @@ public class SignEventCtrl {
 		boolean b = ss.selSignByUidAndSid(userid , se.getId());
 		//能不能签到
 		mav.addObject("canSign" , !b);
+		System.out.println(!b);
 		mav.addObject("signEvent" , se);
 		//查询详情
 		mav.setViewName("signDetails.jsp");
@@ -184,12 +193,12 @@ public class SignEventCtrl {
 			String beforeTime = sign.getTime();
 			Date date = sdf.parse(beforeTime);
 			//设置日历时间
-			c.setTime(date);
+			/*c.setTime(date);
 			c.add(Calendar.MINUTE, Core.SIGNDEADTIME);
 			date = c.getTime();
 			String deadTime = sdf.format(date);
 			//设置终止时间
-			sign.setDeadLine(deadTime);
+			sign.setDeadLine(deadTime);*/
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

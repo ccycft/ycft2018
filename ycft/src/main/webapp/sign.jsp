@@ -180,7 +180,7 @@
 						<input type="hidden" value="<%=sign.getId()%>" name="id" />
 						<input type="hidden" value="<%=sign.getName() %>" name="name" />
 						<input type="hidden" value="<%=sign.getTime() %>" name="time" />
-						<input type="hidden" value="<%=sign.getDeadLine() %>" name="deadLine" />
+						 <input type="hidden" value="<%=sign.getState() %>" name="state" /> 
 						<input type="hidden" value="<%=sign.getSname() %>" name="sname" />
 						<input type="hidden" value="<%=sign.getCoordinate() %>" name="coordinate" />
 						<input type="hidden" value="<%=sign.getCoordinateName()%>"  name="coordinateName" />
@@ -194,19 +194,17 @@
 									<div class="col-xs-8">
 										<ul class="none_style">
 											<li class="">签到时间： <%=sign.getTime() %> </li>
-											<li class="">截止时间： <%=sign.getDeadLine() %> </li>
+											<%-- <li class="">截止时间： <%=sign.getDeadLine() %> </li> --%>
 											<li class=""> 主 办 方： <%=sign.getSname() %></li>
 											<li class="">签到地点：<%=sign.getCoordinateName()%> </li>
 										</ul>
 									</div>
-									<div id="" class="col-xs-4 sign_btn">
-										<a  class="btn btn-info btn-lg signBtn"	data-complete-text="签到中"><%=sign.getState()%></a> 
-									</div>
+								    <div id="" class="col-xs-4 sign_btn">
+										<a  class="btn btn-info btn-lg" data-complete-text="<%=sign.getState() %>"><%=sign.getState() %></a> 
+									</div>	
 								</div>
 						</div>
 					</div>
-					
-					
 				</div>
 				
 				<hr>	

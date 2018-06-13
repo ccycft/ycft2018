@@ -8,8 +8,11 @@ public class SignEvent {
     private String name;
 
     private Integer uid;
+    
+    private Integer isdead;
+    private String state;
     //自定义的截止时间
-    private String deadLine;
+  /*  private String deadLine;
     
     //获取截止时间
     public String getDeadLine() {
@@ -18,12 +21,28 @@ public class SignEvent {
 
 	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
+	}*/
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	//用来显示用户姓名
     private String sname;
 
-    public String getSname() {
+    public Integer getIsdead() {
+		return isdead;
+	}
+
+	public void setIsdead(Integer isdead) {
+		this.isdead = isdead;
+	}
+
+	public String getSname() {
 		return sname;
 	}
 
