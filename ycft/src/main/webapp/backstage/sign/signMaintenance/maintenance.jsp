@@ -49,10 +49,12 @@
         $('#dataTables-example').dataTable();
     });
     function changeId(){
+    	dosubmit();
     	$("#signId").attr("action","<%=basePath %>selSignEvent.do");
     	$("#signId").submit();
     }
     function exportSignInfo(){
+    	dosubmit();
     	$("#signId").attr("action","<%=basePath %>exportSignInfo.do");
     	$("#signId").submit();
     }
@@ -130,7 +132,18 @@
 			padding:15px;    	
     	}
     </style>
-<title>Insert title here</title>
+    <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
+<title>签到事件统计</title>
 </head>
 <body>
 <%
@@ -201,7 +214,7 @@
 					                </button>  
 					                <h4 class="modal-title" id="myModalLabel">请选择条件</h4>  
 					            </div>
-					            <form action="<%=basePath%>signSel.do" method="post">  
+					            <form action="<%=basePath%>signSel.do" method="post" onsubmit="dosubmit()">  
 					            <div class="modal-body">
 						            	<input type="hidden" name="id" value="${eventList[0].id}"/> 
 						            	<input type="hidden" name="r3" value="${eventList[0].name}"/> 

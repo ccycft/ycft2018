@@ -72,7 +72,7 @@ public class UserCtrl {
 			mav.setViewName("backstage/success.jsp");
 		}else{
 			//失败页面
-			mav.setViewName("backstage/fail.jsp");
+			mav.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return mav;
 	}
@@ -105,10 +105,10 @@ public class UserCtrl {
 		}
 		if(b){
 			//成功页面
-			mav.setViewName("backstage/selAll.do");
+			mav.setViewName("redirect:/backstage/selAll.do");
 		}else{
 			//失败页面
-			mav.setViewName("backstage/fail.jsp");
+			mav.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return mav;
 	}
@@ -142,9 +142,9 @@ public class UserCtrl {
 		boolean flag = us.addOneUser(user);
 		if (flag) {
 			//返回首页
-			modelAndView.setViewName("backstage/jump.do");
+			modelAndView.setViewName("redirect:/backstage/jump.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -188,9 +188,9 @@ public class UserCtrl {
 		boolean flag = us.updateAffairs(user,role);
 		//删除成功后返回原页面
 		if (flag) {
-			modelAndView.setViewName("backstage/selAll.do");
+			modelAndView.setViewName("redirect:/backstage/selAll.do");
 		} else {
-			//modelAndView.setViewName("backstage/fail");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

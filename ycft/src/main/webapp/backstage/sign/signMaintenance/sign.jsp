@@ -40,7 +40,7 @@
     <script src="<%=basePath%>assets/js/dataTables/dataTables.bootstrap.js"></script>
         <!-- Custom Js -->
     <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
-<title>Insert title here</title>
+<title>签到统计</title>
 <script type="text/javascript">
 	function load(){
 		$("#button").modal();

@@ -60,9 +60,9 @@ public class AdvertisingWindowCtrl {
 		boolean flag = aws.uploadAdvertisingWindow(request,titleFile,slide);
 		//修改成功后返回原页面
 		if (flag) {
-			modelAndView.setViewName("backstage/advertisingWindowSel.do");
+			modelAndView.setViewName("redirect:/backstage/advertisingWindowSel.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

@@ -54,9 +54,9 @@ public class ArticleCtrl {
 		//录入文章
 		boolean flag = articleSrv.addArticleAffairs(request,content,title,titleFile);
 		if(flag) {
-			return "backstage/selArticle.do";
+			return "redirect:/backstage/selArticle.do";
 		}else {
-			return "backstage/selArticle.do";
+			return "redirect:/backstage/fail.jsp";
 		}
 		
 	}
@@ -71,9 +71,9 @@ public class ArticleCtrl {
 		ModelAndView modelAndView = new ModelAndView();
 		boolean flag = articleSrv.del(id);
 		if (flag) {
-			modelAndView.setViewName("backstage/selArticle.do");
+			modelAndView.setViewName("redirect:/backstage/selArticle.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 			//向前台返回信息
 		return modelAndView;

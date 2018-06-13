@@ -60,9 +60,9 @@ public class ActivityCtrl {
 		boolean flag = as.addActivityAffairs(request,content,title,titleFile);
 		//true为发布成功
 		if(flag) {
-			return "backstage/selActivity.do";
+			return "redirect:/backstage/selActivity.do";
 		}else {
-			return "backstage/selActivity.do";
+			return "redirect:/backstage/fail.jsp";
 		}
 		
 	}
@@ -81,9 +81,9 @@ public class ActivityCtrl {
 		boolean flag = as.del(id);
 		//删除成功返回显示页面
 		if (flag) {
-			modelAndView.setViewName("backstage/selActivity.do");
+			modelAndView.setViewName("redirect:/backstage/selActivity.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -173,9 +173,9 @@ public class ActivityCtrl {
 		}
 		//true 导入成功
 		if(flag){
-			modelAndView.setViewName("backstage/selActivity.do");
+			modelAndView.setViewName("redirect:/backstage/selActivity.do");
 		}else{
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -196,7 +196,7 @@ public class ActivityCtrl {
 		if(flag){
 			modelAndView.setViewName("backstage/success.jsp");
 		}else{
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

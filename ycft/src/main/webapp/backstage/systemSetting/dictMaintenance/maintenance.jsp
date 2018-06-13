@@ -43,7 +43,7 @@
 <script src="<%=basePath%>assets/js/custom-scripts.js"></script>
 <script src="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.js"></script>
 <link href="<%=basePath %>assets/bootstrapValidator/bootstrapValidator.min.css" rel="stylesheet"/>
-<title>Insert title here</title>
+<title>数据字典维护</title>
 <script>
 	$(document).ready(function () {
 	    $('#dataTables-example').dataTable();
@@ -333,6 +333,17 @@ $(function () {
 		loadMenu();
    	});
     </script>
+    <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
 </head>
 <body>
 <%
@@ -389,7 +400,7 @@ $(function () {
 					                </button>  
 					                <h4 class="modal-title" id="myModalLabel">新增字典</h4>  
 					            </div>
-					            <form action="<%=basePath%>addDictType.do" method="post" id="addDictType"> 
+					            <form action="<%=basePath%>addDictType.do" method="post" id="addDictType" onsubmit="dosubmit()"> 
 					            	<input type="hidden" name="dictCode" value="<%=ddList.get(ddList.size()-1).getId() + "-" + ddList.get(ddList.size()-1).getdList().get(ddList.get(ddList.size()-1).getdList().size()-1).getId() %>">
 						            <div class="modal-body">  
 						            	<fieldset>
@@ -504,7 +515,7 @@ $(function () {
              </button>  
              <h4 class="modal-title" id="addTitle"></h4>  
          </div>
-         <form action="<%=basePath%>addDictItem.do" method="post" id="addForm"> 
+         <form action="<%=basePath%>addDictItem.do" method="post" id="addForm" onsubmit="dosubmit()"> 
          	<input type="hidden" name="id" id="addId"/> 
          	<input type="hidden" name="dictType" id="addDictItemType"/>   
           <div class="modal-body">  
@@ -543,7 +554,7 @@ $(function () {
              </button>  
              <h4 class="modal-title" id="updateTitle"></h4>  
          </div>
-         <form action="<%=basePath%>updateDict.do" method="post" id="updateForm"> 
+         <form action="<%=basePath%>updateDict.do" method="post" id="updateForm" onsubmit="dosubmit()"> 
          	<input type="hidden" name="id" id="updateId"/>  
           <div class="modal-body">  
           	<fieldset>

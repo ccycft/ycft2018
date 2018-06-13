@@ -284,7 +284,6 @@ public class ActivitySrv {
 		try {
 			//查询所有
 			List<User> uList =  um.selExport(tid);
-			if(uList!= null && !uList.isEmpty()){
 				response.reset();
 				response.setContentType("application/vnd.ms-excel"); //保证不乱码
 				String fileName = "学生信息.xls";
@@ -297,6 +296,8 @@ public class ActivitySrv {
 				bWorkbook = Workbook.createWorkbook(os);
 				//通过excel对象创建一个选项卡对象
 				WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
+				sheet.addCell(new Label(0, 0, "该活动暂时无人报名")); 
+			if(uList!= null && !uList.isEmpty()){
 				for(int i = 0;i < uList.size();i++){
 					User user = uList.get(i);
 					//开始绘制表头
@@ -313,14 +314,17 @@ public class ActivitySrv {
 	                sheet.addCell(new Label(3, i + 1,  user.getProfession()));
 	                sheet.addCell(new Label(4, i + 1,  user.getCls()));
 					}
-		            bWorkbook.write();
-				} 
-				return true;
+		            return true;
+				}else {
+					return false;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}finally {  
 				try {
+					//最后向bWorkbook 里面写数据
+					bWorkbook.write();
 					//下面这两个关闭不能反，否则导出不好使
 					if(bWorkbook != null){
 						bWorkbook.close();

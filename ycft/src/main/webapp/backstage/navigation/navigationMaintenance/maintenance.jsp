@@ -16,7 +16,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewPort" content="width=device-width initial-scale=1.0">
-<title>Insert title here</title>
+<title>校园导航维护</title>
 <!-- Bootstrap Styles-->
 <link href="<%=basePath%>assets/css/bootstrap.css" rel="stylesheet" />
 <!-- FontAwesome Styles-->
@@ -179,6 +179,17 @@
 		loadMenu();
    	});
     </script>
+    <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
 </head>
 <body>
 
@@ -368,6 +379,7 @@
     	if($("#id").val()=="" || $("#coordinate").val()==""){
     		alert("请选择地点");
     	}else{
+    		dosubmit();
     		$("#navigationUpDate").submit();
     	}
     }
