@@ -76,9 +76,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("backstage/selDictDictionary.do");
+			modelAndView.setViewName("redirect:/backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -97,9 +97,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("backstage/selDictDictionary.do");
+			modelAndView.setViewName("redirect:/backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -117,9 +117,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("backstage/selDictDictionary.do");
+			modelAndView.setViewName("redirect:/backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -138,9 +138,9 @@ public class DictCtrl {
 		if (flag) {
 			//重新缓存字典
 			reCache();
-			modelAndView.setViewName("backstage/selDictDictionary.do");
+			modelAndView.setViewName("redirect:/backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		
 		return modelAndView;
@@ -189,9 +189,9 @@ public class DictCtrl {
 		if (flag) {
 			//成功后重新缓存数据字典
 			reCache();
-			modelAndView.setViewName("backstage/selDictDictionary.do");
+			modelAndView.setViewName("redirect:/backstage/selDictDictionary.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

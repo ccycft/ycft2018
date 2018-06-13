@@ -56,9 +56,9 @@ public class InformCtrl {
 	public String addInform(HttpServletResponse response,HttpServletRequest request, Content content,Title title,MultipartFile titleFile) throws IOException { 
 		boolean flag = is.addInformAffairs(request,content,title,titleFile);
 		if(flag) {
-			return "backstage/selInform.do";
+			return "redirect:/backstage/selInform.do";
 		}else {
-			return "backstage/selInform.do";
+			return "redirect:/backstage/selInform.do";
 		}
 		
 	}
@@ -76,9 +76,9 @@ public class InformCtrl {
 		boolean flag = is.del(id);
 		//É¾³ý³É¹¦·µ»Øtrue
 		if (flag) {
-			modelAndView.setViewName("backstage/selInform.do");
+			modelAndView.setViewName("redirect:/backstage/selInform.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}

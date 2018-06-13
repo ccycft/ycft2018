@@ -76,9 +76,9 @@ public class NavigationCtrl {
 		boolean flag = ns.navigationUpDate(navigation);
 		//修改成功后返回显示页面
 		if (flag) {
-			modelAndView.setViewName("backstage/navigationSel.do");
+			modelAndView.setViewName("redirect:/backstage/navigationSel.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
@@ -95,9 +95,9 @@ public class NavigationCtrl {
 		boolean flag = ns.navigationDel(navigation);
 		//删除成功后返回显示页面
 		if (flag) {
-			modelAndView.setViewName("backstage/navigationSel.do");
+			modelAndView.setViewName("redirect:/backstage/navigationSel.do");
 		} else {
-			modelAndView.setViewName("backstage/fail.jsp");
+			modelAndView.setViewName("redirect:/backstage/fail.jsp");
 		}
 		return modelAndView;
 	}
