@@ -120,22 +120,6 @@
 		  <%
 			  }
 		  %>
-		  
-		  <!-- <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
-		    <span class="a_item">课程 | 网络工程-13-李老师 </span>
-		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/error.png">
-		  </a>
-		   <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
-		    <span class="a_item">活动 | 互联网+ 网页设计大赛 </span>
-		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/success.png">
-		  </a>
-		  <a  href="#" class="list-group-item ">
-		   	<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
-		    <span class="a_item">课程 | 网络工程-13-李老师 </span>
-		   	<img class="img-responsive icon pull-right " src="<%=basePath%>images/error.png">
-		  </a> -->
 	</div>
 
 	

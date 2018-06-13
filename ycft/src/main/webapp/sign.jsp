@@ -45,6 +45,16 @@
 			padding-left:2rem;
 			line-height:2.5rem;
 		}
+		.getMore{
+			font-size:1.5rem;
+			color:#ccc;
+			border:0px;
+		}
+		.bottomDiv{
+			margin-top:1rem;
+			margin-bottom:1.5rem;
+		}
+		
 	</style>
 	
 	<script>
@@ -66,6 +76,63 @@
 		}
 		
 	}
+	
+	$(function(){
+		
+		
+		var b = true ;
+		var nowPage = 1;
+		//滚动条到页面底部加载更多案例   
+		$(window).scroll(function(){  
+		      
+		 var scrollTop = $(this).scrollTop();    //滚动条距离顶部的高度  
+		 var scrollHeight = $(document).height();   //当前页面的总高度  
+		 var clientHeight = $(this).height();    //当前可视的页面高度  
+		 // console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);  
+		 if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部   
+		     //滚动条到达底部  
+		     //alert('开始加载....')  ;
+		 	//开始ajax请求下一页
+		 	 ++nowPage;
+			 htmlobj=$.ajax({url:"<%=basePath%>fore/signEvent/selSignEventByPage.do?nowPage="+nowPage,async:false});
+			 var json = (htmlobj.responseText);
+			 //alert(json);
+			 var obj = JSON.parse(json);
+			 var container = $('.container-fluid');
+			 for(var i = 0 ; i < obj.length ;i++){
+				container.append("<div id='sign_div' class='row' onclick='details(this)'><form action='basePathfore/signEvent/selDetail.do' method='post' ><input type='hidden' value='"+obj[i].id+"' name='id' /><input type='hidden' value='"+obj[i].name+"' name='name' /><input type='hidden' value='"+obj[i].time+"' name='time' /><input type='hidden' value='"+obj[i].deadLine+"' name='deadLine' /><input type='hidden' value='"+obj[i].sname+"' name='sname' /><input type='hidden' value='"+obj[i].coordinate+"' name='coordinate' /><input type='hidden' value='"+obj[i].coordinateName+"'  name='coordinateName' /><input type='hidden' value='"+obj[i].uid+"'  name='userid' /></form><div class='col-xs-12'><div class='thumbnail'><img class='img-rounded' src='<%=basePath%>images/t1.jpg' alt='...'><h4 id='course_title' >"+obj[i].name+"</h4><div class='row'><div class='col-xs-8'><ul class='none_style'><li class=''>签到时间："+obj[i].time+"</li><li class=''> 主 办 方："+obj[i].sname+"</li><li class=''>签到地点："+obj[i].coordinateName+"</li></ul></div><div id='' class='col-xs-4 sign_btn'><a  class='btn btn-info btn-lg signBtn' data-complete-text='签到中'>签到中</a> </div></div></div></div></div><hr>");
+			 } 
+			 if(obj.length == 0 &&  b){
+				 alert('没有更多了...');
+				 b = false;
+			 }
+		 }else if(scrollTop<=0){  
+		    //滚动条到达顶部  
+		     alert(4)  
+		 //滚动条距离顶部的高度小于等于0 TODO  
+		 }  
+		 
+		}); 
+		changeStyle();
+	});
+	
+	function changeStyle(){
+		
+		//修改btn样式信息
+		var signBtn = $('.sign_btn');
+		var val = signBtn.val();	
+		alert(signBtn);
+		alert(val);
+		if(val.equals('签到中')){
+			//signBtn
+		}else if(val.equals('正在签到')){
+			
+		}else{
+			
+		}
+		
+	}
+	
 	</script>
 	
 </head>
@@ -106,8 +173,7 @@
 				<input type="hidden" value="<%=uid%>" id="uid" />
 				<%
 				for(SignEvent sign : sList){
-						
-		%>
+				%>
 				
 				<div id="sign_div" class="row" onclick="details(this)">
 					<form action="<%=basePath%>fore/signEvent/selDetail.do" method="post" >
@@ -121,8 +187,8 @@
 						<input type="hidden" value="<%=uid%>"  name="userid" />
 					</form>
 					<div class="col-xs-12">
-							<div class="thumbnail">
-								<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">
+						<div class="thumbnail">
+							<img class="img-rounded" src="<%=basePath%>images/t1.jpg" alt="...">
 								<h4 id="course_title" > <%=sign.getName()%>  </h4>
 								<div class="row">
 									<div class="col-xs-8">
@@ -133,66 +199,26 @@
 											<li class="">签到地点：<%=sign.getCoordinateName()%> </li>
 										</ul>
 									</div>
-									
-									<%
-									  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-									  Date now = new Date();
-									  String dete = sdf.format(now);
-									  now = sdf.parse(dete);
-									  long time = now.getTime();
-									  Date et=sdf.parse(sign.getDeadLine()); 
-									  long hh =  et.getTime();
-									  Date startDate =sdf.parse(sign.getTime()); 
-									  long start = startDate.getTime();
-									  //现在的时间必须要比 截止时间小 并且大等于开始时间
-									  boolean b = time - hh <= 0 && time - start >= 0;
-									  if(b){
-								    	  //则现在的时间还早于截止时间   即为正在签到
-								    %>
-								    	<div id="" class="col-xs-4 sign_btn">
-											<a  class="btn btn-info btn-lg"
-											data-complete-text="签到中"
-											>签到中</a> 
-										</div>
-								    <%
-								      }else{
-								    	  if(time - start < 0){
-								    %>
-								    		<div id="" class="col-xs-4 sign_btn">
-												<a  class="btn btn-info btn-lg btn-danger" 
-												data-complete-text="未开始"
-												>未开始</a> 
-											</div>	
-								    <% 
-								    	  }else{
-								    %>
-								    	<div id="" class="col-xs-4 sign_btn">
-											<a  class="btn btn-info btn-lg btn-danger" 
-											data-complete-text="已结束"
-											>已结束</a> 
-										</div>	  
-								    <%
-								    	  }
-								      }
-									%>
-									 
+									<div id="" class="col-xs-4 sign_btn">
+										<a  class="btn btn-info btn-lg signBtn"	data-complete-text="签到中"><%=sign.getState()%></a> 
+									</div>
 								</div>
-							</div>
+						</div>
 					</div>
+					
+					
 				</div>
 				
-				<hr>	<!--    华丽丽的分割线———————————————————————————————————— -->
+				<hr>	
+				<!--    华丽丽的分割线———————————————————————————————————— -->
 		<%
-		
 				}
 			}else{
 		%>
 			未发现任何信息
 		<%
 			}
-			
 		%>
-		 
-	</div>		 
+	</div>	
 </body>
 </html>
