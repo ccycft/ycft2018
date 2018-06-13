@@ -62,6 +62,7 @@
 	
 	
 	function details(div){
+		
 		$(div).find("form").submit();
 	
 	}
@@ -100,7 +101,7 @@
 			 var obj = JSON.parse(json);
 			 var container = $('.container-fluid');
 			 for(var i = 0 ; i < obj.length ;i++){
-				container.append("<div id='sign_div' class='row' onclick='details(this)'><form action='basePathfore/signEvent/selDetail.do' method='post' ><input type='hidden' value='"+obj[i].id+"' name='id' /><input type='hidden' value='"+obj[i].name+"' name='name' /><input type='hidden' value='"+obj[i].time+"' name='time' /><input type='hidden' value='"+obj[i].deadLine+"' name='deadLine' /><input type='hidden' value='"+obj[i].sname+"' name='sname' /><input type='hidden' value='"+obj[i].coordinate+"' name='coordinate' /><input type='hidden' value='"+obj[i].coordinateName+"'  name='coordinateName' /><input type='hidden' value='"+obj[i].uid+"'  name='userid' /></form><div class='col-xs-12'><div class='thumbnail'><img class='img-rounded' src='<%=basePath%>images/t1.jpg' alt='...'><h4 id='course_title' >"+obj[i].name+"</h4><div class='row'><div class='col-xs-8'><ul class='none_style'><li class=''>签到时间："+obj[i].time+"</li><li class=''> 主 办 方："+obj[i].sname+"</li><li class=''>签到地点："+obj[i].coordinateName+"</li></ul></div><div id='' class='col-xs-4 sign_btn'><a  class='btn btn-info btn-lg signBtn' data-complete-text='签到中'>签到中</a> </div></div></div></div></div><hr>");
+				container.append("<div id='sign_div' class='row' onclick='details(this)'><form action='<%=basePath%>fore/signEvent/selDetail.do' method='post' ><input type='hidden' value='"+obj[i].id+"' name='id' /><input type='hidden' value='"+obj[i].name+"' name='name' /><input type='hidden' value='"+obj[i].time+"' name='time' /><input type='hidden' value='"+obj[i].deadLine+"' name='deadLine' /><input type='hidden' value='"+obj[i].sname+"' name='sname' /><input type='hidden' value='"+obj[i].coordinate+"' name='coordinate' /><input type='hidden' value='"+obj[i].coordinateName+"'  name='coordinateName' /><input type='hidden' value='"+obj[i].uid+"'  name='userid' /></form><div class='col-xs-12'><div class='thumbnail'><img class='img-rounded' src='<%=basePath%>images/t1.jpg' alt='...'><h4 id='course_title' >"+obj[i].name+"</h4><div class='row'><div class='col-xs-8'><ul class='none_style'><li class=''>签到时间："+obj[i].time+"</li><li class=''> 主 办 方："+obj[i].sname+"</li><li class=''>签到地点："+obj[i].coordinateName+"</li></ul></div><div id='' class='col-xs-4 sign_btn'><a  class='btn btn-info btn-lg signBtn' data-complete-text='"+obj[i].state+"'>"+obj[i].state+"</a> </div></div></div></div></div><hr>");
 			 } 
 			 if(obj.length == 0 &&  b){
 				 alert('没有更多了...');
@@ -113,26 +114,28 @@
 		 }  
 		 
 		}); 
+		
+		//修改图标样式
 		changeStyle();
 	});
 	
 	function changeStyle(){
 		
 		//修改btn样式信息
-		var signBtn = $('.sign_btn');
-		var val = signBtn.val();	
-		alert(signBtn);
-		alert(val);
-		if(val.equals('签到中')){
-			//signBtn
-		}else if(val.equals('正在签到')){
-			
-		}else{
-			
-		}
+		var btnArray = document.getElementsByClassName('signBtn');
 		
+		for(var i = 0 ; i < btnArray.length ; i++){
+			
+			if(btnArray[i].innerText =='已结束'){
+				
+				btnArray[i].className = "btn btn-danger btn-lg";
+				
+			}else if(btnArray[i].innerText =='未开始'){
+				
+				btnArray[i].className = "btn btn-warning btn-lg";
+			}	
+		}
 	}
-	
 	</script>
 	
 </head>
@@ -200,7 +203,7 @@
 										</ul>
 									</div>
 								    <div id="" class="col-xs-4 sign_btn">
-										<a  class="btn btn-info btn-lg" data-complete-text="<%=sign.getState() %>"><%=sign.getState() %></a> 
+										<a  class="btn btn-info btn-lg signBtn" data-complete-text="<%=sign.getState() %>"><%=sign.getState() %></a> 
 									</div>	
 								</div>
 						</div>
