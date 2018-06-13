@@ -186,19 +186,19 @@
   <!-- 服务端方法开始 -->
   <select id="selByCount" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select * 
-		from title where type = #{0} order by time desc 
+		from title where type = #{0} and title.id not in (0) order by time desc 
   </select>
   
   <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
   		FROM content,title,USER 
-  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1}
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1} and title.id not in (0)
   </select>
   
   <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
   		FROM content,title,USER 
-  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1} and title.id not in (0)
   </select>
   <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
 		<!-- 将插入数据的主键返回，返回到User对象中 -->
@@ -265,7 +265,7 @@
 	</insert>
 	<select id="selTitleCommentById" resultMap="TitleComment" parameterType="java.lang.Integer">
 	    SELECT comment.id cid,content,TIME,USER FROM COMMENT,title 
-	    WHERE comment.tid = title.id AND title.id = #{1}
+	    WHERE comment.tid = title.id AND title.id = #{1} and title.id not in (0)
 	</select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
