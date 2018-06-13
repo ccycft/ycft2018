@@ -44,8 +44,10 @@ public class SignCtrl {
 		List<SignEvent> eventList = signSrv.selEvent(se);
 		//查询出所有班级
 		List<User> uList = us.selCls();
-		//向页面返回第一个值
-		modelAndView.addObject("sList", sList.get(0));
+		if(sList!=null && sList.size()>0) {
+			//向页面返回第一个值
+			modelAndView.addObject("sList", sList.get(0));
+		}
 		modelAndView.addObject("eventList", eventList);
 		modelAndView.addObject("uList", uList);
 		modelAndView.setViewName("backstage/sign/signMaintenance/maintenance.jsp");
