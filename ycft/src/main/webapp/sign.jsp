@@ -114,7 +114,7 @@
 						<input type="hidden" value="<%=sign.getId()%>" name="id" />
 						<input type="hidden" value="<%=sign.getName() %>" name="name" />
 						<input type="hidden" value="<%=sign.getTime() %>" name="time" />
-						<input type="hidden" value="<%=sign.getDeadLine() %>" name="deadLine" />
+						 <input type="hidden" value="<%=sign.getState() %>" name="state" /> 
 						<input type="hidden" value="<%=sign.getSname() %>" name="sname" />
 						<input type="hidden" value="<%=sign.getCoordinate() %>" name="coordinate" />
 						<input type="hidden" value="<%=sign.getCoordinateName()%>"  name="coordinateName" />
@@ -128,54 +128,20 @@
 									<div class="col-xs-8">
 										<ul class="none_style">
 											<li class="">签到时间： <%=sign.getTime() %> </li>
-											<li class="">截止时间： <%=sign.getDeadLine() %> </li>
+											<%-- <li class="">截止时间： <%=sign.getDeadLine() %> </li> --%>
 											<li class=""> 主 办 方： <%=sign.getSname() %></li>
 											<li class="">签到地点：<%=sign.getCoordinateName()%> </li>
 										</ul>
 									</div>
 									
-									<%
-									  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-									  Date now = new Date();
-									  String dete = sdf.format(now);
-									  now = sdf.parse(dete);
-									  long time = now.getTime();
-									  Date et=sdf.parse(sign.getDeadLine()); 
-									  long hh =  et.getTime();
-									  Date startDate =sdf.parse(sign.getTime()); 
-									  long start = startDate.getTime();
-									  //现在的时间必须要比 截止时间小 并且大等于开始时间
-									  boolean b = time - hh <= 0 && time - start >= 0;
-									  if(b){
-								    	  //则现在的时间还早于截止时间   即为正在签到
-								    %>
+									 
+									  
 								    	<div id="" class="col-xs-4 sign_btn">
 											<a  class="btn btn-info btn-lg"
-											data-complete-text="签到中"
-											>签到中</a> 
+											data-complete-text="<%=sign.getState() %>"
+											><%=sign.getState() %></a> 
 										</div>
-								    <%
-								      }else{
-								    	  if(time - start < 0){
-								    %>
-								    		<div id="" class="col-xs-4 sign_btn">
-												<a  class="btn btn-info btn-lg btn-danger" 
-												data-complete-text="未开始"
-												>未开始</a> 
-											</div>	
-								    <% 
-								    	  }else{
-								    %>
-								    	<div id="" class="col-xs-4 sign_btn">
-											<a  class="btn btn-info btn-lg btn-danger" 
-											data-complete-text="已结束"
-											>已结束</a> 
-										</div>	  
-								    <%
-								    	  }
-								      }
-									%>
-									 
+								    
 								</div>
 							</div>
 					</div>

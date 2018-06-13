@@ -203,7 +203,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<span>截止时间:<%=sign.getDeadLine()%></span>
+			<%-- 	<span>截止时间:<%=sign.getDeadLine()%></span> --%>
 			</div>
 		</div>
 		<div class="row">
@@ -218,30 +218,9 @@
 		<div class="row icon_area" >
 			<div class="col-xs-12">
 				<img class="img-responsive icon" src="<%=basePath%>images/tongzhi.png">
-				<%
-				  SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-				  Date now = new Date();
-				  String dete = sdf.format(now);
-				  now = sdf.parse(dete);
-				  long time = now.getTime();
-				  Date et=sdf.parse(sign.getDeadLine()); 
-				  Date startDate =sdf.parse(sign.getTime()); 
-				  long hh =  et.getTime();
-				  long start = startDate.getTime();
-				  //现在的时间必须要比 截止时间小
-				  boolean b = time - hh <= 0 && time - start >= 0;
-				  //时间是否能够签到
-				  if(b){
-			    	  //则现在的时间还早于截止时间   即为正在签到
-			    %>
-			    		<span class="a_item" style="font-size:1.5rem;font-weight:bold;">正在签到 ···</span>
-			    <%
-			      }else{
-			    %>
-			    	<span class="a_item" style="font-size:1.5rem;font-weight:bold;">签到未开始或已结束,请留意时间 ···</span>
-			    <%
-			      }
-				%> 
+			 
+			    		<span class="a_item" style="font-size:1.5rem;font-weight:bold;"><%=sign.getState() %></span>
+			     
 				
 			</div>
 		</div>
@@ -249,13 +228,13 @@
 		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
 			<%
 				//用户没签到 过  并且  签到时间未过   
-				if(canSign && b ){
+				if(canSign && sign.getState().equals("正在签到") ){
 			%>	
 					 
 							<a class="btn btn-info" onclick="getGeolocation()"> 点击签到 </a> 
 			<%
 				}else{
-					if(!b){
+					if(!sign.getState().equals("正在签到") ){
 			%>
 			<%
 					}else{ 

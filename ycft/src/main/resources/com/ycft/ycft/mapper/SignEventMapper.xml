@@ -18,6 +18,7 @@
     <result column="coordinate" property="coordinate" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <result column="isdead" property="isdead" jdbcType="INTEGER" />
     <collection property="signList" ofType="com.ycft.ycft.po.Sign">
         
         <id column="signId" property="id" jdbcType="INTEGER" />
@@ -56,6 +57,7 @@
     <result column="coordinate_name" property="coordinateName" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="sign_type" property="signType" jdbcType="VARCHAR" />
+    <result column="isdead" property="isdead" jdbcType="INTEGER" />
   </resultMap>
   
   <!-- 客户端方法开始 -->
