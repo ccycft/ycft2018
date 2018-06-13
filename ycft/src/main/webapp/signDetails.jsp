@@ -225,7 +225,7 @@
 			</div>
 		</div>
 		<div class="row">
-		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
+		   <div class="col-xs-12 text-center" disabled="disabled" style="margin-top:3rem;">
 			<%
 				//用户没签到 过  并且  签到时间未过   
 				if(canSign && sign.getState().equals("正在签到") ){
