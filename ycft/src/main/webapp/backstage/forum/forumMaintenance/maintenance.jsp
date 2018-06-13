@@ -236,7 +236,7 @@
 		loadMenu();
    	});
     </script>
-<title>Insert title here</title>
+<title>论坛维护</title>
 </head>
 <body onload="load()">
 <div id="wrapper">

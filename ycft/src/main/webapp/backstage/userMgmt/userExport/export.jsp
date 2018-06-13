@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Export</title>
+	<title>用户导入/出</title>
     <!-- Bootstrap Styles-->
     <link href="<%=basePath %>assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FontAwesome Styles-->
@@ -179,6 +179,17 @@
         });
     });
     </script>
+    <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
 </head>
 <body>
     <div id="wrapper">
@@ -251,7 +262,7 @@
 		                </button>  
 		                <h4 class="modal-title" id="myModalLabel">用户信息添加</h4>  
 		            </div>    
-		           <form action="<%=basePath %>addOneUser.do" method="post" id="addOneUser">
+		           <form action="<%=basePath %>addOneUser.do" method="post" id="addOneUser" onsubmit="dosubmit()">
 		            <div class="modal-body">  
 		            	<fieldset>
 		            	<div class="row">
@@ -341,6 +352,7 @@
     	}
     	function exportFile(){
     		if(confirm('导出 全部用户信息吗?')){
+    			dosubmit();
     			document.getElementById("fileForm").action="<%=basePath %>exportExcel.do";
     			document.getElementById("fileForm").submit();
     		}
@@ -357,6 +369,7 @@
    		    	if(confirm('您将要导入 ['+filename+"] 文件?")){
    		    		//开始导入
    		    		alert("开始提交");
+   		    		dosubmit();
    		    		document.getElementById("fileForm").action="<%=basePath %>importExcel.do";
    		    		document.getElementById("fileForm").submit();
    		    	}

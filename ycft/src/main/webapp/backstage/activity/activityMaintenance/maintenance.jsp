@@ -17,7 +17,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+<title>活动维护</title>
 <!-- Bootstrap Styles-->
     <link href="<%=basePath%>assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
@@ -114,6 +114,7 @@
     } 
     function refer(){
     	var sHTML = $('.summernote').summernote('code');
+    	dosubmit();
     	document.getElementById("contentId").value=sHTML;
     	document.getElementById("addInform").submit();
     }
@@ -128,6 +129,7 @@
 	    }else{
 	    	alert("请仔细核对学号，如若错误则无法导入！");
 	    	if(confirm('您将要导入 ['+filename+"] 文件?")){
+	    		dosubmit();
 	    		//开始导入
 	    		document.getElementById("fileForm"+id).action="<%=basePath%>importActivityExcel.do";
 	    		document.getElementById("fileForm"+id).submit();
@@ -267,6 +269,17 @@
     		}
     	}
    </script>
+   <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
 </head>
 <body onload="load()">
 <%

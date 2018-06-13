@@ -18,7 +18,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="<%=basePath%>assets/css/bootstrap.css" />
 <link rel="stylesheet" href="<%=basePath%>summernote/dist/summernote.css">
-<title>summernote</title>
+<title>活动修改</title>
 
 <script src="<%=basePath%>assets/js/jquery-1.10.2.js"></script> 
 <script src="<%=basePath%>assets/js/bootstrap.min.js"></script>
@@ -68,6 +68,7 @@
   } 
   function upd(){
   	var sHTML = $('.summernote').summernote('code');
+  	dosubmit();
   	document.getElementById("updContentId").value=sHTML;
   	document.getElementById("updInform").submit();
   }
@@ -89,6 +90,17 @@
 			margin-top:30px;
 		}
     </style>
+    <script type="text/javascript">
+         var isCommitted = false;//表单是否已经提交标识，默认为false
+         function dosubmit(){
+             if(isCommitted==false){
+                 isCommitted = true;//提交表单后，将表单是否已经提交标识设置为true
+                 return true;//返回true让表单正常提交
+             }else{
+                 return false;//返回false那么表单将不提交
+             }
+         }
+     </script>
 </head>
 <body>
 <%
