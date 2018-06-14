@@ -53,6 +53,7 @@
             border: 0;
             vertical-align: middle;
         }
+        
         .ps-text{
        		color:#ccc;
         }

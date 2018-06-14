@@ -52,7 +52,6 @@
     	}
     	.add_sign{
     		margin-top:1.5rem;
-    		
     	}
     	
     	.list-group{
@@ -138,7 +137,6 @@
 			  if(sList != null && sList.size() > 0){
 				  for(SignEvent sign : sList){
 					%>
-					
 					<a  href="<%=basePath%>fore/signEvent/selDetailById.do?id=<%=sign.getId()%>" class="list-group-item ">
 					   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
 					    <span class="a_item"><%=sign.getName() %> </span>
