@@ -79,6 +79,17 @@ public class TitleCtrl {
 		mav.setViewName("inform.jsp");
 		return mav;
 	}
+	@RequestMapping("loadInformByPage")
+	public void loadInformByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
+		if(nowPage == null || nowPage <= 0) {
+			nowPage = 1;
+		}
+		if(pageSize == null || pageSize == 0) {
+			//默认查询四条数据
+			pageSize = 4;
+		}
+		
+	}
 	//查询文章详情
 	@RequestMapping("articleDetail.do")
 	public ModelAndView articleDetail(Integer id) {

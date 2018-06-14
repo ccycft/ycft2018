@@ -228,13 +228,13 @@
 		   <div class="col-xs-12 text-center" disabled="disabled" style="margin-top:3rem;">
 			<%
 				//用户没签到 过  并且  签到时间未过   
-				if(canSign && sign.getState().equals("正在签到") ){
+				if(canSign && sign.getState().equals("签到中") ){
 			%>	
 					 
 							<a class="btn btn-info" onclick="getGeolocation()"> 点击签到 </a> 
 			<%
 				}else{
-					if(!sign.getState().equals("正在签到") ){
+					if(!sign.getState().equals("签到中") ){
 			%>
 			<%
 					}else{ 

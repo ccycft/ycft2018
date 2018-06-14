@@ -147,7 +147,7 @@ public class UserCtrl {
 			}
 			
 		}
-		mav.setViewName("preLogin.jsp");
+		mav.setViewName("redirct_preLogin.jsp");
 		return mav;
 	}
 	
