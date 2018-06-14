@@ -54,24 +54,34 @@ a:hover{text-decoration:underline}
 .error-page-actions li{line-height:2.5em}    
 .error-page-actions:before{content:'';display:block;position:absolute;z-index:-1;bottom:17px;left:50px;width:200px;height:10px;-moz-box-shadow:4px 5px 31px 11px #999;-webkit-box-shadow:4px 5px 31px 11px #999;box-shadow:4px 5px 31px 11px #999;-moz-transform:rotate(-4deg);-webkit-transform:rotate(-4deg);-ms-transform:rotate(-4deg);-o-transform:rotate(-4deg);transform:rotate(-4deg)}    
 .error-page-actions:after{content:'';display:block;position:absolute;z-index:-1;bottom:17px;right:50px;width:200px;height:10px;-moz-box-shadow:4px 5px 31px 11px #999;-webkit-box-shadow:4px 5px 31px 11px #999;box-shadow:4px 5px 31px 11px #999;-moz-transform:rotate(4deg);-webkit-transform:rotate(4deg);-ms-transform:rotate(4deg);-o-transform:rotate(4deg);transform:rotate(4deg)}    
-</style> 
+</style>
+<script type="text/javascript">
+     function jump(count) { 
+         window.setTimeout(function(){                 
+             count++; 
+             if(count <= 404) { 
+                 $("#num").html(count);                         
+                 jump(count); 
+             } else { 
+             } 
+         }, 5); 
+     } 
+</script> 
 </head>
-<body>
+<body onload="jump(0)">
 	<div id="wrapper">
 		<div class="error-page">    
 <div class="error-page-container">    
 <div class="error-page-main">    
 <h3>    
-出现点瑕疵<strong>莫慌</strong>
+出现点瑕疵<strong id="num">0</strong>
 </h3>    
 <div class="error-page-actions">    
 <div>    
 <h4>可能原因：</h4>    
 <ol>    
 <li>网络信号差</li>    
-<li>程序员累倒了</li>    
 <li>程序员跑路了</li>    
-<li>找不到请求的页面</li>    
 <li>输入的网址不正确</li>    
 </ol>    
 </div>    
