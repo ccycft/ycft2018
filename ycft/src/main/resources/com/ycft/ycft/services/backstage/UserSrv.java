@@ -24,6 +24,7 @@ import com.ycft.ycft.services.InitService;
 import com.ycft.ycft.tools.BeanUtil;
 import com.ycft.ycft.tools.MD5;
 import jxl.Cell;
+import jxl.CellView;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
@@ -169,6 +170,8 @@ public class UserSrv {
 					bWorkbook = Workbook.createWorkbook(os);
 					//通过excel对象创建一个选项卡对象
 					WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
+			        //给sheet电子版中所有的列设置默认的列的宽度;
+			        sheet.getSettings().setDefaultColumnWidth(20); 
 					//循环绘制信息
 					for(int i = 0;i < uList.size();i++){
 						User user = uList.get(i);
@@ -192,7 +195,7 @@ public class UserSrv {
 		                sheet.addCell(new Label(6, i + 1,  user.getProfession()));
 		                sheet.addCell(new Label(7, i + 1,  user.getCls()));
 					}
-			            bWorkbook.write();
+		            bWorkbook.write();
 				} 
 			return true;
 		} catch (Exception e) {
