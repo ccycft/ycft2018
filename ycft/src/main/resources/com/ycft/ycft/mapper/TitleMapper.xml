@@ -194,12 +194,19 @@
   		FROM content,title,USER 
   		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1} and title.id not in (0)
   </select>
-  
+  <!-- 客户端用了 -->
   <select id="selAllByTypeAndId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		FROM content,title,USER 
+  		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1}
+  </select>
+  
+  <select id="selByTypeAndIdNot" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
   		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
   		FROM content,title,USER 
   		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{0} AND title.id = #{1} and title.id not in (0)
   </select>
+  
   <insert id="insertTitle" parameterType="com.ycft.ycft.po.Title">
 		<!-- 将插入数据的主键返回，返回到User对象中 -->
 		<!-- keyProperty：将查询到的主键值设置到parameterType对象的哪个属性中 -->

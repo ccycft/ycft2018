@@ -129,7 +129,7 @@ public class ActivitySrv {
 	 */
 	public TitleContent selAllActivityById(int id) {
 				
-		return tm.selAllByTypeAndId(3, id);
+		return tm.selByTypeAndIdNot(3, id);
 	}
 	
 	/**
@@ -296,6 +296,7 @@ public class ActivitySrv {
 				bWorkbook = Workbook.createWorkbook(os);
 				//通过excel对象创建一个选项卡对象
 				WritableSheet sheet = bWorkbook.createSheet("学生信息", 0);
+				sheet.getSettings().setDefaultColumnWidth(20);
 				sheet.addCell(new Label(0, 0, "该活动暂时无人报名")); 
 			if(uList!= null && !uList.isEmpty()){
 				for(int i = 0;i < uList.size();i++){

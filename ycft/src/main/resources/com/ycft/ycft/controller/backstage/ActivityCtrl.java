@@ -129,7 +129,7 @@ public class ActivityCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('ÐÞ¸Ä³É¹¦');"); 
-        	out.println("window.open('backstage/selActivity.do','_top');");
+        	out.println("window.open('selActivity.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");

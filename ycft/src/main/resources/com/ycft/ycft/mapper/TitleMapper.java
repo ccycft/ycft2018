@@ -54,6 +54,7 @@ public interface TitleMapper {
 	public List<TitleContent> selAllByType(int type);
 	
 	public TitleContent selAllByTypeAndId(int type,int id);
+	public TitleContent selByTypeAndIdNot(int type,int id);
 	public List<Title> selTitleCommentById(int id);
 	/**
 	 * 服务端方法结束
