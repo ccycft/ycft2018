@@ -109,12 +109,6 @@ public class LoginFilter implements Filter {
 						}
 					}
 				}else {
-					if(cs == null) {
-						out.write("检测到应用未开启cookie功能,请手动开启...");
-						out.flush();
-						out.close();
-						return ;
-					}
 					
 				}
 			} catch (Exception e) {
