@@ -60,6 +60,34 @@ public class TitleCtrl {
 		return mav;
 	}
 	
+	//查询文章分页
+	@RequestMapping("loadArticleByPage.do")
+	public void loadArticleByPage(Integer nowPage , Integer pageSize ,HttpServletResponse rspn) {
+		if(nowPage == null || nowPage <= 0) {
+			nowPage = 1;
+		}
+		//默认查询四条数据
+		if(pageSize == null || pageSize == 0) {
+			pageSize = 4;
+		}
+		
+		int start = ( nowPage - 1 ) * pageSize;
+		List<Title> tList = tm.selectByTime(1, start , pageSize);
+		Gson g = new Gson();
+		String rtn = g.toJson(tList);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			out.print(rtn);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+	}
+	
 	/**
 	 * 根据时间降序 查询通知
 	 * @param nowPage 当前页
@@ -79,6 +107,8 @@ public class TitleCtrl {
 		mav.setViewName("inform.jsp");
 		return mav;
 	}
+	
+	//分页查询 通知(由于首页通知两条一分页，所以首页请指定pageSize为2)
 	@RequestMapping("loadInformByPage")
 	public void loadInformByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
 		if(nowPage == null || nowPage <= 0) {
@@ -88,7 +118,21 @@ public class TitleCtrl {
 			//默认查询四条数据
 			pageSize = 4;
 		}
-		
+		int start = ( nowPage - 1 ) * pageSize;
+		List<Title> tList = tm.selectByTime(2, start , pageSize);
+		Gson g = new Gson();
+		String rtn = g.toJson(tList);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			out.print(rtn);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
 	}
 	//查询文章详情
 	@RequestMapping("articleDetail.do")
@@ -127,10 +171,33 @@ public class TitleCtrl {
 	 * @return
 	 */
 	@RequestMapping("loadActivity.do")
-	public ModelAndView loadActivity(Integer nowPage) {
+	public ModelAndView loadActivity(Integer nowPage , Integer pageSize) {
 		ModelAndView mav = new ModelAndView();
 		//默认查询四条数据
-		int pageSize = 4;
+		if(pageSize == null || pageSize == 0) {
+			pageSize = 4;
+		}
+		if(nowPage == null || nowPage == 0) {
+			nowPage = 1;
+		}
+		int start = ( nowPage - 1 ) * pageSize;
+		if(start < 0 ) {
+			start = 0;
+		}
+		//根据时间查询最新活动 和报名人数 3：代表查询活动
+		List<Title> tList = tm.selectByTimeAndCount(start , pageSize);
+		mav.addObject("tList" , tList);
+		mav.setViewName("activity.jsp");
+		return mav;
+	}
+	//加载活动分页
+	@RequestMapping("loadActivityByPage.do")
+	public ModelAndView loadActivityByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
+		ModelAndView mav = new ModelAndView();
+		//默认查询四条数据
+		if(pageSize == null || pageSize == 0) {
+			pageSize = 4;
+		}
 		if(nowPage == null || nowPage == 0) {
 			nowPage = 1;
 		}
@@ -197,6 +264,33 @@ public class TitleCtrl {
 		List<Forum> fList = ts.selectForum(start , pageSize);
 		mav.addObject("sList",fList);
 		return mav;
+	}
+	 //查询论坛分页
+	@RequestMapping("selectForumByPage.do")
+	public void selectForumByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
+		if(pageSize == null || pageSize == 0) {
+			//如果前端未指定查询几条数据  那后台指定为4条
+			pageSize = 4;
+		}
+		if(nowPage == null || nowPage <= 0) {
+			nowPage = 1;
+		}
+		int start = (nowPage - 1 ) * pageSize;
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("forum.jsp");
+		List<Forum> fList = ts.selectForum(start , pageSize);
+		String rtn = new Gson().toJson(fList);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			out.print(rtn); 
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
 	}
 	
 	@RequestMapping("selDetail.do")
