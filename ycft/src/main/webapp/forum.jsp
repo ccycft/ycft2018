@@ -20,10 +20,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+   	  <link rel="stylesheet" href="<%=basePath%>css/toast.css">
+	<link rel="stylesheet" href="<%=basePath%>css/animate.css">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
+	<script type="text/javascript" src="<%=basePath%>js/toast.js"></script>
 	
 	<style>
 		.icon{
@@ -100,6 +103,111 @@
 		window.location.href = "<%=basePath%>fore/title/selDetail.do?id="+id;
 	}
 
+	
+	function showtoastFromDocument(){
+		showMessage('咩有更多喽~');
+	}
+	
+	function showtoastFromDocumentCenter(){
+		showMessage('慢些刷,少年~');
+	}
+	$(function(){
+		
+		var b = true ;
+		var nowPage = 1;
+		//滚动条到页面底部加载更多案例   
+		$(window).scroll(function(){  
+		      
+		 var scrollTop = $(this).scrollTop();    //滚动条距离顶部的高度  
+		 var scrollHeight = $(document).height();   //当前页面的总高度  
+		 var clientHeight = $(this).height();    //当前可视的页面高度  
+		 // console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);  
+		 if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部   
+		    
+			 //滚动条到达底部  
+		    // alert('开始加载....');
+		 	//开始ajax请求下一页
+		 	 ++nowPage;
+			 htmlobj=$.ajax({url:"<%=basePath%>fore/title/selectForumByPage.do?nowPage="+nowPage,async:false});
+			 var json = (htmlobj.responseText);
+			 //alert(json);
+			 var obj = JSON.parse(json);
+			 var container = $('body');
+			 
+			 var html = '';
+			 for(var i = 0 ; i < obj.length ;i++){
+				html +=  '<div class="row " onclick="openDetail('+obj[i].id+')">'+
+					
+					'<div class="row" >'+
+						
+						'<div class="col-xs-4 text-right" style="width: 24.333333%;">'+
+							'<img class="img-circle icon" src="<%=photoPath%>icon/' +obj[i].userImgName+'">'+
+						'</div>'+
+						
+						'<div class="col-xs-6" >'+
+							'<div class="row" style="line-height:0.5rem">'+
+								'<span>' +obj[i].userName+ '</span>'+
+							'</div>'+
+							'<div class="row">'+
+								'<span>' +obj[i].time+ '</span>'+
+							'</div>'+
+						'</div>'+
+					
+					'</div>'+
+				
+					'<div class="row">'+
+						'<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">'+
+							'<span class="forum-title">' +obj[i].name+ '</span>'+
+						'</div>'+
+					'</div>'+
+					
+					'<div class="row context ">'+
+						'<div class="col-xs-10 col-xs-offset-1">'+
+							'<p>' +obj[i].text+ '</p>'+
+						'</div>'+
+					'</div>'+
+					
+					'<div class="row">'+
+					
+						'<div class="col-xs-1 col-xs-offset-7" >'+
+							'<img src="<%=basePath%>images/dianzan.png"  class="min_icon">'+
+						'</div>'+
+						
+						'<div class="col-xs-1" style="line-height: 2rem">'+
+							'<span>' +obj[i].praise+ '</span>'+
+						'</div>'+
+						
+						'<div class="col-xs-1 " >'+
+							'<img src="<%=basePath%>images/pinglun.png"  class="min_icon">'+
+						'</div>'+
+						
+						'<div class="col-xs-1" style="line-height: 2rem">'+
+							'<span>' +obj[i].comment+ '</span>'+
+						'</div>'+
+						
+					'</div>'+
+					
+			    '</div>'+
+		    
+		    	'<hr>';
+			 }
+			 container.append(html);
+			 if(obj.length == 0 &&  b){
+				 b = false;
+				 showtoastFromDocument();
+			 }
+		 }else if(scrollTop<=0){  
+		    //滚动条到达顶部  
+		 //滚动条距离顶部的高度小于等于0 TODO  
+		     if(!b){
+		    	 b = true;
+		    	 showtoastFromDocumentCenter();
+		     }
+		 }  
+		 
+		}); 
+		 
+	});
 </script>
 </head>
 <body>

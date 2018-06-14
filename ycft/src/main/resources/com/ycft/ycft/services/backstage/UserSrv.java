@@ -91,6 +91,8 @@ public class UserSrv {
 	}
 	//下载导入模版
 	public void downloadDemo(HttpServletResponse response , HttpServletRequest request){
+		//流重置
+		response.reset();
 		//demo文件的名称
 		String fileName = "stuDemo.xls";
 		//模板文件所在的具体位置

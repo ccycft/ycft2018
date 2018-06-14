@@ -119,7 +119,7 @@
     	document.getElementById("addInform").submit();
     }
     function validFile(id){
-		var f_content = document.getElementById("fileEntry").value;  
+		var f_content = document.getElementById("fileEntry"+id).value;  
 	    var fileext=f_content.substring(f_content.lastIndexOf("."),f_content.length);
 	    var filename =  f_content.substring(f_content.lastIndexOf("\\")+1,f_content.length);
 	    fileext=fileext.toLowerCase();
@@ -451,7 +451,7 @@
 						                          </div>
 						                          <label class="col-sm-2 control-label" for="ds_host">请选择导入的表格</label>
 						                          <div class="col-sm-4">
-						                          	<input type="file" name="file" onclick="javascript:importFile()"  id="fileEntry" style="vertical-align:middle" >
+						                          	<input type="file" name="file" onclick="javascript:importFile()"  id="fileEntry<%=tcList.get(i).getId() %>" style="vertical-align:middle" >
 						                          </div>
 						                       </div>
 						                    </fieldset>

@@ -178,6 +178,8 @@ public class ActivitySrv {
 	 * @param request
 	 */
 	public void downloadActivityDemo(HttpServletResponse response , HttpServletRequest request){
+		//流重置
+		response.reset();
 		//demo文件的名称
 		String fileName = "activityDemo.xls";
 		String filepath = request.getSession().getServletContext().getRealPath("/") + "backstage/" + "demo/" +fileName;
