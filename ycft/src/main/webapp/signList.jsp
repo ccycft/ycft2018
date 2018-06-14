@@ -106,6 +106,9 @@
 			$('.position').val(info);
 		}
 		
+		function onError(data) {
+	        alert("定位失败！");
+	    } 
 	}
 	
 	function back(){ 
@@ -121,12 +124,7 @@
 	</script>
 </head>
 <body>
-	<!-- 页面顶端导航栏 -->
-	<div class="nav-area">
-		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
-		<span class="nav-title">签到列表</span>	
-		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
-	</div>
+
 
 	<div class="list-group" >
 		  <!-- <div class="list-group-item ">
@@ -151,15 +149,19 @@
 			  }else{
 		  %>
 		  		未查询到任何签到发布信息
-		  
 		  <%
 			  }
 		  %>
 	</div>
-
 	
+	<!-- 页面顶端导航栏 -->
+	<div class="nav-area">
+		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
+		<span class="nav-title">签到列表</span>	
+		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
+	</div>
 	
-	<form class="form-inline">
+	<form class="form-inline" action="发布签到" enctype="application/x-www-form-urlencoded" method="post">
 		<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -176,17 +178,17 @@
 					<div class="container-fluid">
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到名称:</label></div>
-						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到名称"></div>
+						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到名称" name="signTitle"></div>
 					  </div>
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >发起人:</label></div>
-						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到发起人"></div>
+						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到发起人" name="signName"></div>
 					  </div>
 					   <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到地点:</label></div>
 						<div class="col-xs-8 form-inline" onClick="getGeolocation()">
 						    <div class="input-group">
-						      <input type="text" class="form-control position" disabled="disabled" placeholder="当前位置" >
+						      <input type="text" class="form-control position" disabled="disabled" placeholder="当前位置" name="signPosition" >
 						      <div class="input-group-addon">∨</div>
 						    </div>
 						</div>
@@ -195,7 +197,7 @@
 					  	<div class="col-xs-4"><label >签到时间:</label></div>
 						<div class="col-xs-8">
 							 <div class='input-group date' id='datetimepicker'>  
-				                <input type='text' class="form-control" disabled="disabled"/>  
+				                <input type='text' class="form-control" disabled="disabled" name="signTime"/>  
 				                <span class="input-group-addon">  
 				                    <span class="glyphicon glyphicon-calendar"></span>  
 				                </span>  
@@ -205,11 +207,10 @@
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到类别:</label></div>
 						<div class="col-xs-8">
-							<select class="form-control">
-							  <option>课程考勤</option>
-							  <option>活动考勤</option>
-							  <option>其他</option>
-							  <option>…</option>
+							<select class="form-control" name="signType">
+							  <option value="50" >课程考勤</option>
+							  <option value="51" >活动考勤</option>
+							  <option value="52" >其他</option>
 							</select>
 						</div>
 					  </div>
@@ -226,6 +227,7 @@
 		</div>
 	</div>
 	</form> 
+
 	
 	<%--  			  <div class="form-group">
 					    <label >签到发起人:</label>

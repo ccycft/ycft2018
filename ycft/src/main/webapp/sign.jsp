@@ -75,15 +75,7 @@
 		showMessage('慢些刷,少年~');
 	}
 	
-	function back(){ 
-		
-		if(typeof(window.ceshi) != 'undefined'){
-			//说明 可以调用安卓的返回功能
-			window.ceshi.back(); 
-		}else{
-			window.history.back();
-		}
-	}
+	
 	
 	$(function(){
 		
@@ -127,6 +119,15 @@
 		//修改图标样式
 		changeStyle();
 	});
+	function back(){ 
+		
+		if(typeof(window.ceshi) != 'undefined'){
+			//说明 可以调用安卓的返回功能
+			window.ceshi.back(); 
+		}else{
+			window.history.back();
+		}
+	}
 	
 	function changeStyle(){
 		
@@ -152,11 +153,7 @@
 <body >
 	<div class="container-fluid">
 			<!-- 页面顶端导航栏 -->
-		<div class="nav-area">
-			<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="back()">	
-			<span class="nav-title">签到 | 考勤</span>	
-			<img class="right-icon" src="<%=basePath%>images/backhome.png">
-		</div>
+		
 		<div class="toast_div">
 		</div>
 		<!--    华丽丽的分割线———————————————————————————————————— -->
@@ -230,6 +227,11 @@
 		<%
 			}
 		%>
+		<div class="nav-area">
+			<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="back()">	
+			<span class="nav-title">签到 | 考勤</span>	
+			<img class="right-icon" src="<%=basePath%>images/backhome.png">
+		</div>
 	</div>	
 </body>
 </html>
