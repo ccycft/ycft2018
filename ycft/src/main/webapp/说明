@@ -1,27 +1,23 @@
-<li>
-				'<div class="row" >'+
-					 '<div class="col-xs-12">'+
-				 				'<div class="row" onclick="openDetail('+obj[i].id+')">'+
-							      '<div class="col-xs-7 ">'+
-								      '<div class="thumbnail">'+
-								      	'<img  src="<%=photoPath%>'+obj[i].+'"alt="...">'+								  	  </div>
-							      </div>
-							     <div class="col-xs-5 ">
-								       	<p class="tab-p">
-								       		<%=t.getName() %>
-										</p>
-							      </div>
-						      </div>
-						      <div class="row">
-						      		<div class="col-xs-6">
-						      			<span style="float:left"><%=t.getUser() %></span>
-						      		</div>
-						      		<div class="col-xs-6">
-						      			<span style="float:right"><%=t.getTime() %></span>
-						      		</div>
-						      </div>
-						      
-						      <hr><!--    鯖洗洗議蛍護�漾�！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！ -->
-					 </div>
-				</div>
-			</li>
+	<div class="row">'+
+			 '<div class="col-xs-12">'+
+		 				'<div class="row" onclick="openDetail('obj[i].id')">'+
+					      '<div class="col-xs-7 ">'+
+						      '<div class="thumbnail">'+
+						      	'<img  src="<%=photoPath%>'+obj[i].imgName+'" alt="...">'+
+						  	  '</div>'+
+					      '</div>'+
+					     '<div class="col-xs-5 ">'+
+						       	'<p class="tab-p">'+obj[i].name+'</p>'+
+					      '</div>'+
+				      '</div>'+
+				      '<div class="row">'+
+				      		'<div class="col-xs-6">'+
+				      			'<span style="float:left">'+obj[i].user+'</span>'+
+				      		'</div>'+
+				      		'<div class="col-xs-6">'+
+				      			'<span style="float:right">'+obj[i].time+'</span>'+
+				      		'</div>'+
+				      '</div>'+
+				      '<hr>'+
+			 '</div>'+
+		'</div>'+
