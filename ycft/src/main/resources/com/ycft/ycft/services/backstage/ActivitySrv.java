@@ -129,7 +129,7 @@ public class ActivitySrv {
 	 */
 	public TitleContent selAllActivityById(int id) {
 				
-		return tm.selAllByTypeAndId(3, id);
+		return tm.selByTypeAndIdNot(3, id);
 	}
 	
 	/**

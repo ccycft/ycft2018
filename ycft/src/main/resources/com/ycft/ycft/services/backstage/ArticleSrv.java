@@ -124,7 +124,7 @@ public class ArticleSrv {
 	 */
 	public TitleContent selAllTwoById(int id) {
 				
-		return tm.selAllByTypeAndId(1, id);
+		return tm.selByTypeAndIdNot(1, id);
 	}
 	/**
 	 * 修改通知的标题和内容信息

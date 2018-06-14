@@ -120,7 +120,7 @@ public class InformSrv {
 	 */
 	public TitleContent selAllInformById(int id) {
 				
-		return tm.selAllByTypeAndId(2, id);
+		return tm.selByTypeAndIdNot(2, id);
 	}
 	/**
 	 * 修改通知的标题和内容信息
