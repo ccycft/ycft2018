@@ -122,7 +122,7 @@ public class InformCtrl {
         	PrintWriter out = response.getWriter();
         	out.println("<script>"); 
         	out.println("alert('ÐÞ¸Ä³É¹¦');"); 
-        	out.println("window.open('backstage/selInform.do','_top');");
+        	out.println("window.open('selInform.do','_top');");
         	out.println("</script>");
 		}else {
 			response.setContentType("text/html");
