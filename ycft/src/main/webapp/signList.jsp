@@ -124,13 +124,20 @@
 		var name = $("#name").val().trim();
 		var coor = $("#coordinate").val().trim();
 		var coorName = $("#coordinateName").val().trim();
+		
 		var time = $("#time").val().trim();
 		var type = $("#signType").val().trim();
 		if(name != '' && coor!= '' && coorName != '' && time != '' && type != '' ){
-			return true;
+			htmlobj=$.ajax({url:"<%=basePath%>fore/signEvent/publishSign.do?name="+name+"&coordinate=" + coor + "&coordinateName=" + coorName + "&time=" + time +"&signType=" + type ,async:false});
+			var obj =  htmlobj.responseText;
+			if(obj == 'true'){
+				alert('提交成功');
+				window.location.reload();
+			}else{
+				alert('提交失败...');
+			}
 		}else{
 			alert("请输入完整信息");
-			return false;
 		}
 		
 	}
@@ -173,7 +180,7 @@
 		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
 	</div>
 	
-	<form  onsubmit="return tijiao()" action="<%=basePath%>fore/signEvent/publishSign.do"   method="post">
+	<form      method="post">
 		<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -236,9 +243,9 @@
 					  </div>
 					</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-default" data-dismiss="modal">关闭
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<input type="submit"  class="btn btn-info" value="确认发布" > 
+					<input type="button" onclick="tijiao()" class="btn btn-info" value="确认发布"  > 
 				</div>
 			</div>
 		</div>
