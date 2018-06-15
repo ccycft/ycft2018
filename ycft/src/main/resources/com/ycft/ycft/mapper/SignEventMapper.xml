@@ -180,7 +180,7 @@
         coordinate_name,
       </if>
       <if test="time != null" >
-        time,
+        `time`,
       </if>
       <if test="signType != null" >
         sign_type,

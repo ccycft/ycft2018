@@ -67,6 +67,8 @@
 		.row{
 			margin-top:1rem;
 			line-height:1rem;
+			margin-right: 0px;
+			padding-left:5px;
 		}
 		.forum-title{
 		
@@ -79,6 +81,7 @@
 			text-align:left;
 			line-height:2rem;
 		}
+		 
 	</style>
 	
 <title>Forum</title>
@@ -108,6 +111,10 @@
 		showMessage('咩有更多喽~');
 	}
 	
+	function showLoading(){
+		showMessage('正在加载中...请稍候~');
+	}
+	
 	function showtoastFromDocumentCenter(){
 		showMessage('慢些刷,少年~');
 	}
@@ -124,6 +131,9 @@
 		 // console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);  
 		 if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部   
 		    
+			 if(b){
+				 showLoading();
+			 }
 			 //滚动条到达底部  
 		    // alert('开始加载....');
 		 	//开始ajax请求下一页
@@ -134,68 +144,73 @@
 			 var obj = JSON.parse(json);
 			 var container = $('body');
 			 
-			 var html = '';
-			 for(var i = 0 ; i < obj.length ;i++){
-				html +=  '<div class="row " onclick="openDetail('+obj[i].id+')">'+
-					
-					'<div class="row" >'+
-						
-						'<div class="col-xs-4 text-right" style="width: 24.333333%;">'+
-							'<img class="img-circle icon" src="<%=photoPath%>icon/' +obj[i].userImgName+'">'+
-						'</div>'+
-						
-						'<div class="col-xs-6" >'+
-							'<div class="row" style="line-height:0.5rem">'+
-								'<span>' +obj[i].userName+ '</span>'+
-							'</div>'+
-							'<div class="row">'+
-								'<span>' +obj[i].time+ '</span>'+
-							'</div>'+
-						'</div>'+
-					
-					'</div>'+
-				
-					'<div class="row">'+
-						'<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">'+
-							'<span class="forum-title">' +obj[i].name+ '</span>'+
-						'</div>'+
-					'</div>'+
-					
-					'<div class="row context ">'+
-						'<div class="col-xs-10 col-xs-offset-1">'+
-							'<p>' +obj[i].text+ '</p>'+
-						'</div>'+
-					'</div>'+
-					
-					'<div class="row">'+
-					
-						'<div class="col-xs-1 col-xs-offset-7" >'+
-							'<img src="<%=basePath%>images/dianzan.png"  class="min_icon">'+
-						'</div>'+
-						
-						'<div class="col-xs-1" style="line-height: 2rem">'+
-							'<span>' +obj[i].praise+ '</span>'+
-						'</div>'+
-						
-						'<div class="col-xs-1 " >'+
-							'<img src="<%=basePath%>images/pinglun.png"  class="min_icon">'+
-						'</div>'+
-						
-						'<div class="col-xs-1" style="line-height: 2rem">'+
-							'<span>' +obj[i].comment+ '</span>'+
-						'</div>'+
-						
-					'</div>'+
-					
-			    '</div>'+
-		    
-		    	'<hr>';
-			 }
-			 container.append(html);
+			 
 			 if(obj.length == 0 &&  b){
 				 b = false;
 				 showtoastFromDocument();
+			 }else{
+				 var html = '';
+				 for(var i = 0 ; i < obj.length ;i++){
+					html +=  '<div class="row " onclick="openDetail('+obj[i].id+')">'+
+						
+						'<div class="row" >'+
+							
+							'<div class="col-xs-4 text-right" style="width: 24.333333%;">'+
+								'<img class="img-circle icon" src="<%=photoPath%>icon/' +obj[i].userImgName+'">'+
+							'</div>'+
+							
+							'<div class="col-xs-6" >'+
+								'<div class="row" style="line-height:0.5rem">'+
+									'<span>' +obj[i].userName+ '</span>'+
+								'</div>'+
+								'<div class="row">'+
+									'<span>' +obj[i].time+ '</span>'+
+								'</div>'+
+							'</div>'+
+						
+						'</div>'+
+					
+						'<div class="row">'+
+							'<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">'+
+								'<span class="forum-title">' +obj[i].name+ '</span>'+
+							'</div>'+
+						'</div>'+
+						
+						'<div class="row context ">'+
+							'<div class="col-xs-10 col-xs-offset-1">'+
+								'<p>' +obj[i].text+ '</p>'+
+							'</div>'+
+						'</div>'+
+						
+						'<div class="row">'+
+						
+							'<div class="col-xs-1 col-xs-offset-7" >'+
+								'<img src="<%=basePath%>images/dianzan.png"  class="min_icon">'+
+							'</div>'+
+							
+							'<div class="col-xs-1" style="line-height: 2rem">'+
+								'<span>' +obj[i].praise+ '</span>'+
+							'</div>'+
+							
+							'<div class="col-xs-1 " >'+
+								'<img src="<%=basePath%>images/pinglun.png"  class="min_icon">'+
+							'</div>'+
+							
+							'<div class="col-xs-1" style="line-height: 2rem">'+
+								'<span>' +obj[i].comment+ '</span>'+
+							'</div>'+
+							
+						'</div>'+
+						
+				    '</div>'+
+			    
+			    	'<hr>';
+				 }
+				 container.append(html);
 			 }
+			 
+			
+			 
 		 }else if(scrollTop<=0){  
 		    //滚动条到达顶部  
 		 //滚动条距离顶部的高度小于等于0 TODO  

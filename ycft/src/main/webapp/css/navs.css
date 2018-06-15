@@ -12,6 +12,7 @@
 				background:#fff; 
 				text-align:center;
 				border-bottom:1px solid #ccc;
+				z-index:99;
 			}
 			.left-icon{
 				float:left;

@@ -173,7 +173,7 @@
 		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
 	</div>
 	
-	<form  onsubmit="return tijiao()" action="<%=basePath%>fore/signEvent/publishSign.do" enctype="application/x-www-form-urlencoded" method="post">
+	<form  onsubmit="return tijiao()" action="<%=basePath%>fore/signEvent/publishSign.do"   method="post">
 		<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -217,7 +217,7 @@
 					  	<div class="col-xs-4"><label >签到时间:</label></div>
 						<div class="col-xs-8">
 							 <div class='input-group date' id='datetimepicker'>  
-				                <input type='text' class="form-control" disabled="disabled" name="time" id="time" />  
+				                <input type='text' class="form-control" readonly="readonly" name="time" id="time" />  
 				                <span class="input-group-addon">  
 				                    <span class="glyphicon glyphicon-calendar"></span>  
 				                </span>  
