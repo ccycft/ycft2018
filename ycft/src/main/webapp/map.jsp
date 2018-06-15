@@ -50,8 +50,8 @@
 	    		 //console.log(mark);
 					$.ajax({
 	    			  type: 'GET',
-	    			  url: '<%=basePath%>backstage/selNavigationById.do?id='+mark,
-	    			  async:false,
+	    			  url: '<%=basePath%>fore/selNavigationById.do?id='+mark,
+	    			  async:true,
 	    			  success:function(eve){
 	    				  //console.log(eve.coordinate);
 	    				  setPoint(eve.coordinate);
