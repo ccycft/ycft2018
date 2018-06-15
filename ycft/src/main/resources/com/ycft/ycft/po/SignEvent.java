@@ -64,7 +64,8 @@ public class SignEvent {
 
 	private String time;
 
-    private String signType;
+
+	private String signType;
     
     private List<Sign> signList;
     

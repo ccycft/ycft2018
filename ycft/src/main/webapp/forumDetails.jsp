@@ -26,8 +26,8 @@
 <title>论坛详情</title>
 <style type="text/css">
 	.icon{
-			height:3.5rem;
-			width:3.5rem;
+			height:3.8rem;
+			width:3.8rem;
 		}
 	.add-icon{
 			
@@ -51,6 +51,8 @@
 		
 		line-height:2rem;
 		margin-top:1.5rem;
+		 margin-right: 0px!important;  
+   		 margin-left: 15px!important;
 	}
 	.min_icon{
 		height:2rem;
@@ -70,9 +72,8 @@
 		width:100%;
 		height:2.8rem;
 		margin-top:1.1rem;
-		border:1px solid #eee;
-		border-top:none;
-		border-radius:4rem;
+		border:1px solid #aaa;
+		border-radius:0.5rem;
 	}
 </style>
 <script>
@@ -220,10 +221,10 @@
 	 
 </script>
 </head>
-<body >
+<body style="padding-top:5rem">
 
 	<!-- 页面顶端导航栏 -->
-	<div class="nav-area" style="position:relative;top:0">
+	<div class="nav-area"  >
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()" style="position:absolute;left:0;">	
 		<span class="nav-title">论坛详情</span>	
 	</div>
@@ -237,16 +238,22 @@
 	%>
 		<input type="hidden" value="<%=f.getId() %>" id="fid" />
 		<input type="hidden" value="<%=f.getComment()%>" id="cmts" />
-		<div class="row">
 			
-			<div class="col-xs-2 text-center">
-				<img class="img-circle icon" src="<%=photoPath%>icon/<%=f.getUserImgName()%>">
-			</div>
+		<div class="row" style="margin-left:-15px!important;;margin-right:0!important;padding-left: 10px;;">
+					
+					<div class="col-xs-4 text-right" style="width: 21.333333%;">
+						<img class="img-circle icon" src="<%=photoPath + "icon/"%><%=f.getUserImgName()%>">
+					</div>
+					
+					<div class="col-xs-6" style="padding-left: 0px;" >
+						<div class="row" style="line-height:0.5rem;margin:10px 0px 8px 0px;">
+							<span><%=f.getUserName()%></span>
+						</div>
+						<div class="row" style="margin:0">
+							<span><%=f.getTime() %></span>
+						</div>
+					</div>
 				
-			<div class="col-xs-8" style="line-height:4rem;padding-left:0px;">
-				<span><%=f.getUserName()%></span>
-			</div>
-			
 		</div>
 		
 		<div class="row">
@@ -314,7 +321,7 @@
 			<div class="bottom—navs">
 				 	<!-- 评论 -->
 					<input class="bottom-input" type="text" id="content" style="width: 86%" placeholder="爱评论的人粉丝多~"/>
-					<input class="" type="button" id="submit-comment" onclick="pinglun()" value="发送"/>
+					<input class="" style="border-radius:0.5rem;border: 0;color: #fff;background-color: #5bc0de;width: 4rem; height: 2.8rem;" type="button" id="submit-comment" onclick="pinglun()" value="发送"/>
 				 
 			</div>
 	

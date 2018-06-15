@@ -192,7 +192,7 @@ public class TitleCtrl {
 	}
 	//加载活动分页
 	@RequestMapping("loadActivityByPage.do")
-	public ModelAndView loadActivityByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
+	public void loadActivityByPage(Integer nowPage , Integer pageSize , HttpServletResponse rspn) {
 		ModelAndView mav = new ModelAndView();
 		//默认查询四条数据
 		if(pageSize == null || pageSize == 0) {
@@ -207,10 +207,20 @@ public class TitleCtrl {
 		}
 		//根据时间查询最新活动 和报名人数 3：代表查询活动
 		List<Title> tList = tm.selectByTimeAndCount(start , pageSize);
-		mav.addObject("tList" , tList);
-		mav.setViewName("activity.jsp");
-		return mav;
+		String rtn = new Gson().toJson(tList);
+		PrintWriter out = null;
+		try {
+			out =  rspn.getWriter();
+			out.print(rtn); 
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
 	}
+	
 	
 	/**
 	 * 活动报名

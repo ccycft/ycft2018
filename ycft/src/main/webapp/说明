@@ -1,23 +1,16 @@
-	<div class="row">'+
-			 '<div class="col-xs-12">'+
-		 				'<div class="row" onclick="openDetail('obj[i].id')">'+
-					      '<div class="col-xs-7 ">'+
-						      '<div class="thumbnail">'+
-						      	'<img  src="<%=photoPath%>'+obj[i].imgName+'" alt="...">'+
-						  	  '</div>'+
-					      '</div>'+
-					     '<div class="col-xs-5 ">'+
-						       	'<p class="tab-p">'+obj[i].name+'</p>'+
-					      '</div>'+
-				      '</div>'+
-				      '<div class="row">'+
-				      		'<div class="col-xs-6">'+
-				      			'<span style="float:left">'+obj[i].user+'</span>'+
-				      		'</div>'+
-				      		'<div class="col-xs-6">'+
-				      			'<span style="float:right">'+obj[i].time+'</span>'+
-				      		'</div>'+
-				      '</div>'+
-				      '<hr>'+
-			 '</div>'+
-		'</div>'+
+					
+					'<div class="row" onclick="openDetails('obj[i].id')">'+
+						'<div  class="col-xs-10 activity_img">'+
+			     			'<img class=" img-rounded  activity_img" src="<%=photoPath%>'+obj[i].imgName+'" alt="...">'+
+			  			'</div>'+
+					'</div>'+
+					'<div class="row" onclick="openDetails('+obj[i].id+')">'+
+						'<div id="info" class="col-xs-7">'+
+			     			'<span>'+obj[i].id+'</span>'+
+			  			'</div>'+
+			  			'<div id="renshu" class="col-xs-5">'+
+			     			'<img class="icon" src="<%=basePath%>images/renshu.png" >'+
+			     			'<span>已有 '+obj[i].cnt+'人参加<span>'+
+			  			'</div>'+
+					'</div>'+
+					'<hr>

@@ -50,9 +50,9 @@
 	        	 mark = $(event.target).attr("id")||$(event.target).parent().attr('id');
 	        		$.ajax({
 	    			  type: 'GET',
-	    			  url:'<%=basePath%>backstage/selNavigationById.do?id='+mark,
-	    			  async:true,
 	    			  dataType: 'json',
+	    			  url: '<%=basePath%>fore/selNavigationById.do?id='+mark,
+	    			  async:true,
 	    			  success:function(eve){
 	    				 console.log(eve.coordinate);
 	    				 setPoint(eve.coordinate);

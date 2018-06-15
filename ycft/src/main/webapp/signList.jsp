@@ -120,6 +120,20 @@
 		}
 		
 	}
+	function tijiao(){
+		var name = $("#name").val().trim();
+		var coor = $("#coordinate").val().trim();
+		var coorName = $("#coordinateName").val().trim();
+		var time = $("#time").val().trim();
+		var type = $("#signType").val().trim();
+		if(name != '' && coor!= '' && coorName != '' && time != '' && type != '' ){
+			return true;
+		}else{
+			alert("请输入完整信息");
+			return false;
+		}
+		
+	}
 	</script>
 </head>
 <body>
@@ -159,7 +173,7 @@
 		<img class="right-icon" src="<%=basePath%>images/add.png" data-toggle="modal" data-target="#myModal">
 	</div>
 	
-	<form class="form-inline" action="发布签到" enctype="application/x-www-form-urlencoded" method="post">
+	<form  onsubmit="return tijiao()" action="<%=basePath%>fore/signEvent/publishSign.do"   method="post">
 		<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -176,18 +190,26 @@
 					<div class="container-fluid">
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到名称:</label></div>
-						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到名称" name="signTitle"></div>
+						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到名称" name="name" id="name"></div>
 					  </div>
-					  <div class="row form-group">
+					  <!-- <div class="row form-group">
 					  	<div class="col-xs-4"><label >发起人:</label></div>
 						<div class="col-xs-8"><input type="text" class="form-control" placeholder="请输入签到发起人" name="signName"></div>
-					  </div>
+					  </div> -->
 					   <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到地点:</label></div>
 						<div class="col-xs-8 form-inline" onClick="getGeolocation()">
 						    <div class="input-group">
-						      <input type="text" class="form-control position" disabled="disabled" placeholder="当前位置" name="signPosition" >
+						      <input type="text" class="form-control position" disabled="disabled" id="coordinate" placeholder="当前位置" name="coordinate" >
 						      <div class="input-group-addon">∨</div>
+						    </div>
+						</div>
+					  </div>
+					   <div class="row form-group">
+					  	<div class="col-xs-4"><label >地点名称:</label></div>
+						<div class="col-xs-8 form-inline"  >
+						    <div class="input-group">
+						      <input type="text" class="form-control"  placeholder="地点名称"  id="coordinateName" name="coordinateName" >
 						    </div>
 						</div>
 					  </div>
@@ -195,7 +217,7 @@
 					  	<div class="col-xs-4"><label >签到时间:</label></div>
 						<div class="col-xs-8">
 							 <div class='input-group date' id='datetimepicker'>  
-				                <input type='text' class="form-control" disabled="disabled" name="signTime"/>  
+				                <input type='text' class="form-control" readonly="readonly" name="time" id="time" />  
 				                <span class="input-group-addon">  
 				                    <span class="glyphicon glyphicon-calendar"></span>  
 				                </span>  
@@ -205,7 +227,7 @@
 					  <div class="row form-group">
 					  	<div class="col-xs-4"><label >签到类别:</label></div>
 						<div class="col-xs-8">
-							<select class="form-control" name="signType">
+							<select class="form-control" name="signType" id="signType">
 							  <option value="50" >课程考勤</option>
 							  <option value="51" >活动考勤</option>
 							  <option value="52" >其他</option>
@@ -216,9 +238,7 @@
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="submit" class="btn btn-info">
-						确认发布
-					</button>
+					<input type="submit"  class="btn btn-info" value="确认发布" > 
 				</div>
 			</div>
 		</div>

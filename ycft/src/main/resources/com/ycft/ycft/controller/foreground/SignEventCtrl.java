@@ -213,4 +213,39 @@ public class SignEventCtrl {
 		}
 		return sign;
 	}
+	
+	//发布签到
+	@RequestMapping("publishSign.do")
+	public void publishSign(SignEvent sign, HttpServletResponse rspn , HttpServletRequest req) {
+		
+		Cookie[] cs = req.getCookies();
+		int uid = -1;
+		try {
+			for(Cookie c : cs) {
+				if(c.getName().equals("uid")) {
+					uid = (Integer.valueOf(c.getValue()));
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		//设置uid
+		sign.setUid(uid);
+		if(uid == -1) {
+			//未取到用户信息 可能用户未登录或者cookie丢失
+			return ;
+		}
+		int b = sm.insertSelective(sign) > 0 ? 1 : 0;
+		PrintWriter out = null;
+		try {
+			out = rspn.getWriter();
+			out.print(b);
+			out.flush();
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			out.close();
+		}
+	}
 }
