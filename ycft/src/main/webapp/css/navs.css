@@ -1,5 +1,8 @@
 /* Ò³Ãæ¶¥¶Ëµ¼º½À¸css´úÂë */
-			
+			.row{
+				margin-left:0px;
+				margin-right:0px;
+			}
 			.container-fluid{
 				margin-top:6.5rem;
 			}

@@ -86,14 +86,12 @@
 			 var clientHeight = $(this).height();    //当前可视的页面高度  
 			 // console.log("top:"+scrollTop+",doc:"+scrollHeight+",client:"+clientHeight);  
 			 if(scrollTop + clientHeight >= scrollHeight){   //距离顶部+当前高度 >=文档总高度 即代表滑动到底部   
-			    
 				 //滚动条到达底部  
 			    // alert('开始加载....');
 			 	//开始ajax请求下一页
 			 	 ++nowPage;
 				 htmlobj=$.ajax({url:"<%=basePath%>fore/title/loadActivityByPage.do?nowPage="+nowPage,async:false});
 				 var json = (htmlobj.responseText);
-				 alert(json);
 				 var obj = JSON.parse(json);
 				 var container = $('body');
 				 var html = '';
