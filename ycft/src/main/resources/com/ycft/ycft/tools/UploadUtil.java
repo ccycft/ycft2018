@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ycft.ycft.system.Core;
+
 public class UploadUtil {
     
     
@@ -33,7 +35,7 @@ public class UploadUtil {
     	//上传图片到服务器
     	FileOutputStream fos;
     	//String finalPathAndName1 = path +"images/"+newFileName;
-    	String finalPathAndName1 = "D://upload/"+newFileName;
+    	String finalPathAndName1 = Core.PhotoPath+newFileName;
     	fos = new FileOutputStream(finalPathAndName1);
     	fos.write(by);
     	fos.close();
