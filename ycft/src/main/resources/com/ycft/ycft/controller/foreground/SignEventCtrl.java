@@ -216,7 +216,7 @@ public class SignEventCtrl {
 	
 	//发布签到
 	@RequestMapping("publishSign.do")
-	public void publishSign(SignEvent sign, HttpServletResponse rspn , HttpServletRequest req) {
+	public void publishSign(SignEvent sign, HttpServletResponse rspn , HttpServletRequest req) throws ParseException {
 		
 		Cookie[] cs = req.getCookies();
 		int uid = -1;
@@ -236,7 +236,9 @@ public class SignEventCtrl {
 			//未取到用户信息 可能用户未登录或者cookie丢失
 			return ;
 		}
-		int b = sm.insertSelective(sign) > 0 ? 1 : 0;
+		boolean b = sm.insertSelective(sign) > 0 ? true : false ;
+		 
+		
 		PrintWriter out = null;
 		try {
 			out = rspn.getWriter();

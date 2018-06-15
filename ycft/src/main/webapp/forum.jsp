@@ -137,76 +137,80 @@
 			 //滚动条到达底部  
 		    // alert('开始加载....');
 		 	//开始ajax请求下一页
-		 	 ++nowPage;
+		 	
+			 //默认加载一次
 			 htmlobj=$.ajax({url:"<%=basePath%>fore/title/selectForumByPage.do?nowPage="+nowPage,async:false});
 			 var json = (htmlobj.responseText);
 			 //alert(json);
 			 var obj = JSON.parse(json);
 			 var container = $('body');
-			 
-			 
 			 if(obj.length == 0 &&  b){
 				 b = false;
 				 showtoastFromDocument();
 			 }else{
-				 var html = '';
-				 for(var i = 0 ; i < obj.length ;i++){
-					html +=  '<div class="row " onclick="openDetail('+obj[i].id+')">'+
-						
-						'<div class="row" >'+
+				 ++nowPage;
+				 
+				 if( b ){
+					 var html = '';
+					 for(var i = 0 ; i < obj.length ;i++){
+						html +=  '<div class="row " onclick="openDetail('+obj[i].id+')">'+
 							
-							'<div class="col-xs-4 text-right" style="width: 24.333333%;">'+
-								'<img class="img-circle icon" src="<%=photoPath%>icon/' +obj[i].userImgName+'">'+
-							'</div>'+
-							
-							'<div class="col-xs-6" >'+
-								'<div class="row" style="line-height:0.5rem">'+
-									'<span>' +obj[i].userName+ '</span>'+
+							'<div class="row" >'+
+								
+								'<div class="col-xs-4 text-right" style="width: 24.333333%;">'+
+									'<img class="img-circle icon" src="<%=photoPath%>icon/' +obj[i].userImgName+'">'+
 								'</div>'+
-								'<div class="row">'+
-									'<span>' +obj[i].time+ '</span>'+
+								
+								'<div class="col-xs-6" >'+
+									'<div class="row" style="line-height:0.5rem">'+
+										'<span>' +obj[i].userName+ '</span>'+
+									'</div>'+
+									'<div class="row">'+
+										'<span>' +obj[i].time+ '</span>'+
+									'</div>'+
+								'</div>'+
+							
+							'</div>'+
+						
+							'<div class="row">'+
+								'<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">'+
+									'<span class="forum-title">' +obj[i].name+ '</span>'+
 								'</div>'+
 							'</div>'+
-						
-						'</div>'+
-					
-						'<div class="row">'+
-							'<div   class="col-xs-10 col-xs-offset-1" style="margin-top:1rem;">'+
-								'<span class="forum-title">' +obj[i].name+ '</span>'+
-							'</div>'+
-						'</div>'+
-						
-						'<div class="row context ">'+
-							'<div class="col-xs-10 col-xs-offset-1">'+
-								'<p>' +obj[i].text+ '</p>'+
-							'</div>'+
-						'</div>'+
-						
-						'<div class="row">'+
-						
-							'<div class="col-xs-1 col-xs-offset-7" >'+
-								'<img src="<%=basePath%>images/dianzan.png"  class="min_icon">'+
+							
+							'<div class="row context ">'+
+								'<div class="col-xs-10 col-xs-offset-1">'+
+									'<p>' +obj[i].text+ '</p>'+
+								'</div>'+
 							'</div>'+
 							
-							'<div class="col-xs-1" style="line-height: 2rem">'+
-								'<span>' +obj[i].praise+ '</span>'+
+							'<div class="row">'+
+							
+								'<div class="col-xs-1 col-xs-offset-7" >'+
+									'<img src="<%=basePath%>images/dianzan.png"  class="min_icon">'+
+								'</div>'+
+								
+								'<div class="col-xs-1" style="line-height: 2rem">'+
+									'<span>' +obj[i].praise+ '</span>'+
+								'</div>'+
+								
+								'<div class="col-xs-1 " >'+
+									'<img src="<%=basePath%>images/pinglun.png"  class="min_icon">'+
+								'</div>'+
+								
+								'<div class="col-xs-1" style="line-height: 2rem">'+
+									'<span>' +obj[i].comment+ '</span>'+
+								'</div>'+
+								
 							'</div>'+
 							
-							'<div class="col-xs-1 " >'+
-								'<img src="<%=basePath%>images/pinglun.png"  class="min_icon">'+
-							'</div>'+
-							
-							'<div class="col-xs-1" style="line-height: 2rem">'+
-								'<span>' +obj[i].comment+ '</span>'+
-							'</div>'+
-							
-						'</div>'+
-						
-				    '</div>'+
-			    
-			    	'<hr>';
+					    '</div>'+
+				    
+				    	'<hr>';
+					 }
+					 container.append(html);
 				 }
-				 container.append(html);
+				 
 			 }
 			 
 			
@@ -215,7 +219,7 @@
 		    //滚动条到达顶部  
 		 //滚动条距离顶部的高度小于等于0 TODO  
 		     if(!b){
-		    	 b = true;
+		    	 //b = true;
 		    	 showtoastFromDocumentCenter();
 		     }
 		 }  
