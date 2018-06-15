@@ -17,16 +17,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>基本地图展示</title>
-	<script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+	
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/navs.css">
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
     <script type="text/javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
     <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
     <script>
-       var map, geolocation;
+       var map, geolocation, mark;
        /*
 		高德地图js api
 	   */
@@ -44,25 +45,25 @@
 	        });
 	        marker.setMap(map);
 	        
-	        //ajax获取坐标
+	      //ajax获取坐标
 	        $(".col-xs-2").click(function(event){
-	    		 var mark = $(event.target).attr("id")||$(event.target).parent().attr('id');
-	    		 //console.log(mark);
-					$.ajax({
+	        	 mark = $(event.target).attr("id")||$(event.target).parent().attr('id');
+	        		$.ajax({
 	    			  type: 'GET',
-	    			  url: '<%=basePath%>backstage/selNavigationById.do?id='+mark,
-	    			  async:false,
+	    			  url:'<%=basePath%>backstage/selNavigationById.do?id='+mark,
+	    			  async:true,
+	    			  dataType: 'json',
 	    			  success:function(eve){
-	    				  //console.log(eve.coordinate);
-	    				  setPoint(eve.coordinate);
-	    			  },
-	    			  dataType: 'json'
-	    			});
-	   		 });
+	    				 console.log(eve.coordinate);
+	    				 setPoint(eve.coordinate);
+	    			  }
+	    		});
+	   		});
 	   });
 	   
 	   //地图点标记
 	   function setPoint(value){
+		  
 		   map.clearMap();  // 清除地图覆盖物
 		   var coordinate = value.split("|");
 		    var markers = [{

@@ -41,7 +41,6 @@
 		 	 		imgCount++;
 		 		}
 			}else{
-				
 				alert("最多可以上传 3 张图片呦~");
 			}
 		}
@@ -73,7 +72,6 @@
             border: 0;
             vertical-align: middle;
         }
-        
 
 </style>
 </head>
@@ -105,6 +103,7 @@
 			</div>
 			
 			<hr>
+			
 			<div class="row form-group">
 				<div class="col-xs-4 forum-img z_file" >
 			    	<input type="file" name="files" id="file" value="" accept="image/*" multiple="multiple" onchange="imgChange();" />
@@ -118,6 +117,7 @@
 			<div class="row">
 				<input type="submit" value="确认发布" class="btn btn-info"/>
 			</div>
+			
 		</div>
 	</form>
 	
