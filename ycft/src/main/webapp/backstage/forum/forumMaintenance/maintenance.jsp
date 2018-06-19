@@ -70,13 +70,15 @@
 	    		xmlhttp.send("id="+id);
     		}
     	}
+    	function restore(id){
+    		window.location.href="<%=basePath%>forumRestore.do?id="+id;
+    	}
     	//评论的详情
     	function commentDetail(id){
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange  = function(){
 				if(xmlhttp.readyState == 4){
 					var data = xmlhttp.responseText;
-					alert(data);
 					var dataObj=eval("("+data+")");//转换为json对象 
 					appendLi(dataObj);
 				}
@@ -296,7 +298,8 @@
 	                <tbody>
 	                <% for (int i=0; i<tcList.size(); i++) {
 	                %>
-	                	<tr class="gradeA">
+	                	<%if(tcList.get(i).getReport()==0){%>
+	                		<tr class="gradeA">
                             <td class="col-md-2"><%=tcList.get(i).getName() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
@@ -305,6 +308,18 @@
                             	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
                             </td>
                         </tr>
+	                	<% }else{%>
+	                		<tr class="gradeA">
+                            <td class="col-md-2"><span style="color:#FF0000"><%=tcList.get(i).getName() %></span></td>
+                            <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
+                            <td class="col-md-2"><%=tcList.get(i).getUser() %></td>
+                            <td class="col-md-2">
+                            	<input type="button" value="论坛详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="commentDetail('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
+                            	<input type="button" value="删除" class="btn btn-danger" onclick="del('<%=tcList.get(i).getId() %>','<%=tcList.get(i).getName()%>')"/>
+                            	<input type="button" value="恢复" class="btn btn-success" onclick="restore('<%=tcList.get(i).getId()%>')"/>
+                            </td>
+                        </tr>
+	                	<% } %>
                         <!-- 详情的弹出层 -->
 						<div class="modal fade" id="details<%=tcList.get(i).getId()%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  
 						    <div class="modal-dialog" role="document">  

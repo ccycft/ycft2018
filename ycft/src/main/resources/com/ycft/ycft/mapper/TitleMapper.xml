@@ -18,6 +18,7 @@
     <result column="type" property="type" jdbcType="INTEGER" />
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="report" property="report" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.ycft.ycft.po.TitleContent" extends="CustomizeResultMap" >
     <result column="text" property="text" jdbcType="LONGVARCHAR" />
@@ -192,7 +193,7 @@
   </select>
   
   <select id="selAllByType" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
-  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname
+  		SELECT title.id,NAME,TIME,USER,title.img_name,TEXT,praise,user.sname,report
   		FROM content,title,USER 
   		WHERE title.uid  = user.id AND title.id = content.tid AND TYPE = #{1} and title.id not in (0)
   </select>

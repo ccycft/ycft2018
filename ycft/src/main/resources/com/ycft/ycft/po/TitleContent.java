@@ -19,7 +19,15 @@ public class TitleContent {
     private String text;
     //用户名
     private String sname;
+    //title的report
+    private Integer report;
     
+	public Integer getReport() {
+		return report;
+	}
+	public void setReport(Integer report) {
+		this.report = report;
+	}
 	public String getSname() {
 		return sname;
 	}
