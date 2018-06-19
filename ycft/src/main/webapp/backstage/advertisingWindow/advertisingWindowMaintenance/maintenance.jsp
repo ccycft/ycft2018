@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.system.LoadDomain"%>
 <%@page import="com.ycft.ycft.po.Title"%>
 <%@page import="com.ycft.ycft.po.SlideContent"%>
 <%@page import="java.util.List"%>
@@ -185,7 +186,7 @@
 				                	%>
 				                	<tr class="gradeA">
 			                            <td class="col-md-4"><%=scList.get(i).getTime() %></td>
-			                            <td class="col-md-4"><img class="img-responsive" src="http://localhost:8080/photo/<%=scList.get(i).getName() %>"/></td>
+			                            <td class="col-md-4"><img class="img-responsive" src="<%=LoadDomain.domain %><%=scList.get(i).getName() %>"/></td>
 			                            <td class="col-md-4">
 			                            	<input type="button" value="内容详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=scList.get(i).getId()%>"/>
 			                            	<input type="button" value="修改" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#update<%=scList.get(i).getId()%>"/>

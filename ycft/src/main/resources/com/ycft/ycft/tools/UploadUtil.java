@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ycft.ycft.system.Core;
+import com.ycft.ycft.system.LoadDomain;
 
 public class UploadUtil {
     
@@ -39,7 +40,7 @@ public class UploadUtil {
     	fos = new FileOutputStream(finalPathAndName1);
     	fos.write(by);
     	fos.close();
-        return "http://localhost:8080/photo/"+newFileName;
+        return LoadDomain.domain+newFileName;
     }
     
 }

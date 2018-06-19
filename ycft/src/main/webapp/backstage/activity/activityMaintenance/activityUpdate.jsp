@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.system.LoadDomain"%>
 <%@page import="com.ycft.ycft.po.TitleContent"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -130,7 +131,7 @@
 			</div>
 			<!--标题图片预览的div  -->
 			<div class="col-sm-2" id="updPreview">
-				<img id="updImg" src="http://localhost:8080/photo/<%=tc.getImgName() %>" /> 
+				<img id="updImg" src="<%=LoadDomain.domain %><%=tc.getImgName() %>" /> 
 			</div>
 			<div class="col-sm-1">
 				<button type="button" class="btn btn-success" onclick="upd()">保存</button>

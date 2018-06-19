@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.system.LoadDomain"%>
 <%@page import="com.ycft.ycft.po.TitleContent"%>
 <%@page import="com.ycft.ycft.po.Title"%>
 <%@page import="java.util.List"%>
@@ -366,7 +367,7 @@
                             <td class="col-md-2"><%=tcList.get(i).getTime() %></td>
                             <td class="col-md-2"><%=tcList.get(i).getSname() %></td>
                             <td class="col-md-2">
-                            <img class="img-responsive" src="http://localhost:8080/photo/<%=tcList.get(i).getImgName() %>"/>
+                            <img class="img-responsive" src="<%=LoadDomain.domain %><%=tcList.get(i).getImgName() %>"/>
                             </td>
                             <td class="col-md-2">
                             	<input type="button" value="详情" class="btn btn-warning" data-toggle="modal" data-target="#details<%=tcList.get(i).getId()%>" onclick="filter('<%=tcList.get(i).getId()%>')" id="remove<%=tcList.get(i).getId()%>"/>
