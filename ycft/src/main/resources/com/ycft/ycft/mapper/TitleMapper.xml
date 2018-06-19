@@ -281,7 +281,7 @@
 	
 	<update id="updateReport" parameterType="java.lang.Integer">
 		update title
-		set report = 1
+		set report = 0
 		where id = #{1}
 	</update>
   <!-- 服务端方法结束 -->

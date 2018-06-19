@@ -36,7 +36,7 @@
   
   <update id="updateCommentRestore" parameterType="java.lang.Integer">
 	update comment
-	set report = 1
+	set report = 0
 	where id = #{1}  
   </update>
   

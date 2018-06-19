@@ -97,7 +97,12 @@
                 var time = json[index].time;
                 var commentListId = json[index].commentList[0].id;
                 var commentListContent = json[index].commentList[0].content;
-                tt += "<li style='list-style-type:none;' id='li"+commentListId+"' onclick='delComment(this.id)'><span style='color:#295c9d'>" + user + " </span> : " + commentListContent + "</li>";  
+                var commentListreport = json[index].commentList[0].report;
+                if(commentListreport == 0){
+               	 	tt += "<li style='list-style-type:none;' id='li"+commentListId+"' onclick='delComment(this.id)'><span style='color:#295c9d'>" + user + " </span> : " + commentListContent + "</li>";  
+                }else{
+                	tt += "<li style='list-style-type:none;' id='li"+commentListId+"' onclick='delComment(this.id)'><span style='color:#ff0000'>" + user + " : " + commentListContent + "</span></li>";  
+                }
             });  
             $("#list").html('');
             $("#list").html(tt);
@@ -125,6 +130,14 @@
 	    		xmlhttp.open("post","<%=basePath%>commentDel.do",true);
 	    		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	    		xmlhttp.send("id="+id);
+    		}else{
+    			if (confirm("您确认恢复\""+name+"的评论\"吗?")) {
+    				//获取评论的id
+    				id = id.substr(2);
+    				window.location.href="<%=basePath%>commentRestore.do?id="+id;
+    			}else{
+    				return false;
+    			}
     		}
     	}
     	//把滚动条移动到最上面
