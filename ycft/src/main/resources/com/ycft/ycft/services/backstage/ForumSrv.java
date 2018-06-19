@@ -54,4 +54,30 @@ public class ForumSrv {
 		return commentMapper.deleteByPrimaryKey(id);
 	}
 	
+	
+	/**
+	 * 恢复某条举报内容
+	 * @author ZHENGBIN
+	 * @param id 参数绑定
+	 * @return boolean
+	 */
+	public boolean forumRestore(int id) {
+		//恢复成功后返回true
+		boolean flag = tm.updateReport(id) > 0 ? true : false ;
+		
+		return flag;
+	}
+	
+	
+	/**
+	 * @author ZHENGBIN
+	 * @param id 参数绑定
+	 * @return boolean
+	 */
+	public boolean commentRestore(int id) {
+		
+		boolean flag = commentMapper.updateCommentRestore(id) > 0 ? true : false;
+		
+		return flag;
+	}
 }

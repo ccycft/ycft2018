@@ -32,6 +32,15 @@
        title.id = #{value} order by comment.time desc
   </select>
   <!-- 客户端方法结束 -->
+  <!-- 服务端方法开始 -->
+  
+  <update id="updateCommentRestore" parameterType="java.lang.Integer">
+	update comment
+	set report = 1
+	where id = #{1}  
+  </update>
+  
+  <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

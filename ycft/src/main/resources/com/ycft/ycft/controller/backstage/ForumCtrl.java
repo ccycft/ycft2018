@@ -125,4 +125,37 @@ public class ForumCtrl {
 		}
 	}
 	
+	/**
+	 * 恢复某条举报内容
+	 * @author ZHENGBIN
+	 * @param id 参数绑定
+	 * @return backstage/selForum.do
+	 */
+	@RequestMapping("/forumRestore.do")
+	public ModelAndView forumRestore(int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		//恢复成功返回显示页面
+		String url = forumSrv.forumRestore(id) ? "redirect:/backstage/selForum.do" : "redirect:/backstage/fail.jsp";
+		
+		modelAndView.setViewName(url);
+		
+		return modelAndView;
+	}
+	
+	/**
+	 * 恢复某条举报评论
+	 * @author ZHENGBIN
+	 * @param id 参数绑定
+	 * @return backstage/selForum.do
+	 */
+	@RequestMapping("/commentRestore.do")
+	public ModelAndView commentRestore(int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		//恢复成功返回显示页面
+		String url = forumSrv.commentRestore(id) ? "redirect:/backstage/selForum.do" : "redirect:/backstage/fail.jsp";
+		
+		modelAndView.setViewName(url);
+		
+		return modelAndView;
+	}
 }

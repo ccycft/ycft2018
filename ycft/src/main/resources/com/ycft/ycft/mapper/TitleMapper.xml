@@ -275,9 +275,15 @@
 	</insert>
 	<!-- 查询标题对应的评论 -->
 	<select id="selTitleCommentById" resultMap="TitleComment" parameterType="java.lang.Integer">
-	    SELECT comment.id cid,content,comment.TIME,USER.sname USER FROM COMMENT,title,USER
+	    SELECT comment.id cid,content,comment.TIME,USER.sname USER,comment.report report FROM COMMENT,title,USER
 	    WHERE comment.tid = title.id AND title.uid = user.id AND title.id = #{1} and title.id not in (0)
 	</select>
+	
+	<update id="updateReport" parameterType="java.lang.Integer">
+		update title
+		set report = 1
+		where id = #{1}
+	</update>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

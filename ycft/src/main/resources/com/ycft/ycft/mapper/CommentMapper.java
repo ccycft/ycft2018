@@ -21,4 +21,13 @@ public interface CommentMapper {
     int updateByPrimaryKey(Comment record);
     
     public List<Comment> selComment(Integer id);
+    /*
+	 * 服务端方法开始
+	 * 
+	 * */
+    public int updateCommentRestore(int id);
+    /*
+	 * 服务端方法结束
+	 * 
+	 * */
 }
