@@ -76,6 +76,7 @@
 			xmlhttp.onreadystatechange  = function(){
 				if(xmlhttp.readyState == 4){
 					var data = xmlhttp.responseText;
+					alert(data);
 					var dataObj=eval("("+data+")");//转换为json对象 
 					appendLi(dataObj);
 				}

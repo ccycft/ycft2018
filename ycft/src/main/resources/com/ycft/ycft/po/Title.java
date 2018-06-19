@@ -13,7 +13,18 @@ public class Title {
     private String user;
     //文章发布用户id
     private Integer uid;
-    public Integer getUid() {
+    //论坛被举报的状态
+    private Integer report;
+    
+    public Integer getReport() {
+		return report;
+	}
+
+	public void setReport(Integer report) {
+		this.report = report;
+	}
+
+	public Integer getUid() {
 		return uid;
 	}
 

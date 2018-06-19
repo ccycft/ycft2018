@@ -8,13 +8,23 @@ public class Comment {
     private Integer tid;
 
     private String content;
+    //是否被举报 1代表被举报
+    private Integer report;
     
     //时间
     private String time;
     //评论用户名
     private String sname;
     
-    public String getTime() {
+    public Integer getReport() {
+		return report;
+	}
+
+	public void setReport(Integer report) {
+		this.report = report;
+	}
+
+	public String getTime() {
 		return time;
 	}
 

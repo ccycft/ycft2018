@@ -31,11 +31,13 @@
     <result column="praise" property="praise" jdbcType="INTEGER" />
     <result column="img_name" property="imgName" jdbcType="VARCHAR" />
     <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="report" property="report" jdbcType="INTEGER" />
     <collection property="commentList" ofType="com.ycft.ycft.po.Comment">
 	    <result column="cid" property="id" jdbcType="INTEGER" />
 	    <result column="uid" property="uid" jdbcType="INTEGER" />
 	    <result column="tid" property="tid" jdbcType="INTEGER" />
 	    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+	    <result column="report" property="report" jdbcType="INTEGER" />
     </collection>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -270,9 +272,10 @@
       </if>
     </trim>
 	</insert>
+	<!-- 查询标题对应的评论 -->
 	<select id="selTitleCommentById" resultMap="TitleComment" parameterType="java.lang.Integer">
-	    SELECT comment.id cid,content,TIME,USER FROM COMMENT,title 
-	    WHERE comment.tid = title.id AND title.id = #{1} and title.id not in (0)
+	    SELECT comment.id cid,content,comment.TIME,USER.sname USER FROM COMMENT,title,USER
+	    WHERE comment.tid = title.id AND title.uid = user.id AND title.id = #{1} and title.id not in (0)
 	</select>
   <!-- 服务端方法结束 -->
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

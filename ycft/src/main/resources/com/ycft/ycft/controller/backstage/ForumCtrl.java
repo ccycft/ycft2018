@@ -57,6 +57,7 @@ public class ForumCtrl {
 			Gson g = new Gson();
 			//×ª»¯³Éjson
 			String commentGson = g.toJson(titleWithCommentList);
+			System.out.println(commentGson+"-=-=-=-=-=0-=-0-=-");
 			writer.print(commentGson);
 		}catch (Exception e) {
 			e.printStackTrace();
