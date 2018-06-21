@@ -166,7 +166,7 @@
 								    </div>
 				   	<%
 				   				}else{
-				   					
+				  
 				   	%>
 				   					<div class="item"  onclick="openDetails('<%=slide.getCid()%>')">
 								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">

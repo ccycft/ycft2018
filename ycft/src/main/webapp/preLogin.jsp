@@ -75,7 +75,7 @@
   <body class="text-center">
     <form class="form-signin" action="<%=basePath%>fore/user/login.do" method="post" >
     <div id="logo" class="mb-3">
-    	<img id="logo_img" src="<%=basePath%>images/wode.png">
+    	<img id="logo_img" src="<%=basePath%>images/users.png">
     </div>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail" class="sr-only">学	号</label>
