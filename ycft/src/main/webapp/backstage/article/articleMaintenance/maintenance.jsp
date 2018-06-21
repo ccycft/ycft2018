@@ -390,7 +390,7 @@
 						            <div class="modal-body">  
 						            	<fieldset>
 					                       <div class="row">
-					                       		<div class="col-xs-11">
+					                       		<div class="col-xs-12">
 					                       			<%=tcList.get(i).getText() %>
 					                       		</div>
 					                       </div>
@@ -425,7 +425,7 @@
     <script>
 		//控制图片宽度
 		var width  = $(".modal-dialog").width() + $(".modal-body").width();
-		$(".col-xs-11").find("img").width(width);
+		$(".col-xs-12").find("img").width(width);
 	</script>
 </body>
 </html>
