@@ -19,11 +19,11 @@
 <title>基本地图展示</title>
 	
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/navs.css">
+    <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
-    <script type="text/javascript" src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
     <script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
     <script>

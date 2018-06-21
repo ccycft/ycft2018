@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./css/navs.css">
+	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
 	<style>
 	
 		#forum-title{

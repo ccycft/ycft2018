@@ -85,8 +85,8 @@
 	    
 	    function openDetails(id){
 	    	
-	    	var myUrl = '<%=basePath%>fore/title/articleDetail.do?id='+id;
-			
+	    	var myUrl = "<%=basePath%>fore/title/articleDetail.do?id="+id;
+	    	
 	    	if(evn){
 				
 				window.open(myUrl,'_self');
@@ -101,7 +101,7 @@
 		}
 	    
 		function openInformDetails(id){
-			
+			alert(id);
 			var myUrl = '<%=basePath%>fore/title/informDetail.do?id='+id;
 
 			if(evn){

@@ -27,8 +27,8 @@
     <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/date-plugin/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 	<script type="text/javascript" src="<%=basePath%>assets/date-plugin/moment-with-locales.min.js"></script>
-	<script src="http://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
-    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+	<script src="https://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
     
 	<style type="text/css">
     	.icon{
