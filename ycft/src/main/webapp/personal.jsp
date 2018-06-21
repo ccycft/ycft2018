@@ -56,6 +56,7 @@
     <script>
     	function logout(){
     		if(confirm("确认退出当前登录吗?")){
+    			window.localStorage.setItem("selectNav" , 0);
     			window.location.href = "<%=basePath%>fore/user/logout.do";
     		}
     	}
@@ -107,6 +108,6 @@
 			}
 		  %>
 	</div>
-	<%-- <jsp:include page="nav.jsp"></jsp:include> --%>
+	<jsp:include page="nav.jsp"></jsp:include> 
 </body>
 </html>
