@@ -63,8 +63,6 @@
 	//解析定位结果
     function onComplete(data) {
         alert("定位成功！");
-        console.log(str.push('经度：' + data.position.getLng()));
-        console.log(str.push('纬度：' + data.position.getLat()));
     }
     //解析定位错误信息
     function onError(data) {

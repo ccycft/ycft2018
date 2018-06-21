@@ -39,8 +39,6 @@
 		    });
 		});	
 		
-		
-		
 		function getGeolocation(){
 			
 			map.plugin('AMap.Geolocation', function() {

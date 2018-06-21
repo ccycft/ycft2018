@@ -59,7 +59,6 @@
     			window.location.href = "<%=basePath%>fore/user/logout.do";
     		}
     	}
-    
     </script>
     
     
