@@ -100,13 +100,12 @@
 				  <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/banben.png">
 				  	<span class="a_item">当前版本</span></a>
-				  	<a href="<%=basePath %>preLogin.jsp" class="list-group-item ">
-				  	<img class="img-responsive icon" src="<%=basePath%>images/tuichu.png">
-				  	<span class="a_item">我重新登录</span></a>
 		  <%	  
 			}
 		  %>
 	</div>
-	<jsp:include page="nav.jsp"></jsp:include> 
+	<jsp:include page="nav.jsp">
+		<jsp:param value="3" name="nav"/>
+	</jsp:include> 
 </body>
 </html>

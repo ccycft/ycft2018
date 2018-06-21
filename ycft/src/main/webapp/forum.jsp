@@ -308,6 +308,8 @@
 	<%
 	    }
     %>
-    <jsp:include page="nav.jsp"></jsp:include> 
+    <jsp:include page="nav.jsp">
+    	<jsp:param value="1" name="nav"/>
+    </jsp:include> 
 </body>
 </html>
