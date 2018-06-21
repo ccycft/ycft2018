@@ -22,11 +22,12 @@
     <link rel="stylesheet" href="<%=basePath%>css/index.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 	<style>
-	 @media (max-width: 767px) {
+	 /*@media (max-width: 767px) {
 	  
 	}	
-	/* @media (min-width: 768px) and (max-width: 991px) {
+	 @media (min-width: 768px) and (max-width: 991px) {
 	   //CSS代码 
 	}  */
 	.tab-p{
@@ -71,17 +72,66 @@
 	    var localhostPath = curWwwPath.substring(0, pos);
 	    //获取带"/"的项目名，如：/uimcardprj
 	    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+	   
 	    var basePath = localhostPath + projectName + "/";	
-		function openDetails(id){
-			window.open(basePath + 'fore/title/articleDetail.do?id='+id,'_self');	
+		
+	    var evn = true;
+	    
+		if(window.__wxjs_environment === 'miniprogram'){
+    		
+    		evn = false;
+	    	
+    	}
+	    
+	    function openDetails(id){
+	    	
+	    	var myUrl = "<%=basePath%>fore/title/articleDetail.do?id="+id;
+	    	
+	    	if(evn){
+				
+				window.open(myUrl,'_self');
+				
+			}else{
+				
+				wx.miniProgram.navigateTo({url:"/pages/context/context?source="+myUrl});
+			}
+			
+			//window.open(basePath + 'fore/title/articleDetail.do?id='+id,'_self');	
 			
 		}
+	    
 		function openInformDetails(id){
-			window.open(basePath + 'fore/title/informDetail.do?id='+id,'_self');	
+			alert(id);
+			var myUrl = '<%=basePath%>fore/title/informDetail.do?id='+id;
+
+			if(evn){
+				
+				window.open(myUrl,'_self');
+				
+			}else{
+				
+				wx.miniProgram.navigateTo({url:"/pages/context/context?source="+myUrl});
+			}
+			
+			//window.open(basePath + 'fore/title/informDetail.do?id='+id,'_self');	
 			
 		}
-		 
-	
+		
+		
+		function test(info){
+			
+			var myUrl = '<%=basePath%>'+info;
+			
+			if(evn){
+				
+				window.open(myUrl,'_self');
+				
+			}else{
+				
+				wx.miniProgram.navigateTo({url:"/pages/context/context?source="+myUrl});
+			}
+		}
+		
 	</script>
 	
 	
@@ -116,7 +166,7 @@
 								    </div>
 				   	<%
 				   				}else{
-				   					
+				  
 				   	%>
 				   					<div class="item"  onclick="openDetails('<%=slide.getCid()%>')">
 								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">
@@ -127,7 +177,6 @@
 				   		}
 				   	%>
 				   	
-				    
 				  </div>
 				  <!-- Controls -->
 				  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -143,32 +192,33 @@
 		
 		<!--    华丽丽的分割线———————————————————————————————————— -->
 		<div class="row">
-			<div class="col-xs-2">
-				   <a href="<%=basePath%>map.jsp">
+			<div class="col-xs-2" onclick="test('map.jsp')">
+				   <a >
 				    <img class="img-responsive btn-block" src="<%=basePath%>images/daohang.png" alt="...">
 				    <span class="btn-value">导航</span>
 				   </a>
 			</div>
-			<div class="col-xs-2">
-				 <a href="<%=basePath%>fore/title/loadInform.do?nowPage=1">
+			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadInform.do?nowPage=1')">
+				 <a >
+				 
 					<img class="img-responsive btn-block" src="<%=basePath%>images/tongzhi.png" alt="...">
 				  	<span class="btn-value">通知</span>	
 				  </a>  
 			</div>
-			<div class="col-xs-2">
-				    <a href="<%=basePath%>fore/title/loadArticle.do?nowPage=1">
+			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadArticle.do?nowPage=1')">
+				    <a >
 					    <img class="img-responsive btn-block" src="<%=basePath%>images/wenzhang.png" alt="...">
 					  	<span class="btn-value">文章</span>
 				  	</a>	  
 			</div>
-			<div class="col-xs-2">
-					<a href="<%=basePath%>fore/signEvent/selSignEvent.do?nowPage=1">
+			<div class="col-xs-2 nav_btn" onclick="test('fore/signEvent/selSignEvent.do?nowPage=1')">
+					<a >
 					    <img class="img-responsive btn-block" src="<%=basePath%>images/qiandao.png" alt="...">
 					  	<span class="btn-value">签到</span>	  
 				  	</a>
 			</div>
-			<div class="col-xs-2">
-					<a href="<%=basePath%>fore/title/loadActivity.do?nowPage=1">
+			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadActivity.do?nowPage=1')">
+					<a >
 					   <img class="img-responsive btn-block" src="<%=basePath%>images/huodong.png" alt="...">
 					  	<span class="btn-value">活动</span>	
 					</a>  
@@ -177,8 +227,8 @@
 		<!--    华丽丽的分割线———————————————————————————————————— -->
 		
 		<div class="row">
-			<div id="jiaowu" class="col-xs-10">
-					<a href="<%=basePath%>preLogin.html">
+			<div id="jiaowu" class="col-xs-10" onclick="alert('还没有哦~')">
+					<a >
      				 <img id="jiaowu" class="img-rounded" src="<%=basePath%>images/jiaowu.jpg" alt="...">
   					</a>
   			</div>
@@ -258,9 +308,9 @@
 			 </div>
 		</div>
 	</div>
-	
+	 
 	 <jsp:include page="nav.jsp"></jsp:include> 
-	
+	 
 </body>
 
 </html>

@@ -14,7 +14,7 @@
 	String photoPath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort() +  Core.PATH +"/" ;
 %>
-<!DOCTYPE html>
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="<%=basePath%>css/login.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
     <script type="text/javascript">
 	  	//获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
 	    var curWwwPath = window.document.location.href;
@@ -35,38 +36,46 @@
 	    //获取带"/"的项目名，如：/uimcardprj
 	    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
 	    var basePath = localhostPath + projectName + "/";	
-    
+    	
+	    
     	 $(document).ready(function(){
-    		
+    		 
     		$("#login_btn").click(function(){
     			var sno = $("#inputEmail").val().trim();
     			var psd = $("#inputPassword").val().trim();
     			//post请求数据
     			$.post(basePath + "fore/user/login.do",
 					  {
-					    sno : sno,
+					    sno :sno,
 					    psd :psd
 					  },
 					  function(data,status){
 					    //alert("Data: " + data + "\nStatus: " + status);
 					    if(data == 'true'){
-					    	window.open(basePath + 'fore/index/index.do','_self');
+					    	
+					    	//判断是否是小程序
+					    	if(window.__wxjs_environment === 'miniprogram'){
+					    		
+					    		wx.miniProgram.switchTab({url:'/pages/index/index'});
+						    	
+					    	}else{
+					    		//app端跳转
+					    		window.open(basePath + 'fore/index/index.do','_self');
+					    	}
+					    	
 					    }else{
 		   			  		alert("用户名或者密码错误!");
 		   			  	} 
-					  });
+				  });
     		}); 
     	});  
     	 
-    	
-    	
-    
     </script>
   </head>
   <body class="text-center">
     <form class="form-signin" action="<%=basePath%>fore/user/login.do" method="post" >
     <div id="logo" class="mb-3">
-    	<img id="logo_img" src="<%=basePath%>images/wode.png">
+    	<img id="logo_img" src="<%=basePath%>images/users.png">
     </div>
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail" class="sr-only">学	号</label>

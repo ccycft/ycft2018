@@ -60,7 +60,6 @@
     			window.location.href = "<%=basePath%>fore/user/logout.do";
     		}
     	}
-    
     </script>
     
     
@@ -90,19 +89,19 @@
 				  	<img class="img-responsive icon" src="<%=basePath%>images/fabu.png">
 				  	<span class="a_item">我的发布</span></a>
 				  <a href="http://www.cchzyc.com" class="list-group-item ">
-				  	<img class="img-responsive icon" src="<%=basePath%>images/jiaowurukou.png">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/jiaowu.png">
 				  	<span class="a_item">教务信息</span></a>
 				  <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/jianyi.png">
 				  	<span class="a_item">我的建议</span></a>
 				  <a href="#" class="list-group-item ">
-				  	<img class="img-responsive icon" src="<%=basePath%>images/guanyu.png">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/women.png">
 				  	<span class="a_item">关于我们</span></a>
 				  <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/banben.png">
 				  	<span class="a_item">当前版本</span></a>
 				  	<a href="<%=basePath %>preLogin.jsp" class="list-group-item ">
-				  	<img class="img-responsive icon" src="<%=basePath%>images/banben.png">
+				  	<img class="img-responsive icon" src="<%=basePath%>images/tuichu.png">
 				  	<span class="a_item">我重新登录</span></a>
 		  <%	  
 			}
