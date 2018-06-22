@@ -94,13 +94,13 @@ public class LoginFilter implements Filter {
 			}
 		}else {
 			
-			if(resource.contains("login.do") || resource.contains("preLogin.jsp")) {
+			if(resource.contains("login.do") || resource.contains("preLogin.jsp") || resource.contains("redirct_preLogin.jsp")) {
 				chain.doFilter(req,res);
 				return ;
 			}
 			//
 			Cookie[] cs = req.getCookies();
-			int uid = 0;
+			Integer uid = null;
 			try {
 				if(cs != null && cs.length > 0) {
 					for(Cookie c : cs) {
@@ -117,8 +117,8 @@ public class LoginFilter implements Filter {
 				uid = 0;
 			}
 			//如果uid为0  说明无uid信息  则转向登录
-			if(uid == 0) {
-				res.sendRedirect(basePath + "preLogin.jsp");
+			if(uid == 0 || uid == null) {
+				res.sendRedirect(basePath + "redirct_preLogin.jsp");
 				return ;
 			}else {
 				chain.doFilter(req,res);
