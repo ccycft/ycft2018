@@ -65,6 +65,15 @@
 		margin-right:-15px;
 		margin-left:-15px;
 	}
+	.box{
+	
+		display:flex;
+		align-items:center;
+		justify-content:center;
+	}
+	.mainImg{
+		//
+	}
 	</style>  
 	
 	<script>
@@ -159,7 +168,7 @@
 				  </ol>
 				
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" role="listbox">
+				  <div class="carousel-inner box" role="listbox">
 				   	<%
 				   		List<Slide> sList = (List<Slide>)request.getAttribute("sList");
 				   		List<Title> tList = (List<Title>)request.getAttribute("tList");
@@ -171,14 +180,14 @@
 				   				if(i == 0){
 				   	%>
 					   				<div class="item active" onclick="openDetails('<%=slide.getCid()%>')" >
-								      <img src="<%=( photoPath + slide.getName())%>" alt="...">
+								      <img class="mainImg"src="<%=( photoPath + slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}else{
 				  
 				   	%>
 				   					<div class="item"  onclick="openDetails('<%=slide.getCid()%>')">
-								      <img src="<%=(photoPath+ slide.getName())%>" alt="...">
+								      <img class="mainImg" src="<%=(photoPath+ slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}

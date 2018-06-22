@@ -64,11 +64,11 @@
     
     
 </head>
-<body>
+<body style="background:#fff">
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area" style="position:relative;top:0">
 		<span class="nav-title">个人中心</span>	
-		<img class="right-icon" src="<%=basePath%>images/注销.png" onClick="logout()" style="position:absolute;right:0.6rem;">
+		<img class="right-icon" src="<%=basePath%>images/undo.png" onClick="logout()" style="position:absolute;right:0.6rem;">
 	</div>
 	<div class="list-group" >
 		  <a  href="#" class="list-group-item ">
