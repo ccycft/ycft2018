@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/index.css">
+    <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
@@ -59,6 +60,10 @@
 	}
 	.btn-value{
 		line-height:2;
+	}
+	.row{
+		margin-right:-15px;
+		margin-left:-15px;
 	}
 	</style>  
 	
@@ -138,8 +143,12 @@
 	
 </head>
 <body class="text-center">
+	<!-- 页面顶端导航栏 -->
+	<div class="nav-area"  >
+		<span class="nav-title">首页</span>	
+	</div>
 	<div class="container-fluid">
-	
+		 
 		<div class="row">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -308,7 +317,11 @@
 			 </div>
 		</div>
 	</div>
-	
+	 
+	 <jsp:include page="nav.jsp">
+	 	<jsp:param value="0" name="nav"/>
+	 </jsp:include> 
+	 
 </body>
 
 </html>
