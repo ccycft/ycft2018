@@ -68,7 +68,7 @@ public class LoginFilter implements Filter {
 		if(requestURI.contains(PROJECTNAME)) {
 			index = requestURI.indexOf(PROJECTNAME) + PROJECTNAME.length() + 1;
 		}else {
-			index = requestURI.indexOf("/") + PROJECTNAME.length() + 1;
+			index = requestURI.indexOf("/") + 1;
 		}
 		String resource = requestURI.substring(index);
 		//ºóÌ¨
