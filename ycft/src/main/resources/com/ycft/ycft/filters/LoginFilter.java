@@ -27,6 +27,7 @@ public class LoginFilter implements Filter {
 	private static final String LOGINACTION = "backstage/userAjax.do";
 	//项目名
 	private static final String PROJECTNAME = "ycft";
+	private static final String BACK_STAGE = "backstage";
     /**
      * Default constructor. 
      */
@@ -62,10 +63,16 @@ public class LoginFilter implements Filter {
 		String basePath = req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+path+"/";
 		PrintWriter out = res.getWriter();
 		String requestURI = req.getRequestURI();
-		int index = requestURI.indexOf(PROJECTNAME) + PROJECTNAME.length() + 1;
+		int index = 0;
+		//地址栏上的地址如果包含ycft，则从ycft向后截取
+		if(requestURI.contains(PROJECTNAME)) {
+			index = requestURI.indexOf(PROJECTNAME) + PROJECTNAME.length() + 1;
+		}else {
+			index = requestURI.indexOf("/") + PROJECTNAME.length() + 1;
+		}
 		String resource = requestURI.substring(index);
-		System.out.println(resource+"+0++++");
-		if(resource.startsWith("backstage")) {
+		//后台
+		if(resource.startsWith(BACK_STAGE)) {
 			if(user != null) {
 				//把地址栏的数据和用户应有的数据进行比较，如果是true，则放过
 				SysPrivilege s = new SysPrivilege();
@@ -93,7 +100,6 @@ public class LoginFilter implements Filter {
 				}
 			}
 		}else {
-			
 			if(resource.contains("login.do") || resource.contains("preLogin.jsp") || resource.contains("redirct_preLogin.jsp")) {
 				chain.doFilter(req,res);
 				return ;
@@ -108,8 +114,6 @@ public class LoginFilter implements Filter {
 							uid = Integer.parseInt(c.getValue());
 						}
 					}
-				}else {
-					
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -117,7 +121,7 @@ public class LoginFilter implements Filter {
 				uid = 0;
 			}
 			//如果uid为0  说明无uid信息  则转向登录
-			if(uid == 0 || uid == null) {
+			if(uid == null || uid == 0) {
 				res.sendRedirect(basePath + "redirct_preLogin.jsp");
 				return ;
 			}else {

@@ -52,17 +52,9 @@
 					  function(data,status){
 					    //alert("Data: " + data + "\nStatus: " + status);
 					    if(data == 'true'){
-					    	
-					    	//判断是否是小程序
-					    	if(window.__wxjs_environment === 'miniprogram'){
-					    		
-					    		wx.miniProgram.switchTab({url:'/pages/index/index'});
-						    	
-					    	}else{
-					    		//app端跳转
-					    		window.open(basePath + 'fore/index/index.do','_self');
-					    	}
-					    	
+					    	document.getElementById("showSpan").innerText = "go to login";
+					    	//app端跳转
+					    	document.getElementById("myForm").submit();
 					    }else{
 		   			  		alert("用户名或者密码错误!");
 		   			  	} 
@@ -84,13 +76,15 @@
     <input type="password" value="123456" id="inputPassword" name="psd" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3 line">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> <span id="showSpan">Remember me</span>
       </label>
     </div>
     <button id="login_btn" class="btn btn-lg btn-info btn-block" type="submit" onclick="return false">Sign in</button>
     <div  class="mb-3 line">
     	<p class="mt-5 mb-3 text-muted">&copy; 2018 - * </p>
     </div>
+  </form>
+  <form id="myForm" action="<%=basePath %>/fore/index/index.do" method="post"> 
   </form>
   </body>
 </html>
