@@ -63,6 +63,7 @@ public class LoginFilter implements Filter {
 		PrintWriter out = res.getWriter();
 		String requestURI = req.getRequestURI();
 		int index = requestURI.indexOf(PROJECTNAME) + PROJECTNAME.length() + 1;
+		//过滤器有问题会出现越界
 		String resource = requestURI.substring(index);
 		System.out.println(resource+"+0++++");
 		if(resource.startsWith("backstage")) {
