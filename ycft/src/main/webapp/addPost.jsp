@@ -1,3 +1,4 @@
+<%@page import="com.ycft.ycft.system.LoadDomain"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%
@@ -152,7 +153,7 @@
 	</div>
 	
 	
-	<form class="form-horizontal" method="post" enctype="multipart/form-data" action="http://192.168.1.200:8080/ycft/fore/title/addForum.do">
+	<form class="form-horizontal" method="post" enctype="multipart/form-data" action="http:192.168.1.101:8080/ycft/fore/title/addForum.do">
 	  <div class="form-group">
     	<div class="col-xs-12">
       		<input type="text" name="name" class="form-control" id="forum-title" placeholder="请输入标题">

@@ -9,13 +9,15 @@ import java.util.Properties;
  */
 public class LoadDomain {
 	public static String domain = ""; //域名
+	public static String domainTop = "";//真正的域名，而不是照片的路径
 	static {
 		try {
 		//加载config
 		InputStream in =LoadDomain.class.getClassLoader().getResource("config.properties").openStream();
 		Properties p = new Properties();
 		p.load(in);
-		domain = p.getProperty("domain.top").toString().trim();
+		domain = p.getProperty("domain.photo").toString().trim();
+		domainTop = p.getProperty("domain.top").toString().trim();
 		} catch (Exception e) {
 		e.printStackTrace();
 		}
