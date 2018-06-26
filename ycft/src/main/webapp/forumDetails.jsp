@@ -79,8 +79,7 @@
 <script>
  
 
-	function back(){ 
-		
+	function back(){
 		if(typeof(window.ceshi) != 'undefined'){
 			//说明 可以调用安卓的返回功能
 			window.ceshi.back(); 
@@ -187,9 +186,17 @@
 		var id = $("#fid").val();
 		var content = $("#content").val().trim();
 		if(content != ''){
-			htmlobj=$.ajax({url:"<%=basePath%>fore/title/comment.do?tid="+id+"&content="+content,async:false});
-			//alert(htmlobj);
-			var rtn = htmlobj.responseText;
+			var rtn = 0;
+			$.ajax({
+				 async:false,
+	             type: "POST", //POST
+	             url: "<%=basePath%>fore/title/comment.do",
+	             data: {tid:id, content:content}, //组装参数
+	             dataType: "json",
+	             success: function(data){
+	            	 rtn = data;
+	             }
+	         });
 			if(rtn == 1){
 				 
 			 	//成功
