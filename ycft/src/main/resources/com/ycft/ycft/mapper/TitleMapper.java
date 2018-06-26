@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ycft.ycft.po.Comment;
 import com.ycft.ycft.po.Forum;
+import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 
@@ -28,7 +29,8 @@ public interface TitleMapper {
 	public int insertForum(Title t);
 	//插入用户评论
 	public int insertComment(Comment comment);
-	
+	//查询我的活动
+	List<Title> selectActivityById(Integer uid,Integer nowPage , Integer pageSize);
 	/**
 	 * 客户端方法结束
 	 * */

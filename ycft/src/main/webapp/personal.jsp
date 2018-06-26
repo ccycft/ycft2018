@@ -79,7 +79,7 @@
 		  		
 		  		<img class="img-responsive logo_icon" src="<%=photoPath+"icon/" + u.getImgName()%>">
 				    <span class="name_item"><%=u.getSname()%></span></a>
-				  <a  href="#" class="list-group-item ">
+				  <a  href="<%=basePath%>fore/title/myActivity.do" class="list-group-item ">
 				   	<img class="img-responsive icon" src="<%=basePath%>images/huodong.png">
 				    <span class="a_item">我的活动 </span></a>
 				  <a href="<%=basePath%>fore/signEvent/myReleaseSign.do" class="list-group-item ">

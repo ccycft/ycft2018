@@ -57,6 +57,7 @@
 	    		xmlhttp.onreadystatechange = function(){
 	    			if(xmlhttp.readyState == 4){
 	    				var data= xmlhttp.responseText;
+	    				alert(data);
 	    				if (data == 1) {
 	    					alert("删除成功！");
 	    					document.location.reload();

@@ -111,6 +111,7 @@ public class ForumCtrl {
 			
 			writer = response.getWriter();
 			int temp = forumSrv.commentDel(id);
+			System.out.println(temp+"0-0-0-0-0-0-");
 			if(temp > 0) {
 				writer.print("1");
 			}else {

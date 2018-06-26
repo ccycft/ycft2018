@@ -15,6 +15,7 @@ import com.ycft.ycft.mapper.ContentMapper;
 import com.ycft.ycft.mapper.TitleMapper;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Forum;
+import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.system.Core;
 
@@ -170,5 +171,10 @@ public class TitleSrv {
 		//插入content
 		cm.insertSelective(con);
 		return 1;
+	}
+	
+	//查询我的活动
+	public List<Title> selectActivityById(Integer uid , Integer nowPage , Integer pageSize){
+		return tm.selectActivityById(uid , nowPage , pageSize);
 	}
 }
