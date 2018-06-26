@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>redirctLogin</title>
+<title>校园通</title>
 </head>
 <body>
 正在跳转登录...

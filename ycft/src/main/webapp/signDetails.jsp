@@ -25,7 +25,7 @@
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
-<title></title>
+<title>校园通</title>
 <script>
 		var map, geolocation;
 		

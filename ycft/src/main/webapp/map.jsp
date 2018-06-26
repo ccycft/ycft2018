@@ -17,7 +17,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>基本地图展示</title>
+<title>校园通</title>
 	<link rel="stylesheet" href="<%=basePath%>css/toast.css">
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
@@ -104,7 +104,7 @@
 		   map.plugin('AMap.Geolocation', function() {
 			   showMessage('正 在 获 取 定 位  ··· ');
 	           geolocation = new AMap.Geolocation({
-	               enableHighAccuracy: true,//是否使用高精度定位，默认:true
+	        	   enableHighAccuracy: true,//是否使用高精度定位，默认:truee
 	               timeout: 10000,          //超过10秒后停止定位，默认：无穷大
 	               buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
 	               zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false

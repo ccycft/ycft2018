@@ -23,7 +23,7 @@
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="<%=basePath%>css/navs.css">
-<title>论坛详情</title>
+<title>校园通</title>
 <style type="text/css">
 	.icon{
 			height:3.8rem;

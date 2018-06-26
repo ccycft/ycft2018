@@ -15,7 +15,7 @@
 			+ request.getServerName() + ":" + request.getServerPort() +  Core.PATH +"/" ;
 %>
 <head>
-	<title>Index</title>
+	<title>校园通</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="<%=basePath%>css/navs.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath%>assets/bootstrap/js/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 	<style>
 	 /*@media (max-width: 767px) {
 	  
@@ -136,14 +136,10 @@
 			
 			var myUrl = '<%=basePath%>'+info;
 			
-			if(evn){
 				
 				window.open(myUrl,'_self');
 				
-			}else{
-				
-				wx.miniProgram.navigateTo({url:"/pages/context/context?source="+myUrl});
-			}
+		
 		}
 		
 	</script>
@@ -217,8 +213,7 @@
 				   </a>
 			</div>
 			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadInform.do?nowPage=1')">
-				 <a >
-				 
+				 <a > 
 					<img class="img-responsive btn-block" src="<%=basePath%>images/tongzhi.png" alt="...">
 				  	<span class="btn-value">通知</span>	
 				  </a>  

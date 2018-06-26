@@ -19,7 +19,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Login</title>
+    <title>欢迎使用校园通</title>
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=basePath%>css/login.css">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>

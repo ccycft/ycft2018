@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>签到详情</title>
+<title>校园通</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
@@ -252,29 +252,5 @@
 		</div>
 	</div>
 	</form> 
-
-	
-	<%--  			  <div class="form-group">
-					    <label >签到发起人:</label>
-					    <input type="text" class="form-control" placeholder="请输入签到发起人">
-					  </div>
-					   <div class="form-group">
-					    <label >签到地点:</label>
-					    <input type="text" class="form-control" placeholder="请输入签到地点">
-					  </div>
-					   <div class="form-group">
-					    <label >签到日期:</label>
-					    <input type="text" class="form-control" placeholder="请输入签到日期">
-					  </div>
-					   <div class="form-group">
-					    <label >签到时间:</label>
-					    <input type="text" class="form-control" placeholder="请输入签到时间">
-					  </div>
-					 <div class="form-group">
-				        <div class=" tl th">
-				            <input type="file" name="image" class="projectfile btn btn-info" value="${deal.image}" />
-				            <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
-				        </div>
-				    </div>  --%>
 </body>
 </html>
