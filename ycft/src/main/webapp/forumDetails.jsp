@@ -77,7 +77,6 @@
 	}
 </style>
 <script>
- 
 
 	function back(){
 		if(typeof(window.ceshi) != 'undefined'){
@@ -229,7 +228,6 @@
 </script>
 </head>
 <body style="padding-top:5rem">
-<%=basePath %>
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area"  >
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()" style="position:absolute;left:0;">	

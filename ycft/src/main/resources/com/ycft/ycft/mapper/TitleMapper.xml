@@ -142,9 +142,11 @@
   </select>
   <!-- 查询活动 并显示报名人数 -->
   <select id="selectByTimeAndCount" parameterType="java.lang.Integer" resultMap="ActivityResultMap">
-      SELECT  title.*,COUNT(*) cnt FROM activity,title 
+     <!--  SELECT  title.*,COUNT(*) cnt FROM activity,title 
       WHERE activity.tid = title.id and title.type = 3 GROUP BY activity.tid order by title.time desc limit #{0} , #{1}
-  </select>
+ -->  
+ 	SELECT t.*,COUNT(a.id) cnt FROM title t LEFT JOIN activity a ON t.id = a.tid WHERE t.type=3 GROUP BY t.id ORDER BY t.time DESC LIMIT #{0} , #{1}
+ </select>
   <!-- 活动报名 -->
   <insert id="insertActivity" parameterType="java.lang.Integer" >
 	  insert into activity(tid , uid) values( #{0} , #{1} )      
@@ -184,6 +186,10 @@
       values
       ( #{name} , #{time}     , #{type} , #{uid} )
   </insert>
+  <!-- 查询当前用户报名的活动  -->
+  <select id="selectActivityById" parameterType="java.lang.Integer" resultMap="ActivityResultMap">
+		SELECT t.* FROM title t LEFT JOIN activity a ON t.id = a.tid WHERE t.type=3 AND a.uid = #{0} ORDER BY t.time DESC LIMIT #{1} , #{2}
+  </select>
   <!-- 客户端方法 结束 -->
   
   <!-- 服务端方法开始 -->

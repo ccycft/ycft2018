@@ -2,6 +2,7 @@ package com.ycft.ycft.controller.foreground;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.ycft.ycft.po.Comment;
 import com.ycft.ycft.po.Content;
 import com.ycft.ycft.po.Forum;
 import com.ycft.ycft.po.Praise;
+import com.ycft.ycft.po.SignEvent;
 import com.ycft.ycft.po.Title;
 import com.ycft.ycft.po.TitleContent;
 import com.ycft.ycft.services.foreground.TitleSrv;
@@ -258,6 +260,43 @@ public class TitleCtrl {
 		
 	}
 	
+	//查询我报名的活动
+	@RequestMapping("myActivity.do")
+	public ModelAndView myReleaseSign(HttpServletRequest req , Integer nowPage , Integer pageSize) throws ParseException {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("activityList.jsp");
+		Cookie[] cs = req.getCookies();
+		int uid = 0;
+		try {
+			for(Cookie c : cs) {
+				if(c.getName().equals("uid")) {
+					uid = (Integer.valueOf(c.getValue()));
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			mav.setViewName("exception.jsp");
+		}
+		if(uid == 0) {
+			//未取到用户信息 可能用户未登录或者cookie丢失
+			mav.setViewName("no_userinfo.jsp");
+		}
+		if(nowPage == null || nowPage == 0) {
+			nowPage = 1;
+		}
+		//开始计算开始索引
+		
+		if(pageSize == null || pageSize == 0) {
+			pageSize = 4;
+		}
+		int start = (nowPage - 1) * pageSize ; 
+		List<Title> list = ts.selectActivityById(uid , start , pageSize);
+		
+		mav.addObject("tList" , list);
+		return mav;
+	}
+		
 	//查询论坛
 	@RequestMapping("selectForum.do")
 	public ModelAndView selectForum(Integer nowPage , Integer pageSize) {
