@@ -18,8 +18,9 @@
 <html>
 <head>
 <title>校园通</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  	<script src="https://webapi.amap.com/maps?v=1.4.6&key=1662e84b6b9339c8e60267a9d9afb106"></script>
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <!-- <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
@@ -50,8 +51,6 @@
 		//解析定位结果
 		function onComplete(data) {
 		    alert("定位成功！");
-		    console.log(str.push('经度：' + data.position.getLng()));
-		    console.log(str.push('纬度：' + data.position.getLat()));
 		}
 		//解析定位错误信息
 		function onError(data) {

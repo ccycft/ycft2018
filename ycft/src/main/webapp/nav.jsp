@@ -30,10 +30,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <style>
-	div.col-xs-3{
+
+	.bottom-btn-box{
 		text-align:center!important;
 	}
-	.btn-value{
+	.bottom-btn-value{
 		line-height:2;
 	}
 	.inner-wrapper{
@@ -46,8 +47,7 @@
 		width:3.3rem;
 		height:2.9rem;
 	}
-	.row{
-	}
+	
 </style>
   <script type="text/javascript" src="<%=basePath%>assets/js/jquery.min.js"></script>
 <script>
@@ -99,37 +99,37 @@
 </script>
 </head>
 <body style="margin:0;padding:0">
+
 	<div style="height:5.8rem;color:#707070;font-size:17px;border:0;border-top:1px solid #e3e3e3;margin:0;padding:0;position:fixed;left:0;bottom:0;width:100%;background-color: #fff;">
 	
 		<div class="row" style="margin-left:0px;margin-right:0px;margin-top:0px;padding-left:0px;" >
-			<div class="col-xs-3"   style="text-align:center;">
+			<div class="col-xs-3 bottom-btn-box"   style="text-align:center;">
 				<div class="inner-wrapper">
 					<img alt="暂无图片" id="img0" src="<%=basePath%>images/tab01_unsel.png" class="img-responsive" />
-				    <span class="btn-value" style="font-size:14px;">首页</span>
+				    <span class="bottom-btn-value" style="font-size:14px;">首页</span>
 				</div>
 			</div>
-			<div class="col-xs-3"   style="text-align:center;" >
+			<div class="col-xs-3 bottom-btn-box"   style="text-align:center;" >
 				<div class="inner-wrapper">
 					<img alt="暂无图片" id="img1" src="<%=basePath%>images/tab02_unsel.png" class="img-responsive" />
-				    <span class="btn-value" style="font-size:14px;">论坛</span>
+				    <span class="bottom-btn-value" style="font-size:14px;">论坛</span>
 				</div>
 			</div>
-			<div class="col-xs-3"   style="text-align:center;" >
+			<div class="col-xs-3 bottom-btn-box"   style="text-align:center;" >
 				<div class="inner-wrapper">
 					<img alt="暂无图片" id="img2" src="<%=basePath%>images/tab03_unsel.png" class="img-responsive" />
-				    <span class="btn-value" style="font-size:14px;">教务</span>
+				    <span class="bottom-btn-value" style="font-size:14px;">教务</span>
 				</div>
 			</div>
-			<div class="col-xs-3"  style="text-align:center;"  >
+			<div class="col-xs-3 bottom-btn-box"  style="text-align:center;"  >
 				<div class="inner-wrapper">
 					<img alt="暂无图片" id="img3" src="<%=basePath%>images/tab04_unsel.png" class="img-responsive" />
-				    <span class="btn-value" style="font-size:14px;">我的</span>
+				    <span class="bottom-btn-value" style="font-size:14px;">我的</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-		
-	</script>
+	
+	
 </body>
 </html>

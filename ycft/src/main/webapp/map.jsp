@@ -14,10 +14,11 @@
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>校园通</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 	<link rel="stylesheet" href="<%=basePath%>css/toast.css">
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
     <link rel="stylesheet" href="<%=basePath%>assets/bootstrap/css/bootstrap.min.css">
