@@ -146,7 +146,9 @@
 		}); 
 	
 	});
-	
+	function backIndex(){
+		window.location.href="<%=basePath%>fore/index/index.do";
+	}
 	
 	//华丽的分割线-------------------------------------------------------------------------------------
 	
@@ -206,7 +208,7 @@
 	<div class="nav-area">
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 		<span class="nav-title">校园通知</span>	
-		<a href="<%=basePath%>fore/index/index.do"><img class="right-icon" src="<%=basePath%>images/backhome.png"></a>
+		<img class="right-icon" src="<%=basePath%>images/backhome.png" onclick="backIndex()">
 	</div>
 	
 </body>

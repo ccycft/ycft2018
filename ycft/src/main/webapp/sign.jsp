@@ -148,6 +148,9 @@
 			}	
 		}
 	}
+	function backIndex(){
+		window.location.href="<%=basePath%>fore/index/index.do";
+	}
 	</script>
 	
 </head>
@@ -232,7 +235,7 @@
 		<div class="nav-area">
 			<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="back()">	
 			<span class="nav-title">签到 | 考勤</span>	
-			<img class="right-icon" src="<%=basePath%>images/backhome.png">
+			<img class="right-icon" src="<%=basePath%>images/backhome.png" onclick="backIndex()">
 		</div>
 	</div>	
 </body>
