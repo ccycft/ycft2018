@@ -175,7 +175,7 @@
 		<div class="nav-area">
 			<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 			<span class="nav-title">签到 | 考勤</span>	
-			<img class="right-icon" src="<%=basePath%>images/location.png"onClick="toLocation()">
+			<img class="right-icon" src="<%=basePath%>images/location.png" onClick="toLocation()">
 		</div>
 		
 		<div id="sign_div" class="row">

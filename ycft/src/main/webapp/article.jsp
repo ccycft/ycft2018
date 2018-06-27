@@ -135,6 +135,9 @@
 			 }  
 			}); 
 		});
+		function backIndex(){
+			window.location.href="<%=basePath%>fore/index/index.do";
+		}
 	</script>
 </head>
 <body class="text-center">
@@ -181,7 +184,7 @@
 	<div class="nav-area">
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="javascript:back();">	
 		<span class="nav-title">校园文章</span>	
-		<img class="right-icon" src="<%=basePath%>images/backhome.png">
+		<img class="right-icon" src="<%=basePath%>images/backhome.png" onclick="backIndex()">
 	</div>
 </body>
 </html>

@@ -224,14 +224,17 @@
 			alert("请输入评论内容!");
 		}
 	}
-	 
+	function backIndex(){
+		window.location.href="<%=basePath%>fore/index/index.do";
+	}
 </script>
 </head>
 <body style="padding-top:5rem">
 	<!-- 页面顶端导航栏 -->
 	<div class="nav-area"  >
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()" style="position:absolute;left:0;">	
-		<span class="nav-title">论坛详情</span>	
+		<span class="nav-title">论坛详情</span>
+		<img class="right-icon" src="<%=basePath%>images/backhome.png" onclick="backIndex()">
 	</div>
 		
 		

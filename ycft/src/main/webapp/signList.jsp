@@ -128,9 +128,18 @@
 		var time = $("#time").val().trim();
 		var type = $("#signType").val().trim();
 		if(name != '' && coor!= '' && coorName != '' && time != '' && type != '' ){
-			htmlobj=$.ajax({url:"<%=basePath%>fore/signEvent/publishSign.do?name="+name+"&coordinate=" + coor + "&coordinateName=" + coorName + "&time=" + time +"&signType=" + type ,async:false});
-			var obj =  htmlobj.responseText;
-			if(obj == 'true'){
+			var rtn;
+			$.ajax({
+				 async:false,
+	             type: "POST", //POST
+	             url:"<%=basePath%>fore/signEvent/publishSign.do",
+	             data: {name:name, coordinate:coor,coordinateName:coorName,time:time,signType:type}, //组装参数
+	             dataType: "json",
+	             success: function(data){
+	            	 rtn = data;
+	             }
+	         });
+			if(rtn == true){
 				alert('提交成功');
 				window.location.reload();
 			}else{

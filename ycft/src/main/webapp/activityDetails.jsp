@@ -95,6 +95,9 @@
 			}
 			
 		}
+		function backIndex(){
+			window.location.href="<%=basePath%>fore/index/index.do";
+		}
 	</script>
 </head>
 <body>
@@ -102,7 +105,7 @@
 	<div class="nav-area">
 		<img class="left-icon"  src="<%=basePath%>images/back.png" onClick="back()">	
 		<span class="nav-title">活动详情</span>	
-		<img class="right-icon" src="<%=basePath%>images/backhome.png">
+		<img class="right-icon" src="<%=basePath%>images/backhome.png" onclick="backIndex()">
 	</div>
 
 	<div class="container-fluid">
