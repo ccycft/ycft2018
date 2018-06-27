@@ -74,12 +74,18 @@
 	 		var fileList = file.files;
 	 		var iconList = document.getElementsByClassName('add-icon');
 	 		var labList =  document.getElementsByClassName('labInput');
-	 		if(fileList.length <= 3){
+	 		
+	 	 		iconList[imgCount].setAttribute("src", window.URL.createObjectURL(file.files[0])); 
+	 	 		/* 	 	 	 		labList[imgCount].setAttribute("for","123");
+	 	 		 */	 	 	 		labList[imgCount].style.height="100%";
+	 	 			 	 	 		labList[imgCount].style.width="10rem";
+	 	 			 	 	 
+	 	 			 	 	 		/*	if(fileList.length <= 3){
  	 			//遍历选中的所有图的url
  	 	 		for(var i = 0 ; i < fileList.length ; i++){
-	 	 	 		iconList[imgCount].setAttribute("src", window.URL.createObjectURL(file.files[i])); 
-	 	 	 		labList[imgCount].setAttribute("for","123");
-	 	 	 		labList[imgCount].style.height="100%";
+	 	 	 		iconList[imgCount].setAttribute("src", window.URL.createObjectURL(file.files[0])); 
+ 	 	 	 		labList[imgCount].setAttribute("for","123");
+  	 	 		labList[imgCount].style.height="100%";
 	 	 	 		labList[imgCount].style.width="10rem";
 	 	 	 		imgCount++;
  	 	 		}
@@ -87,6 +93,7 @@
  	 			
  	 			alert("最多可以上传 3 张图片呦~");
  	 		}
+	 	 			 	 	 	*/	
  		}
  		
  
@@ -127,8 +134,9 @@
 			
 		function doCommit(){
 			
-			
-			
+			var form = document.getElementsByClass('form-horizontal');
+			//再次修改input内容
+			form.submit();
 			
 		}
 		
@@ -167,6 +175,7 @@
 	    	<textarea name="text" class="form-control" id="forum-content" rows="10" placeholder="快来说点啥~"></textarea>
 	    </div>
 	  </div>
+	  
 	  <div class="form-group" style="margin-bottom:0px">
 		   
 		   	 <div class="col-xs-4 forum-img z_file" >
@@ -176,24 +185,9 @@
 			　　　　<img src="<%=basePath%>images/z_add.png" id="img_1"  name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
 			　　</label> 
 		     </div>
-		     
-		   	<div class="col-xs-4 forum-img" >
-	    		<label class="labInput" >　　 
-
-			　　　　<img src="<%=basePath%>images/z_add_hidden.png" id="img_2"  name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
-
-			　　</label> 
-		    </div>
-		    
-		    <div class="col-xs-4 forum-img" >
-		    	<label class="labInput" >　　 
-
-			　　　　<img src="<%=basePath%>images/z_add_hidden.png" id="img_3" name="imgName" alt="" class="add-icon" onclick="showBigImg()"> 　　
-			　　
-				</label> 
-		    </div>
 	  </div>
-	  <label class="ps-text">最多可以上传 3 张图呦~</label>
+	  
+	  <label class="ps-text">暂时只能晒 1 张图片呦~</label>
 	  <input type="submit" value="确认发布" class="btn btn-info"/>
 	</form>
 	

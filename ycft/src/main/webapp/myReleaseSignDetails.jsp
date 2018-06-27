@@ -74,7 +74,6 @@
 			}else{
 				window.history.back();
 			}
-			
 		}
 	</script>
 <style>
@@ -143,7 +142,7 @@
 		<div class="nav-area">
 			<img class="left-icon"  src="<%=basePath%>images/back.png" onclick="back()">	
 			<span class="nav-title">签到 | 考勤</span>	
-			<img class="right-icon" src="<%=basePath%>images/location.png" onClick="toLocation()">
+			<img class="right-icon" src="<%=basePath%>images/location.png" onClick="window.location('_self','<%=basePath%>fore/index/index.do')">
 		</div>
 		
 		<div id="sign_div" class="row">
@@ -187,11 +186,12 @@
 				
 			</div>
 		</div>
-		<div class="row" style="margin-bottom:200px;">
+		
+		<%-- <div class="row" style="margin-bottom:200px;">
 		   <div class="col-xs-12 text-center" disable="disable" style="margin-top:3rem;">
 				<a class="btn btn-info" onclick="getMembers('<%=sign.getId()%>')"> 查看签到成员信息 </a> 
 			</div>
-		</div> 
+		</div>  --%>
 		
 		<%
 			if(sign.getState().equals("签到中") ){

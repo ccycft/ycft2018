@@ -86,16 +86,16 @@
 				  <a href="<%=basePath%>fore/signEvent/myReleaseSign.do" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/qiandao.png">	
 				  	<span class="a_item">我的签到</span></a>
-				  <a href="#" class="list-group-item ">
+				<%--   <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/fabu.png">
-				  	<span class="a_item">我的发布</span></a>
-				  <a href="http://www.cchzyc.com" class="list-group-item ">
+				  	<span class="a_item">我的发布</span></a> --%>
+				  <a href="#" class="list-group-item " onclick="alert('功能升级中…')">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/jiaowu.png">
 				  	<span class="a_item">教务信息</span></a>
 				  <a href="#" class="list-group-item ">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/jianyi.png">
 				  	<span class="a_item">我的建议</span></a>
-				  <a href="#" class="list-group-item ">
+				  <a href="#" class="list-group-item" onclick="alert('功能升级中…')">
 				  	<img class="img-responsive icon" src="<%=basePath%>images/women.png">
 				  	<span class="a_item">关于我们</span></a>
 				  <a href="#" class="list-group-item ">
