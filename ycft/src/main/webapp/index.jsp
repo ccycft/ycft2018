@@ -179,15 +179,14 @@
 				   				if(i == 0){
 				   	%>
 					   				<div class="item active" onclick="openDetails('<%=slide.getCid()%>')" >
-								      <img class="mainImg lazy" src="images/blank.gif" data-echo="<%=( photoPath + slide.getName())%>" alt="...">
-								      <img class="lazy" src="images/blank.gif" data-echo="images/big-2.jpg">
+								      <img class="mainImg lazy" data-echo="<%=( photoPath + slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}else{
 				  
 				   	%>
 				   					<div class="item"  onclick="openDetails('<%=slide.getCid()%>')">
-								      <img class="mainImg lazy" src="images/blank.gif" data-echo="<%=( photoPath + slide.getName())%>" alt="...">
+								      <img class="mainImg lazy" data-echo="<%=( photoPath + slide.getName())%>" alt="...">
 								    </div>
 				   	<%
 				   				}
@@ -212,31 +211,31 @@
 		<div class="row">
 			<div class="col-xs-2" onclick="test('map.jsp')">
 				   <a >
-				    <img class="img-responsive btn-block" src="images/blank.gif" data-echo="<%=basePath%>images/daohang.png" alt="...">
+				    <img class="img-responsive btn-block" src="" data-echo="<%=basePath%>images/daohang.png" alt="...">
 				    <span class="btn-value">导航</span>
 				   </a>
 			</div>
 			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadInform.do?nowPage=1')">
 				 <a > 
-					<img class="img-responsive btn-block" src="images/blank.gif" data-echo="<%=basePath%>images/tongzhi.png" alt="...">
+					<img class="img-responsive btn-block" src="" data-echo="<%=basePath%>images/tongzhi.png" alt="...">
 				  	<span class="btn-value">通知</span>	
 				  </a>  
 			</div>
 			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadArticle.do?nowPage=1')">
 				    <a >
-					    <img class="img-responsive btn-block" src="images/blank.gif" data-echo="<%=basePath%>images/wenzhang.png" alt="...">
+					    <img class="img-responsive btn-block" src="" data-echo="<%=basePath%>images/wenzhang.png" alt="...">
 					  	<span class="btn-value">文章</span>
 				  	</a>	  
 			</div>
 			<div class="col-xs-2 nav_btn" onclick="test('fore/signEvent/selSignEvent.do?nowPage=1')">
 					<a >
-					    <img class="img-responsive btn-block" src="images/blank.gif" data-echo="<%=basePath%>images/qiandao.png" alt="...">
+					    <img class="img-responsive btn-block" src="" data-echo="<%=basePath%>images/qiandao.png" alt="...">
 					  	<span class="btn-value">签到</span>	  
 				  	</a>
 			</div>
 			<div class="col-xs-2 nav_btn" onclick="test('fore/title/loadActivity.do?nowPage=1')">
 					<a >
-					   <img class="img-responsive btn-block" src="images/blank.gif" data-echo="<%=basePath%>images/huodong.png" alt="...">
+					   <img class="img-responsive btn-block" src="" data-echo="<%=basePath%>images/huodong.png" alt="...">
 					  	<span class="btn-value">活动</span>	
 					</a>  
 			</div>
@@ -262,7 +261,7 @@
 			      			 <div onclick="openDetails('<%=title.getId()%>')" class="row">
 							      <div class="col-xs-7 col-">
 								      <div class="thumbnail">
-								      	<img src="images/blank.gif" data-echo="<%= (photoPath + "/" +title.getImgName()) %>" alt="...">
+								      	<img src="" data-echo="<%= (photoPath + "/" +title.getImgName()) %>" alt="...">
 								  	  </div>
 							      </div>
 							      <div class="col-xs-5 ">
@@ -300,7 +299,7 @@
 		 				<div class="row" onclick="openInformDetails('<%=t.getId()%>')">
 					      <div class="col-xs-7 col-">
 						      <div class="thumbnail">
-						      	<img src="images/blank.gif" data-echo="<%= (photoPath + "/" + t.getImgName()) %>" alt="...">
+						      	<img src="" data-echo="<%= (photoPath + "/" + t.getImgName()) %>" alt="...">
 						  	  </div>
 					      </div>
 					      <div class="col-xs-5 ">
