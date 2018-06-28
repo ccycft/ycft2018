@@ -105,7 +105,7 @@
 							 '</div>'+
 							'<div class="row" onclick="openDetails('+obj[i].id+')">'+
 								'<div id="info" class="col-xs-7">'+
-					     			'<span>'+obj[i].id+'</span>'+
+					     			'<span></span>'+
 					  			'</div>'+
 					  			'<div id="renshu" class="col-xs-5">'+
 					     			'<img class="icon" src="<%=basePath%>images/renshu.png" >'+
